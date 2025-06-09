@@ -1,0 +1,411 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f7f8fc;
+}
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #fff;
+    border-right: 1px solid #ddd;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.logo {
+    color: #7bb31a;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.profile-level {
+    font-size: 13px;
+    color: #6c63ff;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.nav-menu a {
+    display: block;
+    padding: 8px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 4px;
+}
+
+.nav-menu a.active,
+.nav-menu a:hover {
+    background-color: #5fb4ff;
+    color: #000000;
+}
+
+.logout-btn {
+    margin-top: 15px;
+    width: 100%;
+    padding: 8px;
+    background-color: #d24747;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+}
+
+.logout-btn.highlight {
+    border: 2px solid #5b53ee;
+}
+
+.main-content {
+    flex: 1;
+    padding: 15px;
+}
+
+.dashboard-header h1 {
+    font-size: 30px;
+    font-weight: 750;
+    margin: 0;
+    text-align: center;
+}
+
+.dashboard-header p {
+    font-size: 22px;
+    color: #101010;
+    margin-top: 5px;
+    text-align: center;
+}
+
+/* Summary Section */
+.summary-section {
+    border: 2px solid #9ea7f0;
+    border-radius: 8px;
+    padding: 15px;
+    max-width: 700px;
+    margin: 15px auto;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.summary-cards.grid-2x2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 15px 0;
+}
+
+.summary-card {
+    background: linear-gradient(to right, #d0e2f0, #1336e9);
+    border-radius: 10px;
+    padding: 15px;
+    min-height: 140px;
+    font-size: 24px;
+    text-align: center;
+    color: #000;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Metrics Section */
+.metrics-section {
+    border: 2px solid #9ea7f0;
+    border-radius: 8px;
+    padding: 15px;
+    max-width: 700px;
+    margin: 15px auto;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.metrics-cards.grid-2x2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 15px 0;
+}
+
+.metrics-card {
+    background: linear-gradient(to right, #ddebf5, #70a9eb);
+    border-radius: 10px;
+    padding: 15px;
+    min-height: 220px;
+    font-size: 16px;
+    color: #000;
+    box-shadow: 0 12px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* Common Card Elements */
+.card h3 {
+    margin: 0 0 12px;
+    font-size: 28px;
+    text-align: center;
+}
+
+/* Current Students Section */
+.students-section {
+    border: 2px solid #9ea7f0;
+    border-radius: 8px;
+    padding: 15px;
+    max-width: 600px;
+    margin: 15px auto;
+    background: #fff;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.section-header .title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.section-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.view-all {
+    border: 1px solid #8a7ff0;
+    background: transparent;
+    color: #5b53ee;
+    border-radius: 5px;
+    padding: 4px 12px;
+    cursor: pointer;
+}
+
+.view-all.highlight {
+    border: 2px solid #5b53ee;
+    background: #e6f0ff;
+}
+
+.student-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #ccc;
+    padding: 12px 0;
+}
+
+.student-card:first-of-type {
+    border-top: none;
+}
+
+.student-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    background: #4caf50;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-btn {
+    background: #e0e0e0;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.contact-btn.highlight {
+    border: 2px solid #5b53ee;
+    background: #e6f0ff;
+}
+
+.green {
+    color: #2ecc71;
+}
+
+.star {
+    color: gold;
+    font-weight: bold;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #eee;
+    border-radius: 4px;
+    margin-top: 4px;
+}
+
+.progress {
+    height: 6px;
+    background: #8a7ff0;
+    border-radius: 4px;
+}
+
+.small-text {
+    font-size: 11px;
+    color: #444;
+}
+
+.session {
+    position: relative;
+    margin-bottom: 8px;
+    padding-right: 80px;
+}
+
+.time-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #ffdd99;
+    color: #a67c00;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+}
+
+.review {
+    display: flex;
+    gap: 8px;
+    align-items: start;
+    margin-bottom: 8px;
+}
+
+.stars {
+    color: gold;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background: #5b53ee;
+    color: white;
+    border: none;
+    padding: 6px;
+    border-radius: 5px;
+    margin-top: 4px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    background: #f0f0f0;
+    color: #333;
+    border: none;
+    padding: 6px;
+    border-radius: 5px;
+    margin-top: 4px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.btn-secondary.highlight {
+    border: 2px solid #5b53ee;
+    background: #e6f0ff;
+}
+
+.btn-outline {
+    background: transparent;
+    color: #5b53ee;
+    border: 1px solid #5b53ee;
+    padding: 6px;
+    border-radius: 5px;
+    margin-top: 4px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.quick-actions button {
+    background: #f0f0f0;
+    color: #333;
+    border: none;
+    padding: 6px;
+    border-radius: 5px;
+    margin: 4px 0;
+    width: 100%;
+    cursor: pointer;
+}
+
+.quick-actions button.highlight {
+    border: 2px solid #5b53ee;
+    background: #e6f0ff;
+}
+
+.modal-section {
+    display: none;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    margin: 15px auto;
+    width: 80%;
+    max-width: 600px;
+}
+
+.modal-section.active {
+    display: block;
+}
+
+.modal-section h2 {
+    color: #5b53ee;
+    margin: 0 0 10px;
+}
+
+.modal-section p {
+    margin: 5px 0;
+}
+
+.modal-section form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-section input, .modal-section textarea {
+    margin-bottom: 8px;
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.modal-section button {
+    background: #5b53ee;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.close-btn {
+    background: #e0e0e0;
+    color: #333;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+#availabilityDisplay, #skillsList, #resourcesList, #contactMessages {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 5px;
+}
+
+#contactMessages p {
+    font-size: 12px;
+    color: #2ecc71;
+}
