@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Management - SkillHub</title>
+    <link rel="stylesheet" href="../public/css/dashboard_overview.css">
+    <link rel="stylesheet" href="../public/css/class_management.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar from dashboard_overview.html -->
+        <div class="sidebar">
+            <div class="logo">SkillHub</div>
+            <div class="profile-level">Level 3 - Pro Instructor</div>
+            <div class="nav-menu">
+                <a href="../public/dashboard_overview.html">Overview</a>
+                <a href="class_management.html" class="active">Class Management</a>
+                <a href="../shedule_availability/shedule_availability.html">Schedule & Availability</a>
+                <a href="../earnings_analytics/earnings_analytics.html">Earning & Analytics</a>
+                <a href="../profile_setting/profile_setting.html">Profile Setting</a>
+            </div>
+            <button class="logout-btn">LOG OUT</button>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="dashboard-header">
+                <h1>Class Management</h1>
+                <p>Manage your students, sessions, and teaching materials</p>
+            </div>
+
+            <!-- Student Communications Section -->
+            <div class="card-section">
+                <div class="section-header">
+                    <h3 class="section-title">👥 Student Communications</h3>
+                    <button class="btn-primary send-message-btn">Send Message</button>
+                </div>
+                <div class="entry">
+                    <div class="avatar green">S</div>
+                    <div class="entry-info">
+                        <h4>Sarah Johnson</h4>
+                        <p>Last message: "Thanks for the great lesson!"</p>
+                    </div>
+                    <button class="btn-secondary reply-btn" data-student="Sarah Johnson">Reply</button>
+                </div>
+                <div class="entry">
+                    <div class="avatar green">M</div>
+                    <div class="entry-info">
+                        <h4>Mike Thompson</h4>
+                        <p>Last message: "Can we reschedule Thursday?"</p>
+                    </div>
+                    <button class="btn-secondary reply-btn" data-student="Mike Thompson">Reply</button>
+                </div>
+            </div>
+
+            <!-- Session Notes Section -->
+            <div class="card-section">
+                <div class="section-header">
+                    <h3 class="section-title">📒 Session Notes</h3>
+                    <button class="btn-primary add-note-btn">Add Note</button>
+                </div>
+                <div class="note-entry" data-note-id="0">
+                    <div>
+                        <h4>Sarah Johnson - Guitar Basics</h4>
+                        <div class="note-date">Dec 18, 2024</div>
+                        <p class="note-content">Worked on chord transitions. Great progress!</p>
+                    </div>
+                    <button class="btn-secondary edit-note-btn">Edit</button>
+                </div>
+                <div class="note-entry" data-note-id="1">
+                    <div>
+                        <h4>Mike Thompson - Advanced Guitar</h4>
+                        <div class="note-date">Dec 17, 2024</div>
+                        <p class="note-content">Fingerpicking techniques. Needs more practice.</p>
+                    </div>
+                    <button class="btn-secondary edit-note-btn">Edit</button>
+                </div>
+            </div>
+
+            <!-- Teaching Resources Section -->
+            <div class="card-section">
+                <div class="section-header">
+                    <h3 class="section-title">📁 Teaching Resources</h3>
+                    <button class="btn-primary upload-btn">Upload</button>
+                </div>
+                <div class="resource-entry" data-resource-id="0">
+                    <div>
+                        <h4>Guitar Chord Charts.pdf</h4>
+                        <div class="note-date">Uploaded Dec 15, 2024 • 2.3 MB</div>
+                    </div>
+                    <button class="btn-secondary share-btn">Share</button>
+                </div>
+                <div class="resource-entry" data-resource-id="1">
+                    <div>
+                        <h4>Practice Songs.mp3</h4>
+                        <div class="note-date">Uploaded Dec 10, 2024 • 5.1 MB</div>
+                    </div>
+                    <button class="btn-secondary share-btn">Share</button>
+                </div>
+            </div>
+
+            <!-- Modal Section -->
+            <div id="modalSection" class="modal-section"></div>
+        </div>
+    </div>
+
+    <script src="../public/js/dashboard_overview.js"></script>
+    <script src="../public/js/class_management.js"></script>
+</body>
+</html>
