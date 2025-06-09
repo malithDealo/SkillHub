@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Overview - SkillHub</title>
+    <link rel="stylesheet" href="../public/css/dashboard_overview.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <div class="logo">SkillHub</div>
+            <div class="profile-level">Level 3 - Pro Instructor</div>
+            <div class="nav-menu">
+                <a href="dashboard_overview.html" class="active">Overview</a>
+                <a href="../class_management/class_management.html">Class Management</a>
+                <a href="../shedule_availability/shedule_availability.html">Schedule & Availability</a>
+                <a href="../earnings_analytics/earnings_analytics.html">Earning & Analytics</a>
+                <a href="../profile_setting/profile_setting.html">Profile Setting</a>
+            </div>
+            <button class="logout-btn">LOG OUT</button>
+        </div>
+
+        <div class="main-content">
+            <div class="dashboard-header">
+                <h1>Dashboard Overview</h1>
+                <p>Monitor your teaching performance and manage your classes</p>
+            </div>
+
+            <div class="summary-section">
+                <div class="summary-cards grid-2x2">
+                    <div class="summary-card">
+                        <h3>24</h3>
+                        <p>Active Students</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3>4.9</h3>
+                        <p>Average Rating</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3>$1,240</h3>
+                        <p>This Month</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3>156</h3>
+                        <p>Total Sessions</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="students-section">
+                <div class="section-header">
+                    <div class="title">
+                        <h3>👥 Current Students</h3>
+                    </div>
+                    <button class="view-all">View All</button>
+                </div>
+                <div class="student-card">
+                    <div class="student-info">
+                        <div class="avatar green">M</div>
+                        <div>
+                            <h4>Sarah Johnson</h4>
+                            <p>Guitar Basics • 12 sessions • Next: Wed 2PM</p>
+                        </div>
+                    </div>
+                    <button class="contact-btn">Contact</button>
+                </div>
+                <div class="student-card">
+                    <div class="student-info">
+                        <div class="avatar green">C</div>
+                        <div>
+                            <h4>Mike Thompson</h4>
+                            <p>Advanced Guitar • 8 sessions • Next: Thu 4PM</p>
+                        </div>
+                    </div>
+                    <button class="contact-btn">Contact</button>
+                </div>
+                <div class="student-card">
+                    <div class="student-info">
+                        <div class="avatar green">J</div>
+                        <div>
+                            <h4>Emma Brown</h4>
+                            <p>Guitar Basics • 5 sessions • Next: Fri 3PM</p>
+                        </div>
+                    </div>
+                    <button class="contact-btn">Contact</button>
+                </div>
+            </div>
+
+            <div class="metrics-section">
+                <div class="metrics-cards grid-2x2">
+                    <div class="metrics-card">
+                        <h3>📈 Performance Metrics</h3>
+                        <p>Student Retention Rate <strong>92%</strong></p>
+                        <p>Session Completion Rate <strong>96%</strong></p>
+                        <p>Average Rating <strong>4.9★</strong></p>
+                        <p>Response Time <strong>~ 2 hours</strong></p>
+                        <p>Teacher Level Progress</p>
+                        <div class="progress-bar"><div class="progress" style="width: 75%"></div></div>
+                        <p class="small-text">75% to level 4</p>
+                    </div>
+                    <div class="metrics-card">
+                        <h3>📅 Today's Sessions</h3>
+                        <button class="btn-secondary">View Schedule</button>
+                        <div class="session">
+                            <p><strong>Guitar Basics with Sarah</strong></p>
+                            <p>2:00 PM - 3:00 PM • Community Center</p>
+                            <div class="time-badge">In 2 hours</div>
+                        </div>
+                        <div class="session">
+                            <p><strong>Advanced Guitar with Mike</strong></p>
+                            <p>4:00 PM - 5:00 PM • Music Studio</p>
+                            <div class="time-badge">In 4 hours</div>
+                        </div>
+                        <div class="session">
+                            <p><strong>Group Guitar Session</strong></p>
+                            <p>6:00 PM - 7:30 PM • Community Center</p>
+                            <div class="time-badge">In 6 hours</div>
+                        </div>
+                    </div>
+                    <div class="metrics-card">
+                        <h3>⭐ Recent Reviews</h3>
+                        <div class="review">
+                            <div class="avatar">S</div>
+                            <div>
+                                <p><strong>Sarah Johnson</strong></p>
+                                <p class="stars">★★★★★</p>
+                                <p>"Excellent teacher! Very patient and knowledgeable."</p>
+                            </div>
+                        </div>
+                        <div class="review">
+                            <div class="avatar">M</div>
+                            <div>
+                                <p><strong>Mike Thompson</strong></p>
+                                <p class="stars">★★★★☆</p>
+                                <p>"Great techniques and personalized approach."</p>
+                            </div>
+                        </div>
+                        <div class="review">
+                            <div class="avatar">E</div>
+                            <div>
+                                <p><strong>Emma Brown</strong></p>
+                                <p class="stars">★★★★★</p>
+                                <p>"Made learning guitar fun and engaging!"</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="metrics-card">
+                        <h3>✅ Quick Actions</h3>
+                        <div class="quick-actions">
+                            <button>Update Availability</button>
+                            <button>Add New Skill</button>
+                            <button>View Earning Report</button>
+                            <button>Upload Resources</button>
+                            <button>Edit Profile</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modalSection" class="modal-section">
+                <div id="availabilityDisplay"></div>
+                <div id="skillsList"></div>
+                <div id="resourcesList"></div>
+                <div id="contactMessages"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../public/js/dashboard_overview.js"></script>
+</body>
+</html>
