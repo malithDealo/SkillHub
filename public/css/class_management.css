@@ -1,0 +1,213 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9f9fc;
+}
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 30px;
+}
+
+.dashboard-header h1 {
+    font-size: 32px;
+    margin-bottom: 5px;
+}
+
+.dashboard-header p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* Sections */
+.card-section {
+    background: white;
+    border: 1px solid #ddd;
+    width: 1000px;
+    align-items: center;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.entry,
+.note-entry,
+.resource-entry {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-top: 1px solid #eee;
+}
+
+.entry:first-of-type,
+.note-entry:first-of-type,
+.resource-entry:first-of-type {
+    border-top: none;
+}
+
+.entry-info {
+    flex-grow: 1;
+    margin-left: 12px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #7bb31a;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.green {
+    background: #4caf50;
+}
+
+.note-entry,
+.resource-entry {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.note-entry h4,
+.resource-entry h4 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.note-date {
+    font-size: 13px;
+    color: #888;
+    margin: 4px 0;
+}
+
+.note-content a {
+    color: #6c63ff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.note-content a:hover {
+    text-decoration: underline;
+}
+
+.btn-primary {
+    background: #6c63ff;
+    color: white;
+    width: 100px;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-secondary {
+    background: #ccc;
+    color: black;
+    width: 100px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Modal Section */
+.modal-section {
+    display: none;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    margin: 20px auto;
+    width: 80%;
+    max-width: 600px;
+}
+
+.modal-section.active {
+    display: block;
+}
+
+.modal-section h2 {
+    color: #6c63ff;
+    margin: 0 0 15px;
+}
+
+.modal-section p {
+    margin: 5px 0;
+}
+
+.modal-section form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-section select,
+.modal-section input,
+.modal-section textarea {
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.modal-section .note-type {
+    margin-bottom: 10px;
+}
+
+.modal-section .note-type label {
+    margin-right: 20px;
+}
+
+.modal-section .note-input {
+    display: none;
+}
+
+.modal-section .note-input.active {
+    display: block;
+}
+
+.modal-section button {
+    background: #6c63ff;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.close-btn {
+    background: #ccc;
+    color: #333;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    float: right;
+}
