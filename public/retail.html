@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillHub - Retail Sponsors</title>
+    <link rel="stylesheet" href="../public/css/sponsors.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">SKILLHUB</div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">How It Works</a>
+            <a href="#">Community</a>
+            <a href="../public/sponsors.html">Sponsors</a>
+            <a href="#">About Us</a>
+        </nav>
+        <div class="profile-icon">👤</div>
+    </header>
+
+    <!-- Main Section -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>OUR <span class="skillhub-text">SPONSORS</span> IN <span class="about-text">SkillHub</span></h1>
+                <p class="subtitle">Connect with amazing sponsors to support and build meaningful partnerships</p>
+            </div>
+            <div class="floating-circle floating-circle-1"></div>
+            <div class="floating-circle floating-circle-2"></div>
+            <div class="floating-circle floating-circle-3"></div>
+            <div class="floating-circle floating-circle-4"></div>
+            <div class="floating-circle floating-circle-5"></div>
+            <div class="floating-circle floating-circle-6"></div>
+            <div class="floating-circle floating-circle-7"></div>
+            <div class="floating-circle floating-circle-8"></div>
+        </section>
+
+        <!-- Search and Filters -->
+        <section class="search-filter">
+            <h2>Discover sponsors actively looking for partnership opportunities</h2>
+            <div class="search-bar">
+                <input type="text" placeholder="Search Sponsor by name, category or location..." id="searchInput">
+                <button onclick="searchSponsors()">🔍</button>
+            </div>
+            <div class="categories">
+                <a href="../public/sponsors.html" class="category">All Categories</a>
+                <a href="../public/technology.html" class="category">Technology</a>
+                <a href="../public/finance.html" class="category">Finance</a>
+                <a href="../public/healthcare.html" class="category">Healthcare</a>
+                <a href="../public/education.html" class="category">Education</a>
+                <a href="../public/retail.html" class="category active">Retail</a>
+            </div>
+        </section>
+
+        <!-- Sponsor Cards -->
+        <section class="sponsor-cards">
+            <div class="card">
+                <div class="card-header">
+                    <div class="icon">R</div>
+                    <div>
+                        <h3>Retail Giants Inc.</h3>
+                        <span class="category-tag">Retail</span>
+                    </div>
+                </div>
+                <p><strong>Location:</strong> Los Angeles, USA</p>
+                <p><strong>Contact:</strong> <a href="mailto:support@retailgiants.com">support@retailgiants.com</a></p>
+                <p><strong>Interest In:</strong> Retail expos</p>
+                <p><strong>Budget:</strong> $30,000 - $70,000</p>
+                <button class="contact-btn">Contact Sponsor</button>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="icon">S</div>
+                    <div>
+                        <h3>ShopSmart Co.</h3>
+                        <span class="category-tag">Retail</span>
+                    </div>
+                </div>
+                <p><strong>Location:</strong> Dallas, USA</p>
+                <p><strong>Contact:</strong> <a href="mailto:contact@shopsmart.com">contact@shopsmart.com</a></p>
+                <p><strong>Interest In:</strong> E-commerce events</p>
+                <p><strong>Budget:</strong> $25,000 - $65,000</p>
+                <button class="contact-btn">Contact Sponsor</button>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="icon">M</div>
+                    <div>
+                        <h3>MarketTrend Stores</h3>
+                        <span class="category-tag">Retail</span>
+                    </div>
+                </div>
+                <p><strong>Location:</strong> Houston, USA</p>
+                <p><strong>Contact:</strong> <a href="mailto:info@markettrend.com">info@markettrend.com</a></p>
+                <p><strong>Interest In:</strong> Retail summits</p>
+                <p><strong>Budget:</strong> $28,000 - $75,000</p>
+                <button class="contact-btn">Contact Sponsor</button>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="icon">B</div>
+                    <div>
+                        <h3>BuyEasy Retail</h3>
+                        <span class="category-tag">Retail</span>
+                    </div>
+                </div>
+                <p><strong>Location:</strong> Phoenix, USA</p>
+                <p><strong>Contact:</strong> <a href="mailto:contact@buyeasy.com">contact@buyeasy.com</a></p>
+                <p><strong>Interest In:</strong> Shopping festivals</p>
+                <p><strong>Budget:</strong> $20,000 - $60,000</p>
+                <button class="contact-btn">Contact Sponsor</button>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="icon">T</div>
+                    <div>
+                        <h3>TrendSetters Mall</h3>
+                        <span class="category-tag">Retail</span>
+                    </div>
+                </div>
+                <p><strong>Location:</strong> San Francisco, USA</p>
+                <p><strong>Contact:</strong> <a href="mailto:support@trendsetters.com">support@trendsetters.com</a></p>
+                <p><strong>Interest In:</strong> Fashion events</p>
+                <p><strong>Budget:</strong> $35,000 - $80,000</p>
+                <button class="contact-btn">Contact Sponsor</button>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="icon">O</div>
+                    <div>
+                        <h3>OnlineShop Hub</h3>
+                        <span class="category-tag">Retail</span>
+                    </div>
+                </div>
+                <p><strong>Location:</strong> Chicago, USA</p>
+                <p><strong>Contact:</strong> <a href="mailto:info@onlineshop.com">info@onlineshop.com</a></p>
+                <p><strong>Interest In:</strong> E-commerce expos</p>
+                <p><strong>Budget:</strong> $22,000 - $70,000</p>
+                <button class="contact-btn">Contact Sponsor</button>
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="cta">
+            <h2>Ready to Start Your <span class="skillhub-text">SkillHub</span> Journey?</h2>
+            <p>Join thousands of learners and teachers in your neighborhood. Whether you're looking to master a new skill or share your expertise, your community is waiting.</p>
+            <button class="cta-button">Get Started Today</button>
+        </section>
+    </main>
+
+    <script src="../public/js/sponsors.js"></script>
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillHub Sponsors</title>
+    <link rel="stylesheet" href="../public/css/sponsors.css">
+    <script src="../public/js/sponsors.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">SKILLHUB</div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">How It Works</a>
+            <a href="#">Community</a>
+            <a href="#">Sponsors</a>
+            <a href="#">About Us</a>
+        </nav>
+        <div class="profile-icon">👤</div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>OUR SPONSORS IN <span class="skillhub-text">SkillHub</span></h1>
+            <p class="subtitle">Connect with amazing sponsors to support and build meaningful partnerships</p>
+            <div class="floating-circle floating-circle-1"></div>
+            <div class="floating-circle floating-circle-2"></div>
+            <div class="floating-circle floating-circle-3"></div>
+            <div class="floating-circle floating-circle-4"></div>
+            <div class="floating-circle floating-circle-5"></div>
+            <div class="floating-circle floating-circle-6"></div>
+            <div class="floating-circle floating-circle-7"></div>
+            <div class="floating-circle floating-circle-8"></div>
+        </div>
+    </section>
+
+    <section class="search-filter">
+        <h2>Discover sponsors actively looking for partnership opportunities</h2>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search sponsors...">
+            <button onclick="searchSponsors()">🔍</button>
+        </div>
+        <div class="categories">
+            <a href="../public/sponsors.html" class="category active">All Categories</a>
+            <a href="../public/technology.html" class="category">Technology</a>
+            <a href="../public/finance.html" class="category">Finance</a>
+            <a href="../public/healthcare.html" class="category">Healthcare</a>
+            <a href="../public/education.html" class="category">Education</a>
+            <a href="../public/retail.html" class="category">Retail</a>
+        </div>
+    </section>
+
+    <section class="sponsor-cards">
+        <!-- Technology Sponsors -->
+        <div class="card">
+            <div class="card-header">
+                <div class="icon">T</div>
+                <div>
+                    <h3>TechCorp Solutions</h3>
+                    <span class="category-tag">Technology</span>
+                </div>
+            </div>
+            <p>Location: San Francisco, USA</p>
+            <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+            <p>Interest In: Tech conferences, startup events</p>
+            <p>Budget: $15,000 - $60,000</p>
+            <button class="contact-btn">Contact Sponsor</button>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="icon">N</div>
+                <div>
+                    <h3>NextGen Tech</h3>
+                    <span class="category-tag">Technology</span>
+                </div>
+            </div>
+            <p>Location: Seattle, USA</p>
+            <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+            <p>Interest In: AI workshops, tech expos</p>
+            <p>Budget: $25,000 - $75,000</p>
+            <button class="contact-btn">Contact Sponsor</button>
+        </div>
+
+        <!-- Finance Sponsors -->
+        <div class="card">
+            <div class="card-header">
+                <div class="icon">G</div>
+                <div>
+                    <h3>GreenBank Financial</h3>
+                    <span class="category-tag">Finance</span>
+                </div>
+            </div>
+            <p>Location: New York, USA</p>
+            <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+            <p>Interest In: Financial conferences</p>
+            <p>Budget: $50,000 - $100,000</p>
+            <button class="contact-btn">Contact Sponsor</button>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="icon">F</div>
+                <div>
+                    <h3>FinTrust Capital</h3>
+                    <span class="category-tag">Finance</span>
+                </div>
+            </div>
+            <p>Location: Chicago, USA</p>
+            <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+            <p>Interest In: Fintech summits</p>
+            <p>Budget: $40,000 - $90,000</p>
+            <button class="contact-btn">Contact Sponsor</button>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="icon">I</div>
+                <div>
+                    <h3>InvestPro Group</h3>
+                    <span class="category-tag">Finance</span>
+                </div>
+            </div>
+            <p>Location: Boston, USA</p>
+            <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+            <p>Interest In: Investment seminars</p>
+            <p>Budget: $45,000 - $95,000</p>
+            <button class="contact-btn">Contact Sponsor</button>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="icon">B</div>
+                <div>
+                    <h3>BlueSky Finance</h3>
+                    <span class="category-tag">Finance</span>
+                </div>
+            </div>
+            <p>Location: Denver, USA</p>
+            <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+            <p>Interest In: Banking events</p>
+            <p>Budget: $35,000 - $85,000</p>
+            <button class="contact-btn">Contact Sponsor</button>
+        </div>
+
+        <!-- Healthcare Sponsors -->
+        <div class="card">
+            <div class="card-header">
+                <div class="icon">H</div>
+                <div>
+                    <h3>HealthPlus Innovations</h3>
+                    <span class="category-tag">Healthcare</span>
+                </div>
+            </div>
+            <p>Location: Boston, USA</p>
+            <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+            <p>Interest In: Medical conferences</p>
+            <p>Budget: $20,000 - $80,000</p>
+            <button class="contact-btn">Contact Sponsor</button>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="icon">M</div>
+                <div>
+                    <h3>MediCare Solutions</h3>
+                    <span class="category-tag">Healthcare</span>
+                </div>
+            </div>
+            <p>Location: Houston, USA</p>
+            <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+            <p>Interest In: Healthcare summits</p>
+            <p>Budget: $30,000 - $85,000</p>
+            <button class="contact-btn">Contact Sponsor</button>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="icon">W</div>
+                <div>
+                    <h3>Wellness First</h3>
+                    <span class="category-tag">Healthcare</span>
+                </div>
+            </div>
+            <p>Location: Miami, USA</p>
+            <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+            <p>Interest In: Mental health events</p>
+            <p>Budget: $15,000 - $50,000</p>
+            <button class="contact-btn">Contact Sponsor</button>
+        </div>
+
+        <!-- Education Sponsors -->
+        <div class="card">
+            <div class="card-header">
+                <div class="icon">E</div>
+                <div>
+                    <h3>EduFuture Foundation</h3>
+                    <span class="category-tag">Education</span>
+                </div>
+            </div>
+            <p>Location: Chicago, USA</p>
+            <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+            <p>Interest In: Educational workshops</p>
+            <p>Budget: $10,000 - $40,000</p>
+            <button class="contact-btn">Contact Sponsor</button>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="icon">L</div>
+                <div>
+                    <h3>LearnEasy Academy</h3>
+                    <span class="category-tag">Education</span>
+                </div>
+            </div>
+            <p>Location: Atlanta, USA</p>
+            <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+            <p>Interest In: Teacher training</p>
+            <p>Budget: $12,000 - $45,000</p>
+            <button class="contact-btn">Contact Sponsor</button>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="icon">S</div>
+                <div>
+                    <h3>SmartKids Initiative</h3>
+                    <span class="category-tag">Education</span>
+                </div>
+            </div>
+            <p>Location: Denver, USA</p>
+            <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+            <p>Interest In: STEM education</p>
+            <p>Budget: $15,000 - $50,000</p>
+            <button class="contact-btn">Contact Sponsor</button>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="icon">K</div>
+                <div>
+                    <h3>KnowledgeHub</h3>
+                    <span class="category-tag">Education</span>
+                </div>
+            </div>
+            <p>Location: Boston, USA</p>
+            <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+            <p>Interest In: Online learning</p>
+            <p>Budget: $20,000 - $60,000</p>
+            <button class="contact-btn">Contact Sponsor</button>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="icon">T</div>
+                <div>
+                    <h3>TeachNow Institute</h3>
+                    <span class="category-tag">Education</span>
+                </div>
+            </div>
+            <p>Location: Seattle, USA</p>
+            <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+            <p>Interest In: Teacher development</p>
+            <p>Budget: $15,000 - $55,000</p>
+            <button class="contact-btn">Contact Sponsor</button>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="icon">L</div>
+                <div>
+                    <h3>LearnSphere</h3>
+                    <span class="category-tag">Education</span>
+                </div>
+            </div>
+            <p>Location: Austin, USA</p>
+            <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+            <p>Interest In: Educational summits</p>
+            <p>Budget: $18,000 - $65,000</p>
+            <button class="contact-btn">Contact Sponsor</button>
+        </div>
+
+        <!-- Retail Sponsors -->
+        <div class="card">
+            <div class="card-header">
+                <div class="icon">R</div>
+                <div>
+                    <h3>Retail Giants Inc.</h3>
+                    <span class="category-tag">Retail</span>
+                </div>
+            </div>
+            <p>Location: Los Angeles, USA</p>
+            <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+            <p>Interest In: Retail expos</p>
+            <p>Budget: $30,000 - $70,000</p>
+            <button class="contact-btn">Contact Sponsor</button>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="icon">S</div>
+                <div>
+                    <h3>ShopSmart Co.</h3>
+                    <span class="category-tag">Retail</span>
+                </div>
+            </div>
+            <p>Location: Dallas, USA</p>
+            <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+            <p>Interest In: E-commerce events</p>
+            <p>Budget: $25,000 - $65,000</p>
+            <button class="contact-btn">Contact Sponsor</button>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="icon">M</div>
+                <div>
+                    <h3>MarketTrend Stores</h3>
+                    <span class="category-tag">Retail</span>
+                </div>
+            </div>
+            <p>Location: Houston, USA</p>
+            <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+            <p>Interest In: Retail summits</p>
+            <p>Budget: $28,000 - $75,000</p>
+            <button class="contact-btn">Contact Sponsor</button>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="icon">B</div>
+                <div>
+                    <h3>BuyEasy Retail</h3>
+                    <span class="category-tag">Retail</span>
+                </div>
+            </div>
+            <p>Location: Phoenix, USA</p>
+            <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+            <p>Interest In: Shopping festivals</p>
+            <p>Budget: $20,000 - $60,000</p>
+            <button class="contact-btn">Contact Sponsor</button>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="icon">T</div>
+                <div>
+                    <h3>TrendSetters Mall</h3>
+                    <span class="category-tag">Retail</span>
+                </div>
+            </div>
+            <p>Location: San Francisco, USA</p>
+            <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+            <p>Interest In: Fashion events</p>
+            <p>Budget: $35,000 - $80,000</p>
+            <button class="contact-btn">Contact Sponsor</button>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="icon">O</div>
+                <div>
+                    <h3>OnlineShop Hub</h3>
+                    <span class="category-tag">Retail</span>
+                </div>
+            </div>
+            <p>Location: Chicago, USA</p>
+            <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+            <p>Interest In: E-commerce expos</p>
+            <p>Budget: $22,000 - $70,000</p>
+            <button class="contact-btn">Contact Sponsor</button>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Ready to Start Your SkillHub Journey?</h2>
+        <p>Join thousands of learners and teachers in your neighborhood. Whether you're looking to master a new skill or share your expertise, your community is waiting.</p>
+        <button class="cta-button">Get Started Today</button>
+    </section>
+</body>
+</html>
