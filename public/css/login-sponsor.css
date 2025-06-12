@@ -1,0 +1,424 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.signin-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Left Column Styles */
+.signin-left {
+    flex: 1;
+    width: 50%;
+    background: linear-gradient(180deg, #F4A261 0%, #E76F51 100%); /* Sponsor gradient background */
+    position: relative;
+    display: flex;
+    padding: 2rem;
+    color: #ffffff;
+    overflow: hidden;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 200px;
+}
+
+.circle-pattern {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.2); /* Lighter circles on gradient */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.circle-1 { top: 5%; left: 5%; }
+.circle-2 { top: 5%; left: 45%; }
+.circle-3 { top: 5%; left: 85%; }
+.circle-4 { top: 20%; left: 5%; }
+.circle-5 { top: 20%; left: 45%; }
+.circle-6 { top: 20%; left: 85%; }
+.circle-7 { top: 35%; left: 5%; }
+.circle-8 { top: 35%; left: 45%; }
+.circle-9 { top: 35%; left: 85%; }
+.circle-10 { top: 50%; left: 5%; }
+.circle-11 { top: 50%; left: 45%; }
+.circle-12 { top: 50%; left: 85%; }
+.circle-13 { top: 65%; left: 5%; }
+.circle-14 { top: 65%; left: 45%; }
+.circle-15 { top: 65%; left: 85%; }
+.circle-16 { top: 80%; left: 5%; }
+.circle-17 { top: 80%; left: 45%; }
+.circle-18 { top: 80%; left: 85%; }
+.circle-19 { top: 95%; left: 5%; }
+.circle-20 { top: 95%; left: 45%; }
+.circle-21 { top: 95%; left: 85%; }
+.circle-22 { top: 110%; left: 5%; }
+.circle-23 { top: 110%; left: 45%; }
+.circle-24 { top: 110%; left: 85%; }
+.circle-25 { top: 125%; left: 5%; }
+.circle-26 { top: 125%; left: 45%; }
+.circle-27 { top: 125%; left: 85%; }
+.circle-28 { top: 140%; left: 5%; }
+.circle-29 { top: 140%; left: 45%; }
+.circle-30 { top: 140%; left: 85%; }
+
+.left-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 80%;
+    margin-left: 10%;
+}
+
+.star-container {
+    position: relative;
+    margin-bottom: 1.5rem;
+    width: 60px;
+    height: 60px;
+    align-self: flex-start;
+}
+
+.star-circle {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    position: absolute;
+}
+
+.star {
+    font-size: 2.5rem;
+    color: #ffffff;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+}
+
+.text-content {
+    text-align: left;
+}
+
+.main-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    line-height: 1.2;
+}
+
+.main-subtitle {
+    font-size: 1.25rem;
+    max-width: 100%;
+    color: #ffffff;
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+/* Right Column Styles */
+.signin-right {
+    flex: 1;
+    width: 50%;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.brand-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.signin-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.brand-text {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #87BE25; /* Green theme */
+    letter-spacing: -0.5px;
+}
+
+.form-title {
+    font-size: 2.2rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.form-subtitle {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.signin-form {
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 0.3rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.6rem;
+    padding-right: 40px; /* Add padding to prevent text overlap with icon */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    height: 40px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1) inset;
+    background-color: #fafafa;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    border-color: #4CAF50; /* Green theme */
+    outline: none;
+    background-color: #fff;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%; /* Center vertically relative to the input */
+    transform: translateY(-50%);
+    padding-top: 20px;
+    cursor: pointer;
+    line-height: 1; /* Ensure the emoji doesn't add extra height */
+    font-size: 1.2rem; /* Adjust size for better visibility */
+    color: #666; /* Subtle color for the icon */
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 2rem;
+    cursor: pointer;
+}
+
+.checkbox-label input {
+    position: absolute;
+    opacity: 0;
+}
+
+.custom-checkbox {
+    position: absolute;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #4CAF50; /* Green theme */
+    border-radius: 3px;
+    background-color: #fff;
+}
+
+.checkbox-label input:checked + .custom-checkbox {
+    background-color: #4CAF50; /* Green theme */
+}
+
+.checkbox-label input:checked + .custom-checkbox::after {
+    content: '✔';
+    position: absolute;
+    left: 2px;
+    top: -2px;
+    color: #fff;
+    font-size: 12px;
+}
+
+.forgot-link {
+    color: #4CAF50; /* Green theme */
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+.signin-btn {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #4CAF50; /* Green theme */
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 45px;
+}
+
+.signin-btn:hover {
+    background-color: #45a049; /* Darker green for hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.error-message {
+    display: none;
+    color: #ff4d4d;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+/* Divider Text Styling */
+.social-login {
+    text-align: center;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.divider-text {
+    position: relative;
+    display: inline-block;
+    font-size: 0.9rem;
+    color: #BAB9B9;
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+}
+
+.divider-text span {
+    position: relative;
+    background-color: #ffffff;
+    padding: 0 0.5rem;
+    z-index: 1;
+}
+
+.divider-text::before,
+.divider-text::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 325px;
+    height: 1px;
+    background-color: #BAB9B9;
+}
+
+.divider-text::before {
+    left: -50px;
+}
+
+.divider-text::after {
+    right: -50px;
+}
+
+.social-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    background-color: #ffffff;
+    transition: background-color 0.3s ease;
+    height: 40px;
+    min-width: 150px;
+    box-sizing: border-box;
+}
+
+.social-btn:hover {
+    background-color: #f9f9f9;
+}
+
+.social-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.social-btn.google {
+    color: #4285f4;
+}
+
+.social-btn.facebook {
+    color: #3b5998;
+}
+
+.footer-links {
+    margin-top: 2rem;
+    padding: 1rem 0;
+    font-size: 0.9rem;
+    color: #333;
+    text-align: center;
+}
+
+.footer-links a {
+    color: #4CAF50; /* Green theme */
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 0.5rem;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .signin-container {
+        flex-direction: column;
+    }
+
+    .signin-left,
+    .signin-right {
+        flex: none;
+        width: 100%;
+    }
+
+    .signin-left {
+        padding: 3rem 1rem;
+        min-height: 50vh;
+    }
+
+    .signin-right {
+        padding: 1.5rem;
+    }
+
+    .social-buttons {
+        flex-direction: column;
+    }
+
+    .social-btn {
+        width: 100%;
+    }
+}
