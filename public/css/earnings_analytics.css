@@ -1,0 +1,372 @@
+/* General Reset and Base Styles */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', 'Arial', sans-serif; /* Modern font stack with fallback */
+    background-color: #f4f6f8; /* Softer background */
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: linear-gradient(90deg, #6c63ff 0%, #5a54d9 100%); /* Gradient header */
+    color: white;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: 700;
+}
+
+nav a {
+    color: white;
+    margin: 0 20px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.2s ease;
+}
+
+nav a:hover {
+    color: #e0e0e0;
+}
+
+.profile-icon {
+    width: 32px;
+    height: 32px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Dashboard Layout */
+.container {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: white;
+    padding: 20px;
+    border-right: 1px solid #ececec;
+    transition: transform 0.3s ease; /* Smooth sidebar animation */
+}
+
+.dashboard {
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+.dashboard span {
+    color: #6b46c1;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar li a:hover,
+.sidebar li a.active {
+    background-color: #6b46c1;
+    color: white;
+}
+
+/* Main Content */
+.content {
+    flex: 1;
+    padding: 30px;
+}
+
+/* Headings */
+h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+/* Overview Section */
+.overview-section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Four columns */
+    gap: 10px; /* Reduced gap */
+    margin-bottom: 30px;
+    justify-content: center; /* Center the grid */
+    max-width: 1200px; /* Limit max width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.overview-box {
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    color: white;
+    background-color: #28a745; /* Default background */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.overview-box:hover {
+    transform: translateY(-5px); /* Subtle lift effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.this-month, .last-3-months {
+    background-color: #28a745; /* Green */
+}
+
+.avg-per-session, .sessions-this-month {
+    background-color: #6b46c1; /* Purple */
+}
+
+.overview-box h3 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.overview-box p {
+    margin: 8px 0 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* Sections Container */
+.sections-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Payments and Trends Sections */
+.payments-section, .trends-section {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05); /* Softer shadow */
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    transition: transform 0.2s ease;
+}
+
+.payments-section:hover, .trends-section:hover {
+    transform: translateY(-5px); /* Subtle lift effect */
+}
+
+.payments-section h2, .trends-section h2 {
+    margin: 0 0 15px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #6b46c1;
+    display: inline-block;
+}
+
+.payments-section h2::before, .trends-section h2::before {
+    margin-right: 8px;
+}
+
+/* Buttons */
+.download-btn, .view-details-btn, .view-trend-btn {
+    background-color: #6b46c1;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+.download-btn:hover, .view-details-btn:hover, .view-trend-btn:hover {
+    background-color: #5a3da8;
+}
+
+.download-btn, .view-trend-btn {
+    float: right;
+}
+
+.view-details-btn {
+    margin-left: 10px;
+}
+
+/* Payment and Trend Items */
+.payment-item, .trend-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #ececec;
+}
+
+.payment-item:last-child, .trend-item:last-child {
+    border-bottom: none;
+}
+
+.payment-item p, .trend-item p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.status {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    background-color: #e6ffe6;
+    color: #28a745;
+}
+
+.trend-item p:first-child {
+    color: #6b46c1;
+}
+
+.trend-item p:last-child {
+    text-align: right;
+}
+
+.growth {
+    font-size: 12px;
+    color: #28a745;
+}
+
+/* Details Section */
+.details-section {
+    display: none;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    margin: 30px auto;
+    width: 90%;
+    max-width: 600px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.details-section.active {
+    display: block;
+}
+
+.details-section h2 {
+    color: #6b46c1;
+    font-size: 22px;
+    margin: 0 0 15px;
+}
+
+.details-section p {
+    margin: 8px 0;
+    font-size: 14px;
+}
+
+.close-btn {
+    background: #e0e0e0;
+    color: #333;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s ease;
+    float: right;
+}
+
+.close-btn:hover {
+    background: #d0d0d0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+        transform: translateX(-100%);
+        position: fixed;
+        height: 100%;
+        z-index: 1000;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .content {
+        padding: 20px;
+    }
+
+    .overview-section {
+        grid-template-columns: repeat(2, 1fr); /* Two columns */
+        gap: 8px;
+    }
+
+    .payments-section, .trends-section, .details-section {
+        width: 95%;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 22px;
+    }
+
+    nav a {
+        margin: 0 10px;
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .overview-section {
+        grid-template-columns: 1fr; /* One column */
+        gap: 6px;
+    }
+
+    .overview-box h3 {
+        font-size: 20px;
+    }
+
+    .download-btn, .view-details-btn, .view-trend-btn, .close-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+}
