@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity</title>
+  <link rel="stylesheet" href="../public/css/servicess.css">
+  <script src="../public/js/activity.js" defer></script>
+</head>
+<body>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1 id="hero-title">Loading activity...</h1>
+    <p class="subtitle" id="hero-subtitle">Please wait while we load the activity details.</p>
+    <div class="floating-circle floating-circle-1"></div>
+    <div class="floating-circle floating-circle-2"></div>
+    <div class="floating-circle floating-circle-3"></div>
+    <div class="floating-circle floating-circle-4"></div>
+    <div class="floating-circle floating-circle-5"></div>
+    <div class="floating-circle floating-circle-6"></div>
+    <div class="floating-circle floating-circle-7"></div>
+    <div class="floating-circle floating-circle-8"></div>
+  </section>
+
+  <!-- Accessibility Features -->
+  <section class="accessibility">
+    <h2>Accessibility Features</h2>
+    <div class="features">
+      <button data-feature="high-contrast">🔆 High Contrast</button>
+      <button data-feature="large-text">🔠 Large Text</button>
+      <button data-feature="audio-support">🔊 Audio Support</button>
+      <button data-feature="simple-mode">🧾 Simple Mode</button>
+      <button data-feature="reset-all">♻️ Reset All</button>
+    </div>
+  </section>
+
+  <!-- Activity Content -->
+  <section class="action-page">
+    <h1 id="activity-title">Loading activity details...</h1>
+    <p id="activity-description">Please wait while we load the activity description.</p>
+
+    <!-- Add this after the activity description in activity.html -->
+    <div class="timer-container" id="timer-container" style="display: none;">
+    <h3>Activity Timer</h3>
+    <div class="timer-display" id="timer">00:00</div>
+    <div class="timer-controls">
+        <button id="start-timer">Start</button>
+        <button id="pause-timer">Pause</button>
+        <button id="reset-timer">Reset</button>
+    </div>
+    </div>
+
+    <button class="back-button">Back to Skills</button>
+  </section>
+</body>
+</html>
