@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillHub</title>
+    <link rel="stylesheet" href="../public/css/works_learning.css">
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <section class="hero">
+        <div class="floating-circle floating-circle-1"></div>
+        <div class="floating-circle floating-circle-2"></div>
+        <div class="floating-circle floating-circle-3"></div>
+        <div class="floating-circle floating-circle-4"></div>
+        <div class="floating-circle floating-circle-5"></div>
+        <div class="floating-circle floating-circle-6"></div>
+        <div class="floating-circle floating-circle-7"></div>
+        <div class="floating-circle floating-circle-8"></div>
+        <h1>How <span class="skillhub">SkillHub</span> Works</h1>
+        <p>Simple steps to connect, learn, and teach in your neighborhood community.</p>
+    </section>
+
+    <section class="role-selection">
+        <p class="label">I want to learn about:</p>
+        <div class="role-select">
+            <div class="option active" data-value="learning">Learning</div>
+            <div class="option" data-value="teaching">Teaching</div>
+        </div>
+    </section>
+
+    <div class="for-students-wrapper">
+        <section class="for-students">
+            <h2>For Students</h2>
+            <p>Discover and learn new skills from qualified teachers in your neighborhood</p>
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Search & Discover</h3>
+                    <p>Broad location-based search. Filter by skill, availability, distance, price range, and more to find the perfect match.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>View Teacher Profiles</h3>
+                    <p>Check detailed profiles of potential teachers. Read testimonials, teaching styles, and reviews feedback from other students.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Book Sessions</h3>
+                    <p>Schedule convenient meeting times and locations that work for both you and your teacher. Choose from various session formats and durations.</p>
+                </div>
+                <div class="step step-4">
+                    <div class="step-number">4</div>
+                    <h3>Learn & Review</h3>
+                    <p>Attend and provide feedback to help build a community of trust, track your progress, and build lasting learning relationships.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="safety">
+        <div class="safety-container">
+            <h2>Your Safety Is Our Priority</h2>
+            <p>Comprehensive security measures ensure every learning interaction is safe and trustworthy</p>
+            <div class="safety-measures">
+                <div class="measure">
+                    <div class="measure-icon">ID</div>
+                    <h4>Identity Verification Process</h4>
+                    <p>Multi-step identity verification ensures every user is who they claim to be, creating a trusted community environment.</p>
+                </div>
+                <div class="measure">
+                    <div class="measure-icon">🛡️</div>
+                    <h4>Background Checks for Teachers</h4>
+                    <p>Comprehensive background screening for all teachers provides peace of mind for students and parents.</p>
+                </div>
+                <div class="measure">
+                    <div class="measure-icon">💬</div>
+                    <h4>Secure In-App Messaging</h4>
+                    <p>All communication happens through our secure platform, protecting your personal information while facilitating connection.</p>
+                </div>
+                <div class="measure">
+                    <div class="measure-icon">📍</div>
+                    <h4>Safe Meeting Location Recommendation</h4>
+                    <p>Curated list of safe, public meeting locations in your neighborhood, including libraries, coffee shops, and community centers.</p>
+                </div>
+                <div class="measure">
+                    <div class="measure-icon">SOS</div>
+                    <h4>24/7 Community Support</h4>
+                    <p>Round-the-clock support team ready to assist with any concerns or issues that may arise during your learning journey.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Ready to Start Your SkillHub Journey?</h2>
+        <p>Join thousands of learners and teachers in your neighborhood. Whether you're looking to master a new skill or share your expertise, your community is waiting.</p>
+        <button class="get-started">Get Started Today</button>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script src="../public/js/works_learning.js"></script>
+    <script>
+        // Load Header
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+
+        // Load Footer
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+</body>
+</html>
