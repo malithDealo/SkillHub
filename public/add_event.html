@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event</title>
+    <link rel="stylesheet" href="../public/css/add_event.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div>
+                    <h1>Create Community Event</h1>
+                    <p class="subtitle">Bring your community together through shared learning experiences</p>
+                </div>
+                <button class="close-icon" onclick="window.location.href='../learning_community/learning_community.html'">×</button>
+            </div>
+        </header>
+        
+        <section class="tips-section">
+            <h3>★ Tips for Successful Events</h3>
+            <ul>
+                <li>Choose a clear, descriptive title that explains what participants will learn</li>
+                <li>Provide detailed information about what to expect and what to bring</li>
+                <li>Set realistic capacity limits based on your venue and teaching style</li>
+                <li>Choose accessible locations that are easy to find</li>
+            </ul>
+        </section>
+
+        <form>
+            <div class="form-group">
+                <label for="event-title">Event title:</label>
+                <input type="text" id="event-title" name="event-title" placeholder="e.g., Beginner Guitar Workshop">
+            </div>
+
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <select id="category" name="category">
+                    <option>Select Category</option>
+                    <option>Workshop</option>
+                    <option>Meetup</option>
+                    <option>Class</option>
+                    <option>Practice Session</option>
+                    <option>Social Event</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Event type:</label>
+                <p class="helper-text">Choose the type that best describes your event</p>
+                <div class="event-types">
+                    <button class="event-type-btn" data-type="Workshop">
+                        <img src="images/workshop.png" alt="Workshop Icon" class="btn-icon"> Workshop
+                    </button>
+                    <button class="event-type-btn" data-type="Meetup">
+                        <img src="images/meetup.png" alt="Meetup Icon" class="btn-icon"> Meetup
+                    </button>
+                    <button class="event-type-btn" data-type="Class">
+                        <img src="images/class.png" alt="Class Icon" class="btn-icon"> Class
+                    </button>
+                    <button class="event-type-btn" data-type="Practice Session">
+                        <img src="images/practice_session.png" alt="Practice Session Icon" class="btn-icon"> Practice Session
+                    </button>
+                    <button class="event-type-btn" data-type="Social Event">
+                        <img src="images/social.png" alt="Social Event Icon" class="btn-icon"> Social Event
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="event-description">Event Description:</label>
+                <textarea id="event-description" name="event-description" placeholder="Describe what participants will learn, what to expect, what to bring, and any prerequisites…"></textarea>
+                <p class="helper-text">Include learning objectives, materials needed, and skill level requirements</p>
+            </div>
+
+            <div class="form-row date-time-row">
+                <div class="form-group">
+                    <label for="event-date">Event Date:</label>
+                    <input type="date" id="event-date" name="event-date" placeholder="mm/dd/yyyy">
+                </div>
+                <div class="form-group">
+                    <label for="start-time">Start Time:</label>
+                    <input type="time" id="start-time" name="start-time">
+                </div>
+                <div class="form-group">
+                    <label for="end-time">End Time:</label>
+                    <input type="time" id="end-time" name="end-time">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" placeholder="e.g., Community Center, Library or online via Zoom">
+                <p class="helper-text">Provide specific address or meeting details</p>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="max-participants">Max participants:</label>
+                    <input type="number" id="max-participants" name="max-participants" placeholder="e.g., 13">
+                    <p class="helper-text">How many people can you accommodate?</p>
+                </div>
+                <div class="form-group">
+                    <label for="cost">Cost per person:</label>
+                    <input type="number" id="cost" name="cost" placeholder="0">
+                    <p class="helper-text">Leave as 0 for free events (recommended for community building)</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Skill Level Required:</label>
+                <div class="skill-levels">
+                    <button class="skill-level-btn" data-level="All Levels">All Levels</button>
+                    <button class="skill-level-btn" data-level="Beginner">Beginner</button>
+                    <button class="skill-level-btn" data-level="Intermediate">Intermediate</button>
+                    <button class="skill-level-btn" data-level="Advanced">Advanced</button>
+                </div>
+                <p class="helper-text">Who should attend this event?</p>
+            </div>
+
+            <div class="form-group">
+                <label for="event-tags">Event Tags:</label>
+                <input type="text" id="event-tags" name="event-tags" placeholder="Add tags like 'guitar', 'beginner', 'weekend' and press Enter">
+                <p class="helper-text">Add relevant tags to help people find your event (press Enter to add)</p>
+            </div>
+
+            <div class="form-group">
+                <label>Additional Options:</label>
+                <div class="options">
+                    <div class="option-item">
+                        <input type="checkbox" id="require-advance" name="require-advance">
+                        <label for="require-advance">Require advance registration</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="allow-waitlist" name="allow-waitlist">
+                        <label for="allow-waitlist">Allow waitlist when full</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="send-reminders" name="send-reminders">
+                        <label for="send-reminders">Send reminder notifications to participants</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="recurring" name="recurring">
+                        <label for="recurring">This is a recurring event</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="contact-email">Contact Email:</label>
+                    <input type="email" id="contact-email" name="contact-email" placeholder="e.g., organizer@example.com">
+                    <p class="helper-text">Where participants can reach you for questions</p>
+                </div>
+                <div class="form-group">
+                    <label for="contact-number">Contact Number:</label>
+                    <input type="tel" id="contact-number" name="contact-number" placeholder="e.g., +1 234-567-8900">
+                    <p class="helper-text">Optional phone number for participant inquiries</p>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="cancel-btn">Cancel</button>
+                <button type="submit" class="submit-btn">Post Event</button>
+            </div>
+        </form>
+    </div>
+    <script src="../public/js/add_event.js"></script>
+</body>
+</html>

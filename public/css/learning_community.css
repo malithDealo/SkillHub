@@ -1,0 +1,646 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+    background: linear-gradient(to bottom, #6b46c1, #4c51bf);
+    color: white;
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+}
+
+/* Background dots */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 10px, transparent 10px);
+    background-size: calc(100% / 11) calc(100% / 3);
+    background-repeat: repeat;
+    opacity: 0.3;
+    z-index: 0;
+}
+
+/* Large circles */
+.floating-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    z-index: 1;
+    animation: float 8s infinite ease-in-out;
+    filter: blur(1px);
+    opacity: 0.8;
+}
+
+/* Circle sizes and positions */
+.floating-circle-1 {
+    width: 120px;
+    height: 120px;
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.floating-circle-2 {
+    width: 150px;
+    height: 150px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: 2s;
+}
+
+.floating-circle-3 {
+    width: 100px;
+    height: 100px;
+    top: 60%;
+    right: 10%;
+    animation-delay: 1s;
+}
+
+.floating-circle-4 {
+    width: 80px;
+    height: 80px;
+    top: 30%;
+    right: 15%;
+    animation-delay: 3s;
+}
+
+.floating-circle-5 {
+    width: 130px;
+    height: 130px;
+    top: 70%;
+    left: 20%;
+    animation-delay: 4s;
+}
+
+.floating-circle-6 {
+    width: 110px;
+    height: 110px;
+    top: 25%;
+    left: 30%;
+    animation-delay: 1.5s;
+}
+
+.floating-circle-7 {
+    width: 90px;
+    height: 90px;
+    top: 65%;
+    left: 40%;
+    animation-delay: 2.5s;
+}
+
+.floating-circle-8 {
+    width: 140px;
+    height: 140px;
+    top: 40%;
+    right: 20%;
+    animation-delay: 3.5s;
+}
+
+/* Animation for floating effect */
+@keyframes float {
+    0%, 100% { 
+        transform: translateY(0) scale(1);
+        opacity: 0.9;
+    }
+    50% { 
+        transform: translateY(-20px) scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero .skillhub {
+    color: #48bb78;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Community Stats Section */
+.community-stats {
+    background: linear-gradient(135deg, #bfb8d1, #4c51bf);
+    padding: 40px 20px;
+    color: white;
+    text-align: center;
+    margin-top: -20px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1000px;
+    position: relative;
+    z-index: 2;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    max-width: 800px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.stat-item {
+    padding: 10px;
+    min-width: 120px;
+}
+
+.stat-number {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #666;
+    opacity: 0.9;
+}
+
+/* Container Section */
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.section-header {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.section-header h2 {
+    font-size: 28px;
+    color: #343a40;
+    margin-bottom: 10px;
+}
+
+.section-header p {
+    color: #6c757d;
+    font-size: 16px;
+}
+
+.add-btn {
+    background-color: #3aa864;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s;
+}
+
+.add-btn:hover {
+    background-color: #5a3aa8;
+}
+
+/* Events Section */
+.events-section {
+    background-color: #e9ecef;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    grid-template-rows: repeat(2, 1fr); /* 2 rows */
+    gap: 25px;
+    margin-bottom: 0;
+}
+
+.event-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+.event-date {
+    display: inline-block;
+    background-color: #6b46c1;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.event-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #343a40;
+}
+
+.event-card p {
+    color: #6c757d;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+.event-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.event-location i,
+.event-attendees i {
+    margin-right: 5px;
+}
+
+.event-location {
+    display: flex;
+    align-items: center;
+}
+
+.event-attendees {
+    display: flex;
+    align-items: center;
+}
+
+.replies-btn {
+    background-color: #f1f3f5;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s;
+}
+
+.replies-btn:hover {
+    background-color: #e9ecef;
+}
+
+/* Discussions Section */
+.discussions-section {
+    background-color: #e9ecef;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+}
+
+.discussion-card {
+    background-color: #c8ccf8;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.discussion-header {
+    margin-bottom: 15px;
+}
+
+.discussion-header h3 {
+    font-size: 18px;
+    color: #343a40;
+    margin-bottom: 8px;
+}
+
+.discussion-meta {
+    display: flex;
+    gap: 15px;
+    font-size: 13px;
+    color: #6c757d;
+}
+
+.discussion-card p {
+    color: #495057;
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+
+.discussion-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.discussion-footer i {
+    margin-right: 5px;
+}
+
+.reply-btn {
+    background-color: #f1f3f5;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #495057;
+    transition: background-color 0.3s;
+}
+
+.reply-btn:hover {
+    background-color: #e9ecef;
+}
+
+/* CTA Section */
+.cta-section {
+    text-align: center;
+    padding: 80px 20px;
+    background-color: #f1f3f5;
+    margin-top: 60px;
+}
+
+.cta-section h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #343a40;
+}
+.skillhub {
+    color: #28a745; /* Green color to match navbar logo and cta-btn */
+}
+
+.cta-section p {
+    max-width: 700px;
+    margin: 0 auto 30px;
+    color: #6c757d;
+    font-size: 18px;
+}
+
+.cta-btn {
+    background-color: #6528a7;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.cta-btn:hover {
+    background-color: #8211e5;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .navbar ul {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .hero h1 {
+        font-size: 32px;
+    }
+    
+    .hero p {
+        font-size: 16px;
+    }
+    
+    .community-stats {
+        max-width: 600px;
+        padding: 30px 15px;
+    }
+
+    .stats-container {
+        gap: 8px;
+        max-width: 600px;
+    }
+    
+    .stat-item {
+        min-width: 100px;
+        padding: 8px;
+    }
+    
+    .stat-number {
+        font-size: 32px;
+    }
+    
+    .stat-label {
+        font-size: 13px;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .add-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .events-section {
+        padding: 15px;
+    }
+
+    .events-grid {
+        grid-template-columns: 1fr; /* Stack cards in a single column on smaller screens */
+        grid-template-rows: auto; /* Allow rows to adjust based on content */
+    }
+
+    .event-card {
+        padding: 15px;
+    }
+
+    .event-date {
+        font-size: 14px;
+    }
+
+    .event-card h3 {
+        font-size: 20px;
+    }
+
+    .event-card p {
+        font-size: 16px;
+    }
+
+    .event-meta {
+        font-size: 13px;
+    }
+
+    .discussions-section {
+        padding: 15px;
+    }
+
+    .discussion-card {
+        padding: 20px;
+        margin-bottom: 15px;
+    }
+
+    .discussion-header h3 {
+        font-size: 16px;
+    }
+
+    .discussion-meta {
+        font-size: 12px;
+    }
+
+    .discussion-card p {
+        font-size: 14px;
+    }
+
+    .cta-section h2 {
+        font-size: 28px;
+    }
+
+    .cta-section p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 10px 15px;
+    }
+
+    .navbar .logo {
+        font-size: 24px;
+    }
+
+    .navbar ul li a {
+        font-size: 14px;
+    }
+
+    .hero {
+        padding: 60px 15px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .community-stats {
+        max-width: 400px;
+        padding: 20px 10px;
+    }
+
+    .stats-container {
+        gap: 5px;
+        max-width: 400px;
+    }
+    
+    .stat-item {
+        min-width: 80px;
+        padding: 5px;
+    }
+    
+    .stat-number {
+        font-size: 28px;
+    }
+
+    .stat-label {
+        font-size: 12px;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .section-header h2 {
+        font-size: 24px;
+    }
+
+    .section-header p {
+        font-size: 14px;
+    }
+
+    .events-section {
+        padding: 10px;
+    }
+
+    .event-card {
+        padding: 10px;
+    }
+
+    .event-date {
+        font-size: 12px;
+    }
+
+    .event-card h3 {
+        font-size: 16px;
+    }
+
+    .event-card p {
+        font-size: 13px;
+    }
+
+    .event-meta {
+        font-size: 12px;
+    }
+
+    .discussions-section {
+        padding: 10px;
+    }
+
+    .discussion-card {
+        padding: 15px;
+        margin-bottom: 10px;
+    }
+
+    .cta-section {
+        padding: 60px 15px;
+    }
+
+    .cta-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
