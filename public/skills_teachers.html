@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillHub - Teachers</title>
+    <link rel="stylesheet" href="../public/css/skills_teachers.css">
+    <script src="../public/js/skills_teachers.js" defer></script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">SkillHub</div>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">How it Works</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Community</a></li>
+            <li><a href="#">Sponsor</a></li>
+            <li><a href="#">About Us</a></li>
+        </ul>
+        <div class="user-icon"></div>
+    </div>
+
+    <div class="hero">
+        <h1>FIND EXPERT TEACHERS</h1>
+        <p>Connect with skilled instructors in your neighborhood ready to share their knowledge</p>
+        <input type="text" placeholder="Search for a teacher...">
+        <div class="floating-circle floating-circle-1"></div>
+        <div class="floating-circle floating-circle-2"></div>
+        <div class="floating-circle floating-circle-3"></div>
+        <div class="floating-circle floating-circle-4"></div>
+        <div class="floating-circle floating-circle-5"></div>
+    </div>
+
+    <div class="container">
+        <div class="filters">
+            <div class="filter-header">Filters</div>
+            <div class="filter-group">
+                <label for="locationFilter"><span class="filter-icon">📍</span> Location</label>
+                <select id="locationFilter">
+                    <option>Within 1 mile</option>
+                    <option>Within 3 miles</option>
+                    <option>Within 5 miles</option>
+                    <option>Within 10 miles</option>
+                    <option>Anywhere in City</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="priceRangeMax"><span class="filter-icon">💰</span> Price Range</label>
+                <div class="price-range">
+                    <select id="priceRangeMax">
+                        <option>Max</option>
+                        <option>500</option>
+                        <option>1000</option>
+                        <option>1500</option>
+                        <option>2000</option>
+                    </select>
+                    <span>-</span>
+                    <select id="priceRangeMin">
+                        <option>Min</option>
+                        <option>0</option>
+                        <option>500</option>
+                        <option>1000</option>
+                        <option>1500</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label for="availabilityFilter"><span class="filter-icon">📅</span> Availability</label>
+                <select id="availabilityFilter">
+                    <option>Any time</option>
+                    <option>Weekdays</option>
+                    <option>Weekends</option>
+                    <option>Morning</option>
+                    <option>Afternoon</option>
+                    <option>Evening</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="languageFilter"><span class="filter-icon">👤</span> Language</label>
+                <select id="languageFilter">
+                    <option>Any language</option>
+                    <option>English</option>
+                    <option>Sinhala</option>
+                    <option>Tamil</option>
+                    <option>Sign language</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="ratingFilter"><span class="filter-icon">⭐</span> Rating</label>
+                <select id="ratingFilter">
+                    <option>All ratings</option>
+                    <option>4+ stars</option>
+                    <option>3+ stars</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="skillFilter"><span class="filter-icon">📚</span> Skill category</label>
+                <select id="skillFilter">
+                    <option>All skills</option>
+                    <option>Languages</option>
+                    <option>Music</option>
+                    <option>Cooking</option>
+                </select>
+            </div>
+            <button class="clear-btn" onclick="clearFilters()">Clear All Filters</button>
+        </div>
+
+        <div class="categories">
+            <div class="categories-header">
+                <div>
+                    <span class="skills-count">247 teachers found in your area</span>
+                    <h3>Featured Teachers</h3>
+                </div>
+                <div class="sort-options">
+                    <span>Sort by:</span>
+                    <select id="sortFilter" onchange="sortTeachers()">
+                        <option value="popular">Most Popular</option>
+                        <option value="Alphabetical">Alphabetical</option>
+                    </select>
+                </div>
+            </div>
+            <div class="role-buttons">
+                <a href="../public/skills_category.html"><button class="role-btn" data-role="categories">Categories</button></a>
+                <button class="role-btn active" data-role="teachers">Teachers</button>
+            </div>
+            <div class="category-grid" id="categoryGrid">
+                <div class="category-card" data-name="Maria Rodriguez" data-popularity="47">
+                    <div class="teacher-initial">M</div>
+                    <h4>Maria Rodriguez ★ 4.9 (47 reviews)</h4>
+                    <p class="distance">📍 8.8 miles away</p>
+                    <p>Passionate language teacher with 10+ years experience, specializing in making Spanish fun and accessible for all ages through immersive cultural experiences.</p>
+                    <p><strong>Skills Offered:</strong> English, Guitar, Flamenco Dance, Cooking</p>
+                    <p class="availability">Rs.1000/hour • Available today</p>
+                </div>
+                <div class="category-card" data-name="David Kim" data-popularity="47">
+                    <div class="teacher-initial">D</div>
+                    <h4>David Kim ★ 4.9 (47 reviews)</h4>
+                    <p class="distance">📍 8.8 miles away</p>
+                    <p>Passionate language teacher with 10+ years experience, specializing in making Spanish fun and accessible for all ages through immersive cultural experiences.</p>
+                    <p><strong>Skills Offered:</strong> English, Guitar, Flamenco Dance</p>
+                    <p class="availability">Rs.1000/hour • Available today</p>
+                </div>
+                <div class="category-card" data-name="Maria Rodriguez" data-popularity="47">
+                    <div class="teacher-initial">M</div>
+                    <h4>Maria Rodriguez ★ 4.9 (47 reviews)</h4>
+                    <p class="distance">📍 8.8 miles away</p>
+                    <p>Passionate language teacher with 10+ years experience, specializing in making Spanish fun and accessible for all ages through immersive cultural experiences.</p>
+                    <p><strong>Skills Offered:</strong> English, Guitar, Flamenco Dance, Cooking</p>
+                    <p class="availability">Rs.1000/hour • Available today</p>
+                </div>
+                <div class="category-card" data-name="David Kim" data-popularity="47">
+                    <div class="teacher-initial">D</div>
+                    <h4>David Kim ★ 4.9 (47 reviews)</h4>
+                    <p class="distance">📍 8.8 miles away</p>
+                    <p>Passionate language teacher with 10+ years experience, specializing in making Spanish fun and accessible for all ages through immersive cultural experiences.</p>
+                    <p><strong>Skills Offered:</strong> English, Guitar, Flamenco Dance</p>
+                    <p class="availability">Rs.1000/hour • Available today</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
