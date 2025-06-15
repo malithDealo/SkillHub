@@ -1,0 +1,153 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.privacy-wrapper {
+    width: 100%;
+    padding: 2rem 1rem;
+    display: flex; /* Add flexbox to center the child */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.privacy-card {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+    max-width: 800px;
+    width: 100%;
+    text-align: left;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.brand-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.brand-text {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #87BE25;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+}
+
+.title {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    text-align: center;
+    background: linear-gradient(90deg, #4CAF50, #45a049);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.last-updated {
+    font-size: 0.9rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.intro {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.content-section h2 {
+    font-size: 1.3rem;
+    color: #333;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.content-section h2::before {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 3px;
+    background: #4CAF50;
+    bottom: -5px;
+    left: 0;
+    transition: width 0.3s ease;
+}
+
+.content-section h2:hover::before {
+    width: 60px;
+}
+
+.content-section p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.footer-links {
+    margin-top: 2rem;
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.footer-links a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: 600;
+    margin: 0 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #45a049;
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .privacy-card {
+        padding: 1.5rem;
+        border-radius: 10px;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .content-section h2 {
+        font-size: 1.1rem;
+    }
+
+    .content-section p {
+        font-size: 0.9rem;
+    }
+}
