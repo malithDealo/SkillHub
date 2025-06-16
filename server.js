@@ -3,6 +3,7 @@ const session = require('express-session');
 const passport = require('passport');
 const path = require('path');
 const dotenv = require('dotenv');
+const sqlite3 = require('sqlite3').verbose();
 
 // Import routes
 const authRoutes = require('./src/routes/auth');
@@ -21,6 +22,9 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Connect to database
+const db = new sqlite3.Database('mydatabase.db');
 
 // Session configuration
 app.use(session({
