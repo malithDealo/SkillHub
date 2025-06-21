@@ -11,7 +11,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const updatesCheckbox = document.querySelector('input[name="updates"]');
     const ageGroupSelect = document.getElementById('age-group');
     const languageSelect = document.getElementById('language');
+    const mapContainer = document.getElementById('map-container');
     let selectedInterests = [];
+    let map, marker;
 
     // Databases
     const interestsDatabase = [
@@ -50,16 +52,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Clear all validation error states and tooltips
     function clearAllValidationErrors() {
-        // Remove any existing error tooltips
-        document.querySelectorAll('.validation-tooltip').forEach(tooltip => {
-            tooltip.remove();
-        });
-        
-        // Reset all border colors to default
+        document.querySelectorAll('.validation-tooltip').forEach(tooltip => tooltip.remove());
         const allInputs = document.querySelectorAll('input, select');
-        allInputs.forEach(input => {
-            input.style.borderColor = '#ddd';
-        });
+        allInputs.forEach(input => input.style.borderColor = '#ddd');
     }
 
     // 1. Password Strength Matrix
@@ -95,7 +90,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 2. Validation without Icons (except Password)
     function setupValidationWithoutIcons() {
-        // Name Validation
         [firstNameInput, lastNameInput].forEach(input => {
             input.addEventListener('input', () => {
                 const isValid = /^[a-zA-Z]{2,}$/.test(input.value.trim());
@@ -111,11 +105,9 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        // Email Validation
         emailInput.addEventListener('input', () => {
             const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim());
             emailInput.style.borderColor = emailInput.value ? (isValid ? '#4CAF50' : '#ff4444') : '#ddd';
-            
             if (isValid) {
                 hideValidationTooltip(emailInput);
                 predictAgeGroup();
@@ -130,7 +122,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Location Validation
         locationInput.addEventListener('input', () => {
             const isValid = locationInput.value.trim().length > 0;
             locationInput.style.borderColor = isValid ? '#4CAF50' : '#ddd';
@@ -144,67 +135,52 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Age Group Validation
         ageGroupSelect.addEventListener('change', () => {
             const isValid = ageGroupSelect.value !== "" && ageGroupSelect.value !== null;
             ageGroupSelect.style.borderColor = isValid ? '#4CAF50' : '#ddd';
         });
 
-        // Language Validation
         languageSelect.addEventListener('change', () => {
             const validLanguages = ['english', 'sinhala', 'tamil'];
             const isValid = validLanguages.includes(languageSelect.value);
             languageSelect.style.borderColor = isValid ? '#4CAF50' : '#ddd';
         });
 
-        // Initialize language validation state
         const validLanguages = ['english', 'sinhala', 'tamil'];
         if (validLanguages.includes(languageSelect.value)) {
             languageSelect.style.borderColor = '#4CAF50';
         }
 
-        // Terms Checkbox Validation
         termsCheckbox.addEventListener('change', () => {
             const isValid = termsCheckbox.checked;
             termsCheckbox.parentNode.style.color = isValid ? '#333' : '#ff4444';
         });
 
-        // Updates Checkbox Validation (optional)
         if (updatesCheckbox) {
             updatesCheckbox.addEventListener('change', () => {
-                const isValid = true; // Optional field, always valid
                 updatesCheckbox.parentNode.style.color = '#333';
             });
         }
     }
 
-    // Validation tooltip functions
     function showValidationTooltip(element, message) {
-        hideValidationTooltip(element); // Remove existing tooltip
-        
+        hideValidationTooltip(element);
         const tooltip = document.createElement('div');
         tooltip.className = 'validation-tooltip';
         tooltip.innerHTML = `<span class="tooltip-icon">!</span> ${message}`;
-        
-        // Position tooltip
         const rect = element.getBoundingClientRect();
         tooltip.style.position = 'absolute';
         tooltip.style.top = `${rect.bottom + window.scrollY + 5}px`;
         tooltip.style.left = `${rect.left + window.scrollX}px`;
         tooltip.style.zIndex = '1000';
-        
         document.body.appendChild(tooltip);
-        
-        // Auto-hide after 5 seconds
         setTimeout(() => hideValidationTooltip(element), 5000);
     }
 
     function hideValidationTooltip(element) {
-        const existingTooltips = document.querySelectorAll('.validation-tooltip');
-        existingTooltips.forEach(tooltip => tooltip.remove());
+        document.querySelectorAll('.validation-tooltip').forEach(tooltip => tooltip.remove());
     }
 
-    // 3. Smart Interests with Tags - COMPLETELY FIXED
     function setupSmartInterests() {
         const tagsContainer = document.createElement('div');
         tagsContainer.className = 'interest-tags';
@@ -213,8 +189,6 @@ document.addEventListener('DOMContentLoaded', function() {
         let currentSuggestionIndex = -1;
         let suggestionsContainer = null;
 
-        renderTags();
-
         function renderTags() {
             tagsContainer.innerHTML = selectedInterests.map(interest => `
                 <span class="interest-tag">
@@ -222,11 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <span class="remove-tag" data-interest="${interest}">×</span>
                 </span>
             `).join('');
-
-            // Remove valid class and its associated tick
             tagsContainer.classList.remove('valid');
-
-            // Add remove handlers
             document.querySelectorAll('.remove-tag').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -234,40 +204,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     renderTags();
                 });
             });
-
-            // Update validation state
             updateInterestsValidation();
         }
 
         function updateInterestsValidation() {
             const isValid = selectedInterests.length > 0;
-            
-            // Clear any validation tooltips for interests
             hideValidationTooltip(interestsInput);
-            
-            // Set border color - green if valid, default if no selection yet
-            if (selectedInterests.length > 0) {
-                interestsInput.style.borderColor = '#4CAF50';
-            } else {
-                interestsInput.style.borderColor = '#ddd'; // Neutral state
-            }
-            
+            interestsInput.style.borderColor = selectedInterests.length > 0 ? '#4CAF50' : '#ddd';
             return isValid;
         }
 
         function addInterest(interest) {
             const trimmedInterest = interest.trim();
             if (!trimmedInterest) return;
-
-            const exists = selectedInterests.some(i => 
-                i.toLowerCase() === trimmedInterest.toLowerCase()
-            );
-
-            if (!exists) {
+            if (!selectedInterests.some(i => i.toLowerCase() === trimmedInterest.toLowerCase())) {
                 selectedInterests.push(trimmedInterest);
                 renderTags();
             }
-
             interestsInput.value = '';
             if (suggestionsContainer) {
                 suggestionsContainer.remove();
@@ -276,11 +229,9 @@ document.addEventListener('DOMContentLoaded', function() {
             currentSuggestionIndex = -1;
         }
 
-        // Enhanced keyboard navigation
         interestsInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 e.preventDefault();
-                
                 if (suggestionsContainer) {
                     const suggestions = Array.from(suggestionsContainer.querySelectorAll('.suggestion-item'));
                     if (currentSuggestionIndex >= 0 && suggestions[currentSuggestionIndex]) {
@@ -288,18 +239,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         return;
                     }
                 }
-                
-                // Add whatever is typed if no suggestion selected
-                if (interestsInput.value.trim()) {
-                    addInterest(interestsInput.value.trim());
-                }
+                if (interestsInput.value.trim()) addInterest(interestsInput.value.trim());
             }
-            
             if (!suggestionsContainer) return;
-
             const suggestions = Array.from(suggestionsContainer.querySelectorAll('.suggestion-item'));
             if (suggestions.length === 0) return;
-
             if (e.key === 'ArrowDown') {
                 e.preventDefault();
                 currentSuggestionIndex = (currentSuggestionIndex + 1) % suggestions.length;
@@ -318,19 +262,16 @@ document.addEventListener('DOMContentLoaded', function() {
         function highlightSuggestion(suggestions, index) {
             suggestions.forEach((suggestion, i) => {
                 suggestion.classList.toggle('highlighted', i === index);
-                if (i === index) {
-                    suggestion.scrollIntoView({ block: 'nearest' });
-                }
+                if (i === index) suggestion.scrollIntoView({ block: 'nearest' });
             });
         }
 
         interestsInput.addEventListener('input', () => {
             const value = interestsInput.value.trim();
             currentSuggestionIndex = -1;
-            
             if (value.length > 1) {
                 const filtered = interestsDatabase.filter(item => 
-                    item.toLowerCase().includes(value.toLowerCase()) &&
+                    item.toLowerCase().includes(value.toLowerCase()) && 
                     !selectedInterests.some(selected => selected.toLowerCase() === item.toLowerCase())
                 );
                 showSuggestions(interestsInput, filtered);
@@ -341,73 +282,69 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         function showSuggestions(inputElement, suggestions) {
-            if (suggestionsContainer) {
-                suggestionsContainer.remove();
-            }
-
+            if (suggestionsContainer) suggestionsContainer.remove();
             if (suggestions.length === 0) return;
-
             suggestionsContainer = document.createElement('div');
             suggestionsContainer.className = 'suggestions-container';
-
             const inputRect = inputElement.getBoundingClientRect();
             suggestionsContainer.style.position = 'absolute';
             suggestionsContainer.style.width = `${inputRect.width}px`;
             suggestionsContainer.style.top = `${inputRect.bottom + window.scrollY}px`;
             suggestionsContainer.style.left = `${inputRect.left + window.scrollX}px`;
             suggestionsContainer.style.zIndex = '1000';
-
             suggestions.slice(0, 5).forEach((suggestion, index) => {
                 const item = document.createElement('div');
                 item.className = 'suggestion-item';
                 item.textContent = suggestion;
-                
                 item.addEventListener('mousedown', (e) => {
                     e.preventDefault();
                     addInterest(suggestion);
                 });
-                
                 suggestionsContainer.appendChild(item);
             });
-
             document.body.appendChild(suggestionsContainer);
-
-            const clickHandler = (e) => {
+            document.addEventListener('click', (e) => {
                 if (!suggestionsContainer?.contains(e.target) && e.target !== interestsInput) {
                     if (suggestionsContainer) {
                         suggestionsContainer.remove();
                         suggestionsContainer = null;
                     }
-                    document.removeEventListener('click', clickHandler);
+                    document.removeEventListener('click', arguments.callee);
                 }
-            };
-            
-            document.addEventListener('click', clickHandler);
+            });
         }
 
-        // Make the validation function available globally
         window.validateInterests = updateInterestsValidation;
     }
 
-    // 4. Smart Location Detection
     async function setupSmartLocation() {
         if (navigator.geolocation) {
             try {
                 const position = await new Promise((resolve, reject) => {
                     navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 5000 });
                 });
-                
                 const { latitude, longitude } = position.coords;
                 const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
                 const data = await response.json();
-                
-                locationInput.value = `${data.address.city || data.address.town}, ${data.address.state}`;
-                showLocationPreview(data);
+                const city = data.address.city || data.address.town || data.address.village;
+                const state = data.address.state;
+                const location = city ? `${city}, ${state}` : `undefined, ${state}`;
+                locationInput.value = location;
+
+                // Show map if city/town is undefined or user wants to refine
+                if (!city) {
+                    showMapForSelection(latitude, longitude, true);
+                } else {
+                    showLocationPreview(data, latitude, longitude);
+                }
             } catch (error) {
+                console.log('Geolocation error:', error);
                 fallbackToIPLocation();
+                showMapForSelection(); // Show map as fallback
             }
         } else {
             fallbackToIPLocation();
+            showMapForSelection(); // Show map if geolocation is not supported
         }
 
         locationInput.addEventListener('input', () => {
@@ -420,45 +357,94 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 5. Age Group Prediction
+    function showMapForSelection(initialLat = 6.9271, initialLon = 79.8612, isInitial = false) {
+        mapContainer.style.display = 'block';
+        mapContainer.style.width = '100%';
+        mapContainer.style.height = '300px';
+
+        if (map) map.remove(); // Remove existing map if it exists
+        map = L.map(mapContainer).setView([initialLat, initialLon], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        if (marker) map.removeLayer(marker); // Remove existing marker
+        marker = L.marker([initialLat, initialLon], { draggable: true }).addTo(map);
+        marker.bindPopup("Drag me to your exact location or click the map to set it.").openPopup();
+
+        map.on('click', async (e) => {
+            const { lat, lng } = e.latlng;
+            marker.setLatLng([lat, lng]);
+            updateLocationFromCoordinates(lat, lng);
+        });
+
+        marker.on('dragend', async (e) => {
+            const { lat, lng } = marker.getLatLng();
+            updateLocationFromCoordinates(lat, lng);
+        });
+
+        const controlContainer = L.control({ position: 'topright' });
+        controlContainer.onAdd = function () {
+            const div = L.DomUtil.create('div', 'map-controls');
+            div.innerHTML = `
+                <button id="confirm-location">Confirm Location</button>
+                ${isInitial ? '' : '<button id="change-location">Change Location</button>'}
+            `;
+            return div;
+        };
+        controlContainer.addTo(map);
+
+        document.getElementById('confirm-location').addEventListener('click', () => {
+            mapContainer.style.display = 'none';
+        });
+
+        if (!isInitial) {
+            document.getElementById('change-location').addEventListener('click', () => {
+                showMapForSelection(initialLat, initialLon); // Reopen map to change
+            });
+        }
+    }
+
+    async function updateLocationFromCoordinates(lat, lng) {
+        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`);
+        const data = await response.json();
+        const city = data.address.city || data.address.town || data.address.village || data.address.hamlet;
+        const state = data.address.state;
+        const detailedLocation = city ? `${city}, ${state}` : `Near ${data.address.state}`;
+        locationInput.value = detailedLocation;
+    }
+
     function predictAgeGroup() {
         const emailDomain = emailInput.value.split('@')[1] || '';
-        
         if (emailDomain.match(/\.edu$|\.ac\.|\.school\.|college|university/i)) {
             ageGroupSelect.value = '16-20';
             return;
         }
-        
         if (emailDomain.match(/\.com$|\.org$|\.net$|\.io/i)) {
             ageGroupSelect.value = '21-25';
             return;
         }
-        
         const stemInterests = ["Programming", "Math", "Physics", "Engineering", "Web Development"];
         if (selectedInterests.some(i => stemInterests.includes(i))) {
             ageGroupSelect.value = '21-25';
         }
     }
 
-    // Helper Functions
-    function showLocationPreview(locationData) {
+    function showLocationPreview(locationData, lat, lon) {
         const preview = document.createElement('div');
         preview.className = 'location-preview';
         preview.innerHTML = `
             <p>Detected location: <strong>${locationInput.value}</strong></p>
             <button class="btn-confirm">Confirm</button>
-            <button class="btn-change">Change</button>
+            <button class="btn-change">Change on Map</button>
         `;
-        
         locationInput.parentNode.appendChild(preview);
         
-        preview.querySelector('.btn-confirm').addEventListener('click', () => {
-            preview.remove();
-        });
-        
+        preview.querySelector('.btn-confirm').addEventListener('click', () => preview.remove());
         preview.querySelector('.btn-change').addEventListener('click', () => {
-            locationInput.value = '';
             preview.remove();
+            showMapForSelection(lat || 6.9271, lon || 79.8612);
         });
     }
 
@@ -472,17 +458,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // COMPLETELY FIXED Form Submission
     function setupFormSubmission() {
         signupForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
-            // Clear any existing validation tooltips
             clearAllValidationErrors();
-            
             if (validateForm()) {
                 showLoadingState();
-                
                 try {
                     await new Promise(resolve => setTimeout(resolve, 1500));
                     showSuccessMessage();
@@ -498,84 +479,47 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // COMPLETELY FIXED Form Validation
     function validateForm() {
         let isValid = true;
         const errors = [];
-        
-        // First Name
         if (!/^[a-zA-Z]{2,}$/.test(firstNameInput.value.trim())) {
             firstNameInput.style.borderColor = '#ff4444';
-            if (!firstNameInput.value.trim()) {
-                errors.push('First name is required');
-            } else {
-                errors.push('First name must contain only letters (2+ characters)');
-            }
+            if (!firstNameInput.value.trim()) errors.push('First name is required');
+            else errors.push('First name must contain only letters (2+ characters)');
             isValid = false;
-        } else {
-            firstNameInput.style.borderColor = '#4CAF50';
-        }
-        
-        // Last Name
+        } else firstNameInput.style.borderColor = '#4CAF50';
         if (!/^[a-zA-Z]{2,}$/.test(lastNameInput.value.trim())) {
             lastNameInput.style.borderColor = '#ff4444';
-            if (!lastNameInput.value.trim()) {
-                errors.push('Last name is required');
-            } else {
-                errors.push('Last name must contain only letters (2+ characters)');
-            }
+            if (!lastNameInput.value.trim()) errors.push('Last name is required');
+            else errors.push('Last name must contain only letters (2+ characters)');
             isValid = false;
-        } else {
-            lastNameInput.style.borderColor = '#4CAF50';
-        }
-        
-        // Email
+        } else lastNameInput.style.borderColor = '#4CAF50';
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim())) {
             emailInput.style.borderColor = '#ff4444';
             errors.push('Please enter a valid email address');
             isValid = false;
-        } else {
-            emailInput.style.borderColor = '#4CAF50';
-        }
-        
-        // Password
+        } else emailInput.style.borderColor = '#4CAF50';
         if (passwordInput.value.length < 8) {
             passwordInput.style.borderColor = '#ff4444';
             errors.push('Password must be at least 8 characters long');
             isValid = false;
-        } else {
-            passwordInput.style.borderColor = '#4CAF50';
-        }
-        
-        // Location
+        } else passwordInput.style.borderColor = '#4CAF50';
         if (locationInput.value.trim().length === 0) {
             locationInput.style.borderColor = '#ff4444';
             errors.push('Please enter your location');
             isValid = false;
-        } else {
-            locationInput.style.borderColor = '#4CAF50';
-        }
-        
-        // Interests
+        } else locationInput.style.borderColor = '#4CAF50';
         if (selectedInterests.length === 0) {
             interestsInput.style.borderColor = '#ff4444';
             showValidationTooltip(interestsInput, 'Please select at least one interest');
             errors.push('Please select at least one interest');
             isValid = false;
-        } else {
-            interestsInput.style.borderColor = '#4CAF50';
-        }
-        
-        // Age Group
+        } else interestsInput.style.borderColor = '#4CAF50';
         if (ageGroupSelect.value === "" || ageGroupSelect.value === null) {
             ageGroupSelect.style.borderColor = '#ff4444';
             errors.push('Please select your age group');
             isValid = false;
-        } else {
-            ageGroupSelect.style.borderColor = '#4CAF50';
-        }
-        
-        // Language
+        } else ageGroupSelect.style.borderColor = '#4CAF50';
         const validLanguages = ['english', 'sinhala', 'tamil'];
         if (!validLanguages.includes(languageSelect.value)) {
             languageSelect.style.borderColor = '#ff4444';
@@ -586,26 +530,13 @@ document.addEventListener('DOMContentLoaded', function() {
             languageSelect.style.borderColor = '#4CAF50';
             hideValidationTooltip(languageSelect);
         }
-        
-        // Terms checkbox
         if (!termsCheckbox.checked) {
             termsCheckbox.parentNode.style.color = '#ff4444';
             errors.push('Please accept the terms and conditions');
             isValid = false;
-        } else {
-            termsCheckbox.parentNode.style.color = '#333';
-        }
-        
-        // Updates checkbox (optional)
-        if (updatesCheckbox && !updatesCheckbox.checked) {
-            updatesCheckbox.parentNode.style.color = '#333'; // Optional, no error
-        }
-        
-        // Show errors if validation failed
-        if (!isValid) {
-            showError(`Please fix the following issues:\n• ${errors.join('\n• ')}`);
-        }
-        
+        } else termsCheckbox.parentNode.style.color = '#333';
+        if (updatesCheckbox && !updatesCheckbox.checked) updatesCheckbox.parentNode.style.color = '#333';
+        if (!isValid) showError(`Please fix the following issues:\n• ${errors.join('\n• ')}`);
         return isValid;
     }
 
@@ -632,7 +563,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 ${selectedInterests.slice(0, 3).map(i => `<li>${i} Fundamentals</li>`).join('')}
             </ul>
         `;
-        
         signupForm.parentNode.insertBefore(message, signupForm.nextSibling);
         setTimeout(() => message.remove(), 5000);
     }
@@ -658,18 +588,15 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => error.remove(), 5000);
     }
 
-    // Social Logins
     function setupSocialLogins() {
         const googleBtn = document.querySelector('.social-btn.google');
         const facebookBtn = document.querySelector('.social-btn.facebook');
-        
         if (googleBtn) {
             googleBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 alert('Google sign-up would be implemented here');
             });
         }
-
         if (facebookBtn) {
             facebookBtn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -678,6 +605,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Initialize everything
     init();
 });
