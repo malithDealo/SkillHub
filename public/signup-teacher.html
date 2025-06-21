@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/signup-teacher.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
     <div class="signup-container">
@@ -85,9 +86,11 @@
                     <label for="phone">Phone Number:</label>
                     <input type="tel" id="phone" name="phone" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group location-group">
                     <label for="location">Location:</label>
                     <input type="text" id="location" name="location" placeholder="City, Province" required>
+                    <div id="map-container" class="map-container" style="display: none;"></div>
+                    <div id="map-controls" class="map-controls" style="margin-top: 0.5rem;"></div>
                 </div>
                 <div class="form-group">
                     <label for="skills">What skill do you want to teach?</label>
@@ -114,21 +117,26 @@
                             <img src="C:\Users\Welcome\OneDrive - NSBM\Desktop\Skillhub\Images\bxs_down-arrow.png" alt="Dropdown Arrow" class="dropdown-icon">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="hourly-rate">Hourly Rate (Optional)</label>
-                        <input type="number" id="hourly-rate" name="hourly-rate" min="0" placeholder="e.g., 500">
-                    </div>
                 </div>
-              <div class="form-group verification-note">
-    <span class="verification-icon"><img src="C:\Users\Welcome\OneDrive - NSBM\Desktop\Skillhub\Images\fxemoji_lock.png" alt="Lock Icon"></span>
-    <p><b>Verification Required</b><br>After registration, you'll need to complete identity verification and skill validation to ensure safety for all community members. This typically takes 1-2 business days.</p>
-</div>
-                <div class="form-group checkbox-group">
-                    <label>
-                        <input type="checkbox" id="terms" name="terms" required>
+                <div class="form-group certificates-section">
+                    <label for="certificates">Upload Certificates (Optional)</label>
+                    <input type="file" id="certificates" name="certificates" accept=".pdf,.jpg,.png" multiple>
+                    <p class="certificate-note">Upload any certificates or credentials to verify your skills (PDF, JPG, PNG; max 5MB each).</p>
+                    <div id="certificate-list" class="certificate-list"></div>
+                </div>
+                <div class="form-group verification-note">
+                    <span class="verification-icon"><img src="C:\Users\Welcome\OneDrive - NSBM\Desktop\Skillhub\Images\fxemoji_lock.png" alt="Lock Icon"></span>
+                    <p><b>Verification Required</b><br>After registration, you'll need to complete identity verification and skill validation to ensure safety for all community members. This typically takes 1-2 business days.</p>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">
                         <span class="custom-checkbox"></span>
-                        I agree to the <a href="./terms-of-service.html" class="policy-link">&nbsp;Terms of Services</a> &nbsp;and&nbsp;<a href="./privacy-policy.html" class="policy-link">Privacy Policy</a>
+                        I agree to the
                     </label>
+                    <a href="./terms-of-service.html" class="policy-link">Terms of Service</a>
+                    and
+                    <a href="./privacy-policy.html" class="policy-link">Privacy Policy</a>
                 </div>
                 <div class="form-group checkbox-group">
                     <label>
@@ -168,5 +176,6 @@
         <!-- Content will be dynamically included or copied from footer1.html -->
     </footer>
     <script src="../js/signup-teacher.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </body>
 </html>

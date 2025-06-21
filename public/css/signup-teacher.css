@@ -223,7 +223,7 @@ body {
     height: 80px;
 }
 
-/* Dropdown row for Teaching Language and Hourly Rate */
+/* Dropdown row for Teaching Language */
 .dropdown-row {
     display: flex;
     gap: 1rem;
@@ -258,13 +258,13 @@ body {
 }
 
 .checkbox-group label {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     font-size: 0.9rem;
     color: #333;
+    cursor: pointer;
     position: relative;
     padding-left: 2rem;
-    cursor: pointer;
 }
 
 .checkbox-group input {
@@ -293,6 +293,10 @@ body {
     top: -2px;
     color: #fff;
     font-size: 12px;
+}
+
+.checkbox-group input + label + .policy-link {
+    margin-left: 0.5rem;
 }
 
 .policy-link {
@@ -330,8 +334,7 @@ body {
     display: flex;
     align-items: flex-start;
     margin-bottom: 1rem;
-        background: linear-gradient(180deg, rgba(105, 118, 222, 0.1) 0%, rgba(116, 84, 174, 0.1) 100%);
-
+    background: linear-gradient(180deg, rgba(105, 118, 222, 0.1) 0%, rgba(116, 84, 174, 0.1) 100%);
     padding: 1rem;
     border-radius: 8px;
     border-left: 4px solid #6976DE;
@@ -339,7 +342,6 @@ body {
 
 .verification-icon {
     margin-right: 0.75rem;
-    
 }
 
 .verification-icon img {
@@ -349,12 +351,12 @@ body {
 
 .verification-note p {
     font-size: 0.9rem;
-    color: #6B7280; /* Gray-blue for description text */
+    color: #6B7280;
     margin: 0;
 }
 
 .verification-note p b {
-    color: #4A5DE2; /* Vibrant blue for "Verification Required" */
+    color: #4A5DE2;
     font-size: 1rem;
     display: block;
     margin-bottom: 0.25rem;
@@ -636,41 +638,86 @@ body {
 }
 
 /* Location Detection */
-.location-preview {
-    background: #f5f5f5;
-    padding: 0.8rem;
-    margin-top: 0.5rem;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    animation: fadeIn 0.3s;
-    border-left: 3px solid #4CAF50;
+.location-group {
+    position: relative;
 }
 
-.btn-confirm, .btn-change {
-    padding: 0.3rem 0.8rem;
-    margin-right: 0.5rem;
+/* Add or update in signup-teacher.css */
+.map-container {
     margin-top: 0.5rem;
+    border-radius: 5px;
+    overflow: hidden;
+    height: 300px; /* Match learner's height */
+}
+
+.map-controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.map-controls button {
+    padding: 0.3rem 0.8rem;
+    background: #4CAF50;
+    color: white;
     border: none;
     border-radius: 3px;
     cursor: pointer;
     transition: all 0.2s;
 }
 
-.btn-confirm {
-    background: #4CAF50;
-    color: white;
-}
-
-.btn-confirm:hover {
+.map-controls button:hover {
     background: #3d8b40;
 }
 
-.btn-change {
+.map-controls #change-location {
     background: #e0e0e0;
+    color: #333;
 }
 
-.btn-change:hover {
+.map-controls #change-location:hover {
     background: #bdbdbd;
+}
+
+/* Certificate Section */
+.certificates-section {
+    position: relative;
+}
+
+.certificate-list {
+    margin-top: 0.5rem;
+}
+
+.certificate-item {
+    display: flex;
+    align-items: center;
+    background: #f5f5f5;
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+}
+
+.certificate-item span {
+    flex-grow: 1;
+    font-size: 0.9rem;
+}
+
+.certificate-item .remove-certificate {
+    margin-left: 0.5rem;
+    cursor: pointer;
+    color: #ff4444;
+    font-size: 1rem;
+    transition: transform 0.2s;
+}
+
+.certificate-item .remove-certificate:hover {
+    transform: scale(1.2);
+}
+
+.certificate-note {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 0.3rem;
 }
 
 /* Loading States */
@@ -728,7 +775,7 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Style for the teaching language dropdown to match other fields */
+/* Style for the teaching language dropdown */
 #teaching-language {
     width: 100%;
     padding: 0.6rem;
