@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // DOM Elements
     const signupForm = document.getElementById('sponsor-signup-form');
-    const locationInput = document.getElementById('location');
     const interestsInput = document.getElementById('interests');
     const aboutInput = document.getElementById('about');
     const passwordInput = document.getElementById('password');
@@ -10,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const lastNameInput = document.getElementById('last-name');
     const companyNameInput = document.getElementById('company-name');
     const phoneInput = document.getElementById('phone');
+    const addressInput = document.getElementById('address');
     const budgetInput = document.getElementById('budget');
     const termsCheckbox = document.getElementById('terms');
     const updatesCheckbox = document.getElementById('updates');
@@ -25,20 +25,11 @@ document.addEventListener('DOMContentLoaded', function() {
         "STEM", "Creative Writing", "Digital Skills"
     ];
 
-    const commonLocations = [
-        "Colombo, Western", "Kandy, Central", "Galle, Southern",
-        "Jaffna, Northern", "Anuradhapura, North Central",
-        "Trincomalee, Eastern", "Badulla, Uva", "Ratnapura, Sabaragamuwa",
-        "Negombo, Western", "Matara, Southern", "Kurunegala, North Western",
-        "Batticaloa, Eastern", "Kalutara, Western", "Nuwara Eliya, Central"
-    ];
-
     // Initialize all features
     function init() {
         createPasswordMatrix();
         setupValidationWithoutIcons();
         setupSmartInterests();
-        setupSmartLocation();
         setupFormSubmission();
         setupSocialLogins();
         
@@ -84,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 2. Validation without Icons (except Password)
+    // 2. Validation without Icons
     function setupValidationWithoutIcons() {
         // Name Validation
         [firstNameInput, lastNameInput].forEach(input => {
@@ -144,17 +135,17 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Location Validation
-        locationInput.addEventListener('input', () => {
-            const isValid = locationInput.value.trim().length > 0;
-            locationInput.style.borderColor = isValid ? '#4CAF50' : '#ddd';
+        // Address Validation
+        addressInput.addEventListener('input', () => {
+            const isValid = addressInput.value.trim().length > 0;
+            addressInput.style.borderColor = isValid ? '#4CAF50' : '#ddd';
         });
 
-        locationInput.addEventListener('blur', () => {
-            if (!locationInput.value.trim()) {
-                showValidationTooltip(locationInput, 'Please enter your location');
+        addressInput.addEventListener('blur', () => {
+            if (!addressInput.value.trim()) {
+                showValidationTooltip(addressInput, 'Please enter your address');
             } else {
-                hideValidationTooltip(locationInput);
+                hideValidationTooltip(addressInput);
             }
         });
 
@@ -186,23 +177,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Terms Checkbox Validation
-        termsCheckbox.addEventListener('change', () => {
-            const isValid = termsCheckbox.checked;
-            termsCheckbox.parentNode.style.color = isValid ? '#333' : '#ff4444';
-        });
-
-        // Updates Checkbox Validation (optional)
-        if (updatesCheckbox) {
-            updatesCheckbox.addEventListener('change', () => {
-                updatesCheckbox.parentNode.style.color = '#333';
-            });
-        }
-
-        // Organization Verification Checkbox Validation
-        orgVerificationCheckbox.addEventListener('change', () => {
-            const isValid = orgVerificationCheckbox.checked;
-            orgVerificationCheckbox.parentNode.style.color = isValid ? '#333' : '#ff4444';
+        // Checkbox Validation
+        [termsCheckbox, updatesCheckbox, orgVerificationCheckbox].forEach(checkbox => {
+            if (checkbox) {
+                checkbox.addEventListener('change', () => {
+                    const isValid = !checkbox.required || checkbox.checked;
+                    checkbox.parentNode.style.color = isValid ? '#333' : '#ff4444';
+                });
+            }
         });
     }
 
@@ -363,51 +345,6 @@ document.addEventListener('DOMContentLoaded', function() {
         window.validateInterests = updateInterestsValidation;
     }
 
-    // 4. Smart Location Detection
-    async function setupSmartLocation() {
-        if (navigator.geolocation) {
-            try {
-                const position = await new Promise((resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 5000 }));
-                const { latitude, longitude } = position.coords;
-                const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
-                const data = await response.json();
-                locationInput.value = `${data.address.city || data.address.town}, ${data.address.state}`;
-                showLocationPreview(data);
-            } catch (error) {
-                fallbackToIPLocation();
-            }
-        } else {
-            fallbackToIPLocation();
-        }
-
-        locationInput.addEventListener('input', () => {
-            const value = locationInput.value.trim();
-            if (value.length > 1) {
-                showSuggestions(locationInput, commonLocations.filter(item => item.toLowerCase().includes(value.toLowerCase())));
-            }
-        });
-    }
-
-    // Helper Functions
-    function showLocationPreview(locationData) {
-        const preview = document.createElement('div');
-        preview.className = 'location-preview';
-        preview.innerHTML = `<p>Detected location: <strong>${locationInput.value}</strong></p><button class="btn-confirm">Confirm</button><button class="btn-change">Change</button>`;
-        locationInput.parentNode.appendChild(preview);
-        preview.querySelector('.btn-confirm').addEventListener('click', () => preview.remove());
-        preview.querySelector('.btn-change').addEventListener('click', () => { locationInput.value = ''; preview.remove(); });
-    }
-
-    async function fallbackToIPLocation() {
-        try {
-            const response = await fetch('https://ipapi.co/json/');
-            const data = await response.json();
-            locationInput.placeholder = `e.g., ${data.city}, ${data.region}`;
-        } catch (error) {
-            console.log('Could not determine location');
-        }
-    }
-
     // Form Submission
     function setupFormSubmission() {
         signupForm.addEventListener('submit', async function(e) {
@@ -479,12 +416,12 @@ document.addEventListener('DOMContentLoaded', function() {
             isValid = false;
         } else phoneInput.style.borderColor = '#4CAF50';
         
-        // Location
-        if (!locationInput.value.trim().length) {
-            locationInput.style.borderColor = '#ff4444';
-            errors.push('Please enter your location');
+        // Address
+        if (!addressInput.value.trim().length) {
+            addressInput.style.borderColor = '#ff4444';
+            errors.push('Please enter your address');
             isValid = false;
-        } else locationInput.style.borderColor = '#4CAF50';
+        } else addressInput.style.borderColor = '#4CAF50';
         
         // Interests
         if (selectedInterests.length === 0) {
@@ -516,7 +453,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else termsCheckbox.parentNode.style.color = '#333';
         
         // Updates Checkbox (optional)
-        if (updatesCheckbox && !updatesCheckbox.checked) updatesCheckbox.parentNode.style.color = '#333';
+        if (updatesCheckbox) updatesCheckbox.parentNode.style.color = '#333';
         
         // Organization Verification Checkbox
         if (!orgVerificationCheckbox.checked) {
