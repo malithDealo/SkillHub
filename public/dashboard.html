@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Dashboard - SkillHub</title>
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="dashboard-header">
+          <h2>Student Dashboard</h2>
+          <span class="status-badge">Active Learner</span>
+        </div>
+
+        <nav class="sidebar-nav">
+          <ul>
+            <li>
+              <a
+                href="#overview"
+                class="sidebar-link active"
+                data-page="overview"
+              >
+                <span class="sidebar-icon">📊</span>
+                Overview
+              </a>
+            </li>
+            <li>
+              <a
+                href="#my-learning"
+                class="sidebar-link"
+                data-page="my-learning"
+              >
+                <span class="sidebar-icon">🎓</span>
+                My Learning
+              </a>
+            </li>
+            <li>
+              <a href="#booking" class="sidebar-link" data-page="booking">
+                <span class="sidebar-icon">📋</span>
+                Booking
+              </a>
+            </li>
+            <li>
+              <a
+                href="#learning-group"
+                class="sidebar-link"
+                data-page="learning-group"
+              >
+                <span class="sidebar-icon">👥</span>
+                Learning Group
+              </a>
+            </li>
+            <li>
+              <a
+                href="#profile-setting"
+                class="sidebar-link"
+                data-page="profile-setting"
+              >
+                <span class="sidebar-icon">⚙️</span>
+                Profile Setting
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <button class="logout-btn">LOG OUT</button>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Learning Groups Page -->
+        <div id="learning-group" class="page-content active">
+          <div class="page-header">
+            <h1>Learning Groups</h1>
+            <p class="page-subtitle">
+              Connect with peers and join study groups
+            </p>
+          </div>
+
+          <!-- My Groups Section -->
+          <section class="content-section">
+            <div class="section-header">
+              <div class="section-title">
+                <span class="section-icon">👥</span>
+                <h2>My Groups</h2>
+              </div>
+              <button class="create-group-btn">Create Group</button>
+            </div>
+
+            <div class="groups-list">
+              <div class="group-item">
+                <div class="group-info">
+                  <h3>Guitar Enthusiasts</h3>
+                  <p class="group-details">
+                    15 members • Next meetup: Sunday 3PM
+                  </p>
+                </div>
+                <button class="view-btn">View</button>
+              </div>
+
+              <div class="group-item">
+                <div class="group-info">
+                  <h3>Coding Bootcamp Grads</h3>
+                  <p class="group-details">28 members • Active discussions</p>
+                </div>
+                <button class="view-btn">View</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Discover Groups Section -->
+          <section class="content-section">
+            <div class="section-header">
+              <div class="section-title">
+                <span class="section-icon">🔍</span>
+                <h2>Discover Groups</h2>
+              </div>
+            </div>
+
+            <div class="groups-list">
+              <div class="group-item">
+                <div class="group-info">
+                  <h3>Local Food Lovers</h3>
+                  <p class="group-details">
+                    42 members • Weekly cooking sessions
+                  </p>
+                </div>
+                <button class="join-btn">Join</button>
+              </div>
+
+              <div class="group-item">
+                <div class="group-info">
+                  <h3>Digital Art Community</h3>
+                  <p class="group-details">89 members • Daily challenges</p>
+                </div>
+                <button class="join-btn">Join</button>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- My Learning Page -->
+        <div id="my-learning" class="page-content">
+          <div class="page-header">
+            <h1>My Learning</h1>
+            <p class="page-subtitle">
+              Manage your courses, progress, and learning preferences
+            </p>
+          </div>
+
+          <!-- Current Courses -->
+          <section class="content-section">
+            <div class="section-header">
+              <div class="section-title">
+                <span class="section-icon">🎓</span>
+                <h2>Current Courses</h2>
+              </div>
+            </div>
+
+            <div class="courses-list">
+              <div class="course-item">
+                <div class="course-icon">🎸</div>
+                <div class="course-info">
+                  <h3>Guitar Basics</h3>
+                  <p class="course-progress">
+                    Progress: 60% • 12 sessions completed
+                  </p>
+                </div>
+                <span class="status-badge active">Active</span>
+              </div>
+
+              <div class="course-item">
+                <div class="course-icon">🍳</div>
+                <div class="course-info">
+                  <h3>Italian Cooking</h3>
+                  <p class="course-progress">
+                    Progress: 40% • 6 sessions completed
+                  </p>
+                </div>
+                <span class="status-badge active">Active</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Wishlist -->
+          <section class="content-section">
+            <div class="section-header">
+              <div class="section-title">
+                <span class="section-icon">💚</span>
+                <h2>Wishlist</h2>
+              </div>
+            </div>
+
+            <div class="wishlist-list">
+              <div class="wishlist-item">
+                <div class="course-icon">🎨</div>
+                <div class="course-info">
+                  <h3>Digital Art Fundamentals</h3>
+                  <p class="course-details">
+                    Saved for later • 3 teachers available
+                  </p>
+                </div>
+                <button class="explore-btn">Explore</button>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Profile Settings Page -->
+        <div id="profile-setting" class="page-content">
+          <div class="page-header">
+            <h1>Profile Settings</h1>
+            <p class="page-subtitle">
+              Manage your personal information and preferences
+            </p>
+          </div>
+
+          <!-- Personal Information -->
+          <section class="content-section">
+            <div class="section-header">
+              <div class="section-title">
+                <span class="section-icon">👤</span>
+                <h2>Personal Information</h2>
+              </div>
+              <button class="edit-btn">Edit</button>
+            </div>
+
+            <div class="profile-form">
+              <div class="form-group">
+                <label>Name</label>
+                <div class="form-value">Sarah Johnson</div>
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <div class="form-value">sarah.johnson@email.com</div>
+              </div>
+              <div class="form-group">
+                <label>Location</label>
+                <div class="form-value">Downtown District, Central City</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Learning Preferences -->
+          <section class="content-section">
+            <div class="section-header">
+              <div class="section-title">
+                <span class="section-icon">⭐</span>
+                <h2>Learning Preferences</h2>
+              </div>
+              <button class="update-btn">Update</button>
+            </div>
+
+            <div class="profile-form">
+              <div class="form-group">
+                <label>Preferred Learning Style</label>
+                <div class="form-value">Visual & Hands-on</div>
+              </div>
+              <div class="form-group">
+                <label>Availability</label>
+                <div class="form-value">Weekday evenings, Weekend mornings</div>
+              </div>
+              <div class="form-group">
+                <label>Budget Range</label>
+                <div class="form-value">$25 - $60 per session</div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Overview Page -->
+        <div id="overview" class="page-content">
+          <div class="page-header">
+            <h1>Dashboard Overview</h1>
+            <p class="page-subtitle">
+              Track your learning progress and manage your activities
+            </p>
+          </div>
+
+          <!-- Stats Grid -->
+          <div class="overview-stats">
+            <div class="stat-card">
+              <div class="stat-number">5</div>
+              <h3>Active courses</h3>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">24</div>
+              <h3>Hours Learned</h3>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">8</div>
+              <h3>Favorite Teachers</h3>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">3</div>
+              <h3>Study Groups</h3>
+            </div>
+          </div>
+
+          <!-- Dashboard Content Grid -->
+          <div class="dashboard-grid">
+            <!-- Current Courses -->
+            <div class="dashboard-section">
+              <div class="section-header">
+                <div class="section-title">
+                  <span class="section-icon">📚</span>
+                  <h2>Current Courses</h2>
+                </div>
+                <button class="view-all-btn">View All</button>
+              </div>
+
+              <div class="course-list">
+                <div class="course-item-overview">
+                  <div class="course-icon">🎸</div>
+                  <div class="course-details">
+                    <h4>Guitar Basics</h4>
+                    <p>with Sarah Miller</p>
+                    <span class="next-class">Next class today</span>
+                  </div>
+                  <span class="status-badge active">Active</span>
+                </div>
+
+                <div class="course-item-overview">
+                  <div class="course-icon">🍳</div>
+                  <div class="course-details">
+                    <h4>Italian Cooking</h4>
+                    <p>with Chef Antonio</p>
+                    <span class="next-class">Next class Friday</span>
+                  </div>
+                  <span class="status-badge active">Active</span>
+                </div>
+
+                <div class="course-item-overview">
+                  <div class="course-icon">💻</div>
+                  <div class="course-details">
+                    <h4>Web Development</h4>
+                    <p>with John Smith</p>
+                    <span class="next-class">Next class Monday</span>
+                  </div>
+                  <span class="status-badge completed">Completed</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Upcoming Sessions -->
+            <div class="dashboard-section">
+              <div class="section-header">
+                <div class="section-title">
+                  <span class="section-icon">📅</span>
+                  <h2>Upcoming Sessions</h2>
+                </div>
+                <button class="manage-btn">Manage</button>
+              </div>
+
+              <div class="session-list">
+                <div class="session-item-overview">
+                  <h4>Guitar Practice Session</h4>
+                  <p>Tomorrow at 2:00 PM</p>
+                  <span class="location">Community Center</span>
+                </div>
+
+                <div class="session-item-overview">
+                  <h4>Cooking Class: Pasta Making</h4>
+                  <p>Friday at 6:00 PM</p>
+                  <span class="location">Kitchen Studio</span>
+                </div>
+
+                <div class="session-item-overview">
+                  <h4>Code Review Session</h4>
+                  <p>Saturday at 10:00 AM</p>
+                  <span class="location">Online</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Favorite Teachers -->
+            <div class="dashboard-section">
+              <div class="section-header">
+                <div class="section-title">
+                  <span class="section-icon">💚</span>
+                  <h2>Favorite Teachers</h2>
+                </div>
+                <button class="view-all-btn">View All</button>
+              </div>
+
+              <div class="teacher-list">
+                <div class="teacher-item">
+                  <div class="teacher-avatar">M</div>
+                  <div class="teacher-info">
+                    <h4>Maria Rodriguez</h4>
+                    <p>Spanish Language</p>
+                    <div class="rating">⭐ 4.9 Rating</div>
+                  </div>
+                  <button class="book-btn">Book</button>
+                </div>
+
+                <div class="teacher-item">
+                  <div class="teacher-avatar chef">C</div>
+                  <div class="teacher-info">
+                    <h4>Chef Antonio</h4>
+                    <p>Cooking Expert</p>
+                    <div class="rating">⭐ 4.8 Rating</div>
+                  </div>
+                  <button class="book-btn">Book</button>
+                </div>
+
+                <div class="teacher-item">
+                  <div class="teacher-avatar tech">J</div>
+                  <div class="teacher-info">
+                    <h4>John Smith</h4>
+                    <p>Web Developer</p>
+                    <div class="rating">⭐ 4.7 Rating</div>
+                  </div>
+                  <button class="book-btn">Book</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- My Study Groups -->
+            <div class="dashboard-section">
+              <div class="section-header">
+                <div class="section-title">
+                  <span class="section-icon">👥</span>
+                  <h2>My Study Groups</h2>
+                </div>
+                <button class="explore-btn">Explore</button>
+              </div>
+
+              <div class="group-list">
+                <div class="group-item-overview">
+                  <h4>Guitar Enthusiasts</h4>
+                  <p>15 members</p>
+                  <span class="next-meetup">Next meetup Sunday</span>
+                  <button class="join-btn joined">Join</button>
+                </div>
+
+                <div class="group-item-overview">
+                  <h4>Coding Bootcamp Grads</h4>
+                  <p>28 members</p>
+                  <span class="next-meetup">Active discussions</span>
+                  <button class="view-btn">View</button>
+                </div>
+
+                <div class="group-item-overview">
+                  <h4>Local Food Lovers</h4>
+                  <p>42 members</p>
+                  <span class="next-meetup">Weekly cooking sessions</span>
+                  <button class="view-btn">View</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Booking Page -->
+        <div id="booking" class="page-content">
+          <div class="page-header">
+            <h1>Booking</h1>
+            <p class="page-subtitle">
+              Schedule and manage your learning sessions
+            </p>
+          </div>
+
+          <!-- Upcoming Sessions -->
+          <section class="content-section">
+            <div class="section-header">
+              <div class="section-title">
+                <span class="section-icon">📅</span>
+                <h2>Upcoming Sessions</h2>
+              </div>
+            </div>
+
+            <div class="sessions-list">
+              <div class="session-item">
+                <div class="session-info">
+                  <h3>Guitar Practice Session</h3>
+                  <p class="session-details">
+                    Tomorrow at 2:00 PM • Community Center
+                  </p>
+                </div>
+                <div class="session-actions">
+                  <button class="reschedule-btn">Reschedule</button>
+                  <button class="cancel-btn">Cancel</button>
+                </div>
+              </div>
+
+              <div class="session-item">
+                <div class="session-info">
+                  <h3>Cooking Class: Pasta Making</h3>
+                  <p class="session-details">
+                    Friday at 6:00 PM • Kitchen Studio
+                  </p>
+                </div>
+                <div class="session-actions">
+                  <button class="reschedule-btn">Reschedule</button>
+                  <button class="cancel-btn">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Payment History -->
+          <section class="content-section">
+            <div class="section-header">
+              <div class="section-title">
+                <span class="section-icon">💳</span>
+                <h2>Payment History</h2>
+              </div>
+            </div>
+
+            <div class="payment-list">
+              <div class="payment-item">
+                <div class="payment-info">
+                  <h3>Guitar Lessons Package</h3>
+                  <p class="payment-details">Dec 15, 2024 • $120.00</p>
+                </div>
+                <span class="payment-status paid">Paid</span>
+              </div>
+
+              <div class="payment-item">
+                <div class="payment-info">
+                  <h3>Cooking Class Session</h3>
+                  <p class="payment-details">Dec 10, 2024 • $45.00</p>
+                </div>
+                <span class="payment-status paid">Paid</span>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script src="dashboard.js"></script>
+  </body>
+</html>

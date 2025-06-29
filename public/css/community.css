@@ -1,0 +1,1322 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+  color: #333;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+  position: relative;
+  overflow: hidden;
+  color: white;
+}
+
+.hero-background-circles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.circle-1 {
+  width: 80px;
+  height: 80px;
+  top: 10%;
+  left: 5%;
+}
+.circle-2 {
+  width: 120px;
+  height: 120px;
+  top: 70%;
+  left: 10%;
+}
+.circle-3 {
+  width: 60px;
+  height: 60px;
+  top: 20%;
+  left: 85%;
+}
+.circle-4 {
+  width: 100px;
+  height: 100px;
+  top: 80%;
+  right: 15%;
+}
+.circle-5 {
+  width: 90px;
+  height: 90px;
+  top: 40%;
+  left: 20%;
+}
+.circle-6 {
+  width: 70px;
+  height: 70px;
+  top: 30%;
+  right: 25%;
+}
+.circle-7 {
+  width: 110px;
+  height: 110px;
+  top: 60%;
+  left: 70%;
+}
+.circle-8 {
+  width: 85px;
+  height: 85px;
+  top: 50%;
+  right: 5%;
+}
+
+.hero-content {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.highlight {
+  color: #4caf50;
+}
+
+/* Community Stats Section */
+.community-stats-section {
+  padding: 3rem 0;
+  background: #f8f9fa;
+  margin-top: -2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.stats-card {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  text-align: center;
+}
+
+.stat-item {
+  padding: 1rem;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #4caf50;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+}
+
+/* Events Section */
+.events-section {
+  padding: 6rem 0;
+  background: white;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.section-header p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.add-event-btn,
+.add-question-btn {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-event-btn:hover,
+.add-question-btn:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.event-card {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 15px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  border-color: #4caf50;
+}
+
+.event-date {
+  margin-bottom: 1rem;
+}
+
+.date-badge {
+  background: #4caf50;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.event-content h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+  color: #333;
+}
+
+.event-content p {
+  color: #666;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.event-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.event-location,
+.event-attendees {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* Discussions Section */
+.discussions-section {
+  padding: 6rem 0;
+  background: #f8f9fa;
+}
+
+.discussions-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.discussion-item {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.discussion-item:hover {
+  border-color: #4caf50;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.discussion-content {
+  flex: 1;
+}
+
+.discussion-content h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.discussion-meta {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 0.8rem;
+}
+
+.author {
+  font-weight: 600;
+}
+
+.time {
+  color: #aaa;
+}
+
+.discussion-content p {
+  color: #666;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.discussion-stats {
+  margin-left: 1rem;
+  text-align: right;
+}
+
+.reply-count {
+  background: #e8f5e8;
+  color: #4caf50;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* CTA Section */
+.cta {
+  padding: 6rem 0;
+  background: white;
+  text-align: center;
+}
+
+.cta h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.cta p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary {
+  background: #4caf50;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .discussion-item {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .discussion-stats {
+    margin-left: 0;
+    text-align: left;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-number {
+    font-size: 2rem;
+  }
+
+  .event-card,
+  .discussion-item {
+    padding: 1rem;
+  }
+
+  .section-header h2,
+  .cta h2 {
+    font-size: 2rem;
+  }
+}
+
+/* Animation for smooth transitions */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.event-card,
+.discussion-item {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Loading states */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: #666;
+}
+
+.loading::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #4caf50;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: 10px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* Add this to community-styles.css or create a separate file */
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal Container */
+.modal-container {
+  background: white;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 700px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  transform: translateY(30px);
+  transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-container {
+  transform: translateY(0);
+}
+
+/* Modal Header */
+.modal-header {
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+  color: white;
+  padding: 1.5rem 2rem;
+  border-radius: 15px 15px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modal-icon {
+  font-size: 1.5rem;
+}
+
+.modal-title h2 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.modal-close {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.modal-subtitle {
+  color: white;
+  margin: 0.5rem 0 0 0;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* Modal Content */
+.modal-content {
+  padding: 2rem;
+}
+
+/* Tips Section */
+.tips-section {
+  background: #f0f8ff;
+  border: 1px solid #e1f5fe;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.tips-section h3 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.tips-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tips-list li {
+  color: #666;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Form Styles */
+.event-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 12px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #4caf50;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Event Type Grid */
+.event-type-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.event-type-option {
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  padding: 1rem 0.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.event-type-option:hover {
+  border-color: #4caf50;
+  background: #f8f9fa;
+}
+
+.event-type-option.selected {
+  border-color: #4caf50;
+  background: #e8f5e8;
+  color: #4caf50;
+}
+
+.type-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.event-type-option span {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Cost Input */
+.cost-input {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.cost-input select {
+  flex: 1;
+}
+
+.cost-input input {
+  flex: 1;
+}
+
+/* Skill Level Options */
+.skill-level-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.skill-option {
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  padding: 0.8rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.skill-option:hover {
+  border-color: #4caf50;
+  background: #f8f9fa;
+}
+
+.skill-option.selected {
+  border-color: #4caf50;
+  background: #e8f5e8;
+  color: #4caf50;
+}
+
+/* Tags Container */
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  min-height: 20px;
+}
+
+.tag-item {
+  background: #e8f5e8;
+  color: #4caf50;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.tag-remove {
+  background: none;
+  border: none;
+  color: #4caf50;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tag-remove:hover {
+  background: rgba(76, 175, 80, 0.2);
+}
+
+/* Checkbox Group */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.checkbox-label input[type="checkbox"] {
+  display: none;
+}
+
+.checkmark {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ddd;
+  border-radius: 3px;
+  position: relative;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark {
+  background: #4caf50;
+  border-color: #4caf50;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+  content: "✓";
+  position: absolute;
+  top: -2px;
+  left: 2px;
+  color: white;
+  font-size: 12px;
+}
+
+/* Modal Footer */
+.modal-footer {
+  padding: 1.5rem 2rem;
+  border-top: 1px solid #e9ecef;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  background: #f8f9fa;
+  border-radius: 0 0 15px 15px;
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: #4caf50;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+}
+
+.btn-primary:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #666;
+  border: 2px solid #ddd;
+}
+
+.btn-secondary:hover {
+  border-color: #4caf50;
+  color: #4caf50;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modal-container {
+    width: 95%;
+    margin: 1rem;
+    max-height: 95vh;
+  }
+
+  .modal-header {
+    padding: 1rem 1.5rem;
+  }
+
+  .modal-content {
+    padding: 1.5rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .event-type-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .skill-level-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .modal-footer {
+    padding: 1rem 1.5rem;
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    max-height: 100vh;
+  }
+
+  .modal-header {
+    border-radius: 0;
+  }
+
+  .event-type-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .skill-level-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Animation for modal */
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-overlay.active .modal-container {
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+/* Add this to community-styles.css or create a separate file */
+
+/* Discussion Modal Specific Styles */
+#discussionModal .modal-header {
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+}
+
+#discussionModal .modal-icon {
+  font-size: 1.5rem;
+}
+
+/* Tips Section for Discussion */
+#discussionModal .tips-section {
+  background: #f0f8ff;
+  border: 1px solid #e1f5fe;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+#discussionModal .tips-section h3 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+#discussionModal .tips-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#discussionModal .tips-list li {
+  color: #666;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Discussion Form Styles */
+.discussion-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.discussion-form .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.discussion-form .form-group label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.discussion-form input,
+.discussion-form select,
+.discussion-form textarea {
+  padding: 12px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: border-color 0.3s ease;
+  font-family: inherit;
+}
+
+.discussion-form input:focus,
+.discussion-form select:focus,
+.discussion-form textarea:focus {
+  outline: none;
+  border-color: #4caf50;
+}
+
+.discussion-form textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.5;
+}
+
+.discussion-form input::placeholder,
+.discussion-form textarea::placeholder {
+  color: #999;
+}
+
+/* Description Help Text */
+.description-help {
+  margin-top: 0.5rem;
+}
+
+.description-help p {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Tags Help Text */
+.tags-help {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Tags Container */
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  min-height: 20px;
+}
+
+.tag-item {
+  background: #e8f5e8;
+  color: #4caf50;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.tag-remove {
+  background: none;
+  border: none;
+  color: #4caf50;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tag-remove:hover {
+  background: rgba(76, 175, 80, 0.2);
+}
+
+/* Checkbox Group */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+.checkbox-label input[type="checkbox"] {
+  display: none;
+}
+
+.checkmark {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ddd;
+  border-radius: 3px;
+  position: relative;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark {
+  background: #4caf50;
+  border-color: #4caf50;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+  content: "✓";
+  position: absolute;
+  top: -2px;
+  left: 2px;
+  color: white;
+  font-size: 12px;
+}
+
+/* Community Guidelines Link */
+.community-guidelines-link {
+  color: #4caf50;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.community-guidelines-link:hover {
+  text-decoration: underline;
+}
+
+/* Character Counter */
+.character-counter {
+  text-align: right;
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.character-counter.warning {
+  color: #ff9800;
+}
+
+.character-counter.error {
+  color: #f44336;
+}
+
+/* Form Validation States */
+.form-group input.invalid,
+.form-group select.invalid,
+.form-group textarea.invalid {
+  border-color: #f44336;
+}
+
+.form-group input.valid,
+.form-group select.valid,
+.form-group textarea.valid {
+  border-color: #4caf50;
+}
+
+/* Error Messages */
+.error-message {
+  color: #f44336;
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+  display: none;
+}
+
+.error-message.show {
+  display: block;
+}
+
+/* Modal Footer for Discussion */
+#discussionModal .modal-footer {
+  padding: 1.5rem 2rem;
+  border-top: 1px solid #e9ecef;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  background: #f8f9fa;
+  border-radius: 0 0 15px 15px;
+}
+
+#discussionModal .btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#discussionModal .btn-primary {
+  background: #4caf50;
+  color: white;
+}
+
+#discussionModal .btn-primary:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+}
+
+#discussionModal .btn-primary:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+#discussionModal .btn-secondary {
+  background: transparent;
+  color: #666;
+  border: 2px solid #ddd;
+}
+
+#discussionModal .btn-secondary:hover {
+  border-color: #4caf50;
+  color: #4caf50;
+}
+
+/* Loading State */
+.loading-text {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ffffff40;
+  border-top: 2px solid #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design for Discussion Modal */
+@media (max-width: 768px) {
+  #discussionModal .modal-container {
+    width: 95%;
+    margin: 1rem;
+    max-height: 95vh;
+  }
+
+  #discussionModal .modal-header {
+    padding: 1rem 1.5rem;
+  }
+
+  #discussionModal .modal-content {
+    padding: 1.5rem;
+  }
+
+  #discussionModal .modal-footer {
+    padding: 1rem 1.5rem;
+    flex-direction: column;
+  }
+
+  #discussionModal .btn {
+    width: 100%;
+  }
+
+  .checkbox-label {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  #discussionModal .modal-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    max-height: 100vh;
+  }
+
+  #discussionModal .modal-header {
+    border-radius: 0;
+  }
+
+  #discussionModal .modal-content {
+    padding: 1rem;
+  }
+
+  .discussion-form {
+    gap: 1rem;
+  }
+}
