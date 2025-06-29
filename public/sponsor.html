@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sponsors - SkillHub</title>
+    <link rel="stylesheet" href="sponsors.css" />
+  </head>
+  <body>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-background-circles">
+        <div class="hero-circle circle-1"></div>
+        <div class="hero-circle circle-2"></div>
+        <div class="hero-circle circle-3"></div>
+        <div class="hero-circle circle-4"></div>
+        <div class="hero-circle circle-5"></div>
+        <div class="hero-circle circle-6"></div>
+        <div class="hero-circle circle-7"></div>
+        <div class="hero-circle circle-8"></div>
+        <div class="hero-circle circle-9"></div>
+        <div class="hero-circle circle-10"></div>
+        <div class="hero-circle circle-11"></div>
+        <div class="hero-circle circle-12"></div>
+      </div>
+      <div class="container">
+        <div class="hero-content">
+          <h1>Our Sponsors</h1>
+          <p>
+            Connect with amazing sponsors looking to support events and build
+            meaningful partnerships
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content">
+      <div class="container">
+        <!-- Search and Filter Section -->
+        <div class="search-filter-section">
+          <p class="section-subtitle">
+            Discover sponsors actively looking for partnership opportunities
+          </p>
+
+          <!-- Search Bar -->
+          <div class="search-container">
+            <input
+              type="text"
+              placeholder="Search Sponsor by name, category or location..."
+              class="search-input"
+              id="sponsorSearch"
+            />
+            <button class="search-btn" id="searchBtn">🔍</button>
+          </div>
+
+          <!-- Category Filters -->
+          <div class="category-filters">
+            <button class="filter-btn active" data-category="all">
+              All Categories
+            </button>
+            <button class="filter-btn" data-category="technology">
+              Technology
+            </button>
+            <button class="filter-btn" data-category="finance">Finance</button>
+            <button class="filter-btn" data-category="healthcare">
+              Healthcare
+            </button>
+            <button class="filter-btn" data-category="education">
+              Education
+            </button>
+            <button class="filter-btn" data-category="retail">Retail</button>
+          </div>
+        </div>
+
+        <!-- Sponsors Grid -->
+        <div class="sponsors-grid" id="sponsorsGrid">
+          <!-- Sponsor Card 1 -->
+          <div class="sponsor-card" data-category="technology">
+            <div class="sponsor-header">
+              <div class="sponsor-avatar">T</div>
+              <div class="sponsor-info">
+                <h3>TechCorp Solutions</h3>
+                <span class="sponsor-category">Technology</span>
+              </div>
+            </div>
+            <div class="sponsor-details">
+              <div class="detail-row">
+                <span class="detail-label">Location:</span>
+                <span class="detail-value">San Francisco, USA</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Contact:</span>
+                <span class="detail-value">john@techcorp.com</span>
+              </div>
+              <div class="sponsor-description">
+                Leading technology solutions provider
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Interested in:</span>
+                <span class="detail-value"
+                  >Tech conferences, startup events, innovation summits</span
+                >
+              </div>
+              <div class="budget-range">
+                <span class="budget-label">Budget:</span>
+                <span class="budget-value">$15,000 - $50,000</span>
+              </div>
+            </div>
+            <button class="contact-sponsor-btn">Contact Sponsor</button>
+          </div>
+
+          <!-- Sponsor Card 2 -->
+          <div class="sponsor-card" data-category="finance">
+            <div class="sponsor-header">
+              <div class="sponsor-avatar">G</div>
+              <div class="sponsor-info">
+                <h3>GreenBank Financial</h3>
+                <span class="sponsor-category">Finance</span>
+              </div>
+            </div>
+            <div class="sponsor-details">
+              <div class="detail-row">
+                <span class="detail-label">Location:</span>
+                <span class="detail-value">New York, USA</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Contact:</span>
+                <span class="detail-value">sarah@greenbank.com</span>
+              </div>
+              <div class="sponsor-description">
+                Sustainable financial services
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Interested in:</span>
+                <span class="detail-value"
+                  >Financial conferences, sustainability events</span
+                >
+              </div>
+              <div class="budget-range">
+                <span class="budget-label">Budget:</span>
+                <span class="budget-value">$50,000 - $100,000</span>
+              </div>
+            </div>
+            <button class="contact-sponsor-btn">Contact Sponsor</button>
+          </div>
+
+          <!-- Sponsor Card 3 -->
+          <div class="sponsor-card" data-category="healthcare">
+            <div class="sponsor-header">
+              <div class="sponsor-avatar">H</div>
+              <div class="sponsor-info">
+                <h3>HealthFirst Medical</h3>
+                <span class="sponsor-category">Healthcare</span>
+              </div>
+            </div>
+            <div class="sponsor-details">
+              <div class="detail-row">
+                <span class="detail-label">Location:</span>
+                <span class="detail-value">Chicago, USA</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Contact:</span>
+                <span class="detail-value">info@healthfirst.com</span>
+              </div>
+              <div class="sponsor-description">Premier healthcare provider</div>
+              <div class="detail-row">
+                <span class="detail-label">Interested in:</span>
+                <span class="detail-value"
+                  >Medical conferences, health awareness events</span
+                >
+              </div>
+              <div class="budget-range">
+                <span class="budget-label">Budget:</span>
+                <span class="budget-value">$25,000 - $75,000</span>
+              </div>
+            </div>
+            <button class="contact-sponsor-btn">Contact Sponsor</button>
+          </div>
+
+          <!-- Sponsor Card 4 -->
+          <div class="sponsor-card" data-category="education">
+            <div class="sponsor-header">
+              <div class="sponsor-avatar">E</div>
+              <div class="sponsor-info">
+                <h3>EduTech Innovations</h3>
+                <span class="sponsor-category">Education</span>
+              </div>
+            </div>
+            <div class="sponsor-details">
+              <div class="detail-row">
+                <span class="detail-label">Location:</span>
+                <span class="detail-value">Boston, USA</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Contact:</span>
+                <span class="detail-value">partnerships@edutech.com</span>
+              </div>
+              <div class="sponsor-description">
+                Educational technology pioneer
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Interested in:</span>
+                <span class="detail-value"
+                  >Educational events, learning workshops, skill
+                  development</span
+                >
+              </div>
+              <div class="budget-range">
+                <span class="budget-label">Budget:</span>
+                <span class="budget-value">$10,000 - $40,000</span>
+              </div>
+            </div>
+            <button class="contact-sponsor-btn">Contact Sponsor</button>
+          </div>
+
+          <!-- Sponsor Card 5 -->
+          <div class="sponsor-card" data-category="retail">
+            <div class="sponsor-header">
+              <div class="sponsor-avatar">R</div>
+              <div class="sponsor-info">
+                <h3>RetailMax Corporation</h3>
+                <span class="sponsor-category">Retail</span>
+              </div>
+            </div>
+            <div class="sponsor-details">
+              <div class="detail-row">
+                <span class="detail-label">Location:</span>
+                <span class="detail-value">Los Angeles, USA</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Contact:</span>
+                <span class="detail-value">sponsors@retailmax.com</span>
+              </div>
+              <div class="sponsor-description">
+                Leading retail solutions company
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Interested in:</span>
+                <span class="detail-value"
+                  >Retail conferences, consumer events, trade shows</span
+                >
+              </div>
+              <div class="budget-range">
+                <span class="budget-label">Budget:</span>
+                <span class="budget-value">$20,000 - $60,000</span>
+              </div>
+            </div>
+            <button class="contact-sponsor-btn">Contact Sponsor</button>
+          </div>
+
+          <!-- Sponsor Card 6 -->
+          <div class="sponsor-card" data-category="technology">
+            <div class="sponsor-header">
+              <div class="sponsor-avatar">I</div>
+              <div class="sponsor-info">
+                <h3>InnovateTech Labs</h3>
+                <span class="sponsor-category">Technology</span>
+              </div>
+            </div>
+            <div class="sponsor-details">
+              <div class="detail-row">
+                <span class="detail-label">Location:</span>
+                <span class="detail-value">Seattle, USA</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Contact:</span>
+                <span class="detail-value">hello@innovatetech.com</span>
+              </div>
+              <div class="sponsor-description">Innovation and research lab</div>
+              <div class="detail-row">
+                <span class="detail-label">Interested in:</span>
+                <span class="detail-value"
+                  >Innovation events, tech meetups, hackathons</span
+                >
+              </div>
+              <div class="budget-range">
+                <span class="budget-label">Budget:</span>
+                <span class="budget-value">$30,000 - $80,000</span>
+              </div>
+            </div>
+            <button class="contact-sponsor-btn">Contact Sponsor</button>
+          </div>
+        </div>
+
+        <!-- No Results Message -->
+        <div class="no-results" id="noResults" style="display: none">
+          <h3>No sponsors found</h3>
+          <p>Try adjusting your search or filter criteria</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+      <div class="container">
+        <h2>
+          Ready to Start Your <span class="highlight">SkillHub</span> Journey?
+        </h2>
+        <p>
+          Join thousands of learners and teachers in your neighborhood. Whether
+          you're looking to master a new skill or share your expertise, your
+          community is waiting.
+        </p>
+        <button class="btn btn-primary">Get Started Today</button>
+      </div>
+    </section>
+
+    <script src="sponsors.js"></script>
+  </body>
+</html>
