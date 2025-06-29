@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services - SkillHub</title>
+    <link rel="stylesheet" href="services.css" />
+  </head>
+  <body>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-background-circles">
+        <div class="hero-circle circle-1"></div>
+        <div class="hero-circle circle-2"></div>
+        <div class="hero-circle circle-3"></div>
+        <div class="hero-circle circle-4"></div>
+        <div class="hero-circle circle-5"></div>
+        <div class="hero-circle circle-6"></div>
+        <div class="hero-circle circle-7"></div>
+        <div class="hero-circle circle-8"></div>
+        <div class="hero-circle circle-9"></div>
+        <div class="hero-circle circle-10"></div>
+        <div class="hero-circle circle-11"></div>
+        <div class="hero-circle circle-12"></div>
+      </div>
+      <div class="container">
+        <div class="hero-content">
+          <h1>Discover Skills Near You</h1>
+          <p>
+            Find the perfect teacher for any skill you want to learn in your
+            neighborhood
+          </p>
+          <div class="search-container">
+            <input
+              type="text"
+              placeholder="Search for skills, teachers, or topics..."
+              class="search-input"
+            />
+            <button class="search-btn">🔍</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content">
+      <div class="container">
+        <div class="content-layout">
+          <!-- Filters Sidebar -->
+          <aside class="filters-sidebar">
+            <div class="filters-header">
+              <h3>Filters</h3>
+            </div>
+
+            <!-- Location Filter -->
+            <div class="filter-group">
+              <div class="filter-title">
+                <span class="filter-icon">📍</span>
+                <span>Location</span>
+              </div>
+              <select class="filter-select" id="location-filter">
+                <option value="1">Within 1 mile</option>
+                <option value="3">Within 3 miles</option>
+                <option value="5">Within 5 miles</option>
+                <option value="10">Within 10 miles</option>
+              </select>
+              <div class="location-options">
+                <div class="location-option">Within 1 mile</div>
+                <div class="location-option">Within 3 miles</div>
+                <div class="location-option">Within 5 miles</div>
+                <div class="location-option">Within 10 miles</div>
+              </div>
+            </div>
+
+            <!-- Time Filter -->
+            <div class="filter-group">
+              <div class="filter-title">
+                <span class="filter-icon">🕒</span>
+                <span>Time</span>
+              </div>
+              <select class="filter-select" id="time-filter">
+                <option value="anytime">Any time</option>
+                <option value="morning">Morning</option>
+                <option value="afternoon">Afternoon</option>
+                <option value="evening">Evening</option>
+                <option value="weekend">Weekend</option>
+              </select>
+            </div>
+
+            <!-- Language Filter -->
+            <div class="filter-group">
+              <div class="filter-title">
+                <span class="filter-icon">🗣️</span>
+                <span>Language</span>
+              </div>
+              <select class="filter-select" id="language-filter">
+                <option value="any">Any language</option>
+                <option value="english">English</option>
+                <option value="spanish">Spanish</option>
+                <option value="french">French</option>
+                <option value="german">German</option>
+              </select>
+            </div>
+
+            <!-- Teacher Level Filter -->
+            <div class="filter-group">
+              <div class="filter-title">
+                <span class="filter-icon">⭐</span>
+                <span>Teacher Level</span>
+              </div>
+              <div class="checkbox-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" value="beginner" />
+                  <span class="checkmark"></span>
+                  Beginner-friendly
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" value="intermediate" />
+                  <span class="checkmark"></span>
+                  Intermediate
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" value="advanced" />
+                  <span class="checkmark"></span>
+                  Advanced/Expert
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" value="professional" />
+                  <span class="checkmark"></span>
+                  Professional
+                </label>
+              </div>
+            </div>
+
+            <!-- Lesson Type Filter -->
+            <div class="filter-group">
+              <div class="filter-title">
+                <span class="filter-icon">👥</span>
+                <span>Lesson Type</span>
+              </div>
+              <div class="checkbox-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" value="individual" />
+                  <span class="checkmark"></span>
+                  Individual lessons
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" value="group" />
+                  <span class="checkmark"></span>
+                  Group lessons
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" value="workshops" />
+                  <span class="checkmark"></span>
+                  Workshops
+                </label>
+              </div>
+            </div>
+
+            <button class="clear-filters-btn">Clear All Filters</button>
+          </aside>
+
+          <!-- Main Content Area -->
+          <main class="content-main">
+            <!-- Results Header -->
+            <div class="results-header">
+              <div class="results-count">
+                <span id="results-count">1,247</span> skills available in your
+                area
+              </div>
+              <div class="sort-controls">
+                <span>Sort by:</span>
+                <select class="sort-select">
+                  <option value="popular">Most Popular</option>
+                  <option value="newest">Newest</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                  <option value="rating">Highest Rated</option>
+                </select>
+                <div class="view-toggle">
+                  <button class="view-btn active" data-view="categories">
+                    Categories
+                  </button>
+                  <button class="view-btn" data-view="teachers">
+                    Teachers
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Skill Categories -->
+            <div class="categories-view active">
+              <h2>Skill Categories</h2>
+              <div class="categories-grid">
+                <!-- Arts & Crafts -->
+                <div class="category-card">
+                  <div class="category-icon">🎨</div>
+                  <div class="category-info">
+                    <h3>Arts & Crafts</h3>
+                    <p class="teacher-count">156 teachers available</p>
+                    <p class="category-skills">
+                      Painting, Pottery, Jewelry Making, Drawing, Sculpture,
+                      Photography
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Music & Performance -->
+                <div class="category-card">
+                  <div class="category-icon">🎵</div>
+                  <div class="category-info">
+                    <h3>Music & Performance</h3>
+                    <p class="teacher-count">203 teachers available</p>
+                    <p class="category-skills">
+                      Guitar, Piano, Dance, Singing, Violin, Drama, Public
+                      Speaking
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Languages -->
+                <div class="category-card">
+                  <div class="category-icon">🗣️</div>
+                  <div class="category-info">
+                    <h3>Languages</h3>
+                    <p class="teacher-count">189 teachers available</p>
+                    <p class="category-skills">
+                      Conversational Practice, Writing, Grammar, Cultural
+                      Exchange
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Technology -->
+                <div class="category-card">
+                  <div class="category-icon">💻</div>
+                  <div class="category-info">
+                    <h3>Technology</h3>
+                    <p class="teacher-count">134 teachers available</p>
+                    <p class="category-skills">
+                      Computer Basics, Social Media, Mobile Apps, Digital Skills
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Cooking & Culinary -->
+                <div class="category-card">
+                  <div class="category-icon">🍳</div>
+                  <div class="category-info">
+                    <h3>Cooking & Culinary</h3>
+                    <p class="teacher-count">167 teachers available</p>
+                    <p class="category-skills">
+                      Traditional Cuisines, Baking, Nutrition, Food Safety, Wine
+                      Pairing
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Home & Garden -->
+                <div class="category-card">
+                  <div class="category-icon">🏠</div>
+                  <div class="category-info">
+                    <h3>Home & Garden</h3>
+                    <p class="teacher-count">98 teachers available</p>
+                    <p class="category-skills">
+                      Gardening, Home Repair, Organization, Interior Design
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Health & Wellness -->
+                <div class="category-card">
+                  <div class="category-icon">🧘</div>
+                  <div class="category-info">
+                    <h3>Health & Wellness</h3>
+                    <p class="teacher-count">142 teachers available</p>
+                    <p class="category-skills">
+                      Yoga, Meditation, Fitness, Nutrition, Mental Health
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Professional Skills -->
+                <div class="category-card">
+                  <div class="category-icon">💼</div>
+                  <div class="category-info">
+                    <h3>Professional Skills</h3>
+                    <p class="teacher-count">87 teachers available</p>
+                    <p class="category-skills">
+                      Resume Writing, Interview Prep, Business Skills,
+                      Leadership
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Traditional Crafts -->
+                <div class="category-card">
+                  <div class="category-icon">✨</div>
+                  <div class="category-info">
+                    <h3>Traditional Crafts</h3>
+                    <p class="teacher-count">71 teachers available</p>
+                    <p class="category-skills">
+                      Weaving, Carpentry, Traditional Medicine, Folk Arts
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Teachers View -->
+            <div class="teachers-view">
+              <h2 id="teachers-section-title">Featured Teachers</h2>
+              <div class="teachers-grid">
+                <!-- Teacher cards will be dynamically generated here -->
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </section>
+
+    <script src="services.js"></script>
+  </body>
+</html>
