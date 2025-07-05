@@ -1,3 +1,30 @@
+function onSignIn(googleUser) {
+    // Get user info from Google
+    const profile = googleUser.getBasicProfile();
+    const firstName = profile.getGivenName();
+    const lastName = profile.getFamilyName();
+    const email = profile.getEmail();
+
+    // Put the info into your form
+    document.getElementById('first-name').value = firstName || '';
+    document.getElementById('last-name').value = lastName || '';
+    document.getElementById('email').value = email || '';
+
+    // Show a message (you can change this to redirect or save)
+    alert('Signed up with Google! Please fill the remaining fields.');
+}
+
+// Initialize Google Sign-In
+window.onGoogleLibraryLoad = function() {
+    google.accounts.id.initialize({
+        client_id: '928244016011-mpju3m1mdqjkhntbngabieokkfmm6h3e.apps.googleusercontent.com',
+        callback: onSignIn
+    });
+    google.accounts.id.renderButton(
+        document.querySelector('.g_id_signin'),
+        { theme: 'outline', size: 'large', text: 'signup_with', shape: 'rectangular' }
+    );
+};
 document.addEventListener('DOMContentLoaded', function() {
     // DOM Elements
     const signupForm = document.getElementById('learner-signup-form');

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/signup-learner.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <meta name="google-signin-client_id" content="928244016011-mpju3m1mdqjkhntbngabieokkfmm6h3e.apps.googleusercontent.com">
 </head>
 <body>
     <div class="signup-container">
@@ -118,17 +119,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="checkbox-group">
-    <label class="checkbox-label">
-        <input type="checkbox" id="terms" name="terms" required>
-        <span class="custom-checkbox"></span>
-        <span class="checkbox-text">I agree to the 
-            <a href="./terms-of-service.html" class="policy-link">Terms of Services</a> 
-            and 
-            <a href="./privacy-policy.html" class="policy-link">Privacy Policy</a>
-        </span>
-    </label>
-</div>
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <span class="custom-checkbox"></span>
+                        I agree to the <a href="./terms-of-service.html" class="policy-link">Terms of Service</a> and <a href="./privacy-policy.html" class="policy-link">Privacy Policy</a>
+                    </label>
+                </div>
                 <div class="form-group checkbox-group">
                     <label>
                         <input type="checkbox" id="updates" name="updates">
@@ -143,9 +140,7 @@
                     <span>Or sign up with</span>
                 </div>
                 <div class="social-buttons">
-                    <button class="social-btn google">
-                        <img src="C:\Users\Welcome\OneDrive - NSBM\Desktop\Skillhub\Images\devicon_google.png" alt="Google" class="social-icon"> Google
-                    </button>
+                    <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="signup_with" data-logo_alignment="left"></div>
                     <button class="social-btn facebook">
                         <img src="C:\Users\Welcome\OneDrive - NSBM\Desktop\Skillhub\Images\logos_facebook.png" alt="Facebook" class="social-icon"> Facebook
                     </button>
@@ -159,6 +154,7 @@
     <footer class="footer">
         <!-- Content will be dynamically included or copied from footer1.html -->
     </footer>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="../js/signup-learner.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </body>

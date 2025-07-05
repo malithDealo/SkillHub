@@ -245,6 +245,7 @@ body {
     pointer-events: none;
 }
 
+/* Checkbox Section */
 .checkbox-group {
     margin-bottom: 1rem;
 }
@@ -306,6 +307,7 @@ body {
 .policy-link:hover {
     text-decoration: underline;
 }
+
 
 .signup-btn {
     width: 100%;
