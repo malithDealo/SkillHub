@@ -211,17 +211,91 @@ header p {
     font-weight: 500;
 }
 
-/* Grid Layout */
-.grid {
-    display: grid;
+/* Modal Styles */
+.modal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
-.grid-cols-4 {
-    grid-template-columns: repeat(4, 1fr);
+.modal.active {
+    opacity: 1;
+    pointer-events: auto;
 }
 
-.gap-4 {
-    gap: 1rem;
+.modal-content {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1e3a8a;
+    margin-bottom: 1rem;
+}
+
+.modal-content form input,
+.modal-content form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.modal-content form button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+button.primary {
+    background-color: #2563eb;
+    color: #fff;
+}
+
+button.primary:hover {
+    background-color: #1e40af;
+}
+
+button.secondary {
+    background-color: #6b7280;
+    color: #fff;
+}
+
+button.secondary:hover {
+    background-color: #4b5563;
+}
+
+button.green {
+    background-color: #10b981;
+    color: #fff;
+}
+
+button.green:hover {
+    background-color: #059669;
+}
+
+/* Community Post Styles */
+.community-post {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 1rem 0;
 }
 
 /* Utility Classes */
@@ -233,10 +307,6 @@ header p {
     color: #1e40af;
 }
 
-.text-green-500 {
-    color: #10b981;
-}
-
 .text-sm {
     font-size: 0.875rem;
 }
@@ -245,16 +315,8 @@ header p {
     font-weight: 600;
 }
 
-.font-bold {
-    font-weight: 700;
-}
-
-.flex {
-    display: flex;
-}
-
-.space-x-2 > * + * {
-    margin-left: 0.5rem;
+.mb-4 {
+    margin-bottom: 1rem;
 }
 
 .space-y-4 > * + * {
@@ -292,9 +354,5 @@ header p {
     .main-content {
         margin-left: 0;
         padding: 2rem;
-    }
-    
-    .grid-cols-4 {
-        grid-template-columns: 1fr;
     }
 }

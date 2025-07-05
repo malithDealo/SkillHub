@@ -35,8 +35,37 @@ function renderTimetable() {
     });
 }
 
+function handleEventFormSubmit(event) {
+    event.preventDefault();
+    const name = document.getElementById('eventName').value;
+    const date = document.getElementById('eventDate').value;
+    const description = document.getElementById('eventDescription').value;
+
+    axios.post('/api/events', { name, date, description })
+        .then(response => {
+            const event = response.data;
+            const eventList = document.getElementById('event-list');
+            const eventDiv = document.createElement('div');
+            eventDiv.className = 'border-b pb-2';
+            eventDiv.innerHTML = `
+                <p class="font-semibold">${event.name}</p>
+                <p class="text-sm text-gray-600">${event.date}</p>
+                <p>${event.description}</p>
+            `;
+            eventList.appendChild(eventDiv);
+            event.target.reset();
+        })
+        .catch(error => {
+            console.error('Error creating event:', error);
+            alert('Failed to create event. Please try again.');
+        });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     renderTimetable();
+
+    const eventForm = document.getElementById('eventForm');
+    if (eventForm) eventForm.addEventListener('submit', handleEventFormSubmit);
 
     document.querySelectorAll('.filter-checkbox input').forEach(checkbox => {
         checkbox.addEventListener('change', () => {

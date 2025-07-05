@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeacherPro - Schedule & Availability</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 0 2rem;
+        }
+
+        .logo h1 {
+            color: #764ba2;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-text {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 0 1rem;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            color: #555;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(118, 75, 162, 0.1);
+            color: #764ba2;
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .nav-link i {
+            margin-right: 1rem;
+            width: 20px;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .page-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-header h1 {
+            color: #333;
+            font-size: 2.5rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .schedule-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+        }
+
+        .calendar-sidebar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            height: fit-content;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .mini-calendar {
+            margin-bottom: 2rem;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .calendar-nav {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #667eea;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.25rem;
+            text-align: center;
+        }
+
+        .calendar-day {
+            padding: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .calendar-day:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .calendar-day.today {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .calendar-day.has-sessions {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+            font-weight: bold;
+        }
+
+        .availability-settings {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 2rem;
+        }
+
+        .availability-settings h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .time-slot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 10px;
+        }
+
+        .main-calendar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .calendar-view-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .view-tabs {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .view-tab {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .view-tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .weekly-calendar {
+            display: grid;
+            grid-template-columns: 80px repeat(7, 1fr);
+            gap: 1px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .time-header {
+            background: #f8fafc;
+            padding: 1rem 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        .day-header {
+            background: #f8fafc;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .time-slot-grid {
+            background: white;
+            padding: 0.5rem;
+            min-height: 60px;
+            position: relative;
+        }
+
+        .session-block {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.5rem;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .session-block:hover {
+            transform: scale(1.02);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .available-slot {
+            background: rgba(34, 197, 94, 0.1);
+            border: 2px dashed #22c55e;
+            color: #22c55e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-header h3 {
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+        }
+
+        .btn-secondary {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <h1>TeacherPro</h1>
+                <p class="welcome-text">Welcome back, Dr. Smith!</p>
+            </div>
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="dashboard_overview.html" class="nav-link">
+                            <i class="fas fa-home"></i>
+                            Dashboard Overview
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="class_management.html" class="nav-link">
+                            <i class="fas fa-chalkboard"></i>
+                            Class Management
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active">
+                            <i class="fas fa-calendar-alt"></i>
+                            Schedule & Availability
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="earnings.html" class="nav-link">
+                            <i class="fas fa-chart-line"></i>
+                            Earnings & Analytics
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="profile.html" class="nav-link">
+                            <i class="fas fa-user-cog"></i>
+                            Profile Settings
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="teacher_community.html" class="nav-link">
+                            <i class="fas fa-users"></i>
+                            Teacher Community
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="student_management.html" class="nav-link">
+                            <i class="fas fa-user-graduate"></i>
+                            Student Management
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="events.html" class="nav-link">
+                            <i class="fas fa-calendar-check"></i>
+                            Event Organization
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="sponsors.html" class="nav-link">
+                            <i class="fas fa-handshake"></i>
+                            Sponsor Management
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header class="page-header">
+                <div>
+                    <h1>Schedule & Availability</h1>
+                    <p>Manage your teaching schedule and availability</p>
+                </div>
+                <button class="btn btn-primary" onclick="openModal('availabilityModal')">
+                    <i class="fas fa-calendar-plus"></i> Add Availability
+                </button>
+            </header>
+
+            <!-- Statistics -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">24</div>
+                    <div class="stat-label">Sessions This Week</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">18</div>
+                    <div class="stat-label">Available Slots</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Pending Requests</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">42hrs</div>
+                    <div class="stat-label">Total Teaching Hours</div>
+                </div>
+            </div>
+
+            <div class="schedule-container">
+                <!-- Calendar Sidebar -->
+                <div class="calendar-sidebar">
+                    <div class="mini-calendar">
+                        <div class="calendar-header">
+                            <button class="calendar-nav">&lt;</button>
+                            <h3>July 2025</h3>
+                            <button class="calendar-nav">&gt;</button>
+                        </div>
+                        <div class="calendar-grid">
+                            <div style="font-weight: bold; color: #666;">S</div>
+                            <div style="font-weight: bold; color: #666;">M</div>
+                            <div style="font-weight: bold; color: #666;">T</div>
+                            <div style="font-weight: bold; color: #666;">W</div>
+                            <div style="font-weight: bold; color: #666;">T</div>
+                            <div style="font-weight: bold; color: #666;">F</div>
+                            <div style="font-weight: bold; color: #666;">S</div>
+                            
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day">1</div>
+                            <div class="calendar-day">2</div>
+                            <div class="calendar-day">3</div>
+                            <div class="calendar-day">4</div>
+                            <div class="calendar-day">5</div>
+                            <div class="calendar-day today">6</div>
+                            <div class="calendar-day has-sessions">7</div>
+                            <div class="calendar-day has-sessions">8</div>
+                            <div class="calendar-day has-sessions">9</div>
+                            <div class="calendar-day has-sessions">10</div>
+                            <div class="calendar-day">11</div>
+                            <div class="calendar-day">12</div>
+                            <div class="calendar-day">13</div>
+                            <div class="calendar-day has-sessions">14</div>
+                            <div class="calendar-day has-sessions">15</div>
+                            <div class="calendar-day has-sessions">16</div>
+                            <div class="calendar-day has-sessions">17</div>
+                            <div class="calendar-day">18</div>
+                            <div class="calendar-day">19</div>
+                            <div class="calendar-day">20</div>
+                            <div class="calendar-day has-sessions">21</div>
+                            <div class="calendar-day has-sessions">22</div>
+                            <div class="calendar-day has-sessions">23</div>
+                            <div class="calendar-day has-sessions">24</div>
+                            <div class="calendar-day">25</div>
+                            <div class="calendar-day">26</div>
+                            <div class="calendar-day">27</div>
+                            <div class="calendar-day has-sessions">28</div>
+                            <div class="calendar-day has-sessions">29</div>
+                            <div class="calendar-day has-sessions">30</div>
+                            <div class="calendar-day has-sessions">31</div>
+                        </div>
+                    </div>
+
+                    <div class="availability-settings">
+                        <h3>Quick Availability</h3>
+                        <div class="time-slot">
+                            <span>Monday 9:00 AM</span>
+                            <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">Remove</button>
+                        </div>
+                        <div class="time-slot">
+                            <span>Tuesday 2:00 PM</span>
+                            <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">Remove</button>
+                        </div>
+                        <div class="time-slot">
+                            <span>Wednesday 10:00 AM</span>
+                            <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">Remove</button>
+                        </div>
+                        <div class="time-slot">
+                            <span>Friday 3:00 PM</span>
+                            <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">Remove</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Calendar -->
+                <div class="main-calendar">
+                    <div class="calendar-view-controls">
+                        <div class="view-tabs">
+                            <button class="view-tab active">Week</button>
+                            <button class="view-tab">Month</button>
+                            <button class="view-tab">Day</button>
+                        </div>
+                        <div>
+                            <h3>July 6 - July 12, 2025</h3>
+                        </div>
+                    </div>
+
+                    <div class="weekly-calendar">
+                        <div class="time-header">Time</div>
+                        <div class="day-header">Sun<br><small>6</small></div>
+                        <div class="day-header">Mon<br><small>7</small></div>
+                        <div class="day-header">Tue<br><small>8</small></div>
+                        <div class="day-header">Wed<br><small>9</small></div>
+                        <div class="day-header">Thu<br><small>10</small></div>
+                        <div class="day-header">Fri<br><small>11</small></div>
+                        <div class="day-header">Sat<br><small>12</small></div>
+
+                        <!-- 8:00 AM -->
+                        <div class="time-header">8:00</div>
+                        <div class="time-slot-grid"></div>
+                        <div class="time-slot-grid">
+                            <div class="session-block">Math Grade 10<br>8:00-9:30 AM</div>
+                        </div>
+                        <div class="time-slot-grid">
+                            <div class="session-block">Physics Grade 11<br>8:00-9:30 AM</div>
+                        </div>
+                        <div class="time-slot-grid">
+                            <div class="session-block">Math Grade 10<br>8:00-9:30 AM</div>
+                        </div>
+                        <div class="time-slot-grid">
+                            <div class="session-block">Physics Grade 11<br>8:00-9:30 AM</div>
+                        </div>
+                        <div class="time-slot-grid">
+                            <div class="session-block">Chemistry Grade 12<br>8:00-9:30 AM</div>
+                        </div>
+                        <div class="time-slot-grid"></div>
+
+                        <!-- 10:00 AM -->
+                        <div class="time-header">10:00</div>
+                        <div class="time-slot-grid"></div>
+                        <div class="time-slot-grid">
+                            <div class="available-slot">Available</div>
+                        </div>
+                        <div class="time-slot-grid">
+                            <div class="available-slot">Available</div>
+                        </div>
+                        <div class="time-slot-grid">
+                            <div class="session-block">Chemistry Grade 12<br>10:00-11:30 AM</div>
+                        </div>
+                        <div class="time-slot-grid">
+                            <div class="available-slot">Available</div>
+                        </div>
+                        <div class="time-slot-grid">
+                            <div class="session-block">Math Grade 10<br>10:00-11:30 AM</div>
+                        </div>
+                        <div class="time-slot-grid">
+                            <div class="session-block">Chemistry Grade 12<br>10:00-11:30 AM</div>
+                        </div>
+
+                        <!-- 2:00 PM -->
+                        <div class="time-header">14:00</div>
+                        <div class="time-slot-grid"></div>
+                        <div class="time-slot-grid">
+                            <div class="session-block">Physics Grade 11<br>2:00-3:30 PM</div>
+                        </div>
+                        <div class="time-slot-grid">
+                            <div class="session-block">Math Grade 10<br>2:00-3:30 PM</div>
+                        </div>
+                        <div class="time-slot-grid">
+                            <div class="available-slot">Available</div>
+                        </div>
+                        <div class="time-slot-grid">
+                            <div class="session-block">Chemistry Grade 12<br>2:00-3:30 PM</div>
+                        </div>
+                        <div class="time-slot-grid">
+                            <div class="available-slot">Available</div>
+                        </div>
+                        <div class="time-slot-grid"></div>
+
+                        <!-- 4:00 PM -->
+                        <div class="time-header">16:00</div>
+                        <div class="time-slot-grid"></div>
+                        <div class="time-slot-grid">
+                            <div class="available-slot">Available</div>
+                        </div>
+                        <div class="time-slot-grid">
+                            <div class="available-slot">Available</div>
+                        </div>
+                        <div class="time-slot-grid">
+                            <div class="session-block">Physics Grade 11<br>4:00-5:30 PM</div>
+                        </div>
+                        <div class="time-slot-grid">
+                            <div class="available-slot">Available</div>
+                        </div>
+                        <div class="time-slot-grid">
+                            <div class="session-block">Math Grade 10<br>4:00-5:30 PM</div>
+                        </div>
+                        <div class="time-slot-grid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Availability Modal -->
+    <div id="availabilityModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Availability</h3>
+                <button class="close-btn" onclick="closeModal('availabilityModal')">×</button>
+            </div>
+            <form id="availabilityForm">
+                <div class="form-group">
+                    <label for="availabilityDate">Date</label>
+                    <input type="date" id="availabilityDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="startTime">Start Time</label>
+                    <input type="time" id="startTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="endTime">End Time</label>
+                    <input type="time" id="endTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="repeatPattern">Repeat Pattern</label>
+                    <select id="repeatPattern">
+                        <option value="none">No Repeat</option>
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('availabilityModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Availability</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Form submission
+        document.getElementById('availabilityForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Availability added successfully!');
+            closeModal('availabilityModal');
+            this.reset();
+        });
+
+        // View tab switching
+        document.querySelectorAll('.view-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
