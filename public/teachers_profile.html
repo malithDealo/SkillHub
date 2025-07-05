@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillHub - Teacher Profile</title>
+    <link rel="stylesheet" href="../public/css/teachers_profile.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">SkillHub</div>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">How it Works</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Community</a></li>
+            <li><a href="#">Sponsor</a></li>
+            <li><a href="#">About Us</a></li>
+        </ul>
+        <div class="user-icon"></div>
+    </div>
+
+    <div class="hero">
+        <h1>Teacher Profile</h1>
+        <p>Learn more about your selected teacher</p>
+    </div>
+
+    <div class="container">
+        <div class="profile">
+            <div class="profile-header">
+                <div class="teacher-avatar" id="teacherAvatar"></div>
+                <h2 id="teacherName">Teacher Name</h2>
+            </div>
+            <div class="profile-content">
+                <p><strong>First Name:</strong> <span id="teacherFirstName">Not available</span></p>
+                <p><strong>Last Name:</strong> <span id="teacherLastName">Not available</span></p>
+                <p><strong>Phone Number:</strong> <span id="teacherPhone">Not available</span></p>
+                <p><strong>Location:</strong> <span id="teacherLocation">Not available</span></p>
+                <p><strong>Bio:</strong> <span id="teacherBio">Not available</span></p>
+                <p><strong>Skills:</strong> <span id="teacherSkills">Not available</span></p>
+                <p><strong>Years of Experience:</strong> <span id="teacherExperience">Not available</span></p>
+                <p><strong>Teaching Language:</strong> <span id="teacherLanguage">Not available</span></p>
+                <p><strong>Hourly Rate:</strong> <span id="teacherRate">Not available</span></p>
+                <p><strong>Reviews:</strong> <span id="teacherReviews">Not available</span></p>
+                <div class="profile-buttons">
+                    <button class="back-btn" onclick="window.location.href='../public/skills_teachers.html'">Back</button>
+                    <button class="contact-btn" onclick="contactTeacher()">Contact Teacher</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../public/js/teachers_profile.js"></script>
+</body>
+</html>

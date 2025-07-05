@@ -53,7 +53,6 @@ body {
     min-height: 300px;
 }
 
-/* Background dots */
 .hero::before {
     content: '';
     position: absolute;
@@ -68,7 +67,6 @@ body {
     z-index: 0;
 }
 
-/* Large circles */
 .floating-circle {
     position: absolute;
     border-radius: 50%;
@@ -79,7 +77,6 @@ body {
     opacity: 0.8;
 }
 
-/* Circle sizes and positions */
 .floating-circle-1 {
     width: 120px;
     height: 120px;
@@ -145,7 +142,6 @@ body {
     animation-delay: 3.5s;
 }
 
-/* Animation for floating effect */
 @keyframes float {
     0%, 100% { 
         transform: translateY(0) scale(1);
@@ -171,12 +167,27 @@ body {
     z-index: 2;
 }
 
-.hero input {
-    padding: 10px;
+.search-container {
+    position: relative;
     width: 50%;
+    margin: 0 auto;
+}
+
+.search-container input {
+    padding: 10px 10px 10px 40px;
+    width: 100%;
     border: none;
     border-radius: 20px;
     font-size: 16px;
+}
+
+.search-container .search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #666;
 }
 
 .container {
@@ -316,24 +327,9 @@ body {
     color: #666;
 }
 
-.categories-header select {
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.categories-header button {
-    padding: 5px 10px;
-    border: none;
-    background-color: transparent;
-    color: #666;
-    cursor: pointer;
-}
-
 .category-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, auto);
     gap: 20px;
 }
 
@@ -346,13 +342,16 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 350px; /* Fixed width to make it square */
-    height: 300px; /* Fixed height to match width */
+    width: 350px;
+    height: 400px;
+    cursor: pointer;
 }
 
 .category-card img {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
     margin-bottom: 10px;
 }
 
@@ -368,6 +367,35 @@ body {
     flex-grow: 1;
     display: flex;
     align-items: flex-end;
+}
+
+.sub-subjects {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    display: none;
+}
+
+.view-teachers-btn {
+    padding: 8px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.view-teachers-btn:hover {
+    background-color: #218838;
+}
+
+.category-card.active .sub-subjects {
+    display: block;
 }
 
 .checkbox-buttons {
@@ -390,12 +418,10 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Hide the actual checkbox input */
 .checkbox-buttons input[type="checkbox"] {
     display: none;
 }
 
-/* Style for selected checkbox button with checkmark */
 .checkbox-buttons input[type="checkbox"]:checked + .checkbox-btn {
     background-color: #4c51bf;
     color: white;
@@ -412,7 +438,10 @@ body {
     font-size: 12px;
 }
 
-/* Hover effect */
 .checkbox-btn:hover {
     background-color: #e6f0fa;
+}
+
+.category-card[style*="display: none"] {
+    display: none !important;
 }
