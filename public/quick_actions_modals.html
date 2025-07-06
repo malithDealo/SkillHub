@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeacherPro - Functional Quick Actions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 2rem;
+        }
+
+        .quick-actions-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .header-nav {
+            margin-bottom: 1.5rem;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 12px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .back-btn:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateX(-4px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .back-btn i {
+            font-size: 1rem;
+        }
+
+        .header-content {
+            text-align: center;
+        }
+
+        .header-content h1 {
+            color: #333;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-content p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* Quick Actions Grid - Modified for 2 rows x 3 columns */
+        .quick-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .action-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .action-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .action-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .action-card.primary .action-icon {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .action-card.success .action-icon {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+        }
+
+        .action-card.warning .action-icon {
+            background: linear-gradient(135deg, #f1c40f, #f39c12);
+            color: white;
+        }
+
+        .action-card.danger .action-icon {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+        }
+
+        .action-card.info .action-icon {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .action-card.purple .action-icon {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+        }
+
+        .action-card:hover .action-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        .action-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .action-content h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #333;
+        }
+
+        .action-content p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .action-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+
+        .action-button {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: white;
+            margin-top: auto;
+        }
+
+        .action-card.primary .action-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .action-card.success .action-button {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+
+        .action-card.warning .action-button {
+            background: linear-gradient(135deg, #f1c40f, #f39c12);
+        }
+
+        .action-card.danger .action-button {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .action-card.info .action-button {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+        }
+
+        .action-card.purple .action-button {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-header h3 {
+            color: #333;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: #333;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(102, 126, 234, 0.2);
+        }
+
+        /* Student List */
+        .student-list {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 0.5rem;
+        }
+
+        .student-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            border-radius: 6px;
+            margin-bottom: 0.25rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .student-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .student-item input[type="checkbox"] {
+            margin-right: 0.75rem;
+            accent-color: #667eea;
+        }
+
+        .student-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-right: 0.75rem;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: white;
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border-left: 4px solid #2ecc71;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            max-width: 350px;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.success {
+            border-left-color: #2ecc71;
+        }
+
+        .toast.error {
+            border-left-color: #e74c3c;
+        }
+
+        .toast.warning {
+            border-left-color: #f39c12;
+        }
+
+        .toast .icon {
+            font-size: 1.2rem;
+        }
+
+        .toast.success .icon {
+            color: #2ecc71;
+        }
+
+        .toast.error .icon {
+            color: #e74c3c;
+        }
+
+        .toast.warning .icon {
+            color: #f39c12;
+        }
+
+        .toast .message {
+            color: #333;
+            font-weight: 500;
+            flex: 1;
+        }
+
+        /* Grade Table */
+        .grade-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .grade-table th,
+        .grade-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .grade-table th {
+            background: rgba(102, 126, 234, 0.1);
+            font-weight: 600;
+            color: #333;
+        }
+
+        .grade-input {
+            width: 80px;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        /* Calendar Grid */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .calendar-day:hover {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: #667eea;
+        }
+
+        .calendar-day.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .calendar-day.available {
+            background: #e8f5e8;
+            border-color: #2ecc71;
+        }
+
+        /* Payment Table */
+        .payment-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .payment-table th,
+        .payment-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .payment-table th {
+            background: rgba(102, 126, 234, 0.1);
+            font-weight: 600;
+            color: #333;
+        }
+
+        .payment-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .payment-status.paid {
+            background: #e8f5e8;
+            color: #2d7d2d;
+        }
+
+        .payment-status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .payment-status.overdue {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Breadcrumb Styles */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding: 0.75rem 1rem;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+
+        .breadcrumb-item {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: #666;
+        }
+
+        .breadcrumb-item.active {
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .breadcrumb-separator {
+            color: #999;
+            font-size: 0.7rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .quick-actions-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2rem;
+            }
+
+            .back-btn {
+                padding: 0.625rem 1.25rem;
+                font-size: 0.85rem;
+            }
+
+            .breadcrumb {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.25rem;
+            }
+
+            .breadcrumb-separator {
+                display: none;
+            }
+
+            .quick-actions-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                gap: 1.5rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .action-card {
+                padding: 1.5rem;
+                min-height: auto;
+            }
+
+            .action-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quick-actions-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="header-nav">
+                <button class="back-btn" onclick="goBackToDashboard()">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Dashboard
+                </button>
+            </div>
+            <div class="header-content">
+                <h1>Quick Actions</h1>
+                <p>Functional tools for effective teaching management</p>
+            </div>
+        </div>
+
+        <!-- Quick Actions Grid - 2 rows x 3 columns -->
+        <div class="quick-actions-grid">
+            <!-- Create Assignment Action -->
+            <div class="action-card primary">
+                <div class="action-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <div class="action-content">
+                    <h3>Create Assignment</h3>
+                    <p>Design and distribute new assignments to your students with custom deadlines and requirements.</p>
+                    <div class="action-stats">
+                        <div class="stat-item">
+                            <span class="stat-value" id="activeAssignments">24</span>
+                            <span class="stat-label">Active</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="totalAssignments">156</span>
+                            <span class="stat-label">Total</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="action-button" onclick="openAssignmentModal()">
+                    <i class="fas fa-plus"></i>
+                    Create New Assignment
+                </button>
+            </div>
+
+            <!-- Message Students Action -->
+            <div class="action-card success">
+                <div class="action-icon">
+                    <i class="fas fa-comment-dots"></i>
+                </div>
+                <div class="action-content">
+                    <h3>Message Students</h3>
+                    <p>Send announcements, reminders, or personal messages to individual students or entire classes.</p>
+                    <div class="action-stats">
+                        <div class="stat-item">
+                            <span class="stat-value" id="unreadMessages">3</span>
+                            <span class="stat-label">Unread</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="totalStudents">89</span>
+                            <span class="stat-label">Students</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="action-button" onclick="openMessageModal()">
+                    <i class="fas fa-paper-plane"></i>
+                    Send Message
+                </button>
+            </div>
+
+            <!-- Grade Submissions Action -->
+            <div class="action-card warning">
+                <div class="action-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="action-content">
+                    <h3>Grade Submissions</h3>
+                    <p>Review and grade pending student submissions with detailed feedback and rubric scoring.</p>
+                    <div class="action-stats">
+                        <div class="stat-item">
+                            <span class="stat-value" id="pendingGrades">12</span>
+                            <span class="stat-label">Pending</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="avgGrade">4.8</span>
+                            <span class="stat-label">Avg Grade</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="action-button" onclick="openGradingModal()">
+                    <i class="fas fa-clipboard-check"></i>
+                    Start Grading
+                </button>
+            </div>
+
+            <!-- Schedule Session Action -->
+            <div class="action-card info">
+                <div class="action-icon">
+                    <i class="fas fa-calendar-plus"></i>
+                </div>
+                <div class="action-content">
+                    <h3>Schedule Session</h3>
+                    <p>Book one-on-one sessions with students for extra help, tutoring, or consultation meetings.</p>
+                    <div class="action-stats">
+                        <div class="stat-item">
+                            <span class="stat-value" id="weekSessions">7</span>
+                            <span class="stat-label">This Week</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="availableSlots">15</span>
+                            <span class="stat-label">Available</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="action-button" onclick="openScheduleModal()">
+                    <i class="fas fa-clock"></i>
+                    Book Session
+                </button>
+            </div>
+
+            <!-- Generate Report Action -->
+            <div class="action-card purple">
+                <div class="action-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="action-content">
+                    <h3>Generate Reports</h3>
+                    <p>Create detailed performance reports, attendance summaries, and progress analytics for your classes.</p>
+                    <div class="action-stats">
+                        <div class="stat-item">
+                            <span class="stat-value" id="totalClasses">5</span>
+                            <span class="stat-label">Classes</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="attendance">92%</span>
+                            <span class="stat-label">Attendance</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="action-button" onclick="openReportModal()">
+                    <i class="fas fa-file-pdf"></i>
+                    Generate Report
+                </button>
+            </div>
+
+            <!-- Manage Payments Action -->
+            <div class="action-card danger">
+                <div class="action-icon">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <div class="action-content">
+                    <h3>Manage Payments</h3>
+                    <p>Track student payments, send invoices, and manage your earnings with detailed financial reports.</p>
+                    <div class="action-stats">
+                        <div class="stat-item">
+                            <span class="stat-value" id="monthlyEarnings">$2,340</span>
+                            <span class="stat-label">This Month</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="pendingPayments">4</span>
+                            <span class="stat-label">Pending</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="action-button" onclick="openPaymentModal()">
+                    <i class="fas fa-dollar-sign"></i>
+                    View Payments
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Assignment Creation Modal -->
+    <div id="assignmentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Assignment</h3>
+                <button class="close-btn" onclick="closeModal('assignmentModal')">×</button>
+            </div>
+            <form id="assignmentForm">
+                <div class="form-group">
+                    <label for="assignmentTitle">Assignment Title</label>
+                    <input type="text" id="assignmentTitle" required placeholder="Enter assignment title">
+                </div>
+                <div class="form-group">
+                    <label for="assignmentSubject">Subject</label>
+                    <select id="assignmentSubject" required>
+                        <option value="">Select Subject</option>
+                        <option value="mathematics">Mathematics</option>
+                        <option value="physics">Physics</option>
+                        <option value="chemistry">Chemistry</option>
+                        <option value="biology">Biology</option>
+                        <option value="english">English</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="assignmentDescription">Description</label>
+                    <textarea id="assignmentDescription" rows="4" required placeholder="Describe the assignment requirements"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="assignmentDueDate">Due Date</label>
+                    <input type="datetime-local" id="assignmentDueDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="assignmentPoints">Total Points</label>
+                    <input type="number" id="assignmentPoints" min="1" max="100" value="100" required>
+                </div>
+                <div class="form-group">
+                    <label for="assignmentClass">Assign to Class</label>
+                    <select id="assignmentClass" required>
+                        <option value="">Select Class</option>
+                        <option value="math-grade12">Mathematics - Grade 12</option>
+                        <option value="physics-grade11">Physics - Grade 11</option>
+                        <option value="chemistry-grade10">Chemistry - Grade 10</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('assignmentModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Create Assignment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Message Students Modal -->
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Send Message to Students</h3>
+                <button class="close-btn" onclick="closeModal('messageModal')">×</button>
+            </div>
+            <form id="messageForm">
+                <div class="form-group">
+                    <label for="messageType">Message Type</label>
+                    <select id="messageType" required>
+                        <option value="">Select Type</option>
+                        <option value="announcement">Announcement</option>
+                        <option value="reminder">Reminder</option>
+                        <option value="individual">Individual Message</option>
+                        <option value="assignment">Assignment Notification</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="messageSubject">Subject</label>
+                    <input type="text" id="messageSubject" required placeholder="Enter message subject">
+                </div>
+                <div class="form-group">
+                    <label>Select Recipients</label>
+                    <div class="student-list" id="studentList">
+                        <!-- Students will be populated here -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="messageContent">Message</label>
+                    <textarea id="messageContent" rows="6" required placeholder="Type your message here..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="urgent"> Mark as Urgent
+                    </label>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('messageModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Send Message</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Grading Modal -->
+    <div id="gradingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Grade Student Submissions</h3>
+                <button class="close-btn" onclick="closeModal('gradingModal')">×</button>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="gradingAssignment">Select Assignment</label>
+                    <select id="gradingAssignment" onchange="loadSubmissions()">
+                        <option value="">Select Assignment</option>
+                        <option value="algebra-quiz">Algebra Quiz 3</option>
+                        <option value="physics-lab">Physics Lab Report</option>
+                        <option value="chemistry-test">Chemical Reactions Test</option>
+                    </select>
+                </div>
+                <div id="submissionsTable" style="display: none;">
+                    <table class="grade-table">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Submitted</th>
+                                <th>Grade (/100)</th>
+                                <th>Feedback</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="submissionsBody">
+                            <!-- Submissions will be populated here -->
+                        </tbody>
+                    </table>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="closeModal('gradingModal')">Close</button>
+                        <button type="button" class="btn-primary" onclick="saveGrades()">Save All Grades</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Schedule Session Modal -->
+    <div id="scheduleModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Schedule Teaching Session</h3>
+                <button class="close-btn" onclick="closeModal('scheduleModal')">×</button>
+            </div>
+            <form id="scheduleForm">
+                <div class="form-group">
+                    <label for="sessionStudent">Select Student</label>
+                    <select id="sessionStudent" required>
+                        <option value="">Choose a student</option>
+                        <option value="john-smith">John Smith - Grade 12</option>
+                        <option value="emma-johnson">Emma Johnson - Grade 11</option>
+                        <option value="michael-brown">Michael Brown - Grade 10</option>
+                        <option value="sarah-davis">Sarah Davis - Grade 12</option>
+                        <option value="alex-wilson">Alex Wilson - Grade 11</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sessionSubject">Subject</label>
+                    <select id="sessionSubject" required>
+                        <option value="">Select Subject</option>
+                        <option value="mathematics">Mathematics</option>
+                        <option value="physics">Physics</option>
+                        <option value="chemistry">Chemistry</option>
+                        <option value="biology">Biology</option>
+                        <option value="english">English</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sessionDate">Date</label>
+                    <input type="date" id="sessionDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="sessionTime">Time</label>
+                    <input type="time" id="sessionTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="sessionDuration">Duration</label>
+                    <select id="sessionDuration" required>
+                        <option value="30">30 minutes</option>
+                        <option value="45">45 minutes</option>
+                        <option value="60">1 hour</option>
+                        <option value="90">1.5 hours</option>
+                        <option value="120">2 hours</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sessionNotes">Session Notes</label>
+                    <textarea id="sessionNotes" rows="3" placeholder="Add any special notes or topics to cover"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('scheduleModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Schedule Session</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Report Generation Modal -->
+    <div id="reportModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Generate Reports</h3>
+                <button class="close-btn" onclick="closeModal('reportModal')">×</button>
+            </div>
+            <form id="reportForm">
+                <div class="form-group">
+                    <label for="reportType">Report Type</label>
+                    <select id="reportType" required onchange="updateReportOptions()">
+                        <option value="">Select Report Type</option>
+                        <option value="student-performance">Student Performance</option>
+                        <option value="class-summary">Class Summary</option>
+                        <option value="attendance">Attendance Report</option>
+                        <option value="financial">Financial Report</option>
+                        <option value="assignment-analysis">Assignment Analysis</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="reportClass">Select Class</label>
+                    <select id="reportClass" required>
+                        <option value="">Select Class</option>
+                        <option value="math-grade12">Mathematics - Grade 12</option>
+                        <option value="physics-grade11">Physics - Grade 11</option>
+                        <option value="chemistry-grade10">Chemistry - Grade 10</option>
+                        <option value="all">All Classes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="reportPeriod">Time Period</label>
+                    <select id="reportPeriod" required>
+                        <option value="">Select Period</option>
+                        <option value="this-week">This Week</option>
+                        <option value="this-month">This Month</option>
+                        <option value="this-term">This Term</option>
+                        <option value="this-year">This Year</option>
+                        <option value="custom">Custom Range</option>
+                    </select>
+                </div>
+                <div id="customDateRange" style="display: none;">
+                    <div class="form-group">
+                        <label for="reportStartDate">Start Date</label>
+                        <input type="date" id="reportStartDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="reportEndDate">End Date</label>
+                        <input type="date" id="reportEndDate">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Include in Report:</label>
+                    <div style="margin-top: 0.5rem;">
+                        <label><input type="checkbox" id="includeGrades" checked> Grades & Scores</label><br>
+                        <label><input type="checkbox" id="includeAttendance" checked> Attendance</label><br>
+                        <label><input type="checkbox" id="includeAssignments"> Assignment Details</label><br>
+                        <label><input type="checkbox" id="includeComments"> Comments & Feedback</label>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('reportModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Generate Report</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Payment Management Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Payment Management</h3>
+                <button class="close-btn" onclick="closeModal('paymentModal')">×</button>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="paymentView">View</label>
+                    <select id="paymentView" onchange="updatePaymentView()">
+                        <option value="overview">Payment Overview</option>
+                        <option value="pending">Pending Payments</option>
+                        <option value="completed">Completed Payments</option>
+                        <option value="overdue">Overdue Payments</option>
+                    </select>
+                </div>
+                
+                <div id="paymentOverview">
+                    <div class="action-stats" style="margin-bottom: 1.5rem;">
+                        <div class="stat-item">
+                            <span class="stat-value">$2,340</span>
+                            <span class="stat-label">This Month</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">$890</span>
+                            <span class="stat-label">Pending</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">4</span>
+                            <span class="stat-label">Overdue</span>
+                        </div>
+                    </div>
+                    
+                    <table class="payment-table">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Amount</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paymentTableBody">
+                            <tr>
+                                <td>John Smith</td>
+                                <td>$120</td>
+                                <td>2025-07-10</td>
+                                <td><span class="payment-status paid">Paid</span></td>
+                                <td><button class="btn-secondary">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>Emma Johnson</td>
+                                <td>$150</td>
+                                <td>2025-07-15</td>
+                                <td><span class="payment-status pending">Pending</span></td>
+                                <td><button class="btn-primary">Send Reminder</button></td>
+                            </tr>
+                            <tr>
+                                <td>Michael Brown</td>
+                                <td>$100</td>
+                                <td>2025-07-05</td>
+                                <td><span class="payment-status overdue">Overdue</span></td>
+                                <td><button class="btn-danger">Follow Up</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('paymentModal')">Close</button>
+                    <button type="button" class="btn-primary" onclick="sendPaymentReminders()">Send All Reminders</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle icon"></i>
+        <span class="message">Action completed successfully!</span>
+    </div>
+
+    <script>
+        // Sample data
+        let assignments = [];
+        let students = [
+            { id: 'john-smith', name: 'John Smith', email: 'john@email.com', grade: '12', avatar: 'JS' },
+            { id: 'emma-johnson', name: 'Emma Johnson', email: 'emma@email.com', grade: '11', avatar: 'EJ' },
+            { id: 'michael-brown', name: 'Michael Brown', email: 'michael@email.com', grade: '10', avatar: 'MB' },
+            { id: 'sarah-davis', name: 'Sarah Davis', email: 'sarah@email.com', grade: '12', avatar: 'SD' },
+            { id: 'alex-wilson', name: 'Alex Wilson', email: 'alex@email.com', grade: '11', avatar: 'AW' }
+        ];
+
+        let submissions = [
+            { student: 'John Smith', assignment: 'algebra-quiz', submitted: '2025-07-05', grade: '', feedback: '', status: 'submitted' },
+            { student: 'Emma Johnson', assignment: 'algebra-quiz', submitted: '2025-07-06', grade: '', feedback: '', status: 'submitted' },
+            { student: 'Michael Brown', assignment: 'physics-lab', submitted: '2025-07-04', grade: '85', feedback: 'Good work!', status: 'graded' }
+        ];
+
+        // Modal Functions
+        function openAssignmentModal() {
+            document.getElementById('assignmentModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openMessageModal() {
+            document.getElementById('messageModal').classList.add('active');
+            populateStudentList();
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openGradingModal() {
+            document.getElementById('gradingModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openScheduleModal() {
+            document.getElementById('scheduleModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('sessionDate').setAttribute('min', today);
+        }
+
+        function openReportModal() {
+            document.getElementById('reportModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openPaymentModal() {
+            document.getElementById('paymentModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+            // Reset forms
+            const form = document.getElementById(modalId).querySelector('form');
+            if (form) {
+                form.reset();
+            }
+        }
+
+        // Toast Notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const messageElement = toast.querySelector('.message');
+            const iconElement = toast.querySelector('.icon');
+            
+            messageElement.textContent = message;
+            toast.className = `toast ${type} show`;
+            
+            // Update icon based on type
+            if (type === 'success') {
+                iconElement.className = 'fas fa-check-circle icon';
+            } else if (type === 'error') {
+                iconElement.className = 'fas fa-exclamation-circle icon';
+            } else if (type === 'warning') {
+                iconElement.className = 'fas fa-exclamation-triangle icon';
+            }
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        // Assignment Creation
+        document.getElementById('assignmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const assignment = {
+                id: Date.now(),
+                title: formData.get('assignmentTitle') || document.getElementById('assignmentTitle').value,
+                subject: formData.get('assignmentSubject') || document.getElementById('assignmentSubject').value,
+                description: formData.get('assignmentDescription') || document.getElementById('assignmentDescription').value,
+                dueDate: formData.get('assignmentDueDate') || document.getElementById('assignmentDueDate').value,
+                points: formData.get('assignmentPoints') || document.getElementById('assignmentPoints').value,
+                class: formData.get('assignmentClass') || document.getElementById('assignmentClass').value,
+                created: new Date().toISOString()
+            };
+
+            assignments.push(assignment);
+            updateStats('assignments');
+            closeModal('assignmentModal');
+            showToast(`Assignment "${assignment.title}" created successfully!`, 'success');
+        });
+
+        // Student List Population
+        function populateStudentList() {
+            const studentList = document.getElementById('studentList');
+            studentList.innerHTML = '';
+            
+            students.forEach(student => {
+                const studentItem = document.createElement('div');
+                studentItem.className = 'student-item';
+                studentItem.innerHTML = `
+                    <input type="checkbox" id="student-${student.id}" value="${student.id}">
+                    <div class="student-avatar">${student.avatar}</div>
+                    <label for="student-${student.id}" style="cursor: pointer; flex: 1;">
+                        ${student.name} - Grade ${student.grade}
+                    </label>
+                `;
+                studentList.appendChild(studentItem);
+            });
+        }
+
+        // Message Sending
+        document.getElementById('messageForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const selectedStudents = [];
+            const checkboxes = document.querySelectorAll('#studentList input[type="checkbox"]:checked');
+            checkboxes.forEach(cb => {
+                const student = students.find(s => s.id === cb.value);
+                if (student) selectedStudents.push(student.name);
+            });
+
+            if (selectedStudents.length === 0) {
+                showToast('Please select at least one student', 'warning');
+                return;
+            }
+
+            const subject = document.getElementById('messageSubject').value;
+            const content = document.getElementById('messageContent').value;
+            const urgent = document.getElementById('urgent').checked;
+
+            closeModal('messageModal');
+            showToast(`Message "${subject}" sent to ${selectedStudents.length} student(s)${urgent ? ' (URGENT)' : ''}`, 'success');
+        });
+
+        // Grading Functions
+        function loadSubmissions() {
+            const assignment = document.getElementById('gradingAssignment').value;
+            const table = document.getElementById('submissionsTable');
+            const tbody = document.getElementById('submissionsBody');
+            
+            if (!assignment) {
+                table.style.display = 'none';
+                return;
+            }
+
+            const assignmentSubmissions = submissions.filter(s => s.assignment === assignment);
+            tbody.innerHTML = '';
+            
+            assignmentSubmissions.forEach(submission => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${submission.student}</td>
+                    <td>${new Date(submission.submitted).toLocaleDateString()}</td>
+                    <td><input type="number" class="grade-input" value="${submission.grade}" min="0" max="100" data-student="${submission.student}"></td>
+                    <td><input type="text" style="width: 100%; padding: 0.5rem;" placeholder="Add feedback..." value="${submission.feedback}" data-student="${submission.student}"></td>
+                    <td><span class="payment-status ${submission.status === 'graded' ? 'paid' : 'pending'}">${submission.status}</span></td>
+                `;
+                tbody.appendChild(row);
+            });
+            
+            table.style.display = 'block';
+        }
+
+        function saveGrades() {
+            const grades = document.querySelectorAll('.grade-input');
+            const feedbacks = document.querySelectorAll('input[data-student]');
+            let gradedCount = 0;
+
+            grades.forEach(gradeInput => {
+                if (gradeInput.value) {
+                    gradedCount++;
+                    // Update submission data
+                    const student = gradeInput.dataset.student;
+                    const submission = submissions.find(s => s.student === student);
+                    if (submission) {
+                        submission.grade = gradeInput.value;
+                        submission.status = 'graded';
+                    }
+                }
+            });
+
+            closeModal('gradingModal');
+            updateStats('grades');
+            showToast(`${gradedCount} submission(s) graded successfully!`, 'success');
+        }
+
+        // Session Scheduling
+        document.getElementById('scheduleForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const student = document.getElementById('sessionStudent').value;
+            const subject = document.getElementById('sessionSubject').value;
+            const date = document.getElementById('sessionDate').value;
+            const time = document.getElementById('sessionTime').value;
+            const duration = document.getElementById('sessionDuration').value;
+            const notes = document.getElementById('sessionNotes').value;
+
+            const studentName = students.find(s => s.id === student)?.name || student;
+
+            closeModal('scheduleModal');
+            updateStats('sessions');
+            showToast(`Session scheduled with ${studentName} for ${date} at ${time}`, 'success');
+        });
+
+        // Report Generation
+        document.getElementById('reportForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const reportType = document.getElementById('reportType').value;
+            const reportClass = document.getElementById('reportClass').value;
+            const reportPeriod = document.getElementById('reportPeriod').value;
+
+            closeModal('reportModal');
+            
+            // Simulate report generation
+            setTimeout(() => {
+                showToast(`${reportType} report generated for ${reportClass} (${reportPeriod})`, 'success');
+                
+                // Simulate download
+                const link = document.createElement('a');
+                link.href = 'data:text/plain;charset=utf-8,Report generated successfully!';
+                link.download = `${reportType}-${reportClass}-${reportPeriod}.txt`;
+                link.click();
+            }, 2000);
+            
+            showToast('Generating report... Please wait.', 'warning');
+        });
+
+        function updateReportOptions() {
+            const reportType = document.getElementById('reportType').value;
+            const customRange = document.getElementById('customDateRange');
+            
+            // Show/hide custom date range
+            if (document.getElementById('reportPeriod').value === 'custom') {
+                customRange.style.display = 'block';
+            } else {
+                customRange.style.display = 'none';
+            }
+        }
+
+        // Payment Management
+        function updatePaymentView() {
+            const view = document.getElementById('paymentView').value;
+            // Update payment table based on selected view
+            showToast(`Viewing ${view} payments`, 'success');
+        }
+
+        function sendPaymentReminders() {
+            showToast('Payment reminders sent to all pending students', 'success');
+        }
+
+        // Statistics Updates
+        function updateStats(type) {
+            switch(type) {
+                case 'assignments':
+                    document.getElementById('activeAssignments').textContent = assignments.length;
+                    document.getElementById('totalAssignments').textContent = parseInt(document.getElementById('totalAssignments').textContent) + 1;
+                    break;
+                case 'grades':
+                    const pending = parseInt(document.getElementById('pendingGrades').textContent);
+                    document.getElementById('pendingGrades').textContent = Math.max(0, pending - 1);
+                    break;
+                case 'sessions':
+                    const weekSessions = parseInt(document.getElementById('weekSessions').textContent);
+                    document.getElementById('weekSessions').textContent = weekSessions + 1;
+                    const availableSlots = parseInt(document.getElementById('availableSlots').textContent);
+                    document.getElementById('availableSlots').textContent = Math.max(0, availableSlots - 1);
+                    break;
+            }
+        }
+
+        // Navigation Functions
+        function goBackToDashboard() {
+            // Method 1: If this page is integrated as a modal/section in dashboard
+            if (window.parent && window.parent.dashboard) {
+                window.parent.dashboard.closeModal('quickActionsModal');
+                window.parent.dashboard.switchSection('overview');
+                return;
+            }
+            
+            // Method 2: If this is a separate page
+            if (document.referrer.includes('dashboard_overview.html')) {
+                window.history.back();
+                return;
+            }
+            
+            // Method 3: Direct navigation to dashboard
+            window.location.href = 'dashboard_overview.html';
+            
+            // Method 4: If using single page application
+            if (window.dashboard) {
+                window.dashboard.switchSection('overview');
+                return;
+            }
+            
+            // Fallback: Show message if no dashboard found
+            showToast('Returning to dashboard...', 'success');
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 1000);
+        }
+
+        // Add breadcrumb navigation helper
+        function initializeBreadcrumb() {
+            // Add breadcrumb to header if needed
+            const headerNav = document.querySelector('.header-nav');
+            const breadcrumb = document.createElement('div');
+            breadcrumb.className = 'breadcrumb';
+            breadcrumb.innerHTML = `
+                <span class="breadcrumb-item">
+                    <i class="fas fa-home"></i> Dashboard
+                </span>
+                <span class="breadcrumb-separator">
+                    <i class="fas fa-chevron-right"></i>
+                </span>
+                <span class="breadcrumb-item active">
+                    <i class="fas fa-bolt"></i> Quick Actions
+                </span>
+            `;
+            headerNav.appendChild(breadcrumb);
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch (e.key.toLowerCase()) {
+                    case 'a':
+                        e.preventDefault();
+                        openAssignmentModal();
+                        break;
+                    case 'm':
+                        e.preventDefault();
+                        openMessageModal();
+                        break;
+                    case 'g':
+                        e.preventDefault();
+                        openGradingModal();
+                        break;
+                    case 's':
+                        e.preventDefault();
+                        openScheduleModal();
+                        break;
+                    case 'r':
+                        e.preventDefault();
+                        openReportModal();
+                        break;
+                    case 'p':
+                        e.preventDefault();
+                        openPaymentModal();
+                        break;
+                }
+            }
+            
+            // Close modals with Escape key
+            if (e.key === 'Escape') {
+                const activeModal = document.querySelector('.modal.active');
+                if (activeModal) {
+                    closeModal(activeModal.id);
+                }
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize breadcrumb navigation
+            initializeBreadcrumb();
+            
+            // Set default date to today for session scheduling
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('sessionDate').value = today;
+            
+            // Set default due date to next week for assignments
+            const nextWeek = new Date();
+            nextWeek.setDate(nextWeek.getDate() + 7);
+            document.getElementById('assignmentDueDate').value = nextWeek.toISOString().slice(0, 16);
+            
+            // Welcome message
+            setTimeout(() => {
+                showToast('Welcome! All functions are now active. Use Ctrl+A for assignments, Ctrl+M for messages, etc.', 'success');
+            }, 1000);
+            
+            // Add keyboard shortcut for back navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.altKey && e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    goBackToDashboard();
+                }
+            });
+        });
+
+        // Add event listener for report period change
+        document.getElementById('reportPeriod').addEventListener('change', updateReportOptions);
+    </script>
+</body>
+</html>

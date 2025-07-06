@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeacherPro - Teacher Community</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 0 2rem;
+        }
+
+        .logo h1 {
+            color: #764ba2;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-text {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 0 1rem;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            color: #555;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(118, 75, 162, 0.1);
+            color: #764ba2;
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .nav-link i {
+            margin-right: 1rem;
+            width: 20px;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .page-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-header h1 {
+            color: #333;
+            font-size: 2.5rem;
+        }
+
+        .community-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+        }
+
+        .main-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .create-post {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-input {
+            width: 100%;
+            min-height: 120px;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            font-size: 1rem;
+            resize: vertical;
+            margin-bottom: 1rem;
+            font-family: inherit;
+        }
+
+        .post-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .post-tools {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .tool-btn {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .tool-btn:hover {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .post-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .post-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+
+        .post-info h4 {
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+
+        .post-meta {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .post-content {
+            margin-bottom: 1.5rem;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .post-content h3 {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .post-image {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 1rem 0;
+        }
+
+        .post-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .post-stats {
+            display: flex;
+            gap: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .post-actions-bar {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .action-btn:hover {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+
+        .action-btn.active {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+
+        .sidebar-widget {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .widget-title {
+            color: #333;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .teacher-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .teacher-item:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .teacher-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+
+        .teacher-info h5 {
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+
+        .teacher-info p {
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .topic-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin: 0.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .topic-tag:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .event-item {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .event-item:hover {
+            border-color: #667eea;
+        }
+
+        .event-date {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.5rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .event-title {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .event-description {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .online-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            display: inline-block;
+            margin-left: 0.5rem;
+        }
+
+        .offline-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #94a3b8;
+            display: inline-block;
+            margin-left: 0.5rem;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-tab {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .comments-section {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .comment-item {
+            display: flex;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 10px;
+        }
+
+        .comment-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+
+        .comment-content {
+            flex: 1;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+
+        .comment-text {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .comment-time {
+            color: #94a3b8;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <h1>TeacherPro</h1>
+                <p class="welcome-text">Welcome back, Dr. Smith!</p>
+            </div>
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="dashboard_overview.html" class="nav-link">
+                            <i class="fas fa-home"></i>
+                            Dashboard Overview
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="class_management.html" class="nav-link">
+                            <i class="fas fa-chalkboard"></i>
+                            Class Management
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="schedule.html" class="nav-link">
+                            <i class="fas fa-calendar-alt"></i>
+                            Schedule & Availability
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="earnings.html" class="nav-link">
+                            <i class="fas fa-chart-line"></i>
+                            Earnings & Analytics
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="profile.html" class="nav-link">
+                            <i class="fas fa-user-cog"></i>
+                            Profile Settings
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active">
+                            <i class="fas fa-users"></i>
+                            Teacher Community
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="student_management.html" class="nav-link">
+                            <i class="fas fa-user-graduate"></i>
+                            Student Management
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="events.html" class="nav-link">
+                            <i class="fas fa-calendar-check"></i>
+                            Event Organization
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="sponsors.html" class="nav-link">
+                            <i class="fas fa-handshake"></i>
+                            Sponsor Management
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header class="page-header">
+                <div>
+                    <h1>Teacher Community</h1>
+                    <p>Connect, share, and learn from fellow educators</p>
+                </div>
+                <button class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Create Group
+                </button>
+            </header>
+
+            <div class="community-layout">
+                <!-- Main Feed -->
+                <div class="main-feed">
+                    <!-- Create Post -->
+                    <div class="create-post">
+                        <textarea class="post-input" placeholder="Share your teaching experiences, ask questions, or start a discussion..."></textarea>
+                        <div class="post-actions">
+                            <div class="post-tools">
+                                <button class="tool-btn" title="Add Image">
+                                    <i class="fas fa-image"></i>
+                                </button>
+                                <button class="tool-btn" title="Add Poll">
+                                    <i class="fas fa-poll"></i>
+                                </button>
+                                <button class="tool-btn" title="Add Location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </button>
+                            </div>
+                            <button class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i> Post
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Filter Tabs -->
+                    <div class="filter-tabs">
+                        <button class="filter-tab active">All Posts</button>
+                        <button class="filter-tab">Following</button>
+                        <button class="filter-tab">Popular</button>
+                        <button class="filter-tab">Questions</button>
+                        <button class="filter-tab">Resources</button>
+                    </div>
+
+                    <!-- Post 1 -->
+                    <div class="post-card">
+                        <div class="post-header">
+                            <img src="https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=100&h=100&fit=crop&crop=face" alt="Sarah Chen" class="post-avatar">
+                            <div class="post-info">
+                                <h4>Sarah Chen</h4>
+                                <p class="post-meta">Mathematics Teacher • 2 hours ago</p>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <h3>New Interactive Geometry Tools!</h3>
+                            <p>I just discovered this amazing set of digital geometry tools that have completely transformed my Grade 10 classes. The students are so much more engaged when they can manipulate 3D shapes on their tablets. Has anyone else tried incorporating AR/VR tools into their math lessons?</p>
+                            <img src="https://images.unsplash.com/photo-1509228468518-180dd4864904?w=600&h=300&fit=crop" alt="Geometry tools" class="post-image">
+                        </div>
+                        <div class="post-footer">
+                            <div class="post-stats">
+                                <span><i class="fas fa-heart"></i> 24 likes</span>
+                                <span><i class="fas fa-comment"></i> 8 comments</span>
+                                <span><i class="fas fa-share"></i> 3 shares</span>
+                            </div>
+                            <div class="post-actions-bar">
+                                <button class="action-btn">
+                                    <i class="fas fa-heart"></i> Like
+                                </button>
+                                <button class="action-btn">
+                                    <i class="fas fa-comment"></i> Comment
+                                </button>
+                                <button class="action-btn">
+                                    <i class="fas fa-share"></i> Share
+                                </button>
+                            </div>
+                        </div>
+                        <div class="comments-section">
+                            <div class="comment-item">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face" alt="Mike Johnson" class="comment-avatar">
+                                <div class="comment-content">
+                                    <div class="comment-author">Mike Johnson</div>
+                                    <div class="comment-text">This looks amazing! Could you share the name of the app? I've been looking for something like this for my physics classes.</div>
+                                    <div class="comment-time">1 hour ago</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Post 2 -->
+                    <div class="post-card">
+                        <div class="post-header">
+                            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&h=100&fit=crop&crop=face" alt="David Rodriguez" class="post-avatar">
+                            <div class="post-info">
+                                <h4>David Rodriguez</h4>
+                                <p class="post-meta">Chemistry Teacher • 4 hours ago</p>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <p>Quick question for fellow science teachers: How do you handle lab safety with larger class sizes? I'm dealing with 35 students per class this semester and feeling a bit overwhelmed with safety protocols. Any tips or strategies would be greatly appreciated! 🧪⚗️</p>
+                        </div>
+                        <div class="post-footer">
+                            <div class="post-stats">
+                                <span><i class="fas fa-heart"></i> 18 likes</span>
+                                <span><i class="fas fa-comment"></i> 12 comments</span>
+                                <span><i class="fas fa-share"></i> 5 shares</span>
+                            </div>
+                            <div class="post-actions-bar">
+                                <button class="action-btn active">
+                                    <i class="fas fa-heart"></i> Like
+                                </button>
+                                <button class="action-btn">
+                                    <i class="fas fa-comment"></i> Comment
+                                </button>
+                                <button class="action-btn">
+                                    <i class="fas fa-share"></i> Share
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Post 3 -->
+                    <div class="post-card">
+                        <div class="post-header">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="Emily Watson" class="post-avatar">
+                            <div class="post-info">
+                                <h4>Emily Watson</h4>
+                                <p class="post-meta">English Teacher • 6 hours ago</p>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <h3>Student Success Story 📚</h3>
+                            <p>I'm so proud to share that one of my Grade 12 students just got accepted to her dream university with a full scholarship! She started the year struggling with essay writing, but through consistent practice and peer review sessions, she's become an incredible writer. This is why I love teaching! 💝</p>
+                        </div>
+                        <div class="post-footer">
+                            <div class="post-stats">
+                                <span><i class="fas fa-heart"></i> 45 likes</span>
+                                <span><i class="fas fa-comment"></i> 15 comments</span>
+                                <span><i class="fas fa-share"></i> 8 shares</span>
+                            </div>
+                            <div class="post-actions-bar">
+                                <button class="action-btn">
+                                    <i class="fas fa-heart"></i> Like
+                                </button>
+                                <button class="action-btn">
+                                    <i class="fas fa-comment"></i> Comment
+                                </button>
+                                <button class="action-btn">
+                                    <i class="fas fa-share"></i> Share
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="community-sidebar">
+                    <!-- Search -->
+                    <div class="sidebar-widget">
+                        <input type="text" class="search-box" placeholder="Search teachers, posts, topics...">
+                    </div>
+
+                    <!-- Active Teachers -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">Active Teachers</h3>
+                        <div class="teacher-item">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face" alt="Dr. Smith" class="teacher-avatar">
+                            <div class="teacher-info">
+                                <h5>Dr. James Smith <span class="online-indicator"></span></h5>
+                                <p>Mathematics</p>
+                            </div>
+                        </div>
+                        <div class="teacher-item">
+                            <img src="https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=50&h=50&fit=crop&crop=face" alt="Sarah Chen" class="teacher-avatar">
+                            <div class="teacher-info">
+                                <h5>Sarah Chen <span class="online-indicator"></span></h5>
+                                <p>Mathematics</p>
+                            </div>
+                        </div>
+                        <div class="teacher-item">
+                            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=50&h=50&fit=crop&crop=face" alt="David Rodriguez" class="teacher-avatar">
+                            <div class="teacher-info">
+                                <h5>David Rodriguez <span class="online-indicator"></span></h5>
+                                <p>Chemistry</p>
+                            </div>
+                        </div>
+                        <div class="teacher-item">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop&crop=face" alt="Emily Watson" class="teacher-avatar">
+                            <div class="teacher-info">
+                                <h5>Emily Watson <span class="offline-indicator"></span></h5>
+                                <p>English</p>
+                            </div>
+                        </div>
+                        <div class="teacher-item">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face" alt="Mike Johnson" class="teacher-avatar">
+                            <div class="teacher-info">
+                                <h5>Mike Johnson <span class="offline-indicator"></span></h5>
+                                <p>Physics</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trending Topics -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">Trending Topics</h3>
+                        <div class="topic-tag">#DigitalLearning</div>
+                        <div class="topic-tag">#ClassroomManagement</div>
+                        <div class="topic-tag">#STEM</div>
+                        <div class="topic-tag">#OnlineTeaching</div>
+                        <div class="topic-tag">#StudentEngagement</div>
+                        <div class="topic-tag">#Assessment</div>
+                        <div class="topic-tag">#TechInEducation</div>
+                        <div class="topic-tag">#ProfessionalDevelopment</div>
+                    </div>
+
+                    <!-- Upcoming Events -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">Upcoming Events</h3>
+                        <div class="event-item">
+                            <div class="event-date">Jul 15</div>
+                            <div class="event-title">Virtual Teaching Workshop</div>
+                            <div class="event-description">Learn new techniques for online engagement</div>
+                        </div>
+                        <div class="event-item">
+                            <div class="event-date">Jul 22</div>
+                            <div class="event-title">STEM Conference 2025</div>
+                            <div class="event-description">Latest innovations in science education</div>
+                        </div>
+                        <div class="event-item">
+                            <div class="event-date">Aug 5</div>
+                            <div class="event-title">Teacher Networking Event</div>
+                            <div class="event-description">Connect with local educators</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Filter tab functionality
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Like button functionality
+        document.querySelectorAll('.action-btn').forEach(btn => {
+            if (btn.textContent.trim().includes('Like')) {
+                btn.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const icon = this.querySelector('i');
+                    if (this.classList.contains('active')) {
+                        icon.style.color = '#ef4444';
+                    } else {
+                        icon.style.color = '';
+                    }
+                });
+            }
+        });
+
+        // Post submission
+        document.querySelector('.create-post .btn-primary').addEventListener('click', function() {
+            const textarea = document.querySelector('.post-input');
+            if (textarea.value.trim()) {
+                alert('Post shared successfully!');
+                textarea.value = '';
+            } else {
+                alert('Please write something to share!');
+            }
+        });
+    </script>
+</body>
+</html>

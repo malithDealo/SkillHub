@@ -3,167 +3,410 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Overview - SkillHub</title>
+    <title>TeacherPro - Enhanced Dashboard</title>
     <link rel="stylesheet" href="../public/css/dashboard_overview.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="dashboard-container">
+        <!-- Sidebar -->
         <div class="sidebar">
-            <div class="logo">SkillHub</div>
-            <div class="profile-level">Level 3 - Pro Instructor</div>
-            <div class="nav-menu">
-                <a href="../public/dashboard_overview.html" class="active">Overview</a>
-                <a href="../public/class_management.html">Class Management</a>
-                <a href="../public/shedule_availability.html">Schedule & Availability</a>
-                <a href="../earnings_analytics/earnings_analytics.html">Earning & Analytics</a>
-                <a href="../public/profile_setting.html">Profile Setting</a>
+            <div class="logo">
+                <h1>TeacherPro</h1>
+                <p class="welcome-text">Welcome back, Dr. Smith!</p>
             </div>
-            <button class="logout-btn">LOG OUT</button>
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active" data-section="overview">
+                            <i class="fas fa-home"></i>
+                            Dashboard Overview
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-section="classes">
+                            <i class="fas fa-chalkboard"></i>
+                            Class Management
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-section="schedule">
+                            <i class="fas fa-calendar-alt"></i>
+                            Schedule & Availability
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-section="earnings">
+                            <i class="fas fa-chart-line"></i>
+                            Earnings & Analytics
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-section="profile">
+                            <i class="fas fa-user-cog"></i>
+                            Profile Settings
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-section="community">
+                            <i class="fas fa-users"></i>
+                            Teacher Community
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-section="students">
+                            <i class="fas fa-user-graduate"></i>
+                            Student Management
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-section="events">
+                            <i class="fas fa-calendar-check"></i>
+                            Event Organization
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-section="sponsors">
+                            <i class="fas fa-handshake"></i>
+                            Sponsor Management
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="filters">
+                <h3><i class="fas fa-filter"></i> Quick Filters</h3>
+                <div class="filter-option">
+                    <input type="checkbox" id="filter-upcoming" checked>
+                    <label for="filter-upcoming">Upcoming Sessions</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="filter-available" checked>
+                    <label for="filter-available">Available Slots</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="filter-ads" checked>
+                    <label for="filter-ads">Advertisements</label>
+                </div>
+            </div>
+
+            <a href="#" class="logout-btn" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
         </div>
 
+        <!-- Main Content -->
         <div class="main-content">
-            <div class="dashboard-header">
-                <h1>Dashboard Overview</h1>
-                <p>Monitor your teaching performance and manage your classes</p>
-            </div>
+            <header class="page-header">
+                <div class="header-info">
+                    <h1 id="pageTitle">Dashboard Overview</h1>
+                    <p id="dateRange" class="date-range">July 5, 2025 - July 11, 2025</p>
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </header>
 
-            <div class="summary-section">
-                <div class="summary-cards grid-2x2">
-                    <div class="summary-card">
-                        <h3>24</h3>
-                        <p>Active Students</p>
+            <!-- Dashboard Overview Section -->
+            <div id="overview-section" class="content-section active">
+                <div class="dashboard-grid">
+                    <!-- Weekly Schedule Card -->
+                    <div class="card schedule-card">
+                        <div class="card-header">
+                            <h3>Weekly Schedule</h3>
+                            <button class="btn-primary" id="addScheduleBtn">
+                                <i class="fas fa-plus"></i> Add Slot
+                            </button>
+                        </div>
+                        <div class="schedule-grid" id="scheduleGrid">
+                            <!-- Schedule items will be populated by JS -->
+                        </div>
                     </div>
-                    <div class="summary-card">
-                        <h3>4.9</h3>
-                        <p>Average Rating</p>
+
+                    <!-- Upcoming Sessions Card -->
+                    <div class="card sessions-card">
+                        <div class="card-header">
+                            <h3>Upcoming Sessions</h3>
+                            <button class="btn-secondary" id="scheduleSessionBtn">
+                                <i class="fas fa-calendar-plus"></i> Schedule New
+                            </button>
+                        </div>
+                        <div class="sessions-list" id="sessionsList">
+                            <!-- Sessions will be populated by JS -->
+                        </div>
                     </div>
-                    <div class="summary-card">
-                        <h3>$1,240</h3>
-                        <p>This Month</p>
+
+                    <!-- Advertisements Card -->
+                    <div class="card ads-card">
+                        <div class="card-header">
+                            <h3>Advertisements</h3>
+                            <div class="header-actions">
+                                <button class="btn-primary" id="addAdBtn">
+                                    <i class="fas fa-plus"></i> Add New
+                                </button>
+                                <button class="btn-accent" id="connectSponsorBtn">
+                                    <i class="fas fa-link"></i> Connect Sponsor
+                                </button>
+                            </div>
+                        </div>
+                        <div class="ads-list" id="adsList">
+                            <!-- Ads will be populated by JS -->
+                        </div>
                     </div>
-                    <div class="summary-card">
-                        <h3>156</h3>
-                        <p>Total Sessions</p>
+
+                    <!-- Quick Actions Card -->
+                    <div class="card actions-card">
+                        <div class="card-header">
+                            <h3>Quick Actions</h3>
+                        </div>
+                        <div class="actions-grid">
+                            <button class="btn-primary" onclick="window.open('quick_actions_modals.html', '_blank')">
+                                <i class="fas fa-bolt"></i> Quick Actions Hub
+                            </button>
+                            <button class="btn-primary" onclick="window.open('quick_actions_modals.html', '_blank')">
+                                <i class="fas fa-comment"></i>
+                                <span>Message Students</span>
+                            </button>
+                            <button class="btn-primary" onclick="window.open('quick_actions_modals.html', '_blank')">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>View Reports</span>
+                            </button>
+<button class="btn-primary" onclick="window.open('quick_actions_modals.html', '_blank')">
+                                <i class="fas fa-credit-card"></i>
+                                <span>Manage Payments</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="students-section">
+            <!-- Class Management Section -->
+            <div id="classes-section" class="content-section">
                 <div class="section-header">
-                    <div class="title">
-                        <h3>👥 Current Students</h3>
-                    </div>
-                    <button class="view-all">View All</button>
+                    <h2>Class Management</h2>
+                    <button class="btn-primary" id="addClassBtn">
+                        <i class="fas fa-plus"></i> Add New Class
+                    </button>
                 </div>
-                <div class="student-card">
-                    <div class="student-info">
-                        <div class="avatar green">M</div>
-                        <div>
-                            <h4>Sarah Johnson</h4>
-                            <p>Guitar Basics • 12 sessions • Next: Wed 2PM</p>
-                        </div>
-                    </div>
-                    <button class="contact-btn">Contact</button>
-                </div>
-                <div class="student-card">
-                    <div class="student-info">
-                        <div class="avatar green">C</div>
-                        <div>
-                            <h4>Mike Thompson</h4>
-                            <p>Advanced Guitar • 8 sessions • Next: Thu 4PM</p>
-                        </div>
-                    </div>
-                    <button class="contact-btn">Contact</button>
-                </div>
-                <div class="student-card">
-                    <div class="student-info">
-                        <div class="avatar green">J</div>
-                        <div>
-                            <h4>Emma Brown</h4>
-                            <p>Guitar Basics • 5 sessions • Next: Fri 3PM</p>
-                        </div>
-                    </div>
-                    <button class="contact-btn">Contact</button>
+                <div class="classes-grid" id="classesGrid">
+                    <!-- Classes will be populated by JS -->
                 </div>
             </div>
 
-            <div class="metrics-section">
-                <div class="metrics-cards grid-2x2">
-                    <div class="metrics-card">
-                        <h3>📈 Performance Metrics</h3>
-                        <p>Student Retention Rate <strong>92%</strong></p>
-                        <p>Session Completion Rate <strong>96%</strong></p>
-                        <p>Average Rating <strong>4.9★</strong></p>
-                        <p>Response Time <strong>~ 2 hours</strong></p>
-                        <p>Teacher Level Progress</p>
-                        <div class="progress-bar"><div class="progress" style="width: 75%"></div></div>
-                        <p class="small-text">75% to level 4</p>
-                    </div>
-                    <div class="metrics-card">
-                        <h3>📅 Today's Sessions</h3>
-                        <button class="btn-secondary">View Schedule</button>
-                        <div class="session">
-                            <p><strong>Guitar Basics with Sarah</strong></p>
-                            <p>2:00 PM - 3:00 PM • Community Center</p>
-                            <div class="time-badge">In 2 hours</div>
-                        </div>
-                        <div class="session">
-                            <p><strong>Advanced Guitar with Mike</strong></p>
-                            <p>4:00 PM - 5:00 PM • Music Studio</p>
-                            <div class="time-badge">In 4 hours</div>
-                        </div>
-                        <div class="session">
-                            <p><strong>Group Guitar Session</strong></p>
-                            <p>6:00 PM - 7:30 PM • Community Center</p>
-                            <div class="time-badge">In 6 hours</div>
-                        </div>
-                    </div>
-                    <div class="metrics-card">
-                        <h3>⭐ Recent Reviews</h3>
-                        <div class="review">
-                            <div class="avatar">S</div>
-                            <div>
-                                <p><strong>Sarah Johnson</strong></p>
-                                <p class="stars">★★★★★</p>
-                                <p>"Excellent teacher! Very patient and knowledgeable."</p>
-                            </div>
-                        </div>
-                        <div class="review">
-                            <div class="avatar">M</div>
-                            <div>
-                                <p><strong>Mike Thompson</strong></p>
-                                <p class="stars">★★★★☆</p>
-                                <p>"Great techniques and personalized approach."</p>
-                            </div>
-                        </div>
-                        <div class="review">
-                            <div class="avatar">E</div>
-                            <div>
-                                <p><strong>Emma Brown</strong></p>
-                                <p class="stars">★★★★★</p>
-                                <p>"Made learning guitar fun and engaging!"</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="metrics-card">
-                        <h3>✅ Quick Actions</h3>
-                        <div class="quick-actions">
-                            <button>Update Availability</button>
-                            <button>Add New Skill</button>
-                            <button>View Earning Report</button>
-                            <button>Upload Resources</button>
-                            <button>Edit Profile</button>
-                        </div>
-                    </div>
+            <!-- Schedule Section -->
+            <div id="schedule-section" class="content-section">
+                <div class="section-header">
+                    <h2>Schedule & Availability</h2>
+                    <button class="btn-primary" id="addAvailabilityBtn">
+                        <i class="fas fa-calendar-plus"></i> Add Availability
+                    </button>
+                </div>
+                <div class="schedule-calendar" id="scheduleCalendar">
+                    <!-- Calendar will be populated by JS -->
                 </div>
             </div>
 
-            <div id="modalSection" class="modal-section">
-                <div id="availabilityDisplay"></div>
-                <div id="skillsList"></div>
-                <div id="resourcesList"></div>
-                <div id="contactMessages"></div>
+            <!-- Other sections would go here -->
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Add Schedule Modal -->
+    <div id="scheduleModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Available Time Slot</h3>
+                <button class="close-btn" onclick="closeModal('scheduleModal')">×</button>
             </div>
+            <form id="scheduleForm">
+                <div class="form-group">
+                    <label for="scheduleDay">Day</label>
+                    <select id="scheduleDay" required>
+                        <option value="">Select Day</option>
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="scheduleDate">Date</label>
+                    <input type="date" id="scheduleDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="scheduleTime">Time</label>
+                    <input type="time" id="scheduleTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="scheduleDuration">Duration (minutes)</label>
+                    <select id="scheduleDuration" required>
+                        <option value="30">30 minutes</option>
+                        <option value="45">45 minutes</option>
+                        <option value="60">1 hour</option>
+                        <option value="90">1.5 hours</option>
+                        <option value="120">2 hours</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('scheduleModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Slot</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Advertisement Modal -->
+    <div id="adModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Advertisement</h3>
+                <button class="close-btn" onclick="closeModal('adModal')">×</button>
+            </div>
+            <form id="adForm">
+                <div class="form-group">
+                    <label for="adTitle">Title</label>
+                    <input type="text" id="adTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="adDescription">Description</label>
+                    <textarea id="adDescription" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="adSponsor">Sponsor Name</label>
+                    <input type="text" id="adSponsor" required>
+                </div>
+                <div class="form-group">
+                    <label for="adImage">Image URL</label>
+                    <input type="url" id="adImage" placeholder="https://example.com/image.jpg">
+                </div>
+                <div class="form-group">
+                    <label for="adBudget">Budget ($)</label>
+                    <input type="number" id="adBudget" min="0" step="0.01">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('adModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Create Ad</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Connect Sponsor Modal -->
+    <div id="connectSponsorModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Connect Sponsor to Teacher</h3>
+                <button class="close-btn" onclick="closeModal('connectSponsorModal')">×</button>
+            </div>
+            <form id="connectSponsorForm">
+                <div class="form-group">
+                    <label for="teacherName">Teacher Name</label>
+                    <input type="text" id="teacherName" required>
+                </div>
+                <div class="form-group">
+                    <label for="sponsorName">Sponsor Name</label>
+                    <input type="text" id="sponsorName" required>
+                </div>
+                <div class="form-group">
+                    <label for="connectionType">Connection Type</label>
+                    <select id="connectionType" required>
+                        <option value="">Select Type</option>
+                        <option value="direct">Direct Sponsorship</option>
+                        <option value="event">Event Sponsorship</option>
+                        <option value="course">Course Sponsorship</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sponsorshipAmount">Sponsorship Amount ($)</label>
+                    <input type="number" id="sponsorshipAmount" min="0" step="0.01">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('connectSponsorModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Connect</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Session Modal -->
+    <div id="sessionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Session Details</h3>
+                <button class="close-btn" onclick="closeModal('sessionModal')">×</button>
+            </div>
+            <div id="sessionDetails" class="session-details">
+                <!-- Session details will be populated by JS -->
+            </div>
+            <form id="taskForm">
+                <div class="form-group">
+                    <label for="taskTitle">Task Title</label>
+                    <input type="text" id="taskTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="taskDescription">Task Description</label>
+                    <textarea id="taskDescription" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="taskDueDate">Due Date</label>
+                    <input type="date" id="taskDueDate" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('sessionModal')">Close</button>
+                    <button type="submit" class="btn-primary">Assign Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Class Modal -->
+    <div id="classModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Class</h3>
+                <button class="close-btn" onclick="closeModal('classModal')">×</button>
+            </div>
+            <form id="classForm">
+                <div class="form-group">
+                    <label for="className">Class Name</label>
+                    <input type="text" id="className" required>
+                </div>
+                <div class="form-group">
+                    <label for="classSubject">Subject</label>
+                    <input type="text" id="classSubject" required>
+                </div>
+                <div class="form-group">
+                    <label for="classGrade">Grade Level</label>
+                    <select id="classGrade" required>
+                        <option value="">Select Grade</option>
+                        <option value="6">Grade 6</option>
+                        <option value="7">Grade 7</option>
+                        <option value="8">Grade 8</option>
+                        <option value="9">Grade 9</option>
+                        <option value="10">Grade 10</option>
+                        <option value="11">Grade 11</option>
+                        <option value="12">Grade 12</option>
+                        <option value="13">Grade 13</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="classCapacity">Maximum Students</label>
+                    <input type="number" id="classCapacity" min="1" max="50" required>
+                </div>
+                <div class="form-group">
+                    <label for="classPrice">Price per Session ($)</label>
+                    <input type="number" id="classPrice" min="0" step="0.01" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('classModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Create Class</button>
+                </div>
+            </form>
         </div>
     </div>
 

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeacherPro - Assignment Center</title>
+    <link rel="stylesheet" href="../public/css/dashboard_overview.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h1>TeacherPro</h1>
+        <p>Welcome back, Dr. Smith!</p>
+        <nav>
+            <ul>
+                <li><a href="../public/dashboard_overview.html" id="dashboardLink" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="../public/schedule.html" id="scheduleLink"><i class="fas fa-calendar-alt"></i> Schedule</a></li>
+                <li><a href="../public/class_management.html" class="block p-2 hover:bg-gray-200 rounded">Class Management</a></li>
+                <li><a href="../public/students.html" id="studentsLink"><i class="fas fa-users"></i> Students</a></li>
+                <li><a href="../public/assignments.html" id="assignmentsLink"><i class="fas fa-book"></i> Assignments</a></li>
+                <li><a href="../public/teachers_community.html" class="block p-2 hover:bg-gray-200 rounded">Teacher Community</a></li>
+                <li><a href="../public/earnings_analytics.html" class="block p-2 hover:bg-gray-200 rounded">Earning & Analytics</a></li>
+                <li><a href="../public/sponsor_conversations.html" id="sponsorConnectLink"><i class="fas fa-handshake"></i> Connect Sponsor</a></li>
+                <li><a href="../public/profile_setting.html" class="block p-2 hover:bg-gray-200 rounded">Profile Setting</a></li>
+                <li><a href="../public/event_organization.html" class="block p-2 hover:bg-gray-200 rounded">Event Organization</a></li>
+            </ul>
+        </nav>
+        <div class="filter-section">
+            <h3><i class="fas fa-filter"></i> Quick Filters</h3>
+            <div class="filter-checkbox"><input type="checkbox" id="filter-pending" checked><label for="filter-pending">Pending</label></div>
+            <div class="filter-checkbox"><input type="checkbox" id="filter-submitted" checked><label for="filter-submitted">Submitted</label></div>
+        </div>
+        <a href="#" id="logoutBtn" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+
+    <div class="main-content">
+        <header class="header-content">
+            <h2 id="pageTitle">Assignment Center</h2>
+            <p id="dateRange">July 5, 2025 - July 11, 2025</p>
+        </header>
+
+        <div class="card">
+            <div class="flex justify-end space-x-2 mb-2">
+                <button class="primary" id="createAssignmentBtn">Create Assignment</button>
+            </div>
+            <h3>Assignments</h3>
+            <div id="assignmentList" class="space-y-2">
+                <div class="student-item">
+                    <div>
+                        <p class="font-semibold">Math Homework</p>
+                        <p class="text-sm">Due: Tue, July 8 - 11:59 PM</p>
+                        <p class="text-sm">Status: Pending</p>
+                    </div>
+                    <button class="session-action-btn"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+                <div class="student-item">
+                    <div>
+                        <p class="font-semibold">Physics Project</p>
+                        <p class="text-sm">Due: Wed, July 9 - 11:59 PM</p>
+                        <p class="text-sm">Status: Submitted</p>
+                    </div>
+                    <button class="session-action-btn"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modals -->
+        <div id="createAssignmentModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Create New Assignment</h3>
+                    <button class="close-btn" onclick="closeModal('createAssignmentModal')">×</button>
+                </div>
+                <form id="createAssignmentForm">
+                    <input type="text" id="assignmentTitle" placeholder="Assignment Title" required>
+                    <textarea id="assignmentDescription" placeholder="Description" required></textarea>
+                    <input type="date" id="assignmentDueDate" required>
+                    <input type="time" id="assignmentDueTime" required>
+                    <div class="flex justify-end space-x-2">
+                        <button type="button" class="secondary" onclick="closeModal('createAssignmentModal')">Cancel</button>
+                        <button type="submit" class="primary">Create Assignment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="assignmentDetailsModal" class="modal" data-assignment-id="">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Assignment Details</h3>
+                    <button class="close-btn" onclick="closeModal('assignmentDetailsModal')">×</button>
+                </div>
+                <div id="assignmentDetailsContent"></div>
+                <div class="flex justify-end space-x-2">
+                    <button type="button" class="secondary" onclick="closeModal('assignmentDetailsModal')">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+
+    <script src="assignments.js"></script>
+</body>
+</html>

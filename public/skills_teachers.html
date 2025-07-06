@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillHub - Teachers</title>
+    <link rel="stylesheet" href="../public/css/skills_teachers.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">SkillHub</div>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">How it Works</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Community</a></li>
+            <li><a href="#">Sponsor</a></li>
+            <li><a href="#">About Us</a></li>
+        </ul>
+        <div class="user-icon"></div>
+    </nav>
+
+    <section class="hero">
+        <h1>Find Expert Teachers</h1>
+        <p>Connect with skilled teachers for any skill you want to learn</p>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search for skills or teachers...">
+            <span class="search-icon">🔍</span>
+        </div>
+        <div class="floating-circle floating-circle-1"></div>
+        <div class="floating-circle floating-circle-2"></div>
+        <div class="floating-circle floating-circle-3"></div>
+        <div class="floating-circle floating-circle-4"></div>
+        <div class="floating-circle floating-circle-5"></div>
+        <div class="floating-circle floating-circle-6"></div>
+        <div class="floating-circle floating-circle-7"></div>
+        <div class="floating-circle floating-circle-8"></div>
+    </section>
+
+    <div class="container">
+        <div class="filters">
+            <div class="filter-header">Filters</div>
+            <div class="filter-group">
+                <label><span class="filter-icon">📍</span>Location</label>
+                <select id="locationFilter">
+                    <option value="all">All Locations</option>
+                    <option value="1mile">Within 1 mile</option>
+                    <option value="3miles">Within 3 miles</option>
+                    <option value="5miles">Within 5 miles</option>
+                    <option value="10miles">Within 10 miles</option>
+                    <option value="city">Anywhere in City</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label><span class="filter-icon">💰</span>Price Range</label>
+                <div class="price-range">
+                    <select id="priceFilterMin">
+                        <option value="0">0</option>
+                        <option value="500">500</option>
+                        <option value="1000">1000</option>
+                        <option value="1500">1500</option>
+                    </select>
+                    -
+                    <select id="priceFilterMax">
+                        <option value="9999">No Max</option>
+                        <option value="500">500</option>
+                        <option value="1000">1000</option>
+                        <option value="1500">1500</option>
+                        <option value="2000">2000</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label><span class="filter-icon">📅</span>Availability</label>
+                <select id="availabilityFilter">
+                    <option value="all">Any time</option>
+                    <option value="weekdays">Weekdays</option>
+                    <option value="weekends">Weekends</option>
+                    <option value="morning">Morning</option>
+                    <option value="afternoon">Afternoon</option>
+                    <option value="evening">Evening</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label><span class="filter-icon">⭐</span>Teacher Level</label>
+                <div class="checkbox-buttons">
+                    <input type="checkbox" id="beginner" name="level" value="beginner">
+                    <label class="checkbox-btn" for="beginner">Beginner-friendly</label>
+                    <input type="checkbox" id="intermediate" name="level" value="intermediate">
+                    <label class="checkbox-btn" for="intermediate">Intermediate</label>
+                    <input type="checkbox" id="advanced" name="level" value="advanced">
+                    <label class="checkbox-btn" for="advanced">Advanced/Expert</label>
+                    <input type="checkbox" id="professional" name="level" value="professional">
+                    <label class="checkbox-btn" for="professional">Professional</label>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label><span class="filter-icon">👥</span>Lesson Type</label>
+                <div class="checkbox-buttons">
+                    <input type="checkbox" id="individual" name="lesson" value="individual">
+                    <label class="checkbox-btn" for="individual">Individual lessons</label>
+                    <input type="checkbox" id="group" name="lesson" value="group">
+                    <label class="checkbox-btn" for="group">Group lessons</label>
+                    <input type="checkbox" id="workshops" name="lesson" value="workshops">
+                    <label class="checkbox-btn" for="workshops">Workshops</label>
+                </div>
+            </div>
+            <button class="clear-btn" id="clearFilters">Clear All Filters</button>
+            <button class="filter-search-btn">Apply Filters</button>
+        </div>
+
+        <div class="teachers">
+            <div class="teachers-header">
+                <div class="teachers-count">150 teachers available in your area</div>
+                <div class="sort-options">
+                    <span>Sort by:</span>
+                    <select id="sortFilter">
+                        <option value="Most Popular">Most Popular</option>
+                        <option value="Alphabetical">Alphabetical</option>
+                        <option value="Price: Low to High">Price: Low to High</option>
+                        <option value="Price: High to Low">Price: High to Low</option>
+                        <option value="Nearest First">Nearest First</option>
+                        <option value="Highest Rated">Highest Rated</option>
+                        <option value="Most Recent">Most Recent</option>
+                    </select>
+                </div>
+            </div>
+            <div class="role-buttons">
+                <button class="role-btn" data-role="categories">Categories</button>
+                <button class="role-btn active" data-role="teachers">Teachers</button>
+            </div>
+            <h3>Teachers</h3>
+            <div class="teacher-grid" id="teacherGrid">
+                <div class="teacher-card" data-name="Maria Perera" data-location="city" data-price="1000" data-availability="weekdays,weekends,morning,afternoon" data-level="beginner,intermediate,advanced" data-lesson="individual,group">
+                    <div class="teacher-avatar">M</div>
+                    <h4>Maria Perera</h4>
+                    <p class="skills">Painting, Drawing, Sculpture</p>
+                    <p>4.8 (120 reviews)</p>
+                    <button class="view-profile-btn">View Profile</button>
+                </div>
+                <div class="teacher-card" data-name="Nimal Silva" data-location="5miles" data-price="1500" data-availability="weekends,afternoon,evening" data-level="beginner,intermediate,advanced,professional" data-lesson="individual,group">
+                    <div class="teacher-avatar">N</div>
+                    <h4>Nimal Silva</h4>
+                    <p class="skills">Guitar, Piano, Singing</p>
+                    <p>4.9 (150 reviews)</p>
+                    <button class="view-profile-btn">View Profile</button>
+                </div>
+                <div class="teacher-card" data-name="Ayesha Fernando" data-location="10miles" data-price="800" data-availability="weekdays,morning,afternoon" data-level="beginner,intermediate" data-lesson="individual,group">
+                    <div class="teacher-avatar">A</div>
+                    <h4>Ayesha Fernando</h4>
+                    <p class="skills">Conversational Practice, Grammar</p>
+                    <p>4.7 (90 reviews)</p>
+                    <button class="view-profile-btn">View Profile</button>
+                </div>
+                <div class="teacher-card" data-name="Kamal Wijesinghe" data-location="city" data-price="1200" data-availability="weekdays,evening" data-level="beginner,intermediate" data-lesson="group,workshops">
+                    <div class="teacher-avatar">K</div>
+                    <h4>Kamal Wijesinghe</h4>
+                    <p class="skills">Computer Basics, Mobile Apps</p>
+                    <p>4.6 (80 reviews)</p>
+                    <button class="view-profile-btn">View Profile</button>
+                </div>
+                <div class="teacher-card" data-name="Sanjani Ranasinghe" data-location="3miles" data-price="900" data-availability="weekends,morning" data-level="beginner,intermediate,advanced" data-lesson="group,workshops">
+                    <div class="teacher-avatar">S</div>
+                    <h4>Sanjani Ranasinghe</h4>
+                    <p class="skills">Baking, Nutrition, Food Safety</p>
+                    <p>4.8 (110 reviews)</p>
+                    <button class="view-profile-btn">View Profile</button>
+                </div>
+                <div class="teacher-card" data-name="Ruwan Jayawardena" data-location="5miles" data-price="700" data-availability="weekdays,afternoon" data-level="beginner,intermediate" data-lesson="individual,workshops">
+                    <div class="teacher-avatar">R</div>
+                    <h4>Ruwan Jayawardena</h4>
+                    <p class="skills">Gardening, Home Repair</p>
+                    <p>4.5 (70 reviews)</p>
+                    <button class="view-profile-btn">View Profile</button>
+                </div>
+                <div class="teacher-card" data-name="Lakshi Mendis" data-location="city" data-price="1100" data-availability="weekdays,weekends,morning" data-level="beginner,intermediate,advanced" data-lesson="group,workshops">
+                    <div class="teacher-avatar">L</div>
+                    <h4>Lakshi Mendis</h4>
+                    <p class="skills">Yoga, Meditation, Nutrition</p>
+                    <p>4.9 (130 reviews)</p>
+                    <button class="view-profile-btn">View Profile</button>
+                </div>
+                <div class="teacher-card" data-name="Chathura de Silva" data-location="10miles" data-price="1300" data-availability="weekdays,evening" data-level="intermediate,advanced,professional" data-lesson="individual,group">
+                    <div class="teacher-avatar">C</div>
+                    <h4>Chathura de Silva</h4>
+                    <p class="skills">Resume Writing, Leadership</p>
+                    <p>4.7 (95 reviews)</p>
+                    <button class="view-profile-btn">View Profile</button>
+                </div>
+                <div class="teacher-card" data-name="Nadeesha Gunawardena" data-location="1mile" data-price="600" data-availability="weekends,afternoon" data-level="beginner,intermediate" data-lesson="workshops">
+                    <div class="teacher-avatar">N</div>
+                    <h4>Nadeesha Gunawardena</h4>
+                    <p class="skills">Weaving, Traditional Crafts</p>
+                    <p>4.6 (85 reviews)</p>
+                    <button class="view-profile-btn">View Profile</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../public/js/skills_teachers.js"></script>
+</body>
+</html>

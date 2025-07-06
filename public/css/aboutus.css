@@ -1,0 +1,769 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    max-width: 1650px; /* Updated to match works.css */
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* Header */
+header {
+    background: linear-gradient(135deg, #3B2A6B, #6A5ACD);
+    padding: 10px 20px; /* Match works.css */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: #00C4B4;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px; /* Match works.css */
+    margin: 0;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Enhanced Hero Section */
+.hero {
+    color: white;
+    text-align: center;
+    padding: 80px 20px; /* Match works.css */
+    position: relative;
+    min-height: 300px;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #3B2A6B, #6A5ACD); /* Match works.css gradient direction */
+    width: 100%; /* Full-width background */
+}
+
+/* Background dots pattern */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 10px, transparent 10px);
+    background-size: calc(100% / 11) calc(100% / 3); /* Match works.css */
+    background-repeat: repeat;
+    opacity: 0.3;
+    z-index: 0;
+}
+
+/* Text styles */
+.hero h1 {
+    font-size: 36px; /* Match works.css */
+    margin-bottom: 10px; /* Match works.css */
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+}
+
+.about-text {
+    color: white;
+}
+
+.skillhub-text {
+    color: #48bb78; /* Match works.css hero .skillhub */
+}
+
+.subtitle {
+    font-size: 18px; /* Match works.css hero p */
+    margin: 15px auto 20px; /* Match works.css */
+    max-width: 700px;
+    color: #D3D3D3;
+    position: relative;
+    z-index: 2;
+    line-height: 1.4;
+}
+
+/* Floating circles with animation */
+.floating-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    z-index: 1;
+    animation: float 8s infinite ease-in-out;
+    filter: blur(1px);
+    opacity: 0.8;
+}
+
+/* Circle sizes and positions */ 
+.floating-circle-1 {
+    width: 120px;
+    height: 120px;
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.floating-circle-2 {
+    width: 150px;
+    height: 150px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: 2s;
+}
+
+.floating-circle-3 {
+    width: 100px;
+    height: 100px;
+    top: 60%;
+    right: 10%;
+    animation-delay: 1s;
+}
+
+.floating-circle-4 {
+    width: 80px;
+    height: 80px;
+    top: 30%;
+    right: 15%;
+    animation-delay: 3s;
+}
+
+.floating-circle-5 {
+    width: 130px;
+    height: 130px;
+    top: 70%;
+    left: 20%;
+    animation-delay: 4s;
+}
+
+.floating-circle-6 {
+    width: 110px;
+    height: 110px;
+    top: 25%;
+    left: 30%;
+    animation-delay: 1.5s;
+}
+
+.floating-circle-7 {
+    width: 90px;
+    height: 90px;
+    top: 65%;
+    left: 40%;
+    animation-delay: 2.5s;
+}
+
+.floating-circle-8 {
+    width: 140px;
+    height: 140px;
+    top: 40%;
+    right: 20%;
+    animation-delay: 3.5s;
+}
+
+/* Animation for floating effect */
+@keyframes float {
+    0%, 100% { 
+        transform: translateY(0) scale(1);
+        opacity: 0.8; /* Fixed: Added colon */
+    }
+    50% { 
+        transform: translateY(-20px) scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+/* Container for content */
+.hero .container {
+    position: relative;
+    z-index: 2;
+    max-width: 1650px; /* Match works.css */
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 30px; /* Match works.css */
+    }
+    
+    .subtitle {
+        font-size: 16px; /* Match works.css */
+    }
+    
+    .floating-circle {
+        display: none; /* Hide floating circles on mobile */
+    }
+}
+
+/* Story Section */
+.story {
+    background: white;
+    text-align: center;
+    padding: 40px 20px; /* Match works.css */
+    min-height: 200px;
+    width: 100%; /* Full-width background */
+}
+
+.story h2 {
+    font-size: 32px; /* Match works.css */
+    color: #2d3748; /* Match works.css */
+    margin-bottom: 10px; /* Match works.css */
+}
+
+.story p {
+    font-size: 20px; /* Match works.css */
+    color: #4a5568; /* Match works.css */
+    max-width: 800px; /* Match works.css steps-grid */
+    margin: 25px auto;
+    font-weight: bold;
+}
+
+/* Mission Section */
+.mission {
+    background: #f4f4f4; /* Match works.css */
+    text-align: center;
+    padding: 40px 20px; /* Match works.css */
+    width: 100%; /* Full-width background */
+}
+
+.mission h2 {
+    font-size: 32px; /* Match works.css */
+    color: #2d3748; /* Match works.css */
+    font-weight: bold;
+    margin-bottom: 10px; /* Match works.css */
+}
+
+.mission-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    background: white;
+    border-radius: 10px; /* Match works.css */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Match works.css */
+    padding: 30px; /* Match works.css step */
+    max-width: 800px; /* Match works.css steps-grid */
+    margin: 0 auto;
+    text-align: left;
+}
+
+.mission-content .icon {
+    flex-shrink: 0;
+    background: rgba(106, 90, 205, 0.1);
+    border-radius: 50%;
+    width: 50px; /* Match works.css measure-icon */
+    height: 50px; /* Match works.css */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mission-content .icon img {
+    width: 24px; /* Match works.css measure-icon font-size */
+    height: 24px;
+}
+
+.mission-content p {
+    font-size: 19px; /* Match works.css step p */
+    color: #4a5568; /* Match works.css */
+    margin: 0;
+    line-height: 1.6;
+    flex: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .mission-content {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px; /* Match works.css */
+    }
+
+    .mission-content .icon {
+        margin-bottom: 15px;
+    }
+
+    .mission-content p {
+        text-align: center;
+    }
+}
+
+/* Media Queries for Responsive Behavior */
+@media (max-width: 767px) {
+    .mission-content {
+        flex-direction: column;
+        gap: 15px; /* Match works.css safety-measures */
+        padding: 20px;
+    }
+
+    .mission-content .icon {
+        margin-bottom: 10px;
+    }
+
+    .mission-content p {
+        text-align: center;
+    }
+}
+
+/* What Makes Us Different Section */
+.different {
+    background: white;
+    padding: 40px 20px; /* Match works.css */
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    width: 100%; /* Full-width background */
+}
+
+.different::before,
+.different::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.different::before {
+    width: 200px;
+    height: 200px;
+    top: -50px;
+    left: -50px;
+}
+
+.different::after {
+    width: 150px;
+    height: 150px;
+    bottom: -50px;
+    right: -50px;
+}
+
+.different h2 {
+    font-size: 32px; /* Match works.css */
+    color: #2d3748; /* Match works.css */
+    position: relative;
+    z-index: 1;
+    margin-bottom: 10px; /* Match works.css */
+}
+
+.different-subtitle {
+    font-size: 20px; /* Match works.css */
+    color: #4a5568; /* Match works.css */
+    margin: 10px 0 20px; /* Match works.css */
+    position: relative;
+    z-index: 1;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Match works.css steps-grid */
+    gap: 30px; /* Match works.css */
+    margin-top: 20px; /* Match works.css */
+    position: relative;
+    z-index: 1;
+    max-width: 800px; /* Match works.css steps-grid */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.feature {
+    background: white;
+    min-height: 250px; /* Match works.css step */
+    padding: 30px; /* Match works.css step */
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Match works.css step */
+    text-align: center;
+    transition: transform 0.3s ease; /* Match works.css */
+}
+
+.feature:hover {
+    transform: translateY(-5px); /* Match works.css */
+}
+
+.feature-icon {
+    font-size: 24px; /* Match works.css measure-icon */
+    color: #ffffff; /* Match works.css */
+    background-color: #6A5ACD; /* Match works.css */
+    width: 50px; /* Match works.css */
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px; /* Match works.css */
+}
+
+.feature h3 {
+    font-size: 23px; /* Match works.css step h3 */
+    color: #2d3748; /* Match works.css */
+    margin: 10px 0; /* Match works.css */
+}
+
+.feature p {
+    font-size: 19px; /* Match works.css step p */
+    color: #4a5568; /* Match works.css */
+    line-height: 1.5; /* Match works.css */
+}
+
+/* Team Section */
+.team {
+    background: #6975DD;
+    text-align: center;
+    padding: 40px 20px; /* Match works.css */
+    width: 100%; /* Full-width background */
+}
+
+.team h2 {
+    font-size: 32px; /* Match works.css */
+    color: #FFFFFF;
+    margin-bottom: 10px; /* Match works.css */
+}
+
+.team p {
+    font-size: 20px; /* Match works.css */
+    color: #FFFFFF;
+    max-width: 800px; /* Match works.css */
+    margin: 20px auto;
+}
+
+.team-members {
+    display: grid; /* Changed to grid to match works.css */
+    grid-template-columns: repeat(2, 1fr); /* Match works.css steps-grid */
+    gap: 30px; /* Match works.css */
+    margin-top: 20px; /* Match works.css */
+    max-width: 800px; /* Match works.css */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.member {
+    background: #F5F5F5;
+    padding: 30px; /* Match works.css step */
+    border-radius: 10px;
+    min-height: 250px; /* Match works.css step */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Match works.css */
+    transition: transform 0.3s ease; /* Match works.css */
+}
+
+.member:hover {
+    transform: translateY(-5px); /* Match works.css */
+}
+
+.member .avatar {
+    background: #D3D3D3;
+    color: white;
+    font-size: 24px; /* Match works.css measure-icon */
+    width: 50px; /* Match works.css */
+    height: 50px; /* Match works.css */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 15px; /* Match works.css */
+}
+
+.member h3 {
+    font-size: 23px; /* Match works.css step h3 */
+    color: #2d3748; /* Match works.css */
+    margin: 10px 0; /* Match works.css */
+}
+
+.member p {
+    font-size: 19px; /* Match works.css step p */
+    color: #4a5568; /* Match works.css */
+    line-height: 1.5; /* Match works.css */
+}
+
+/* Call to Action Section */
+.cta {
+    background: white;
+    color: black;
+    text-align: center;
+    padding: 40px 20px; /* Match works.css */
+    position: relative;
+    overflow: hidden;
+    width: 100%; /* Full-width background */
+}
+
+.cta::before {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: rgba(0, 255, 127, 0.2);
+    border-radius: 50%;
+    top: -50px;
+    left: -50px;
+    z-index: 0;
+}
+
+.cta::after {
+    content: '';
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: rgba(0, 255, 127, 0.2);
+    border-radius: 50%;
+    top: -50px;
+    right: -50px;
+    z-index: 0;
+}
+
+.cta h2 {
+    font-size: 28px; /* Match works.css */
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    color: #000000; /* Match works.css */
+}
+
+.cta p {
+    font-size: 16px; /* Match works.css */
+    color: #000000; /* Match works.css */
+    margin: 20px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.cta-button {
+    background: #6A5ACD;
+    color: white;
+    border: none;
+    padding: 12px 24px; /* Match works.css get-started */
+    font-size: 16px; /* Match works.css */
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    transition: background-color 0.3s; /* Match works.css */
+}
+
+.cta-button:hover {
+    background: #5A3AA3; /* Match works.css */
+}
+
+/* Footer */
+footer {
+    background: #1A2A44;
+    color: white;
+    padding: 40px 20px; /* Match works.css */
+    width: 100%; /* Full-width background */
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-around; /* Match works.css */
+    flex-wrap: wrap; /* Match works.css */
+    gap: 15px; /* Match works.css */
+}
+
+.footer-left {
+    margin: 15px; /* Match works.css */
+    min-width: 200px; /* Match works.css */
+}
+
+.footer-left .logo {
+    color: #00C4B4;
+}
+
+.footer-left p {
+    font-size: 14px;
+    color: #a0aec0; /* Match works.css */
+    margin: 10px 0;
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.social-icons a {
+    color: #a0aec0; /* Match works.css */
+    font-size: 18px;
+    text-decoration: none;
+    margin: 0 10px; /* Match works.css */
+}
+
+.social-icons a:hover {
+    color: white; /* Match works.css */
+}
+
+.footer-links {
+    display: flex;
+    gap: 50px;
+    margin: 15px; /* Match works.css */
+    min-width: 200px; /* Match works.css */
+}
+
+.footer-links h4 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 5px;
+}
+
+.footer-links ul li a {
+    color: #a0aec0; /* Match works.css */
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 1.6; /* Match works.css */
+}
+
+.footer-links ul li a:hover {
+    color: white; /* Match works.css */
+}
+
+.footer-subscribe {
+    margin: 15px; /* Match works.css */
+    min-width: 200px; /* Match works.css */
+}
+
+.footer-subscribe h4 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.footer-subscribe p {
+    font-size: 14px;
+    color: #a0aec0; /* Match works.css */
+    margin-bottom: 10px;
+}
+
+.footer-subscribe input {
+    padding: 10px;
+    width: 180px; /* Match works.css */
+    border: 1px solid #a0aec0; /* Match works.css */
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.footer-subscribe button {
+    background: #48bb78; /* Match works.css */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Match works.css */
+}
+
+.footer-subscribe button:hover {
+    background: #3a9d63; /* Match works.css */
+}
+
+/* Media Queries */
+@media (max-width: 1199px) {
+    .hero {
+        padding: 80px 0 30px;
+        min-height: 300px; /* Match works.css */
+    }
+    .hero h1 {
+        font-size: 30px; /* Match works.css */
+    }
+    .subtitle {
+        font-size: 16px; /* Match works.css */
+    }
+    .features {
+        grid-template-columns: 1fr; /* Match works.css implied behavior */
+    }
+    .team-members {
+        grid-template-columns: 1fr; /* Match works.css */
+    }
+    .member {
+        max-width: 300px;
+    }
+    .mission {
+        min-height: 300px; /* Match works.css */
+    }
+    .mission-content {
+        padding: 20px;
+        max-width: 600px;
+    }
+    .mission-content .icon {
+        font-size: 24px; /* Match works.css */
+    }
+    .mission-content p {
+        font-size: 16px; /* Match works.css */
+    }
+}
+
+@media (max-width: 767px) {
+    .container {
+        width: 90%; /* Match works.css implied behavior */
+    }
+    .hero {
+        padding: 80px 0 20px;
+        min-height: 300px;
+    }
+    .hero h1 {
+        font-size: 30px;
+    }
+    .subtitle {
+        font-size: 16px;
+    }
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .features {
+        grid-template-columns: 1fr;
+    }
+    .team-members {
+        grid-template-columns: 1fr;
+    }
+    .member {
+        max-width: 250px;
+    }
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+    .mission {
+        min-height: 300px;
+    }
+    .mission-content {
+        padding: 15px;
+        max-width: 90%;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .mission-content .icon {
+        font-size: 24px;
+    }
+    .mission-content p {
+        font-size: 14px;
+    }
+    .story, .mission, .different, .team, .cta, footer {
+        padding: 30px 10px; /* Match works.css */
+    }
+}

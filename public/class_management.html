@@ -3,109 +3,673 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class Management - SkillHub</title>
-    <link rel="stylesheet" href="../public/css/dashboard_overview.css">
-    <link rel="stylesheet" href="../public/css/class_management.css">
+    <title>TeacherPro - Class Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 0 2rem;
+        }
+
+        .logo h1 {
+            color: #764ba2;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-text {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 0 1rem;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            color: #555;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(118, 75, 162, 0.1);
+            color: #764ba2;
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .nav-link i {
+            margin-right: 1rem;
+            width: 20px;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .page-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-header h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .class-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .class-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .class-header {
+            display: flex;
+            justify-content: between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .class-title {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .class-subject {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .class-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #764ba2;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .class-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .add-class-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .add-class-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-header h3 {
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-active {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+        }
+
+        .status-inactive {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+
+        .status-full {
+            background: rgba(251, 191, 36, 0.1);
+            color: #fbbf24;
+        }
+    </style>
 </head>
 <body>
     <div class="dashboard-container">
-        <!-- Sidebar from dashboard_overview.html -->
+        <!-- Sidebar -->
         <div class="sidebar">
-            <div class="logo">SkillHub</div>
-            <div class="profile-level">Level 3 - Pro Instructor</div>
-            <div class="nav-menu">
-                <a href="../public/dashboard_overview.html">Overview</a>
-                <a href="../public/class_management.html" class="active">Class Management</a>
-                <a href="../public/shedule_availability.html">Schedule & Availability</a>
-                <a href="../earnings_analytics/earnings_analytics.html">Earning & Analytics</a>
-                <a href="../public/profile_setting.html">Profile Setting</a>
+            <div class="logo">
+                <h1>TeacherPro</h1>
+                <p class="welcome-text">Welcome back, Dr. Smith!</p>
             </div>
-            <button class="logout-btn">LOG OUT</button>
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="dashboard_overview.html" class="nav-link">
+                            <i class="fas fa-home"></i>
+                            Dashboard Overview
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active">
+                            <i class="fas fa-chalkboard"></i>
+                            Class Management
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="schedule.html" class="nav-link">
+                            <i class="fas fa-calendar-alt"></i>
+                            Schedule & Availability
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../public/earnings & analytics.html" class="nav-link">
+                            <i class="fas fa-chart-line"></i>
+                            Earnings & Analytics
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="profile.html" class="nav-link">
+                            <i class="fas fa-user-cog"></i>
+                            Profile Settings
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="teacher_community.html" class="nav-link">
+                            <i class="fas fa-users"></i>
+                            Teacher Community
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="student_management.html" class="nav-link">
+                            <i class="fas fa-user-graduate"></i>
+                            Student Management
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="events.html" class="nav-link">
+                            <i class="fas fa-calendar-check"></i>
+                            Event Organization
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="sponsors.html" class="nav-link">
+                            <i class="fas fa-handshake"></i>
+                            Sponsor Management
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
 
         <!-- Main Content -->
         <div class="main-content">
-            <div class="dashboard-header">
+            <header class="page-header">
                 <h1>Class Management</h1>
-                <p>Manage your students, sessions, and teaching materials</p>
-            </div>
+                <p>Manage your classes, students, and course content</p>
+            </header>
 
-            <!-- Student Communications Section -->
-            <div class="card-section">
-                <div class="section-header">
-                    <h3 class="section-title">👥 Student Communications</h3>
-                    <button class="btn-primary send-message-btn">Send Message</button>
-                </div>
-                <div class="entry">
-                    <div class="avatar green">S</div>
-                    <div class="entry-info">
-                        <h4>Sarah Johnson</h4>
-                        <p>Last message: "Thanks for the great lesson!"</p>
+            <div class="classes-grid" id="classesGrid">
+                <!-- Mathematics Grade 10 -->
+                <div class="class-card">
+                    <div class="class-header">
+                        <div>
+                            <h3 class="class-title">Advanced Mathematics</h3>
+                            <p class="class-subject">Grade 10 • Mathematics</p>
+                        </div>
+                        <span class="status-badge status-active">Active</span>
                     </div>
-                    <button class="btn-secondary reply-btn" data-student="Sarah Johnson">Reply</button>
-                </div>
-                <div class="entry">
-                    <div class="avatar green">M</div>
-                    <div class="entry-info">
-                        <h4>Mike Thompson</h4>
-                        <p>Last message: "Can we reschedule Thursday?"</p>
+                    
+                    <div class="class-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">25</div>
+                            <div class="stat-label">Students</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">$45</div>
+                            <div class="stat-label">Per Session</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">Mon, Wed</div>
+                            <div class="stat-label">Schedule</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">4.8</div>
+                            <div class="stat-label">Rating</div>
+                        </div>
                     </div>
-                    <button class="btn-secondary reply-btn" data-student="Mike Thompson">Reply</button>
+
+                    <div class="class-actions">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-eye"></i> View
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="btn btn-danger">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Physics Grade 11 -->
+                <div class="class-card">
+                    <div class="class-header">
+                        <div>
+                            <h3 class="class-title">Physics Fundamentals</h3>
+                            <p class="class-subject">Grade 11 • Physics</p>
+                        </div>
+                        <span class="status-badge status-active">Active</span>
+                    </div>
+                    
+                    <div class="class-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">18</div>
+                            <div class="stat-label">Students</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">$50</div>
+                            <div class="stat-label">Per Session</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">Tue, Thu</div>
+                            <div class="stat-label">Schedule</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">4.7</div>
+                            <div class="stat-label">Rating</div>
+                        </div>
+                    </div>
+
+                    <div class="class-actions">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-eye"></i> View
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="btn btn-danger">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Chemistry Grade 12 -->
+                <div class="class-card">
+                    <div class="class-header">
+                        <div>
+                            <h3 class="class-title">Organic Chemistry</h3>
+                            <p class="class-subject">Grade 12 • Chemistry</p>
+                        </div>
+                        <span class="status-badge status-full">Full</span>
+                    </div>
+                    
+                    <div class="class-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">30</div>
+                            <div class="stat-label">Students</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">$55</div>
+                            <div class="stat-label">Per Session</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">Fri, Sat</div>
+                            <div class="stat-label">Schedule</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">4.9</div>
+                            <div class="stat-label">Rating</div>
+                        </div>
+                    </div>
+
+                    <div class="class-actions">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-eye"></i> View
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="btn btn-danger">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Biology Grade 13 -->
+                <div class="class-card">
+                    <div class="class-header">
+                        <div>
+                            <h3 class="class-title">Advanced Biology</h3>
+                            <p class="class-subject">Grade 13 • Biology</p>
+                        </div>
+                        <span class="status-badge status-inactive">Inactive</span>
+                    </div>
+                    
+                    <div class="class-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">0</div>
+                            <div class="stat-label">Students</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">$60</div>
+                            <div class="stat-label">Per Session</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">-</div>
+                            <div class="stat-label">Schedule</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">-</div>
+                            <div class="stat-label">Rating</div>
+                        </div>
+                    </div>
+
+                    <div class="class-actions">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-eye"></i> View
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="btn btn-danger">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Session Notes Section -->
-            <div class="card-section">
-                <div class="section-header">
-                    <h3 class="section-title">📒 Session Notes</h3>
-                    <button class="btn-primary add-note-btn">Add Note</button>
-                </div>
-                <div class="note-entry" data-note-id="0">
-                    <div>
-                        <h4>Sarah Johnson - Guitar Basics</h4>
-                        <div class="note-date">Dec 18, 2024</div>
-                        <p class="note-content">Worked on chord transitions. Great progress!</p>
-                    </div>
-                    <button class="btn-secondary edit-note-btn">Edit</button>
-                </div>
-                <div class="note-entry" data-note-id="1">
-                    <div>
-                        <h4>Mike Thompson - Advanced Guitar</h4>
-                        <div class="note-date">Dec 17, 2024</div>
-                        <p class="note-content">Fingerpicking techniques. Needs more practice.</p>
-                    </div>
-                    <button class="btn-secondary edit-note-btn">Edit</button>
-                </div>
+        <!-- Add Class Button -->
+        <button class="add-class-btn" onclick="openModal('classModal')">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div>
+
+    <!-- Add Class Modal -->
+    <div id="classModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Class</h3>
+                <button class="close-btn" onclick="closeModal('classModal')">×</button>
             </div>
-
-            <!-- Teaching Resources Section -->
-            <div class="card-section">
-                <div class="section-header">
-                    <h3 class="section-title">📁 Teaching Resources</h3>
-                    <button class="btn-primary upload-btn">Upload</button>
+            <form id="classForm">
+                <div class="form-group">
+                    <label for="className">Class Name</label>
+                    <input type="text" id="className" required>
                 </div>
-                <div class="resource-entry" data-resource-id="0">
-                    <div>
-                        <h4>Guitar Chord Charts.pdf</h4>
-                        <div class="note-date">Uploaded Dec 15, 2024 • 2.3 MB</div>
-                    </div>
-                    <button class="btn-secondary share-btn">Share</button>
+                <div class="form-group">
+                    <label for="classSubject">Subject</label>
+                    <select id="classSubject" required>
+                        <option value="">Select Subject</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Chemistry">Chemistry</option>
+                        <option value="Biology">Biology</option>
+                        <option value="English">English</option>
+                        <option value="History">History</option>
+                        <option value="Geography">Geography</option>
+                    </select>
                 </div>
-                <div class="resource-entry" data-resource-id="1">
-                    <div>
-                        <h4>Practice Songs.mp3</h4>
-                        <div class="note-date">Uploaded Dec 10, 2024 • 5.1 MB</div>
-                    </div>
-                    <button class="btn-secondary share-btn">Share</button>
+                <div class="form-group">
+                    <label for="classGrade">Grade Level</label>
+                    <select id="classGrade" required>
+                        <option value="">Select Grade</option>
+                        <option value="6">Grade 6</option>
+                        <option value="7">Grade 7</option>
+                        <option value="8">Grade 8</option>
+                        <option value="9">Grade 9</option>
+                        <option value="10">Grade 10</option>
+                        <option value="11">Grade 11</option>
+                        <option value="12">Grade 12</option>
+                        <option value="13">Grade 13</option>
+                    </select>
                 </div>
-            </div>
-
-            <!-- Modal Section -->
-            <div id="modalSection" class="modal-section"></div>
+                <div class="form-group">
+                    <label for="classCapacity">Maximum Students</label>
+                    <input type="number" id="classCapacity" min="1" max="50" required>
+                </div>
+                <div class="form-group">
+                    <label for="classPrice">Price per Session ($)</label>
+                    <input type="number" id="classPrice" min="0" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="classDescription">Description</label>
+                    <textarea id="classDescription" rows="4"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('classModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Class</button>
+                </div>
+            </form>
         </div>
     </div>
 
-    <script src="../public/js/dashboard_overview.js"></script>
-    <script src="../public/js/class_management.js"></script>
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Form submission
+        document.getElementById('classForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Class created successfully!');
+            closeModal('classModal');
+            this.reset();
+        });
+    </script>
 </body>
 </html>

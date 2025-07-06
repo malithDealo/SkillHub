@@ -1,0 +1,572 @@
+/* General */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #fff;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Header */
+.hero {
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+  position: relative;
+  min-height: 250px;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #3B2A6B, #6A5ACD);
+  width: 100%;
+  transition: background 0.3s ease; /* Smooth background change */
+}
+
+/* Background dots pattern */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 10px, transparent 10px);
+  background-size: calc(100% / 11) calc(100% / 3);
+  background-repeat: repeat;
+  opacity: 0.3;
+  z-index: 0;
+}
+
+/* Text styles */
+.hero h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+}
+
+.about-text {
+  color: white;
+}
+
+.skillhub-text {
+  color: #48bb78;
+}
+
+.subtitle {
+  font-size: 18px;
+  margin: 15px auto 20px;
+  max-width: 700px;
+  color: #D3D3D3;
+  position: relative;
+  z-index: 2;
+  line-height: 1.4;
+}
+
+/* Floating circles with animation */
+.floating-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  z-index: 1;
+  animation: float 8s infinite ease-in-out;
+  filter: blur(1px);
+  opacity: 0.8;
+}
+
+/* Circle sizes and positions */
+.floating-circle-1 { width: 120px; height: 120px; top: 20%; left: 10%; animation-delay: 0s; }
+.floating-circle-2 { width: 150px; height: 150px; top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: 2s; }
+.floating-circle-3 { width: 100px; height: 100px; top: 60%; right: 10%; animation-delay: 1s; }
+.floating-circle-4 { width: 80px; height: 80px; top: 30%; right: 15%; animation-delay: 3s; }
+.floating-circle-5 { width: 130px; height: 130px; top: 70%; left: 20%; animation-delay: 4s; }
+.floating-circle-6 { width: 110px; height: 110px; top: 25%; left: 30%; animation-delay: 1.5s; }
+.floating-circle-7 { width: 90px; height: 90px; top: 65%; left: 40%; animation-delay: 2.5s; }
+.floating-circle-8 { width: 140px; height: 140px; top: 40%; right: 20%; animation-delay: 3.5s; }
+
+/* Animation for floating effect */
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; }
+  50% { transform: translateY(-20px) scale(1.05); opacity: 0.9; }
+}
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.search-bar input {
+  padding: 10px;
+  width: 300px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.search-bar button {
+  padding: 10px 15px;
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Accessibility Features */
+.accessibility {
+  padding: 30px;
+  text-align: center;
+  background-color: #f0f8ff;
+}
+
+.features button {
+  margin: 5px;
+  padding: 10px 15px;
+  border: none;
+  background: #dcdcdc;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: opacity 0.3s ease, background 0.3s ease;
+}
+
+.features button.recommended {
+  background: #6A5ACD;
+  color: white;
+}
+
+.features button:not(.recommended) {
+  opacity: 0.6;
+}
+
+/* Cards Grid */
+.category-grid,
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  padding: 40px 60px;
+}
+
+.category-grid h2,
+.skills-grid h2 {
+  grid-column: 1 / -1;
+  text-align: center;
+}
+
+.card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s, border 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card.selected {
+  border: 2px solid #6A5ACD;
+}
+
+.card img {
+  max-width: 80px;
+  margin-bottom: 15px;
+  object-fit: contain;
+}
+
+.high-contrast .card img {
+  filter: brightness(1.2) contrast(1.5);
+}
+
+.card h3 {
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.card p {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Call to Action Section */
+.cta {
+  background: white;
+  color: black;
+  text-align: center;
+  padding: 40px 20px;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.cta::before {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: rgba(0, 255, 127, 0.2);
+  border-radius: 50%;
+  top: -50px;
+  left: -50px;
+  z-index: 0;
+}
+
+.cta::after {
+  content: '';
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: rgba(0, 255, 127, 0.2);
+  border-radius: 50%;
+  top: -50px;
+  right: -50px;
+  z-index: 0;
+}
+
+.cta h2 {
+  font-size: 28px;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  color: #000000;
+}
+
+.cta p {
+  font-size: 16px;
+  color: #000000;
+  margin: 20px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-button {
+  background: #6A5ACD;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+  background: #5A3AA3;
+}
+
+/* Action Page Styles */
+.action-page {
+  padding: 40px 60px;
+  text-align: center;
+}
+
+.action-page h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.action-page p {
+  font-size: 16px;
+  color: #555;
+  max-width: 700px;
+  margin: 0 auto 30px;
+}
+
+.back-button,
+.activity-button {
+  background: #6A5ACD;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 10px;
+}
+
+.back-button:hover,
+.activity-button:hover {
+  background: #5A3AA3;
+}
+
+.activity-list,
+.tips-list {
+  max-width: 700px;
+  margin: 20px auto;
+  text-align: left;
+}
+
+.activity-list h3,
+.tips-list h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.activity-list ul,
+.tips-list ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.activity-list li,
+.tips-list li {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+/* Activity Prompt Section */
+.activity-prompt {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.activity-prompt h3 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.activity-prompt p {
+  font-size: 16px;
+  color: #555;
+}
+
+.activity-prompt .close-button {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background-color 0.3s;
+}
+
+.activity-prompt .close-button:hover {
+  background: #cc0000;
+}
+
+/* Timer Styles */
+.timer-container {
+  max-width: 300px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #f0f8ff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.timer-display {
+  font-size: 36px;
+  font-weight: bold;
+  margin: 15px 0;
+  font-family: monospace;
+}
+
+.timer-controls button {
+  margin: 5px;
+  padding: 8px 15px;
+  background: #6A5ACD;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.timer-controls button:hover {
+  background: #5A3AA3;
+}
+
+/* High contrast mode adjustments */
+.high-contrast .timer-container {
+  background: #000;
+  border: 1px solid #fff;
+}
+
+.high-contrast .timer-display {
+  color: #fff;
+}
+
+/* Large text mode adjustments */
+.large-text .timer-display {
+  font-size: 48px;
+}
+
+.large-text .timer-controls button {
+  font-size: 20px;
+  padding: 12px 24px;
+}
+
+/* Accessibility Feature Styles */
+.high-contrast {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+.high-contrast .hero,
+.high-contrast .cta,
+.high-contrast .action-page,
+.high-contrast .activity-prompt {
+  background: #000 !important;
+}
+
+.high-contrast .hero h1,
+.high-contrast .subtitle,
+.high-contrast .about-text,
+.high-contrast .skillhub-text,
+.high-contrast .cta h2,
+.high-contrast .cta p,
+.high-contrast .action-page h1,
+.high-contrast .action-page p,
+.high-contrast .activity-list h3,
+.high-contrast .tips-list h3,
+.high-contrast .activity-list li,
+.high-contrast .tips-list li,
+.high-contrast .activity-prompt h3,
+.high-contrast .activity-prompt p {
+  color: #fff !important;
+}
+
+.high-contrast .card {
+  background: #333 !important;
+  color: #fff !important;
+}
+
+.high-contrast .card p {
+  color: #ccc !important;
+}
+
+.high-contrast .accessibility {
+  background: #222 !important;
+}
+
+.high-contrast .search-bar input {
+  background: #333 !important;
+  color: #fff !important;
+  border: 1px solid #fff !important;
+}
+
+.high-contrast .search-bar button,
+.high-contrast .cta-button,
+.high-contrast .back-button,
+.high-contrast .activity-button,
+.high-contrast .activity-prompt .close-button {
+  background: #fff !important;
+  color: #000 !important;
+}
+
+.high-contrast .features button {
+  background: #555 !important;
+  color: #fff !important;
+}
+
+.high-contrast .features button.recommended {
+  background: #fff !important;
+  color: #000 !important;
+}
+
+/* Large Text Mode */
+.large-text {
+  font-size: 1.4em !important;
+}
+
+.large-text .hero h1 {
+  font-size: 50px !important;
+}
+
+.large-text .subtitle {
+  font-size: 26px !important;
+}
+
+.large-text .card h3 {
+  font-size: 26px !important;
+}
+
+.large-text .card p {
+  font-size: 18px !important;
+}
+
+.large-text .cta h2 {
+  font-size: 36px !important;
+}
+
+.large-text .cta p {
+  font-size: 20px !important;
+}
+
+.large-text .action-page h1 {
+  font-size: 42px !important;
+}
+
+.large-text .action-page p {
+  font-size: 20px !important;
+}
+
+.large-text .activity-list h3,
+.large-text .tips-list h3,
+.large-text .activity-prompt h3 {
+  font-size: 30px !important;
+}
+
+.large-text .activity-list li,
+.large-text .tips-list li,
+.large-text .activity-prompt p {
+  font-size: 20px !important;
+}
+
+/* Simple Mode */
+.simple-mode .hero::before,
+.simple-mode .floating-circle,
+.simple-mode .cta::before,
+.simple-mode .cta::after {
+  display: none !important;
+}
+
+.simple-mode .hero,
+.simple-mode .cta,
+.simple-mode .action-page,
+.simple-mode .activity-prompt {
+  background: #f0f8ff !important;
+}
+
+.simple-mode .hero h1,
+.simple-mode .subtitle,
+.simple-mode .about-text,
+.simple-mode .skillhub-text,
+.simple-mode .cta h2,
+.simple-mode .cta p,
+.simple-mode .action-page h1,
+.simple-mode .action-page p,
+.simple-mode .activity-list h3,
+.simple-mode .tips-list h3,
+.simple-mode .activity-list li,
+.simple-mode .tips-list li,
+.simple-mode .activity-prompt h3,
+.simple-mode .activity-prompt p {
+  color: #000 !important;
+}
+
+.simple-mode .category-grid,
+.simple-mode .skills-grid {
+  grid-template-columns: 1fr !important;
+}

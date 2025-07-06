@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillHub</title>
+    <link rel="stylesheet" href="../public/css/skills_category.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">SkillHub</div>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">How it Works</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Community</a></li>
+            <li><a href="#">Sponsor</a></li>
+            <li><a href="#">About Us</a></li>
+        </ul>
+        <div class="user-icon"></div>
+    </nav>
+
+    <section class="hero">
+        <h1>Discover Skills Near You</h1>
+        <p>Find the perfect teacher for any skill you want to learn in your neighborhood</p>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search for skills or teachers...">
+            <span class="search-icon">🔍</span>
+        </div>
+        <div class="floating-circle floating-circle-1"></div>
+        <div class="floating-circle floating-circle-2"></div>
+        <div class="floating-circle floating-circle-3"></div>
+        <div class="floating-circle floating-circle-4"></div>
+        <div class="floating-circle floating-circle-5"></div>
+        <div class="floating-circle floating-circle-6"></div>
+        <div class="floating-circle floating-circle-7"></div>
+        <div class="floating-circle floating-circle-8"></div>
+    </section>
+
+    <div class="container">
+        <div class="filters">
+            <div class="filter-header">Filters</div>
+            <div class="filter-group">
+                <label><span class="filter-icon">📍</span>Location</label>
+                <select id="locationFilter">
+                    <option value="all">All Locations</option>
+                    <option value="1mile">Within 1 mile</option>
+                    <option value="3miles">Within 3 miles</option>
+                    <option value="5miles">Within 5 miles</option>
+                    <option value="10miles">Within 10 miles</option>
+                    <option value="city">Anywhere in City</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label><span class="filter-icon">💰</span>Price Range</label>
+                <div class="price-range">
+                    <select id="priceFilterMin">
+                        <option value="0">0</option>
+                        <option value="500">500</option>
+                        <option value="1000">1000</option>
+                        <option value="1500">1500</option>
+                    </select>
+                    -
+                    <select id="priceFilterMax">
+                        <option value="9999">No Max</option>
+                        <option value="500">500</option>
+                        <option value="1000">1000</option>
+                        <option value="1500">1500</option>
+                        <option value="2000">2000</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label><span class="filter-icon">📅</span>Availability</label>
+                <select id="availabilityFilter">
+                    <option value="all">Any time</option>
+                    <option value="weekdays">Weekdays</option>
+                    <option value="weekends">Weekends</option>
+                    <option value="morning">Morning</option>
+                    <option value="afternoon">Afternoon</option>
+                    <option value="evening">Evening</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label><span class="filter-icon">⭐</span>Category Level</label>
+                <div class="checkbox-buttons">
+                    <input type="checkbox" id="beginner" name="level" value="beginner">
+                    <label class="checkbox-btn" for="beginner">Beginner-friendly</label>
+                    <input type="checkbox" id="intermediate" name="level" value="intermediate">
+                    <label class="checkbox-btn" for="intermediate">Intermediate</label>
+                    <input type="checkbox" id="advanced" name="level" value="advanced">
+                    <label class="checkbox-btn" for="advanced">Advanced/Expert</label>
+                    <input type="checkbox" id="professional" name="level" value="professional">
+                    <label class="checkbox-btn" for="professional">Professional</label>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label><span class="filter-icon">👥</span>Lesson Type</label>
+                <div class="checkbox-buttons">
+                    <input type="checkbox" id="individual" name="lesson" value="individual">
+                    <label class="checkbox-btn" for="individual">Individual lessons</label>
+                    <input type="checkbox" id="group" name="lesson" value="group">
+                    <label class="checkbox-btn" for="group">Group lessons</label>
+                    <input type="checkbox" id="workshops" name="lesson" value="workshops">
+                    <label class="checkbox-btn" for="workshops">Workshops</label>
+                </div>
+            </div>
+            <button class="clear-btn" id="clearFilters">Clear All Filters</button>
+            <button class="clear-btn" style="background-color: #28a745; color: white;">Apply Filters</button>
+        </div>
+
+        <div class="categories">
+            <div class="categories-header">
+                <div class="skills-count">1,247 skills available in your area</div>
+                <div class="sort-options">
+                    <span>Sort by:</span>
+                    <select id="sortFilter">
+                        <option value="Most Popular">Most Popular</option>
+                        <option value="Alphabetical">Alphabetical</option>
+                        <option value="Nearest First">Nearest First</option>
+                        <option value="Price: Low to High">Price: Low to High</option>
+                        <option value="Price: High to Low">Price: High to Low</option>
+                        <option value="Highest Rated">Highest Rated</option>
+                        <option value="Most Recent">Most Recent</option>
+                    </select>
+                </div>
+            </div>
+            <div class="role-buttons">
+                <button class="role-btn" data-role="categories">Categories</button>
+                <button class="role-btn" data-role="teachers">Teachers</button>
+            </div>
+            <h3>Skill Categories</h3>
+            <div class="category-grid" id="categoryGrid">
+                <div class="category-card" data-name="Arts & Crafts" data-location="city" data-price="1000" data-availability="weekdays,weekends,morning,afternoon" data-level="beginner,intermediate,advanced" data-lesson="individual,group,workshops" data-teachers="156">
+                    <img src="../public/images/arts.png" alt="Arts & Crafts">
+                    <h4>Arts & Crafts</h4>
+                    <p>156 teachers available</p>
+                    <div class="sub-subjects">
+                        <p>Painting, Pottery, Jewelry Making, Drawing, Sculpture, Photography</p>
+                    </div>
+                    <button class="view-teachers-btn" onclick="viewTeachers('Arts & Crafts')">View Teachers</button>
+                </div>
+                <div class="category-card" data-name="Music & Performance" data-location="5miles" data-price="1500" data-availability="weekends,afternoon,evening" data-level="beginner,intermediate,advanced,professional" data-lesson="individual,group" data-teachers="203">
+                    <img src="../public/images/music.png" alt="Music & Performance">
+                    <h4>Music & Performance</h4>
+                    <p>203 teachers available</p>
+                    <div class="sub-subjects">
+                        <p>Guitar, Piano, Dance, Singing, Violin, Dramaordre
+
+                    </div>
+                    <button class="view-teachers-btn" onclick="viewTeachers('Music & Performance')">View Teachers</button>
+                </div>
+                <div class="category-card" data-name="Languages" data-location="10miles" data-price="800" data-availability="weekdays,morning,afternoon" data-level="beginner,intermediate" data-lesson="individual,group" data-teachers="189">
+                    <img src="../public/images/languages.png" alt="Languages">
+                    <h4>Languages</h4>
+                    <p>189 teachers available</p>
+                    <div class="sub-subjects">
+                        <p>Conversational Practice, Writing, Grammar, Cultural Exchange</p>
+                    </div>
+                    <button class="view-teachers-btn" onclick="viewTeachers('Languages')">View Teachers</button>
+                </div>
+                <div class="category-card" data-name="Technology" data-location="city" data-price="1200" data-availability="weekdays,evening" data-level="beginner,intermediate" data-lesson="group,workshops" data-teachers="134">
+                    <img src="../public/images/technology.png" alt="Technology">
+                    <h4>Technology</h4>
+                    <p>134 teachers available</p>
+                    <div class="sub-subjects">
+                        <p>Computer Basics, Mobile Apps, Digital Literacy</p>
+                    </div>
+                    <button class="view-teachers-btn" onclick="viewTeachers('Technology')">View Teachers</button>
+                </div>
+                <div class="category-card" data-name="Cooking & Culinary" data-location="3miles" data-price="900" data-availability="weekends,morning" data-level="beginner,intermediate,advanced" data-lesson="group,workshops" data-teachers="167">
+                    <img src="../public/images/cooking.png" alt="Cooking & Culinary">
+                    <h4>Cooking & Culinary</h4>
+                    <p>167 teachers available</p>
+                    <div class="sub-subjects">
+                        <p>Traditional Cuisines, Baking, Nutrition, Food Safety, Wine Pairing</p>
+                    </div>
+                    <button class="view-teachers-btn" onclick="viewTeachers('Cooking & Culinary')">View Teachers</button>
+                </div>
+                <div class="category-card" data-name="Home & Garden" data-location="5miles" data-price="700" data-availability="weekdays,afternoon" data-level="beginner,intermediate" data-lesson="individual,workshops" data-teachers="98">
+                    <img src="../public/images/home.png" alt="Home & Garden">
+                    <h4>Home & Garden</h4>
+                    <p>98 teachers available</p>
+                    <div class="sub-subjects">
+                        <p>Gardening, Home Repair, Organization, Interior Design</p>
+                    </div>
+                    <button class="view-teachers-btn" onclick="viewTeachers('Home & Garden')">View Teachers</button>
+                </div>
+                <div class="category-card" data-name="Health & Wellness" data-location="city" data-price="1100" data-availability="weekdays,weekends,morning" data-level="beginner,intermediate,advanced" data-lesson="group,workshops" data-teachers="142">
+                    <img src="../public/images/health.png" alt="Health & Wellness">
+                    <h4>Health & Wellness</h4>
+                    <p>142 teachers available</p>
+                    <div class="sub-subjects">
+                        <p>Yoga, Meditation, Nutrition, Mental Health</p>
+                    </div>
+                    <button class="view-teachers-btn" onclick="viewTeachers('Health & Wellness')">View Teachers</button>
+                </div>
+                <div class="category-card" data-name="Professional Skills" data-location="10miles" data-price="1300" data-availability="weekdays,evening" data-level="intermediate,advanced,professional" data-lesson="individual,group" data-teachers="87">
+                    <img src="../public/images/professional.png" alt="Professional Skills">
+                    <h4>Professional Skills</h4>
+                    <p>87 teachers available</p>
+                    <div class="sub-subjects">
+                        <p>Resume Writing, Interview Prep, Business Skills, Leadership</p>
+                    </div>
+                    <button class="view-teachers-btn" onclick="viewTeachers('Professional Skills')">View Teachers</button>
+                </div>
+                <div class="category-card" data-name="Traditional Crafts" data-location="1mile" data-price="600" data-availability="weekends,afternoon" data-level="beginner,intermediate" data-lesson="workshops" data-teachers="71">
+                    <img src="../public/images/traditional.png" alt="Traditional Crafts">
+                    <h4>Traditional Crafts</h4>
+                    <p>71 teachers available</p>
+                    <div class="sub-subjects">
+                        <p>Weaving, Carpentry, Traditional Medicine, Folk Arts</p>
+                    </div>
+                    <button class="view-teachers-btn" onclick="viewTeachers('Traditional Crafts')">View Teachers</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../public/js/skills_category.js"></script>
+</body>
+</html>

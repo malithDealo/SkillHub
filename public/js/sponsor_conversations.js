@@ -35,8 +35,46 @@ function renderTimetable() {
     });
 }
 
+function openModal(modalId) {
+    document.getElementById(modalId).classList.remove('hidden');
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).classList.add('hidden');
+    const form = document.getElementById(modalId)?.querySelector('form');
+    if (form) form.reset();
+}
+
+function handleSponsorRequestFormSubmit(event) {
+    event.preventDefault();
+    const name = document.getElementById('sponsorName').value;
+    const message = document.getElementById('sponsorMessage').value;
+
+    axios.post('/api/sponsor/requests', { name, message })
+        .then(response => {
+            const request = response.data;
+            const conversationsDiv = document.getElementById('sponsor-conversations');
+            const requestDiv = document.createElement('div');
+            requestDiv.className = 'community-post';
+            requestDiv.innerHTML = `
+                <p class="font-semibold">${request.name}</p>
+                <p class="text-sm">Last message: "${request.message}"</p>
+                <a href="#" class="text-blue-500">Reply</a>
+            `;
+            conversationsDiv.appendChild(requestDiv);
+            closeModal('sponsorRequestModal');
+        })
+        .catch(error => {
+            console.error('Error sending sponsor request:', error);
+            alert('Failed to send sponsor request. Please try again.');
+        });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     renderTimetable();
+
+    const sponsorRequestForm = document.getElementById('sponsorRequestForm');
+    if (sponsorRequestForm) sponsorRequestForm.addEventListener('submit', handleSponsorRequestFormSubmit);
 
     document.querySelectorAll('.filter-checkbox input').forEach(checkbox => {
         checkbox.addEventListener('change', () => {

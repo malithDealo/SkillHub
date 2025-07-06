@@ -1,0 +1,125 @@
+<DOCUMENT filename="aboutus.html">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About SkillHub</title>
+    <link rel="stylesheet" href="../public/css/aboutus.css">
+</head>
+<body>
+
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <section class="hero">
+        <div class="floating-circle floating-circle-1"></div>
+            <div class="floating-circle floating-circle-2"></div>
+            <div class="floating-circle floating-circle-3"></div>
+            <div class="floating-circle floating-circle-4"></div>
+            <div class="floating-circle floating-circle-5"></div>
+            <div class="floating-circle floating-circle-6"></div>
+            <div class="floating-circle floating-circle-7"></div>
+            <div class="floating-circle floating-circle-8"></div>
+        <div class="container">
+            <h1 class="about-text">About <span class="skillhub-text">SkillHub</span></h1>
+            <p class="subtitle">Connecting communities through the power of shared knowledge and meaningful relationships.</p>
+        </div>
+    </section>
+
+    <section class="story">
+        <div class="container">
+            <h2>Our Story</h2>
+            <p>“SkillHub was born from a simple observation: every neighborhood is filled with talented people eager to share their knowledge and others wanting to learn. We’re bridging the gap between traditional education and community connection.”</p>
+        </div>
+    </section>
+
+    <section class="mission">
+        <h2>Our Mission</h2>
+        <div class="mission-content">
+            <div class="icon"><img src="mission-icon.png" alt="Mission Icon"></div>
+            <p>To create vibrant learning communities where knowledge flows freely, neighbors connect meaningfully, and everyone has access to personalized, affordable education.</p>
+        </div>
+    </section>
+
+    <section class="different">
+        <div class="container">
+            <h2>What Makes Us Different</h2>
+            <p class="different-subtitle">Our unique approach sets us apart in the world of community learning</p>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🏡</div>
+                    <h3>Community-First Approach</h3>
+                    <p>We prioritize neighborhood connections over global reach, fostering genuine local relationships that strengthen communities and create lasting bonds between learners and teachers.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Skill Exchange Economy</h3>
+                    <p>Learn through monetary payment or skill trading, creating flexible opportunities for knowledge exchange that work for every budget and situation.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">✅</div>
+                    <h3>Safety & Verification</h3>
+                    <p>Comprehensive background checks and monitoring systems ensure every interaction is safe and trustworthy, giving parents and learners complete peace of mind.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Inclusive Design</h3>
+                    <p>Built with accessibility and language diversity in mind, our platform welcomes learners from all backgrounds and ensures everyone can participate fully in our community.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team">
+        <div class="container">
+            <h2>Meet Our Team</h2>
+            <p>Passionate educators, technologists, and community builders united by our vision for neighborhood-based learning and meaningful human connections.</p>
+            <div class="team-members">
+                <div class="member">
+                    <div class="avatar">M</div>
+                    <h3>Co-Founder & CEO</h3>
+                    <p>An educator with 15 years in community development. Believes every neighborhood has untapped teaching and learning potential.</p>
+                </div>
+                <div class="member">
+                    <div class="avatar">C</div>
+                    <h3>Co-Founder & CTO</h3>
+                    <p>Tech innovator focused on building inclusive platforms. Passionate about making technology accessible to all communities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Start Your SkillHub Journey?</h2>
+            <p>Join thousands of learners and teachers in your neighborhood. Whether you're looking to master a new skill or share your expertise, your community is waiting.</p>
+            <button class="cta-button get-started">Get Started Today</button>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script src="../public/js/aboutus.js"></script>
+    <script>
+        // Load Header
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+
+        // Load Footer
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+    
+</body>
+</html>
+</DOCUMENT>
