@@ -1,1119 +1,382 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TeacherPro - Event Organization</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-
-        .dashboard-container {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        .sidebar {
-            width: 280px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-right: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 2rem 0;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-        }
-
-        .logo {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding: 0 2rem;
-        }
-
-        .logo h1 {
-            color: #764ba2;
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .welcome-text {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .nav-menu {
-            list-style: none;
-            padding: 0 1rem;
-        }
-
-        .nav-item {
-            margin-bottom: 0.5rem;
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-            color: #555;
-            text-decoration: none;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link:hover {
-            background: rgba(118, 75, 162, 0.1);
-            color: #764ba2;
-        }
-
-        .nav-link.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-        }
-
-        .nav-link i {
-            margin-right: 1rem;
-            width: 20px;
-        }
-
-        .main-content {
-            margin-left: 280px;
-            flex: 1;
-            padding: 2rem;
-        }
-
-        .page-header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .page-header h1 {
-            color: #333;
-            font-size: 2.5rem;
-        }
-
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-        }
-
-        .btn-secondary {
-            background: rgba(102, 126, 234, 0.1);
-            color: #667eea;
-        }
-
-        .btn-success {
-            background: rgba(34, 197, 94, 0.1);
-            color: #22c55e;
-        }
-
-        .btn-warning {
-            background: rgba(251, 191, 36, 0.1);
-            color: #fbbf24;
-        }
-
-        .btn-danger {
-            background: rgba(239, 68, 68, 0.1);
-            color: #ef4444;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .events-layout {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
-        }
-
-        .events-main {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .events-filters {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 1.5rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .filter-tabs {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .filter-tab {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            background: rgba(102, 126, 234, 0.1);
-            color: #667eea;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .filter-tab.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-        }
-
-        .event-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .event-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .event-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-        }
-
-        .event-content {
-            padding: 2rem;
-        }
-
-        .event-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-        }
-
-        .event-title {
-            color: #333;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .event-date {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            text-align: center;
-            min-width: 100px;
-        }
-
-        .event-details {
-            margin-bottom: 1.5rem;
-        }
-
-        .event-detail-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 0.75rem;
-            color: #666;
-        }
-
-        .event-detail-item i {
-            color: #667eea;
-            width: 16px;
-        }
-
-        .event-description {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .event-stats {
-            display: flex;
-            gap: 2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .event-stat {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #764ba2;
-        }
-
-        .stat-label {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .event-actions {
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-
-        .event-status {
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .status-upcoming {
-            background: rgba(59, 130, 246, 0.1);
-            color: #3b82f6;
-        }
-
-        .status-ongoing {
-            background: rgba(34, 197, 94, 0.1);
-            color: #22c55e;
-        }
-
-        .status-completed {
-            background: rgba(107, 114, 128, 0.1);
-            color: #6b7280;
-        }
-
-        .status-cancelled {
-            background: rgba(239, 68, 68, 0.1);
-            color: #ef4444;
-        }
-
-        .events-sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .sidebar-widget {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .widget-title {
-            color: #333;
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .calendar-mini {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 0.25rem;
-            text-align: center;
-        }
-
-        .calendar-day {
-            padding: 0.5rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-
-        .calendar-day:hover {
-            background: rgba(102, 126, 234, 0.1);
-        }
-
-        .calendar-day.today {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-        }
-
-        .calendar-day.has-event {
-            background: rgba(34, 197, 94, 0.1);
-            color: #22c55e;
-            font-weight: bold;
-        }
-
-        .upcoming-event {
-            padding: 1rem;
-            margin-bottom: 1rem;
-            background: rgba(102, 126, 234, 0.05);
-            border-radius: 10px;
-            border-left: 4px solid #667eea;
-        }
-
-        .upcoming-event-title {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
-
-        .upcoming-event-date {
-            color: #667eea;
-            font-size: 0.9rem;
-        }
-
-        .quick-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-
-        .quick-stat {
-            text-align: center;
-            padding: 1rem;
-            background: rgba(102, 126, 234, 0.05);
-            border-radius: 10px;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-        }
-
-        .modal-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            max-width: 600px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .modal-header h3 {
-            color: #333;
-            font-size: 1.5rem;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #666;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #333;
-            font-weight: 600;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-        }
-
-        .form-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: flex-end;
-            margin-top: 2rem;
-        }
-
-        .attendee-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.75rem;
-            margin-bottom: 0.5rem;
-            background: rgba(102, 126, 234, 0.05);
-            border-radius: 10px;
-        }
-
-        .attendee-avatar {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .attendee-info {
-            flex: 1;
-        }
-
-        .attendee-name {
-            font-weight: 600;
-            color: #333;
-        }
-
-        .attendee-email {
-            color: #666;
-            font-size: 0.9rem;
-        }
-    </style>
+    <link rel="stylesheet" href="css/event_organization.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js"></script>
 </head>
-
 <body>
     <div class="dashboard-container">
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="logo">
                 <h1>TeacherPro</h1>
-                <p class="welcome-text">Welcome back, Dr. Smith!</p>
+                <p>Welcome back, Dr. Smith!</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="dashboard_overview.html"><i class="fas fa-home"></i> Dashboard Overview</a></li>
+                    <li><a href="class_management.html"><i class="fas fa-chalkboard"></i> Class Management</a></li>
+                    <li><a href="schedule & Availability.html"><i class="fas fa-calendar-alt"></i> Schedule & Availability</a></li>
+                    <li><a href="earnings & analytics.html"><i class="fas fa-chart-line"></i> Earnings & Analytics</a></li>
+                    <li><a href="profile_settings.html"><i class="fas fa-user-cog"></i> Profile Settings</a></li>
+                    <li><a href="teachers_community.html"><i class="fas fa-users"></i> Teacher Community</a></li>
+                    <li><a href="students.html"><i class="fas fa-user-graduate"></i> Student Management</a></li>
+                    <li><a href="event_organization.html" class="active"><i class="fas fa-calendar-check"></i> Event Organization</a></li>
+                    <li><a href="sponsor_conversations.html"><i class="fas fa-handshake"></i> Sponsor Management</a></li>
+                </ul>
+                <div class="filter-section">
+                    <h3><i class="fas fa-filter"></i> Filters</h3>
+                    <div class="filter-checkbox">
+                        <input type="checkbox" id="filter-workshop" name="category">
+                        <label for="filter-workshop">Workshop</label>
+                    </div>
+                    <div class="filter-checkbox">
+                        <input type="checkbox" id="filter-seminar" name="category">
+                        <label for="filter-seminar">Seminar</label>
+                    </div>
+                    <div class="filter-checkbox">
+                        <input type="checkbox" id="filter-conference" name="category">
+                        <label for="filter-conference">Conference</label>
+                    </div>
+                    <div class="filter-checkbox">
+                        <input type="checkbox" id="filter-study-group" name="category">
+                        <label for="filter-study-group">Study Group</label>
+                    </div>
+                </div>
+                <a href="#" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </div>
 
-            <nav>
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a href="sponsors.html" class="nav-link">
-                            <i class="fas fa-handshake"></i>
-                            Sponsor Management
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-
-        <!-- Main Content -->
-        <div class="main-content">
-            <header class="page-header">
-                <div>
-                    <h1>Event Organization</h1>
+            <!-- Main Content -->
+            <div class="main-content">
+                <header>
+                    <h2>Event Organization</h2>
                     <p>Create and manage educational events, workshops, and seminars</p>
-                </div>
-                <button class="btn btn-primary" onclick="openModal('createEventModal')">
-                    <i class="fas fa-plus"></i> Create Event
-                </button>
-            </header>
+                    <button class="btn primary" onclick="openModal('createEventModal')">
+                        <i class="fas fa-plus"></i> Create Event
+                    </button>
+                </header>
 
-            <div class="events-layout">
-                <!-- Main Events Area -->
-                <div class="events-main">
-                    <!-- Filters -->
-                    <div class="events-filters">
-                        <div class="filter-tabs">
+                <div class="events-layout">
+                    <!-- Main Events Area -->
+                    <div class="events-main">
+                        <div class="events-filters">
                             <button class="filter-tab active">All Events</button>
                             <button class="filter-tab">Upcoming</button>
                             <button class="filter-tab">Ongoing</button>
                             <button class="filter-tab">Completed</button>
+                            <select class="filter-tab">
+                                <option>All Categories</option>
+                                <option>Workshop</option>
+                                <option>Seminar</option>
+                                <option>Conference</option>
+                                <option>Study Group</option>
+                            </select>
                         </div>
-                        <select class="filter-tab" style="border: none;">
-                            <option>All Categories</option>
-                            <option>Workshop</option>
-                            <option>Seminar</option>
-                            <option>Conference</option>
-                            <option>Study Group</option>
-                        </select>
-                    </div>
 
-                    <!-- Event 1 - Upcoming Workshop -->
-                    <div class="event-card">
-                        <div class="event-image"
-                            style="background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
-                            <i class="fas fa-microscope" style="font-size: 3rem;"></i>
+                        <div id="event-list">
+                            <!-- Event 1 - Upcoming Workshop -->
+                            <div class="event-card">
+                                <div class="event-content">
+                                    <div class="event-header">
+                                        <div>
+                                            <h3 class="event-title">Advanced Chemistry Workshop</h3>
+                                            <span class="event-status status-upcoming">Upcoming</span>
+                                        </div>
+                                        <div class="event-date">
+                                            <div>Jul</div>
+                                            <div>15</div>
+                                        </div>
+                                    </div>
+                                    <div class="event-details">
+                                        <div class="event-detail-item"><i class="fas fa-clock"></i> 2:00 PM - 5:00 PM</div>
+                                        <div class="event-detail-item"><i class="fas fa-map-marker-alt"></i> Science Lab Building, Room 301</div>
+                                        <div class="event-detail-item"><i class="fas fa-users"></i> Max 25 participants</div>
+                                        <div class="event-detail-item"><i class="fas fa-tag"></i> Workshop • Grade 12 & 13</div>
+                                    </div>
+                                    <p class="event-description">
+                                        An intensive hands-on workshop covering advanced organic chemistry concepts, including reaction mechanisms, spectroscopy, and laboratory techniques. Perfect preparation for university-level chemistry.
+                                    </p>
+                                    <div class="event-stats">
+                                        <div class="event-stat"><div class="stat-number">18</div><div class="stat-label">Registered</div></div>
+                                        <div class="event-stat"><div class="stat-number">7</div><div class="stat-label">Available</div></div>
+                                        <div class="event-stat"><div class="stat-number">$25</div><div class="stat-label">Fee</div></div>
+                                    </div>
+                                    <div class="event-actions">
+                                        <button class="btn primary"><i class="fas fa-edit"></i> Edit Event</button>
+                                        <button class="btn btn-secondary"><i class="fas fa-users"></i> View Attendees</button>
+                                        <button class="btn btn-success"><i class="fas fa-envelope"></i> Send Update</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Event 2 - Ongoing Seminar -->
+                            <div class="event-card">
+                                <div class="event-content">
+                                    <div class="event-header">
+                                        <div>
+                                            <h3 class="event-title">Mathematics Olympiad Preparation</h3>
+                                            <span class="event-status status-ongoing">Ongoing</span>
+                                        </div>
+                                        <div class="event-date">
+                                            <div>Jul</div>
+                                            <div>6-20</div>
+                                            </div>
+                                    </div>
+                                    <div class="event-details">
+                                        <div class="event-detail-item"><i class="fas fa-clock"></i> Daily 4:00 PM - 6:00 PM</div>
+                                        <div class="event-detail-item"><i class="fas fa-map-marker-alt"></i> Online via Zoom</div>
+                                        <div class="event-detail-item"><i class="fas fa-users"></i> 15 participants</div>
+                                        <div class="event-detail-item"><i class="fas fa-tag"></i> Intensive Course • Advanced Level</div>
+                                    </div>
+                                    <p class="event-description">
+                                        A comprehensive 2-week intensive course designed to prepare talented students for mathematics competitions. Covers problem-solving strategies, advanced topics, and practice tests.
+                                    </p>
+                                    <div class="event-stats">
+                                        <div class="event-stat"><div class="stat-number">15</div><div class="stat-label">Enrolled</div></div>
+                                        <div class="event-stat"><div class="stat-number">8</div><div class="stat-label">Days Left</div></div>
+                                        <div class="event-stat"><div class="stat-number">$150</div><div class="stat-label">Total Fee</div></divOpenArtifact> </div>
+                                    <div class="event-actions">
+                                        <button class="btn btn-success"><i class="fas fa-video"></i> Join Session</button>
+                                        <button class="btn btn-secondary"><i class="fas fa-users"></i> Manage Students</button>
+                                        <button class="btn btn-warning"><i class="fas fa-chart-line"></i> Progress Report</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Event 3 - Completed Conference -->
+                            <div class="event-card">
+                                <div class="event-content">
+                                    <div class="event-header">
+                                        <div>
+                                            <h3 class="event-title">STEM Education Conference 2025</h3>
+                                            <span class="event-status status-completed">Completed</span>
+                                        </div>
+                                        <div class="event-date">
+                                            <div>Jun</div>
+                                            <div>28</div>
+                                        </div>
+                                    </div>
+                                    <div class="event-details">
+                                        <div class="event-detail-item"><i class="fas fa-clock"></i> 9:00 AM - 5:00 PM</div>
+                                        <div class="event-detail-item"><i class="fas fa-map-marker-alt"></i> Convention Center, Main Hall</div>
+                                        <div class="event-detail-item"><i class="fas fa-users"></i> 120 attendees</div>
+                                        <div class="event-detail-item"><i class="fas fa-tag"></i> Conference • Professional Development</div>
+                                    </div>
+                                    <p class="event-description">
+                                        A full-day conference bringing together educators, researchers, and industry professionals to discuss the latest trends and innovations in STEM education.
+                                    </p>
+                                    <div class="event-stats">
+                                        <div class="event-stat"><div class="stat-number">120</div><div class="stat-label">Attended</div></div>
+                                        <div class="event-stat"><div class="stat-number">4.8</div><div class="stat-label">Rating</div></div>
+                                        <div class="event-stat"><div class="stat-number">85%</div><div class="stat-label">Satisfaction</div></div>
+                                    </div>
+                                    <div class="event-actions">
+                                        <button class="btn btn-secondary"><i class="fas fa-chart-bar"></i> View Report</button>
+                                        <button class="btn btn-secondary"><i class="fas fa-star"></i> Reviews</button>
+                                        <button class="btn btn-success"><i class="fas fa-copy"></i> Duplicate Event</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="event-content">
-                            <div class="event-header">
-                                <div>
-                                    <h3 class="event-title">Advanced Chemistry Workshop</h3>
-                                    <span class="event-status status-upcoming">Upcoming</span>
-                                </div>
-                                <div class="event-date">
-                                    <div>Jul</div>
-                                    <div style="font-size: 1.2rem; font-weight: bold;">15</div>
-                                </div>
-                            </div>
 
-                            <div class="event-details">
-                                <div class="event-detail-item">
-                                    <i class="fas fa-clock"></i>
-                                    <span>2:00 PM - 5:00 PM</span>
-                                </div>
-                                <div class="event-detail-item">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span>Science Lab Building, Room 301</span>
-                                </div>
-                                <div class="event-detail-item">
-                                    <i class="fas fa-users"></i>
-                                    <span>Max 25 participants</span>
-                                </div>
-                                <div class="event-detail-item">
-                                    <i class="fas fa-tag"></i>
-                                    <span>Workshop • Grade 12 & 13</span>
-                                </div>
-                            </div>
-
-                            <p class="event-description">
-                                An intensive hands-on workshop covering advanced organic chemistry concepts, including
-                                reaction mechanisms, spectroscopy, and laboratory techniques. Perfect preparation for
-                                university-level chemistry.
-                            </p>
-
-                            <div class="event-stats">
-                                <div class="event-stat">
-                                    <div class="stat-number">18</div>
-                                    <div class="stat-label">Registered</div>
-                                </div>
-                                <div class="event-stat">
-                                    <div class="stat-number">7</div>
-                                    <div class="stat-label">Available</div>
-                                </div>
-                                <div class="event-stat">
-                                    <div class="stat-number">$25</div>
-                                    <div class="stat-label">Fee</div>
-                                </div>
-                            </div>
-
-                            <div class="event-actions">
-                                <button class="btn btn-primary">
-                                    <i class="fas fa-edit"></i> Edit Event
-                                </button>
-                                <button class="btn btn-secondary">
-                                    <i class="fas fa-users"></i> View Attendees
-                                </button>
-                                <button class="btn btn-success">
-                                    <i class="fas fa-envelope"></i> Send Update
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Event 2 - Ongoing Seminar -->
-                    <div class="event-card">
-                        <div class="event-image"
-                            style="background: linear-gradient(135deg, #22c55e, #16a34a); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
-                            <i class="fas fa-chalkboard-teacher" style="font-size: 3rem;"></i>
-                        </div>
-                        <div class="event-content">
-                            <div class="event-header">
-                                <div>
-                                    <h3 class="event-title">Mathematics Olympiad Preparation</h3>
-                                    <span class="event-status status-ongoing">Ongoing</span>
-                                </div>
-                                <div class="event-date">
-                                    <div>Jul</div>
-                                    <div style="font-size: 1.2rem; font-weight: bold;">6-20</div>
-                                </div>
-                            </div>
-
-                            <div class="event-details">
-                                <div class="event-detail-item">
-                                    <i class="fas fa-clock"></i>
-                                    <span>Daily 4:00 PM - 6:00 PM</span>
-                                </div>
-                                <div class="event-detail-item">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span>Online via Zoom</span>
-                                </div>
-                                <div class="event-detail-item">
-                                    <i class="fas fa-users"></i>
-                                    <span>15 participants</span>
-                                </div>
-                                <div class="event-detail-item">
-                                    <i class="fas fa-tag"></i>
-                                    <span>Intensive Course • Advanced Level</span>
-                                </div>
-                            </div>
-
-                            <p class="event-description">
-                                A comprehensive 2-week intensive course designed to prepare talented students for
-                                mathematics competitions. Covers problem-solving strategies, advanced topics, and
-                                practice tests.
-                            </p>
-
-                            <div class="event-stats">
-                                <div class="event-stat">
-                                    <div class="stat-number">15</div>
-                                    <div class="stat-label">Enrolled</div>
-                                </div>
-                                <div class="event-stat">
-                                    <div class="stat-number">8</div>
-                                    <div class="stat-label">Days Left</div>
-                                </div>
-                                <div class="event-stat">
-                                    <div class="stat-number">$150</div>
-                                    <div class="stat-label">Total Fee</div>
-                                </div>
-                            </div>
-
-                            <div class="event-actions">
-                                <button class="btn btn-success">
-                                    <i class="fas fa-video"></i> Join Session
-                                </button>
-                                <button class="btn btn-secondary">
-                                    <i class="fas fa-users"></i> Manage Students
-                                </button>
-                                <button class="btn btn-warning">
-                                    <i class="fas fa-chart-line"></i> Progress Report
-                                </button>
-                            </div>
+                        <div class="timetable">
+                            <h3>Weekly Schedule</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Day</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="timetable-body"></tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <!-- Event 3 - Completed Conference -->
-                    <div class="event-card">
-                        <div class="event-image"
-                            style="background: linear-gradient(135deg, #6b7280, #4b5563); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
-                            <i class="fas fa-graduation-cap" style="font-size: 3rem;"></i>
-                        </div>
-                        <div class="event-content">
-                            <div class="event-header">
-                                <div>
-                                    <h3 class="event-title">STEM Education Conference 2025</h3>
-                                    <span class="event-status status-completed">Completed</span>
-                                </div>
-                                <div class="event-date">
-                                    <div>Jun</div>
-                                    <div style="font-size: 1.2rem; font-weight: bold;">28</div>
-                                </div>
+                    <!-- Sidebar Widgets -->
+                    <div class="events-sidebar">
+                        <div class="sidebar-widget">
+                            <h3 class="widget-title">Event Statistics</h3>
+                            <div class="quick-stats">
+                                <div class="quick-stat"><div class="stat-number">12</div><div class="stat-label">Total Events</div></div>
+                                <div class="quick-stat"><div class="stat-number">4</div><div class="stat-label">Upcoming</div></div>
+                                <div class="quick-stat"><div class="stat-number">2</div><div class="stat-label">Ongoing</div></div>
+                                <div class="quick-stat"><div class="stat-number">186</div><div class="stat-label">Total Attendees</div></div>
                             </div>
+                        </div>
 
-                            <div class="event-details">
-                                <div class="event-detail-item">
-                                    <i class="fas fa-clock"></i>
-                                    <span>9:00 AM - 5:00 PM</span>
+                        <div class="sidebar-widget">
+                            <h3 class="widget-title">July 2025</h3>
+                            <div class="calendar-mini">
+                                <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
+                                <div></div><div></div><div class="calendar-day">1</div><div class="calendar-day">2</div>
+                                <div class="calendar-day">3</div><div class="calendar-day">4</div><div class="calendar-day">5</div>
+                                <div class="calendar-day today">6</div><div class="calendar-day">7</div><div class="calendar-day">8</div>
+                                <div class="calendar-day">9</div><div class="calendar-day">10</div><div class="calendar-day">11</div>
+                                <div class="calendar-day">12</div><div class="calendar-day">13</div><div class="calendar-day">14</div>
+                                <div class="calendar-day has-event">15</div><div class="calendar-day">16</div><div class="calendar-day">17</div>
+                                <div class="calendar-day">18</div><div class="calendar-day">19</div><div class="calendar-day has-event">20</div>
+                                <div class="calendar-day">21</div><div class="calendar-day has-event">22</div><div class="calendar-day">23</div>
+                                <div class="calendar-day">24</div><div class="calendar-day">25</div><div class="calendar-day">26</div>
+                                <div class="calendar-day">27</div><div class="calendar-day has-event">28</div><div class="calendar-day">29</div>
+                                <div class="calendar-day">30</div><div class="calendar-day">31</div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <h3 class="widget-title">Upcoming Events</h3>
+                            <div class="upcoming-event">
+                                <div class="upcoming-event-title">Chemistry Workshop</div>
+                                <div class="upcoming-event-date">July 15, 2025 at 2:00 PM</div>
+                            </div>
+                            <div class="upcoming-event">
+                                <div class="upcoming-event-title">Physics Study Group</div>
+                                <div class="upcoming-event-date">July 20, 2025 at 4:00 PM</div>
+                            </div>
+                            <div class="upcoming-event">
+                                <div class="upcoming-event-title">Math Competition Prep</div>
+                                <div class="upcoming-event-date">July 22, 2025 at 10:00 AM</div>
+                            </div>
+                            <div class="upcoming-event">
+                                <div class="upcoming-event-title">Science Fair Planning</div>
+                                <div class="upcoming-event-date">July 28, 2025 at 3:00 PM</div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <h3 class="widget-title">Recent Registrations</h3>
+                            <div class="attendee-item">
+                                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b547?w=50&h=50&fit=crop&crop=face" alt="Emma" class="attendee-avatar">
+                                <div class="attendee-info">
+                                    <div class="attendee-name">Emma Johnson</div>
+                                    <div class="attendee-email">Chemistry Workshop</div>
                                 </div>
-                                <div class="event-detail-item">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span>Convention Center, Main Hall</span>
-                                </div>
-                                <div class="event-detail-item">
-                                    <i class="fas fa-users"></i>
-                                    <span>120 attendees</span>
-                                </div>
-                                <div class="event-detail-item">
-                                    <i class="fas fa-tag"></i>
-                                    <span>Conference • Professional Development</span>
+                            </div>
+                            <div class="attendee-item">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face" alt="Michael" class="attendee-avatar">
+                                <div class="attendee-info">
+                                    <div class="attendee-name">Michael Chen</div>
+                                    <div class="attendee-email">Math Olympiad Prep</div>
                                 </div>
                             </div>
-
-                            <p class="event-description">
-                                A full-day conference bringing together educators, researchers, and industry
-                                professionals to discuss the latest trends and innovations in STEM education.
-                            </p>
-
-                            <div class="event-stats">
-                                <div class="event-stat">
-                                    <div class="stat-number">120</div>
-                                    <div class="stat-label">Attended</div>
+                            <div class="attendee-item">
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop&crop=face" alt="Sarah" class="attendee-avatar">
+                                <div class="attendee-info">
+                                    <div class="attendee-name">Sarah Williams</div>
+                                    <div class="attendee-email">Chemistry Workshop</div>
                                 </div>
-                                <div class="event-stat">
-                                    <div class="stat-number">4.8</div>
-                                    <div class="stat-label">Rating</div>
-                                </div>
-                                <div class="event-stat">
-                                    <div class="stat-number">85%</div>
-                                    <div class="stat-label">Satisfaction</div>
-                                </div>
-                            </div>
-
-                            <div class="event-actions">
-                                <button class="btn btn-secondary">
-                                    <i class="fas fa-chart-bar"></i> View Report
-                                </button>
-                                <button class="btn btn-secondary">
-                                    <i class="fas fa-star"></i> Reviews
-                                </button>
-                                <button class="btn btn-success">
-                                    <i class="fas fa-copy"></i> Duplicate Event
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sidebar -->
-                <div class="events-sidebar">
-                    <!-- Quick Stats -->
-                    <div class="sidebar-widget">
-                        <h3 class="widget-title">Event Statistics</h3>
-                        <div class="quick-stats">
-                            <div class="quick-stat">
-                                <div class="stat-number">12</div>
-                                <div class="stat-label">Total Events</div>
-                            </div>
-                            <div class="quick-stat">
-                                <div class="stat-number">4</div>
-                                <div class="stat-label">Upcoming</div>
-                            </div>
-                            <div class="quick-stat">
-                                <div class="stat-number">2</div>
-                                <div class="stat-label">Ongoing</div>
-                            </div>
-                            <div class="quick-stat">
-                                <div class="stat-number">186</div>
-                                <div class="stat-label">Total Attendees</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Calendar -->
-                    <div class="sidebar-widget">
-                        <h3 class="widget-title">July 2025</h3>
-                        <div class="calendar-mini">
-                            <div style="font-weight: bold; color: #666;">S</div>
-                            <div style="font-weight: bold; color: #666;">M</div>
-                            <div style="font-weight: bold; color: #666;">T</div>
-                            <div style="font-weight: bold; color: #666;">W</div>
-                            <div style="font-weight: bold; color: #666;">T</div>
-                            <div style="font-weight: bold; color: #666;">F</div>
-                            <div style="font-weight: bold; color: #666;">S</div>
-
-                            <div class="calendar-day"></div>
-                            <div class="calendar-day"></div>
-                            <div class="calendar-day">1</div>
-                            <div class="calendar-day">2</div>
-                            <div class="calendar-day">3</div>
-                            <div class="calendar-day">4</div>
-                            <div class="calendar-day">5</div>
-                            <div class="calendar-day today">6</div>
-                            <div class="calendar-day">7</div>
-                            <div class="calendar-day">8</div>
-                            <div class="calendar-day">9</div>
-                            <div class="calendar-day">10</div>
-                            <div class="calendar-day">11</div>
-                            <div class="calendar-day">12</div>
-                            <div class="calendar-day">13</div>
-                            <div class="calendar-day">14</div>
-                            <div class="calendar-day has-event">15</div>
-                            <div class="calendar-day">16</div>
-                            <div class="calendar-day">17</div>
-                            <div class="calendar-day">18</div>
-                            <div class="calendar-day">19</div>
-                            <div class="calendar-day has-event">20</div>
-                            <div class="calendar-day">21</div>
-                            <div class="calendar-day has-event">22</div>
-                            <div class="calendar-day">23</div>
-                            <div class="calendar-day">24</div>
-                            <div class="calendar-day">25</div>
-                            <div class="calendar-day">26</div>
-                            <div class="calendar-day">27</div>
-                            <div class="calendar-day has-event">28</div>
-                            <div class="calendar-day">29</div>
-                            <div class="calendar-day">30</div>
-                            <div class="calendar-day">31</div>
-                        </div>
-                    </div>
-
-                    <!-- Upcoming Events -->
-                    <div class="sidebar-widget">
-                        <h3 class="widget-title">Upcoming Events</h3>
-                        <div class="upcoming-event">
-                            <div class="upcoming-event-title">Chemistry Workshop</div>
-                            <div class="upcoming-event-date">July 15, 2025 at 2:00 PM</div>
-                        </div>
-                        <div class="upcoming-event">
-                            <div class="upcoming-event-title">Physics Study Group</div>
-                            <div class="upcoming-event-date">July 20, 2025 at 4:00 PM</div>
-                        </div>
-                        <div class="upcoming-event">
-                            <div class="upcoming-event-title">Math Competition Prep</div>
-                            <div class="upcoming-event-date">July 22, 2025 at 10:00 AM</div>
-                        </div>
-                        <div class="upcoming-event">
-                            <div class="upcoming-event-title">Science Fair Planning</div>
-                            <div class="upcoming-event-date">July 28, 2025 at 3:00 PM</div>
-                        </div>
-                    </div>
-
-                    <!-- Recent Attendees -->
-                    <div class="sidebar-widget">
-                        <h3 class="widget-title">Recent Registrations</h3>
-                        <div class="attendee-item">
-                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b547?w=50&h=50&fit=crop&crop=face"
-                                alt="Emma" class="attendee-avatar">
-                            <div class="attendee-info">
-                                <div class="attendee-name">Emma Johnson</div>
-                                <div class="attendee-email">Chemistry Workshop</div>
-                            </div>
-                        </div>
-                        <div class="attendee-item">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face"
-                                alt="Michael" class="attendee-avatar">
-                            <div class="attendee-info">
-                                <div class="attendee-name">Michael Chen</div>
-                                <div class="attendee-email">Math Olympiad Prep</div>
-                            </div>
-                        </div>
-                        <div class="attendee-item">
-                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop&crop=face"
-                                alt="Sarah" class="attendee-avatar">
-                            <div class="attendee-info">
-                                <div class="attendee-name">Sarah Williams</div>
-                                <div class="attendee-email">Chemistry Workshop</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Create Event Modal -->
-    <div id="createEventModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Create New Event</h3>
-                <button class="close-btn" onclick="closeModal('createEventModal')">×</button>
+        <!-- Create Event Modal -->
+        <div id="createEventModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Create New Event</h3>
+                    <button class="close-btn" onclick="closeModal('createEventModal')">×</button>
+                </div>
+                <form id="eventForm">
+                    <div class="form-group">
+                        <label for="eventName">Event Title</label>
+                        <input type="text" id="eventName" required placeholder="Enter event title...">
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="eventType">Event Type</label>
+                            <select id="eventType" required>
+                                <option value="">Select Type</option>
+                                <option value="workshop">Workshop</option>
+                                <option value="seminar">Seminar</option>
+                                <option value="conference">Conference</option>
+                                <option value="study-group">Study Group</option>
+                                <option value="exam-prep">Exam Preparation</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventCategory">Category</label>
+                            <select id="eventCategory" required>
+                                <option value="">Select Category</option>
+                                <option value="mathematics">Mathematics</option>
+                                <option value="physics">Physics</option>
+                                <option value="chemistry">Chemistry</option>
+                                <option value="biology">Biology</option>
+                                <option value="general">General</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventDescription">Description</label>
+                        <textarea id="eventDescription" rows="4" placeholder="Describe your event..."></textarea>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="eventDate">Date</label>
+                            <input type="date" id="eventDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventTime">Start Time</label>
+                            <input type="time" id="eventTime" required>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="eventDuration">Duration (hours)</label>
+                            <select id="eventDuration" required>
+                                <option value="">Select Duration</option>
+                                <option value="1">1 hour</option>
+                                <option value="1.5">1.5 hours</option>
+                                <option value="2">2 hours</option>
+                                <option value="3">3 hours</option>
+                                <option value="4">4 hours</option>
+                                <option value="8">Full day (8 hours)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="maxParticipants">Max Participants</label>
+                            <input type="number" id="maxParticipants" min="1" max="200" required>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="eventLocation">Location</label>
+                            <input type="text" id="eventLocation" placeholder="Room 301 or Online via Zoom">
+                        </div>
+                        <div class="form-group">
+                            <label for="eventFee">Registration Fee ($)</label>
+                            <input type="number" id="eventFee" min="0" step="0.01" placeholder="0.00">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="targetGrades">Target Grades</label>
+                        <select id="targetGrades" multiple style="height: 100px;">
+                            <option value="6">Grade 6</option>
+                            <option value="7">Grade 7</option>
+                            <option value="8">Grade 8</option>
+                            <option value="9">Grade 9</option>
+                            <option value="10">Grade 10</option>
+                            <option value="11">Grade 11</option>
+                            <option value="12">Grade 12</option>
+                            <option value="13">Grade 13</option>
+                        </select>
+                        <small style="color: #666;">Hold Ctrl/Cmd to select multiple grades</small>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('createEventModal')">Cancel</button>
+                        <button type="submit" class="btn primary">Create Event</button>
+                    </div>
+                </form>
             </div>
-            <form id="createEventForm">
-                <div class="form-group">
-                    <label for="eventTitle">Event Title</label>
-                    <input type="text" id="eventTitle" required placeholder="Enter event title...">
-                </div>
-
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="eventType">Event Type</label>
-                        <select id="eventType" required>
-                            <option value="">Select Type</option>
-                            <option value="workshop">Workshop</option>
-                            <option value="seminar">Seminar</option>
-                            <option value="conference">Conference</option>
-                            <option value="study-group">Study Group</option>
-                            <option value="exam-prep">Exam Preparation</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="eventCategory">Category</label>
-                        <select id="eventCategory" required>
-                            <option value="">Select Category</option>
-                            <option value="mathematics">Mathematics</option>
-                            <option value="physics">Physics</option>
-                            <option value="chemistry">Chemistry</option>
-                            <option value="biology">Biology</option>
-                            <option value="general">General</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="eventDescription">Description</label>
-                    <textarea id="eventDescription" rows="4" placeholder="Describe your event..."></textarea>
-                </div>
-
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="eventDate">Date</label>
-                        <input type="date" id="eventDate" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="eventTime">Start Time</label>
-                        <input type="time" id="eventTime" required>
-                    </div>
-                </div>
-
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="eventDuration">Duration (hours)</label>
-                        <select id="eventDuration" required>
-                            <option value="">Select Duration</option>
-                            <option value="1">1 hour</option>
-                            <option value="1.5">1.5 hours</option>
-                            <option value="2">2 hours</option>
-                            <option value="3">3 hours</option>
-                            <option value="4">4 hours</option>
-                            <option value="8">Full day (8 hours)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="maxParticipants">Max Participants</label>
-                        <input type="number" id="maxParticipants" min="1" max="200" required>
-                    </div>
-                </div>
-
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="eventLocation">Location</label>
-                        <input type="text" id="eventLocation" placeholder="Room 301 or Online via Zoom">
-                    </div>
-                    <div class="form-group">
-                        <label for="eventFee">Registration Fee ($)</label>
-                        <input type="number" id="eventFee" min="0" step="0.01" placeholder="0.00">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="targetGrades">Target Grades</label>
-                    <select id="targetGrades" multiple style="height: 100px;">
-                        <option value="6">Grade 6</option>
-                        <option value="7">Grade 7</option>
-                        <option value="8">Grade 8</option>
-                        <option value="9">Grade 9</option>
-                        <option value="10">Grade 10</option>
-                        <option value="11">Grade 11</option>
-                        <option value="12">Grade 12</option>
-                        <option value="13">Grade 13</option>
-                    </select>
-                    <small style="color: #666;">Hold Ctrl/Cmd to select multiple grades</small>
-                </div>
-
-                <div class="form-actions">
-                    <button type="button" class="btn btn-secondary"
-                        onclick="closeModal('createEventModal')">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Create Event</button>
-                </div>
-            </form>
         </div>
-    </div>
 
-    <script>
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = 'block';
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function (event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = 'none';
-            }
-        }
-
-        // Filter tab functionality
-        document.querySelectorAll('.filter-tab').forEach(tab => {
-            tab.addEventListener('click', function () {
-                if (this.tagName === 'BUTTON') {
-                    document.querySelectorAll('.filter-tab').forEach(t => {
-                        if (t.tagName === 'BUTTON') t.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                }
-            });
-        });
-
-        // Form submission
-        document.getElementById('createEventForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            alert('Event created successfully!');
-            closeModal('createEventModal');
-            this.reset();
-        });
-
-        // Set minimum date to today
-        document.getElementById('eventDate').min = new Date().toISOString().split('T')[0];
-    </script>
-</body>
-
-</html>item">
-<a href="dashboard_overview.html" class="nav-link">
-    <i class="fas fa-home"></i>
-    Dashboard Overview
-</a>
-</li>
-<li class="nav-item">
-    <a href="class_management.html" class="nav-link">
-        <i class="fas fa-chalkboard"></i>
-        Class Management
-    </a>
-</li>
-<li class="nav-item">
-    <a href="schedule.html" class="nav-link">
-        <i class="fas fa-calendar-alt"></i>
-        Schedule & Availability
-    </a>
-</li>
-<li class="nav-item">
-    <a href="earnings.html" class="nav-link">
-        <i class="fas fa-chart-line"></i>
-        Earnings & Analytics
-    </a>
-</li>
-<li class="nav-item">
-    <a href="profile.html" class="nav-link">
-        <i class="fas fa-user-cog"></i>
-        Profile Settings
-    </a>
-</li>
-<li class="nav-item">
-    <a href="teacher_community.html" class="nav-link">
-        <i class="fas fa-users"></i>
-        Teacher Community
-    </a>
-</li>
-<li class="nav-item">
-    <a href="student_management.html" class="nav-link">
-        <i class="fas fa-user-graduate"></i>
-        Student Management
-    </a>
-</li>
-<li class="nav-item">
-    <a href="#" class="nav-link active">
-        <i class="fas fa-calendar-check"></i>
-        Event Organization
-    </a>
-</li>
-<li class="nav-
+        <script src="js/event_organization.js"></script>
+    </body>
+</html>
