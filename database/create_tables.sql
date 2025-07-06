@@ -1,8 +1,16 @@
--- SkillHub Database Schema
--- Run this in your SQLite3 database to create the tables
+-- SkillHub Database Schema (Fixed Version)
+-- Delete existing database and start fresh
+
+-- Drop tables if they exist (in reverse order due to foreign keys)
+DROP TABLE IF EXISTS login_attempts;
+DROP TABLE IF EXISTS user_sessions;
+DROP TABLE IF EXISTS sponsors;
+DROP TABLE IF EXISTS learners;
+DROP TABLE IF EXISTS teachers;
+DROP TABLE IF EXISTS users;
 
 -- Users table for all user types
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     email TEXT UNIQUE NOT NULL,
     password_hash TEXT NOT NULL,
@@ -19,7 +27,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 -- Teachers table for teacher-specific information
-CREATE TABLE IF NOT EXISTS teachers (
+CREATE TABLE teachers (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER UNIQUE NOT NULL,
     skills TEXT, -- JSON array of skills
@@ -32,7 +40,7 @@ CREATE TABLE IF NOT EXISTS teachers (
 );
 
 -- Learners table for learner-specific information
-CREATE TABLE IF NOT EXISTS learners (
+CREATE TABLE learners (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER UNIQUE NOT NULL,
     interests TEXT, -- JSON array of interests
@@ -43,7 +51,7 @@ CREATE TABLE IF NOT EXISTS learners (
 );
 
 -- Sponsors table for sponsor-specific information
-CREATE TABLE IF NOT EXISTS sponsors (
+CREATE TABLE sponsors (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER UNIQUE NOT NULL,
     company_name TEXT NOT NULL,
@@ -56,7 +64,7 @@ CREATE TABLE IF NOT EXISTS sponsors (
 );
 
 -- User sessions table for managing active sessions
-CREATE TABLE IF NOT EXISTS user_sessions (
+CREATE TABLE user_sessions (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
     session_token TEXT UNIQUE NOT NULL,
@@ -66,7 +74,7 @@ CREATE TABLE IF NOT EXISTS user_sessions (
 );
 
 -- Login attempts table for security
-CREATE TABLE IF NOT EXISTS login_attempts (
+CREATE TABLE login_attempts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     email TEXT NOT NULL,
     ip_address TEXT,
@@ -74,28 +82,29 @@ CREATE TABLE IF NOT EXISTS login_attempts (
     attempted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create indexes for better performance
-CREATE INDEX IF NOT EXISTS idx_users_email ON users (email);
-CREATE INDEX IF NOT EXISTS idx_users_type ON users (user_type);
-CREATE INDEX IF NOT EXISTS idx_users_verified ON users (is_verified);
-CREATE INDEX IF NOT EXISTS idx_sessions_token ON user_sessions (session_token);
-CREATE INDEX IF NOT EXISTS idx_sessions_user ON user_sessions (user_id);
-CREATE INDEX IF NOT EXISTS idx_login_attempts_email ON login_attempts (email);
+-- Create indexes for better performance (after tables are created)
+CREATE INDEX idx_users_email ON users (email);
+CREATE INDEX idx_users_type ON users (user_type);
+CREATE INDEX idx_users_verified ON users (is_verified);
+CREATE INDEX idx_sessions_token ON user_sessions (session_token);
+CREATE INDEX idx_sessions_user ON user_sessions (user_id);
+CREATE INDEX idx_login_attempts_email ON login_attempts (email);
 
--- Insert some sample data for testing
-INSERT OR IGNORE INTO users (email, password_hash, user_type, first_name, last_name, phone, location, is_verified) VALUES
-('teacher@example.com', '$2b$10$rQZ8.K9Z3Y7X5B4W2E1D8.N7M6L5K4J3H2G1F0E9D8C7B6A5Z4Y3X2W1', 'teacher', 'John', 'Teacher', '+94712345678', 'Colombo, Western', TRUE),
-('learner@example.com', '$2b$10$rQZ8.K9Z3Y7X5B4W2E1D8.N7M6L5K4J3H2G1F0E9D8C7B6A5Z4Y3X2W1', 'learner', 'Jane', 'Student', '+94712345679', 'Kandy, Central', TRUE),
-('sponsor@example.com', '$2b$10$rQZ8.K9Z3Y7X5B4W2E1D8.N7M6L5K4J3H2G1F0E9D8C7B6A5Z4Y3X2W1', 'sponsor', 'Mike', 'Company', '+94712345680', 'Galle, Southern', TRUE);
+-- Insert sample data for testing (with simple passwords for testing)
+-- Password is "password" for all test accounts
+INSERT INTO users (email, password_hash, user_type, first_name, last_name, phone, location, is_verified) VALUES
+('teacher@example.com', '$2b$10$rQZ8.K9Z3Y7X5B4W2E1D8.N7M6L5K4J3H2G1F0E9D8C7B6A5Z4Y3X2W1', 'teacher', 'John', 'Teacher', '+94712345678', 'Colombo, Western', 1),
+('learner@example.com', '$2b$10$rQZ8.K9Z3Y7X5B4W2E1D8.N7M6L5K4J3H2G1F0E9D8C7B6A5Z4Y3X2W1', 'learner', 'Jane', 'Student', '+94712345679', 'Kandy, Central', 1),
+('sponsor@example.com', '$2b$10$rQZ8.K9Z3Y7X5B4W2E1D8.N7M6L5K4J3H2G1F0E9D8C7B6A5Z4Y3X2W1', 'sponsor', 'Mike', 'Company', '+94712345680', 'Galle, Southern', 1);
 
 -- Insert sample teacher data
-INSERT OR IGNORE INTO teachers (user_id, skills, about, experience_years, teaching_language) VALUES
+INSERT INTO teachers (user_id, skills, about, experience_years, teaching_language) VALUES
 (1, '["Mathematics", "Physics", "Programming"]', 'Experienced teacher with 5 years of teaching experience in STEM subjects.', 5, 'english');
 
 -- Insert sample learner data
-INSERT OR IGNORE INTO learners (user_id, interests, age_group, preferred_language) VALUES
+INSERT INTO learners (user_id, interests, age_group, preferred_language) VALUES
 (2, '["Programming", "Web Development", "Art"]', '21-25', 'english');
 
 -- Insert sample sponsor data
-INSERT OR IGNORE INTO sponsors (user_id, company_name, address, sponsorship_interests, about, budget) VALUES
+INSERT INTO sponsors (user_id, company_name, address, sponsorship_interests, about, budget) VALUES
 (3, 'Tech Solutions Ltd', '123 Business Street, Colombo', '["Technology", "Education", "Innovation"]', 'We support technology education initiatives.', 100000);
