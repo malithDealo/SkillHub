@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="css/homepage.css">
 </head>
 <body>
+    <div id="navbar"></div>
+
     <header>
         
     </header>
@@ -96,5 +98,14 @@
     </footer>
 
     <script src="js/teachers_homepage.js"></script>
+    <script>
+        // Load Navbar from external file into the div
+        fetch('components/navbar1.html')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('navbar').innerHTML = data;
+          })
+          .catch(error => console.error('Failed to load navbar:', error));
+      </script>
 </body>
 </html>
