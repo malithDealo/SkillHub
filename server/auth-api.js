@@ -1,4 +1,4 @@
-// auth-api.js - Backend API for SkillHub Authentication
+// auth-api.js - Fixed Backend API for SkillHub Authentication
 // Run with: node server/auth-api.js
 
 const express = require('express');
@@ -15,7 +15,15 @@ const JWT_SECRET = 'your-secret-key-change-this-in-production';
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public')); // Serve static files
+
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, '../public')));
+
+// Also serve files from the root directory (for components, css, js, images folders)
+app.use('/components', express.static(path.join(__dirname, '../components')));
+app.use('/css', express.static(path.join(__dirname, '../css')));
+app.use('/js', express.static(path.join(__dirname, '../js')));
+app.use('/images', express.static(path.join(__dirname, '../images')));
 
 // Database connection
 const dbPath = path.join(__dirname, '../database/skillhub.db');
@@ -24,27 +32,8 @@ const db = new sqlite3.Database(dbPath, (err) => {
         console.error('Error opening database:', err.message);
     } else {
         console.log('Connected to SQLite database');
-        // Initialize tables
-        initializeTables();
     }
 });
-
-// Initialize database tables
-function initializeTables() {
-    const fs = require('fs');
-    const schemaPath = path.join(__dirname, '../database/create_tables.sql');
-    
-    if (fs.existsSync(schemaPath)) {
-        const schema = fs.readFileSync(schemaPath, 'utf8');
-        db.exec(schema, (err) => {
-            if (err) {
-                console.error('Error creating tables:', err.message);
-            } else {
-                console.log('Database tables initialized');
-            }
-        });
-    }
-}
 
 // Helper function to hash passwords
 async function hashPassword(password) {
@@ -68,6 +57,19 @@ function generateToken(user) {
         { expiresIn: '24h' }
     );
 }
+
+// Test endpoint
+app.get('/api/test', (req, res) => {
+    res.json({ 
+        message: 'SkillHub API is working!',
+        timestamp: new Date().toISOString(),
+        endpoints: [
+            'POST /api/auth/login',
+            'POST /api/auth/register',
+            'GET /api/auth/profile'
+        ]
+    });
+});
 
 // User Registration Endpoint
 app.post('/api/auth/register', async (req, res) => {
@@ -197,6 +199,8 @@ app.post('/api/auth/register', async (req, res) => {
 app.post('/api/auth/login', async (req, res) => {
     const { email, password, userType } = req.body;
 
+    console.log('Login attempt:', { email, userType }); // Debug log
+
     try {
         // Validate required fields
         if (!email || !password || !userType) {
@@ -219,12 +223,7 @@ app.post('/api/auth/login', async (req, res) => {
         });
 
         if (!user) {
-            // Log failed attempt
-            db.run(
-                'INSERT INTO login_attempts (email, success) VALUES (?, ?)',
-                [email, false]
-            );
-            
+            console.log('User not found:', email, userType); // Debug log
             return res.status(401).json({ 
                 success: false, 
                 message: 'Invalid email or password' 
@@ -235,12 +234,7 @@ app.post('/api/auth/login', async (req, res) => {
         const isValidPassword = await verifyPassword(password, user.password_hash);
         
         if (!isValidPassword) {
-            // Log failed attempt
-            db.run(
-                'INSERT INTO login_attempts (email, success) VALUES (?, ?)',
-                [email, false]
-            );
-            
+            console.log('Invalid password for:', email); // Debug log
             return res.status(401).json({ 
                 success: false, 
                 message: 'Invalid email or password' 
@@ -255,11 +249,7 @@ app.post('/api/auth/login', async (req, res) => {
             });
         }
 
-        // Log successful attempt
-        db.run(
-            'INSERT INTO login_attempts (email, success) VALUES (?, ?)',
-            [email, true]
-        );
+        console.log('Login successful for:', email); // Debug log
 
         // Generate JWT token
         const token = generateToken(user);
@@ -352,61 +342,25 @@ app.post('/api/auth/login', async (req, res) => {
     }
 });
 
-// Get user profile endpoint
-app.get('/api/auth/profile', (req, res) => {
-    const token = req.headers.authorization?.split(' ')[1];
-    
-    if (!token) {
-        return res.status(401).json({ 
-            success: false, 
-            message: 'No token provided' 
-        });
-    }
-
-    try {
-        const decoded = jwt.verify(token, JWT_SECRET);
-        
-        db.get(
-            'SELECT * FROM users WHERE id = ?',
-            [decoded.id],
-            (err, user) => {
-                if (err || !user) {
-                    return res.status(401).json({ 
-                        success: false, 
-                        message: 'Invalid token' 
-                    });
-                }
-
-                const userData = {
-                    id: user.id,
-                    email: user.email,
-                    firstName: user.first_name,
-                    lastName: user.last_name,
-                    name: `${user.first_name} ${user.last_name}`,
-                    phone: user.phone,
-                    location: user.location,
-                    type: user.user_type,
-                    isVerified: user.is_verified,
-                    profileImage: user.profile_image
-                };
-
-                res.json({ 
-                    success: true, 
-                    user: userData 
-                });
-            }
-        );
-    } catch (error) {
-        res.status(401).json({ 
-            success: false, 
-            message: 'Invalid token' 
-        });
-    }
+// Root route
+app.get('/', (req, res) => {
+    res.send(`
+        <h1>SkillHub API Server</h1>
+        <p>Server is running on port ${PORT}</p>
+        <ul>
+            <li><a href="/api/test">Test API</a></li>
+            <li><a href="/login-learner.html">Learner Login</a></li>
+            <li><a href="/login-teacher.html">Teacher Login</a></li>
+            <li><a href="/login-sponsor.html">Sponsor Login</a></li>
+        </ul>
+    `);
 });
 
 // Start server
 app.listen(PORT, () => {
     console.log(`SkillHub API server running on http://localhost:${PORT}`);
+    console.log(`Test API: http://localhost:${PORT}/api/test`);
+    console.log(`Static files served from: ${path.join(__dirname, '../public')}`);
 });
 
 // Graceful shutdown
@@ -420,17 +374,6 @@ process.on('SIGINT', () => {
         }
         process.exit(0);
     });
-});
-
-// Error handling
-process.on('uncaughtException', (err) => {
-    console.error('Uncaught Exception:', err);
-    process.exit(1);
-});
-
-process.on('unhandledRejection', (reason, promise) => {
-    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-    process.exit(1);
 });
 
 module.exports = app;
