@@ -1,4 +1,4 @@
-// auth.js - Authentication integration for SkillHub
+// auth.js - Updated Authentication integration for SkillHub with SQLite3
 // Place this file in your js/ folder and include it in all pages
 
 class SkillHubAuth {
@@ -41,36 +41,23 @@ class SkillHubAuth {
             const response = await fetch(navbarPath);
             if (response.ok) {
                 const navbarHTML = await response.text();
-                navbarContainer.innerHTML = navbarHTML;
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(navbarHTML, 'text/html');
+                const navbarElement = doc.querySelector('nav');
                 
-                if (this.isAuthenticated) {
-                    this.updateUserProfile();
+                if (navbarElement) {
+                    navbarContainer.innerHTML = navbarElement.outerHTML;
+                    
+                    if (this.isAuthenticated) {
+                        this.updateUserProfile();
+                    }
+                    
+                    this.setupNavbarEvents();
                 }
-                
-                this.setupNavbarEvents();
-            } else {
-                console.error('Failed to load navbar:', response.status);
-                this.loadFallbackNavbar();
             }
         } catch (error) {
             console.error('Error loading navbar:', error);
-            this.loadFallbackNavbar();
         }
-    }
-
-    // Fallback navbar if loading fails
-    loadFallbackNavbar() {
-        const navbarContainer = document.getElementById('navbar-container');
-        if (!navbarContainer) return;
-
-        const fallbackNavbar = this.isAuthenticated ? this.getNavbar2HTML() : this.getNavbar1HTML();
-        navbarContainer.innerHTML = fallbackNavbar;
-        
-        if (this.isAuthenticated) {
-            this.updateUserProfile();
-        }
-        
-        this.setupNavbarEvents();
     }
 
     // Update user profile information in navbar
@@ -179,14 +166,12 @@ class SkillHubAuth {
 
     // Show sign in options modal/page
     showSignInOptions() {
-        // Create a modal or redirect to sign-in selection page
         const modal = this.createUserTypeModal('signin');
         document.body.appendChild(modal);
     }
 
     // Show sign up options modal/page
     showSignUpOptions() {
-        // Create a modal or redirect to sign-up selection page
         const modal = this.createUserTypeModal('signup');
         document.body.appendChild(modal);
     }
@@ -222,7 +207,7 @@ class SkillHubAuth {
             ">
                 <h3 style="margin-bottom: 1.5rem; color: #333;">Choose your role to ${actionText}</h3>
                 <div style="display: flex; flex-direction: column; gap: 1rem;">
-                    <button onclick="window.location.href='${action}-learner.html'" style="
+                    <button onclick="window.location.href='login-learner.html'" style="
                         padding: 1rem;
                         border: 2px solid #4CAF50;
                         background: white;
@@ -235,7 +220,7 @@ class SkillHubAuth {
                        onmouseout="this.style.background='white'; this.style.color='#4CAF50';">
                         📚 ${actionText} as Learner
                     </button>
-                    <button onclick="window.location.href='${action}-teacher.html'" style="
+                    <button onclick="window.location.href='login-teacher.html'" style="
                         padding: 1rem;
                         border: 2px solid #87BE25;
                         background: white;
@@ -248,7 +233,7 @@ class SkillHubAuth {
                        onmouseout="this.style.background='white'; this.style.color='#87BE25';">
                         🎓 ${actionText} as Teacher
                     </button>
-                    <button onclick="window.location.href='${action}-sponsor.html'" style="
+                    <button onclick="window.location.href='login-sponsor.html'" style="
                         padding: 1rem;
                         border: 2px solid #007bff;
                         background: white;
@@ -312,102 +297,6 @@ class SkillHubAuth {
         return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='${encodeURIComponent(color)}'/%3E%3Ccircle cx='50' cy='40' r='15' fill='white'/%3E%3Cpath d='M50 60 C35 60, 25 70, 25 80 L75 80 C75 70, 65 60, 50 60' fill='white'/%3E%3C/svg%3E`;
     }
 
-    // Get navbar1 HTML (before signin)
-    getNavbar1HTML() {
-        return `
-            <nav class="navbar-top">
-                <div class="navbar-container">
-                    <div class="navbar-brand">
-                        <img src="images/SkillHub LOGO 3.png" alt="SkillHub Logo" class="logo">
-                        <span class="brand-text">SkillHub</span>
-                    </div>
-                    
-                    <div class="navbar-actions">
-                        <a href="#" class="nav-button btn-outline" data-action="signin">
-                            <img src="images/lucide_log-in.png" alt="Sign In Icon" class="button-icon">
-                            Sign In
-                        </a>
-                        <a href="#" class="nav-button btn-filled" data-action="signup">
-                            <img src="images/signup.png" alt="Sign Up Icon" class="button-icon">
-                            Sign Up
-                        </a>
-                        <button class="mobile-menu-btn" aria-label="Toggle Menu">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </button>
-                    </div>
-                </div>
-            </nav>
-        `;
-    }
-
-    // Get navbar2 HTML (after signin)
-    getNavbar2HTML() {
-        return `
-            <nav class="navbar-top">
-                <div class="navbar-container">
-                    <div class="navbar-brand">
-                        <img src="images/SkillHub LOGO 3.png" alt="SkillHub Logo" class="logo">
-                        <span class="brand-text">SkillHub</span>
-                    </div>
-                    
-                    <div class="navbar-menu">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">How it Works</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle">Special Needs</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#" class="dropdown-link">Sign Language</a></li>
-                                    <li><a href="#" class="dropdown-link">Audio Books</a></li>
-                                    <li><a href="#" class="dropdown-link">Colour Contrast</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">Community</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">Services</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">About Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">Contact Us</a>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="navbar-actions">
-                        <div class="user-profile">
-                            <span class="user-name">User</span>
-                            <div class="profile-icon" role="button" aria-label="User Profile">
-                                <img src="images/qlementine-icons_user-16.png" alt="User Profile">
-                            </div>
-                            <div class="profile-dropdown">
-                                <a href="#" class="profile-dropdown-link">Profile Settings</a>
-                                <a href="#" class="profile-dropdown-link">Dashboard</a>
-                                <a href="#" class="profile-dropdown-link">My Learning</a>
-                                <a href="#" class="profile-dropdown-link">Messages</a>
-                                <a href="#" class="profile-dropdown-link logout" data-action="signout">Sign Out</a>
-                            </div>
-                        </div>
-                        <button class="mobile-menu-btn" aria-label="Toggle Menu">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </button>
-                    </div>
-                </div>
-            </nav>
-        `;
-    }
-
     // Utility methods
     getCurrentUser() {
         return this.currentUser;
@@ -425,148 +314,5 @@ class SkillHubAuth {
 // Initialize authentication system
 const skillHubAuth = new SkillHubAuth();
 
-// Integration functions for your existing forms
-function handleFormSubmission(formData, userType, isSignUp = false) {
-    if (isSignUp) {
-        // Handle sign up
-        console.log('Processing sign up...', formData);
-        // Add your sign up logic here
-        // After successful registration, sign in the user
-        skillHubAuth.signIn(formData, userType);
-    } else {
-        // Handle sign in
-        console.log('Processing sign in...', formData);
-        // Add your sign in validation logic here
-        // After successful validation, sign in the user
-        skillHubAuth.signIn(formData, userType);
-    }
-}
-
-// Example integration with your existing forms
-document.addEventListener('DOMContentLoaded', function() {
-    // Teacher sign up form
-    const teacherSignUpForm = document.getElementById('teacher-signup-form');
-    if (teacherSignUpForm) {
-        teacherSignUpForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            const userData = {
-                firstName: formData.get('first-name'),
-                lastName: formData.get('last-name'),
-                email: formData.get('email'),
-                phone: formData.get('phone'),
-                location: formData.get('location'),
-                skills: formData.get('skills'),
-                about: formData.get('about'),
-                experience: formData.get('experience'),
-                teachingLanguage: formData.get('teaching-language')
-            };
-            handleFormSubmission(userData, 'teacher', true);
-        });
-    }
-
-    // Learner sign up form
-    const learnerSignUpForm = document.getElementById('learner-signup-form');
-    if (learnerSignUpForm) {
-        learnerSignUpForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            const userData = {
-                firstName: formData.get('first-name'),
-                lastName: formData.get('last-name'),
-                email: formData.get('email'),
-                location: formData.get('location'),
-                interests: formData.get('interests'),
-                ageGroup: formData.get('age-group'),
-                language: formData.get('language')
-            };
-            handleFormSubmission(userData, 'learner', true);
-        });
-    }
-
-    // Sponsor sign up form
-    const sponsorSignUpForm = document.getElementById('sponsor-signup-form');
-    if (sponsorSignUpForm) {
-        sponsorSignUpForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            const userData = {
-                firstName: formData.get('first-name'),
-                lastName: formData.get('last-name'),
-                email: formData.get('email'),
-                companyName: formData.get('company-name'),
-                phone: formData.get('phone'),
-                address: formData.get('address'),
-                interests: formData.get('interests'),
-                about: formData.get('about'),
-                budget: formData.get('budget')
-            };
-            handleFormSubmission(userData, 'sponsor', true);
-        });
-    }
-
-    // Teacher sign in form
-    const teacherSignInForm = document.getElementById('teacher-signin-form');
-    if (teacherSignInForm) {
-        teacherSignInForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            const userData = {
-                email: formData.get('email'),
-                password: formData.get('password')
-            };
-            // Add authentication logic here
-            // For demo purposes, we'll simulate successful login
-            setTimeout(() => {
-                skillHubAuth.signIn({
-                    name: 'John Teacher',
-                    email: userData.email
-                }, 'teacher');
-            }, 1000);
-        });
-    }
-
-    // Learner sign in form
-    const learnerSignInForm = document.getElementById('learner-signin-form');
-    if (learnerSignInForm) {
-        learnerSignInForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            const userData = {
-                email: formData.get('email'),
-                password: formData.get('password')
-            };
-            // Add authentication logic here
-            setTimeout(() => {
-                skillHubAuth.signIn({
-                    name: 'Jane Learner',
-                    email: userData.email
-                }, 'learner');
-            }, 1000);
-        });
-    }
-
-    // Sponsor sign in form
-    const sponsorSignInForm = document.getElementById('sponsor-signin-form');
-    if (sponsorSignInForm) {
-        sponsorSignInForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            const userData = {
-                email: formData.get('email'),
-                password: formData.get('password')
-            };
-            // Add authentication logic here
-            setTimeout(() => {
-                skillHubAuth.signIn({
-                    name: 'Company Sponsor',
-                    email: userData.email
-                }, 'sponsor');
-            }, 1000);
-        });
-    }
-});
-
 // Export for global access
 window.SkillHubAuth = skillHubAuth;
-window.handleFormSubmission = handleFormSubmission;
