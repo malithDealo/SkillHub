@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillHub - Our Sponsors</title>
+    <link rel="stylesheet" href="css/sponsorsponsor.css">
+    <script src="js/sponsorsponsor.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Our Sponsors</h1>
+            <p>Connect with amazing sponsors looking to support events and build meaningful partnerships</p>
+        </div>
+        <div class="hero-bg-elements">
+            <div class="circle circle-1"></div>
+            <div class="circle circle-2"></div>
+            <div class="circle circle-3"></div>
+            <div class="circle circle-4"></div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Add Sponsor Button -->
+            <div class="add-sponsor-section">
+                <button class="add-sponsor-btn" onclick="openAddSponsorModal()">
+                    <i class="fas fa-plus"></i>
+                    Add Your Company as Sponsor
+                </button>
+            </div>
+
+            <!-- Search and Filter Section -->
+            <div class="search-filter-section">
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Search Sponsor by Name, Category or Location..." onkeyup="performSearch()">
+                        <button class="search-btn" onclick="performSearch()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="filter-categories">
+                    <button class="filter-btn active" onclick="filterByCategory('all')">All Categories</button>
+                    <button class="filter-btn" onclick="filterByCategory('technology')">Technology</button>
+                    <button class="filter-btn" onclick="filterByCategory('finance')">Finance</button>
+                    <button class="filter-btn" onclick="filterByCategory('healthcare')">Healthcare</button>
+                    <button class="filter-btn" onclick="filterByCategory('education')">Education</button>
+                    <button class="filter-btn" onclick="filterByCategory('retail')">Retail</button>
+                </div>
+            </div>
+
+            <!-- Sponsors Grid -->
+            <div class="sponsors-grid" id="sponsorsGrid">
+                <!-- Sponsor Card 1 -->
+                <div class="sponsor-card" data-category="technology" data-name="techcorp solutions" data-location="san francisco usa">
+                    <div class="sponsor-header">
+                        <div class="sponsor-avatar">
+                            <span>T</span>
+                        </div>
+                        <div class="sponsor-status">
+                            <span class="status-badge verified">Verified</span>
+                        </div>
+                    </div>
+                    <div class="sponsor-info">
+                        <h3>TechCorp Solutions</h3>
+                        <div class="sponsor-details">
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> San Francisco, USA</p>
+                            <p class="contact"><i class="fas fa-envelope"></i> info@techcorp.com</p>
+                            <p class="website"><i class="fas fa-globe"></i> www.techcorp.com</p>
+                            <p class="interests"><i class="fas fa-heart"></i> Tech conferences, startup events, innovation summits</p>
+                        </div>
+                        <div class="sponsor-budget">
+                            <span class="budget-label">Budget:</span>
+                            <span class="budget-amount">$5,000 - $25,000</span>
+                        </div>
+                        <button class="contact-sponsor-btn" onclick="contactSponsor('TechCorp Solutions', 'info@techcorp.com')">
+                            <i class="fas fa-handshake"></i>
+                            Contact Sponsor
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sponsor Card 2 -->
+                <div class="sponsor-card" data-category="finance" data-name="greenbank financial" data-location="new york usa">
+                    <div class="sponsor-header">
+                        <div class="sponsor-avatar green">
+                            <span>G</span>
+                        </div>
+                        <div class="sponsor-status">
+                            <span class="status-badge verified">Verified</span>
+                        </div>
+                    </div>
+                    <div class="sponsor-info">
+                        <h3>GreenBank Financial</h3>
+                        <div class="sponsor-details">
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> New York, USA</p>
+                            <p class="contact"><i class="fas fa-envelope"></i> sponsors@greenbank.com</p>
+                            <p class="website"><i class="fas fa-globe"></i> www.greenbank.com</p>
+                            <p class="interests"><i class="fas fa-heart"></i> Financial conferences, sustainability events</p>
+                        </div>
+                        <div class="sponsor-budget">
+                            <span class="budget-label">Budget:</span>
+                            <span class="budget-amount">$10,000 - $50,000</span>
+                        </div>
+                        <button class="contact-sponsor-btn" onclick="contactSponsor('GreenBank Financial', 'sponsors@greenbank.com')">
+                            <i class="fas fa-handshake"></i>
+                            Contact Sponsor
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sponsor Card 3 -->
+                <div class="sponsor-card" data-category="healthcare" data-name="medicare plus" data-location="chicago usa">
+                    <div class="sponsor-header">
+                        <div class="sponsor-avatar blue">
+                            <span>M</span>
+                        </div>
+                        <div class="sponsor-status">
+                            <span class="status-badge verified">Verified</span>
+                        </div>
+                    </div>
+                    <div class="sponsor-info">
+                        <h3>MediCare Plus</h3>
+                        <div class="sponsor-details">
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Chicago, USA</p>
+                            <p class="contact"><i class="fas fa-envelope"></i> partnerships@medicareplus.com</p>
+                            <p class="website"><i class="fas fa-globe"></i> www.medicareplus.com</p>
+                            <p class="interests"><i class="fas fa-heart"></i> Health conferences, medical seminars, wellness events</p>
+                        </div>
+                        <div class="sponsor-budget">
+                            <span class="budget-label">Budget:</span>
+                            <span class="budget-amount">$7,500 - $30,000</span>
+                        </div>
+                        <button class="contact-sponsor-btn" onclick="contactSponsor('MediCare Plus', 'partnerships@medicareplus.com')">
+                            <i class="fas fa-handshake"></i>
+                            Contact Sponsor
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sponsor Card 4 -->
+                <div class="sponsor-card" data-category="education" data-name="edutech innovations" data-location="boston usa">
+                    <div class="sponsor-header">
+                        <div class="sponsor-avatar orange">
+                            <span>E</span>
+                        </div>
+                        <div class="sponsor-status">
+                            <span class="status-badge verified">Verified</span>
+                        </div>
+                    </div>
+                    <div class="sponsor-info">
+                        <h3>EduTech Innovations</h3>
+                        <div class="sponsor-details">
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Boston, USA</p>
+                            <p class="contact"><i class="fas fa-envelope"></i> hello@edutech.com</p>
+                            <p class="website"><i class="fas fa-globe"></i> www.edutech.com</p>
+                            <p class="interests"><i class="fas fa-heart"></i> Educational events, workshops, student competitions</p>
+                        </div>
+                        <div class="sponsor-budget">
+                            <span class="budget-label">Budget:</span>
+                            <span class="budget-amount">$3,000 - $15,000</span>
+                        </div>
+                        <button class="contact-sponsor-btn" onclick="contactSponsor('EduTech Innovations', 'hello@edutech.com')">
+                            <i class="fas fa-handshake"></i>
+                            Contact Sponsor
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sponsor Card 5 -->
+                <div class="sponsor-card" data-category="retail" data-name="globalmart corp" data-location="seattle usa">
+                    <div class="sponsor-header">
+                        <div class="sponsor-avatar purple">
+                            <span>G</span>
+                        </div>
+                        <div class="sponsor-status">
+                            <span class="status-badge verified">Verified</span>
+                        </div>
+                    </div>
+                    <div class="sponsor-info">
+                        <h3>GlobalMart Corp</h3>
+                        <div class="sponsor-details">
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Seattle, USA</p>
+                            <p class="contact"><i class="fas fa-envelope"></i> sponsors@globalmart.com</p>
+                            <p class="website"><i class="fas fa-globe"></i> www.globalmart.com</p>
+                            <p class="interests"><i class="fas fa-heart"></i> Community events, retail shows, consumer expos</p>
+                        </div>
+                        <div class="sponsor-budget">
+                            <span class="budget-label">Budget:</span>
+                            <span class="budget-amount">$5,000 - $20,000</span>
+                        </div>
+                        <button class="contact-sponsor-btn" onclick="contactSponsor('GlobalMart Corp', 'sponsors@globalmart.com')">
+                            <i class="fas fa-handshake"></i>
+                            Contact Sponsor
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sponsor Card 6 -->
+                <div class="sponsor-card" data-category="technology" data-name="innovatelab" data-location="austin usa">
+                    <div class="sponsor-header">
+                        <div class="sponsor-avatar teal">
+                            <span>I</span>
+                        </div>
+                        <div class="sponsor-status">
+                            <span class="status-badge verified">Verified</span>
+                        </div>
+                    </div>
+                    <div class="sponsor-info">
+                        <h3>InnovateLab</h3>
+                        <div class="sponsor-details">
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Austin, USA</p>
+                            <p class="contact"><i class="fas fa-envelope"></i> contact@innovatelab.com</p>
+                            <p class="website"><i class="fas fa-globe"></i> www.innovatelab.com</p>
+                            <p class="interests"><i class="fas fa-heart"></i> Innovation workshops, tech meetups, hackathons</p>
+                        </div>
+                        <div class="sponsor-budget">
+                            <span class="budget-label">Budget:</span>
+                            <span class="budget-amount">$2,000 - $12,000</span>
+                        </div>
+                        <button class="contact-sponsor-btn" onclick="contactSponsor('InnovateLab', 'contact@innovatelab.com')">
+                            <i class="fas fa-handshake"></i>
+                            Contact Sponsor
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No Results Message -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <div class="no-results-content">
+                    <i class="fas fa-search"></i>
+                    <h3>No sponsors found</h3>
+                    <p>Try adjusting your search criteria or browse all categories</p>
+                    <button class="clear-filters-btn" onclick="clearAllFilters()">Clear Filters</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Sponsor Modal -->
+    <div class="modal" id="addSponsorModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Your Company as Sponsor</h3>
+                <button class="modal-close" onclick="closeAddSponsorModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-subtitle">Join our network of sponsors and discover amazing partnership opportunities</p>
+                
+                <form class="sponsor-form" id="sponsorForm" onsubmit="submitSponsorForm(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="companyName">Company Name *</label>
+                            <input type="text" id="companyName" name="companyName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactPerson">Contact Person *</label>
+                            <input type="text" id="contactPerson" name="contactPerson" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="emailAddress">Email Address *</label>
+                            <input type="email" id="emailAddress" name="emailAddress" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber">Phone Number *</label>
+                            <input type="tel" id="phoneNumber" name="phoneNumber" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="companyWebsite">Company Website</label>
+                        <input type="url" id="companyWebsite" name="companyWebsite" placeholder="https://www.yourcompany.com">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="category">Category *</label>
+                            <select id="category" name="category" required>
+                                <option value="">Select Category</option>
+                                <option value="technology">Technology</option>
+                                <option value="finance">Finance</option>
+                                <option value="healthcare">Healthcare</option>
+                                <option value="education">Education</option>
+                                <option value="retail">Retail</option>
+                                <option value="manufacturing">Manufacturing</option>
+                                <option value="consulting">Consulting</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location *</label>
+                            <input type="text" id="location" name="location" placeholder="City, Country" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sponsorshipBudget">Sponsorship Budget *</label>
+                            <select id="sponsorshipBudget" name="sponsorshipBudget" required>
+                                <option value="">Select Budget Range</option>
+                                <option value="1000-5000">$1,000 - $5,000</option>
+                                <option value="5000-15000">$5,000 - $15,000</option>
+                                <option value="15000-50000">$15,000 - $50,000</option>
+                                <option value="50000+">$50,000+</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="sponsorshipInterests">Sponsorship Interests *</label>
+                            <input type="text" id="sponsorshipInterests" name="sponsorshipInterests" placeholder="e.g., tech conferences, workshops, community events" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="companyDescription">Company Description</label>
+                        <textarea id="companyDescription" name="companyDescription" rows="3" placeholder="Brief description of your company and what you do..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="whatYouOffer">What You Offer to Events</label>
+                        <textarea id="whatYouOffer" name="whatYouOffer" rows="3" placeholder="Describe what you can offer to events (funding, products, services, expertise, etc.)..."></textarea>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                            I agree to the <a href="#" class="terms-link">Guidelines</a>
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn" onclick="closeAddSponsorModal()">Cancel</button>
+                        <button type="submit" class="submit-btn">Add Sponsor Profile</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+      <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Start Your <span class="highlight">SkillHub</span> Journey?</h2>
+                <p>Join thousands of learners and teachers in your neighborhood. Whether you're looking to master a new skill or share your expertise, your community is waiting.</p>
+                <button class="cta-button" id="getStartedBtn">
+                    <span>Get Started Today</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+    
+</body>
+</html>

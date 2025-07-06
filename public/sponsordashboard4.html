@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillHub - Settings</title>
+    <link rel="stylesheet" href="css/sponsordashboard4.css">
+    <script src="js/sponsordashboard4.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Dashboard</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="sponsordashboard1.html" class="sidebar-link">
+                    <i class="fas fa-chart-bar"></i>
+                    Overview
+                </a>
+                <a href="sponsordashboard2.html" class="sidebar-link">
+                    <i class="fas fa-bullhorn"></i>
+                    Campaigns
+                </a>
+                <a href="sponsordashboard3.html" class="sidebar-link">
+                    <i class="fas fa-chart-line"></i>
+                    Analytics
+                </a>
+                <a href="sponsordashboard4.html" class="sidebar-link active">
+                    <i class="fas fa-cog"></i>
+                    Profile Setting
+                </a>
+            </nav>
+            <button class="logout-btn">LOG OUT</button>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Setting</h1>
+                <p>Manage your account and preferences</p>
+            </div>
+
+            <!-- Profile Settings Form -->
+            <div class="settings-container">
+                <div class="section-header">
+                    <h2>Profile Settings</h2>
+                </div>
+                
+                <form class="settings-form" id="settingsForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="companyName">Company Name</label>
+                            <input type="text" id="companyName" name="companyName" value="TechCorp Solutions" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactName">Contact Name</label>
+                            <input type="text" id="contactName" name="contactName" value="John Smith" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phoneNumber">Phone Number</label>
+                            <input type="tel" id="phoneNumber" name="phoneNumber" value="+1 (555) 123-4567" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="industry">Industry</label>
+                            <select id="industry" name="industry" required>
+                                <option value="">Select Industry</option>
+                                <option value="technology" selected>Technology</option>
+                                <option value="healthcare">Healthcare</option>
+                                <option value="finance">Finance</option>
+                                <option value="education">Education</option>
+                                <option value="manufacturing">Manufacturing</option>
+                                <option value="retail">Retail</option>
+                                <option value="consulting">Consulting</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="emailAddress">Email Address</label>
+                            <input type="email" id="emailAddress" name="emailAddress" value="john.smith@techcorp.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="monthlyBudget">Monthly Budget</label>
+                            <input type="number" id="monthlyBudget" name="monthlyBudget" value="45000" min="0" step="100" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" rows="4" placeholder="Brief description about your company and goals">TechCorp Solutions is a leading technology company focused on innovative software development and digital transformation services for enterprise clients.</textarea>
+                    </div>
+
+                    <!-- Additional Settings -->
+                    <div class="settings-section">
+                        <h3>Notification Preferences</h3>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="emailNotifications" name="emailNotifications" checked>
+                                <span class="checkmark"></span>
+                                Email notifications for campaign updates
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="smsNotifications" name="smsNotifications">
+                                <span class="checkmark"></span>
+                                SMS notifications for urgent alerts
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="weeklyReports" name="weeklyReports" checked>
+                                <span class="checkmark"></span>
+                                Weekly performance reports
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="marketingUpdates" name="marketingUpdates">
+                                <span class="checkmark"></span>
+                                Marketing updates and news
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Privacy Settings</h3>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="profileVisibility" name="profileVisibility" checked>
+                                <span class="checkmark"></span>
+                                Make profile visible to other sponsors
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="dataSharing" name="dataSharing">
+                                <span class="checkmark"></span>
+                                Allow anonymized data sharing for insights
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="publicMetrics" name="publicMetrics" checked>
+                                <span class="checkmark"></span>
+                                Show success metrics in public directory
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Account Preferences</h3>
+                        <div class="preference-group">
+                            <div class="form-group">
+                                <label for="timezone">Timezone</label>
+                                <select id="timezone" name="timezone">
+                                    <option value="UTC-8">Pacific Time (UTC-8)</option>
+                                    <option value="UTC-7">Mountain Time (UTC-7)</option>
+                                    <option value="UTC-6">Central Time (UTC-6)</option>
+                                    <option value="UTC-5" selected>Eastern Time (UTC-5)</option>
+                                    <option value="UTC">UTC</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="currency">Currency</label>
+                                <select id="currency" name="currency">
+                                    <option value="USD" selected>USD ($)</option>
+                                    <option value="EUR">EUR (€)</option>
+                                    <option value="GBP">GBP (£)</option>
+                                    <option value="CAD">CAD ($)</option>
+                                    <option value="AUD">AUD ($)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
+                        <button type="submit" class="save-btn">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Account Management -->
+            <div class="settings-container">
+                <div class="section-header">
+                    <h2>Account Management</h2>
+                </div>
+                
+                <div class="account-actions">
+                    <div class="action-item">
+                        <div class="action-info">
+                            <h4>Change Password</h4>
+                            <p>Update your account password for better security</p>
+                        </div>
+                        <button class="action-btn" id="changePasswordBtn">
+                            <i class="fas fa-key"></i>
+                            Change Password
+                        </button>
+                    </div>
+                    
+                    <div class="action-item">
+                        <div class="action-info">
+                            <h4>Two-Factor Authentication</h4>
+                            <p>Add an extra layer of security to your account</p>
+                        </div>
+                        <button class="action-btn" id="setup2FABtn">
+                            <i class="fas fa-shield-alt"></i>
+                            Setup 2FA
+                        </button>
+                    </div>
+                    
+                    <div class="action-item">
+                        <div class="action-info">
+                            <h4>Download Data</h4>
+                            <p>Export all your account data and campaign information</p>
+                        </div>
+                        <button class="action-btn" id="downloadDataBtn">
+                            <i class="fas fa-download"></i>
+                            Download Data
+                        </button>
+                    </div>
+                    
+                    <div class="action-item danger">
+                        <div class="action-info">
+                            <h4>Delete Account</h4>
+                            <p>Permanently delete your account and all associated data</p>
+                        </div>
+                        <button class="action-btn danger" id="deleteAccountBtn">
+                            <i class="fas fa-trash"></i>
+                            Delete Account
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div class="modal" id="passwordModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Change Password</h3>
+                <button class="close-btn" onclick="closePasswordModal()">&times;</button>
+            </div>
+            <form class="password-form" id="passwordForm">
+                <div class="form-group">
+                    <label for="currentPassword">Current Password</label>
+                    <input type="password" id="currentPassword" name="currentPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">New Password</label>
+                    <input type="password" id="newPassword" name="newPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm New Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="cancel-btn" onclick="closePasswordModal()">Cancel</button>
+                    <button type="submit" class="save-btn">Update Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+</body>
+</html>

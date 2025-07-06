@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillHub - Analytics & Reports</title>
+    <link rel="stylesheet" href="css/sponsordashboard3.css">
+    <script src="js/sponsordashboard3.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Dashboard</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="sponsordashboard1.html" class="sidebar-link">
+                    <i class="fas fa-chart-bar"></i>
+                    Overview
+                </a>
+                <a href="sponsordashboard2.html" class="sidebar-link">
+                    <i class="fas fa-bullhorn"></i>
+                    Campaigns
+                </a>
+                <a href="sponsordashboard3.html" class="sidebar-link active">
+                    <i class="fas fa-chart-line"></i>
+                    Analytics
+                </a>
+                <a href="sponsordashboard4.html" class="sidebar-link">
+                    <i class="fas fa-cog"></i>
+                    Profile Setting
+                </a>
+            </nav>
+            <button class="logout-btn">LOG OUT</button>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Analytics & Reports</h1>
+                <p>Track your campaign performance</p>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">2,847</div>
+                    <div class="metric-label">Total Impressions</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">12.5%</div>
+                    <div class="metric-label">Click Rate</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">8.3%</div>
+                    <div class="metric-label">Conversion Rate</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">$2.45</div>
+                    <div class="metric-label">Cost per Lead</div>
+                </div>
+            </div>
+
+            <!-- Analysis Table -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>Analysis</h2>
+                    <div class="table-actions">
+                        <button class="action-btn" id="refreshBtn">
+                            <i class="fas fa-sync-alt"></i>
+                            Refresh
+                        </button>
+                        <button class="action-btn" id="exportAnalyticsBtn">
+                            <i class="fas fa-download"></i>
+                            Export
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="analysis-table">
+                        <thead>
+                            <tr>
+                                <th>Campaign</th>
+                                <th>Investment</th>
+                                <th>Returns</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="analysisTableBody">
+                            <tr>
+                                <td>Web Development Bootcamp</td>
+                                <td>$12,000</td>
+                                <td>$41,400</td>
+                                <td><span class="status-badge active">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>AI/ML Certification</td>
+                                <td>$8,500</td>
+                                <td>$24,565</td>
+                                <td><span class="status-badge active">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>Data Science Program</td>
+                                <td>$9,800</td>
+                                <td>$31,752</td>
+                                <td><span class="status-badge completed">Completed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Monthly Performance Trends -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>Monthly Performance Trends</h2>
+                    <div class="chart-controls">
+                        <select id="chartPeriod">
+                            <option value="3">Last 3 Months</option>
+                            <option value="6">Last 6 Months</option>
+                            <option value="12">Last 12 Months</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <div class="chart-wrapper">
+                        <div class="chart-month">
+                            <div class="chart-bar" data-height="85">
+                                <div class="bar-fill"></div>
+                            </div>
+                            <div class="month-label">JAN</div>
+                        </div>
+                        <div class="chart-month">
+                            <div class="chart-bar" data-height="65">
+                                <div class="bar-fill"></div>
+                            </div>
+                            <div class="month-label">FEB</div>
+                        </div>
+                        <div class="chart-month">
+                            <div class="chart-bar" data-height="75">
+                                <div class="bar-fill"></div>
+                            </div>
+                            <div class="month-label">MAR</div>
+                        </div>
+                        <div class="chart-month">
+                            <div class="chart-bar" data-height="90">
+                                <div class="bar-fill"></div>
+                            </div>
+                            <div class="month-label">APR</div>
+                        </div>
+                        <div class="chart-month">
+                            <div class="chart-bar" data-height="70">
+                                <div class="bar-fill"></div>
+                            </div>
+                            <div class="month-label">MAY</div>
+                        </div>
+                        <div class="chart-month">
+                            <div class="chart-bar" data-height="80">
+                                <div class="bar-fill"></div>
+                            </div>
+                            <div class="month-label">JUN</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Budget Overview -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>Budget Overview</h2>
+                    <div class="budget-controls">
+                        <button class="action-btn" id="budgetDetailsBtn">
+                            <i class="fas fa-info-circle"></i>
+                            Details
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="budget-analytics">
+                    <div class="budget-summary">
+                        <div class="budget-item">
+                            <span class="budget-label">$45,000</span>
+                            <span class="budget-sublabel">Active Budget</span>
+                        </div>
+                        <div class="budget-item">
+                            <span class="budget-label">$31,250</span>
+                            <span class="budget-sublabel">Used</span>
+                        </div>
+                    </div>
+                    
+                    <div class="budget-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" data-progress="69"></div>
+                        </div>
+                        <div class="progress-labels">
+                            <span>69% Used</span>
+                        </div>
+                    </div>
+                    
+                    <div class="budget-remaining">
+                        <span>Remaining: $13,750</span>
+                    </div>
+                </div>
+            </div>
+
+            
+            <!-- Performance Insights -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>Performance Insights</h2>
+                </div>
+                
+                <div class="insights-grid">
+                    <div class="insight-card">
+                        <div class="insight-icon success">
+                            <i class="fas fa-trending-up"></i>
+                        </div>
+                        <div class="insight-content">
+                            <h4>Strong Performance</h4>
+                            <p>Your conversion rate is 23% above industry average</p>
+                        </div>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-icon warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="insight-content">
+                            <h4>Optimization Opportunity</h4>
+                            <p>Consider increasing budget for Web Development Bootcamp</p>
+                        </div>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-icon info">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="insight-content">
+                            <h4>Recommendation</h4>
+                            <p>Peak engagement occurs between 2-4 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    
+</body>
+</html>

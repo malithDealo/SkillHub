@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillHub - Community</title>
+    <link rel="stylesheet" href="css/sponsorcommunity.css">
+      <script src="js/sponsorcommunity.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Your Learning Community</h1>
+            <p>Connect with neighbors, join events, and share knowledge in your local area</p>
+        </div>
+        <div class="hero-bg-elements">
+            <div class="circle circle-1"></div>
+            <div class="circle circle-2"></div>
+            <div class="circle circle-3"></div>
+            <div class="circle circle-4"></div>
+        </div>
+    </section>
+
+    <!-- Community Stats -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">1234</div>
+                    <div class="stat-label">Active Learners</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">567</div>
+                    <div class="stat-label">Expert Teachers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">472</div>
+                    <div class="stat-label">Skills Shared</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">30</div>
+                    <div class="stat-label">Events This Month</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Events Section -->
+    <section class="events-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Upcoming Community Events</h2>
+                <button class="add-event-btn" id="addEventBtn">
+                    <i class="fas fa-plus"></i>
+                    Add a Event
+                </button>
+            </div>
+
+            <div class="events-grid">
+                <div class="event-card">
+                    <div class="event-date">
+                        <span class="day">15</span>
+                        <span class="month">Dec</span>
+                    </div>
+                    <div class="event-info">
+                        <h3>Community Cooking Workshop</h3>
+                        <p>Learn traditional recipes from diverse cultures in our neighborhood. Bring your favorite dish and share the story behind it.</p>
+                        <div class="event-meta">
+                            <span><i class="fas fa-clock"></i> 6:00 PM</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Community Center</span>
+                        </div>
+                    </div>
+                    <div class="event-attendees">
+                        <span class="attendee-count">12 attending</span>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-date">
+                        <span class="day">18</span>
+                        <span class="month">Dec</span>
+                    </div>
+                    <div class="event-info">
+                        <h3>Photography Walk</h3>
+                        <p>Explore our neighborhood with cameras and smartphones. Perfect for beginners and experienced photographers alike.</p>
+                        <div class="event-meta">
+                            <span><i class="fas fa-clock"></i> 10:00 AM</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Central Park</span>
+                        </div>
+                    </div>
+                    <div class="event-attendees">
+                        <span class="attendee-count">8 attending</span>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-date">
+                        <span class="day">22</span>
+                        <span class="month">Dec</span>
+                    </div>
+                    <div class="event-info">
+                        <h3>Tech Skills Meetup</h3>
+                        <p>Share coding knowledge, practice programming, discuss new technologies, and solve coding challenges together.</p>
+                        <div class="event-meta">
+                            <span><i class="fas fa-clock"></i> 7:00 PM</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Library Meeting Room</span>
+                        </div>
+                    </div>
+                    <div class="event-attendees">
+                        <span class="attendee-count">15 attending</span>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-date">
+                        <span class="day">25</span>
+                        <span class="month">Dec</span>
+                    </div>
+                    <div class="event-info">
+                        <h3>Mindfulness & Meditation</h3>
+                        <p>Weekly meditation circle to cultivate mindfulness, reduce stress, and build a supportive community practice.</p>
+                        <div class="event-meta">
+                            <span><i class="fas fa-clock"></i> 9:00 AM</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Wellness Studio</span>
+                        </div>
+                    </div>
+                    <div class="event-attendees">
+                        <span class="attendee-count">20 attending</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Discussions Section -->
+    <section class="discussions-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Community Discussions</h2>
+                <button class="add-question-btn" id="addQuestionBtn">
+                    <i class="fas fa-plus"></i>
+                    Add a Question
+                </button>
+            </div>
+
+            <div class="discussions-list">
+                <div class="discussion-item" data-discussion="1">
+                    <div class="discussion-content">
+                        <h3>Any ideas for guitar gala in Kandy?</h3>
+                        <p>Looking for suggestions on organizing a guitar performance event...</p>
+                        <div class="discussion-meta">
+                            <span class="author">Sarah Johnson</span>
+                            <span class="time">2 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="discussion-stats">
+                        <span class="replies">3 Replies</span>
+                    </div>
+                </div>
+
+                <div class="discussion-item" data-discussion="2">
+                    <div class="discussion-content">
+                        <h3>Language exchange partners wanted</h3>
+                        <p>Looking for English speakers who want to learn Spanish. I can help teach Spanish!</p>
+                        <div class="discussion-meta">
+                            <span class="author">Maria Garcia</span>
+                            <span class="time">5 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="discussion-stats">
+                        <span class="replies">7 Replies</span>
+                    </div>
+                </div>
+
+                <div class="discussion-item" data-discussion="3">
+                    <div class="discussion-content">
+                        <h3>Photography tips for beginner?</h3>
+                        <p>Just got my first camera and looking for basic photography tips and local shooting spots...</p>
+                        <div class="discussion-meta">
+                            <span class="author">Mike Chen</span>
+                            <span class="time">1 day ago</span>
+                        </div>
+                    </div>
+                    <div class="discussion-stats">
+                        <span class="replies">12 Replies</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Create Event Modal -->
+    <div class="modal" id="createEventModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-calendar-plus"></i> Create Community Event</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-subtitle">Share your event with the community! Anyone can join the event you organize</p>
+                
+                <form class="event-form" id="eventForm">
+                    <div class="form-tips">
+                        <h4>Tips for Great Questions:</h4>
+                        <ul>
+                            <li>Be specific about what you're looking for</li>
+                            <li>Include relevant background and any resources</li>
+                            <li>Use descriptive tags so it's easy to find your question</li>
+                            <li>Be respectful and kind to all community members</li>
+                        </ul>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eventTitle">Event Title</label>
+                        <input type="text" id="eventTitle" placeholder="What's your event about?" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="eventDate">Event Date</label>
+                            <input type="date" id="eventDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventCategory">Select Category</label>
+                            <select id="eventCategory" required>
+                                <option value="">Choose category</option>
+                                <option value="workshop">Workshop</option>
+                                <option value="meetup">Meetup</option>
+                                <option value="class">Class</option>
+                                <option value="social">Social</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eventDescription">Description</label>
+                        <textarea id="eventDescription" placeholder="Describe your event, what participants can expect, and any requirements..." rows="4" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eventLocation">Location</label>
+                        <input type="text" id="eventLocation" placeholder="Where will this event take place?" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="eventTime">Time</label>
+                            <input type="time" id="eventTime" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="maxAttendees">Max Attendees (optional)</label>
+                            <input type="number" id="maxAttendees" placeholder="Leave blank for unlimited">
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn">Cancel</button>
+                        <button type="submit" class="submit-btn">Create Event</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Discussion Modal -->
+    <div class="modal" id="createDiscussionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-comments"></i> Create Community Discussion</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-subtitle">Ask a question to get help from your community! Anyone can help you and and advice.</p>
+                
+                <form class="discussion-form" id="discussionForm">
+                    <div class="form-tips">
+                        <h4>Tips for Great Questions:</h4>
+                        <ul>
+                            <li>Be specific about what you're looking for</li>
+                            <li>Include relevant background and any resources</li>
+                            <li>Use descriptive tags so it's easy to find your question</li>
+                            <li>Be respectful and kind to all community members</li>
+                        </ul>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="discussionTitle">Question Title</label>
+                        <input type="text" id="discussionTitle" placeholder="What's your question about?" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="discussionCategory">Select Category</label>
+                        <select id="discussionCategory" required>
+                            <option value="">Choose category</option>
+                            <option value="general">General</option>
+                            <option value="skills">Skills</option>
+                            <option value="events">Events</option>
+                            <option value="advice">Advice</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="discussionDescription">Description</label>
+                        <textarea id="discussionDescription" placeholder="Provide more details about your question..." rows="4" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="discussionTags">Tags (optional)</label>
+                        <input type="text" id="discussionTags" placeholder="Add tags separated by commas (e.g., guitar, music, events)">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn">Cancel</button>
+                        <button type="submit" class="submit-btn">Post Question</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Discussion Modal -->
+    <div class="modal" id="viewDiscussionModal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3 id="discussionModalTitle">Best places to practice guitar in Kandy?</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="discussion-replies">
+                    <div class="reply-item">
+                        <div class="reply-avatar">
+                            <span>S</span>
+                        </div>
+                        <div class="reply-content">
+                            <div class="reply-author">Sarah Johnson</div>
+                            <div class="reply-text">Looking for quiet spaces to practice guitar? I can practice guitar without disturbing others. Any recommendations? Would be great to have a community space for musicians to practice guitar whether outside or acoustic without worrying about the noise.</div>
+                            <div class="reply-actions">
+                                <button class="reply-action-btn">Like</button>
+                                <button class="reply-action-btn">Share</button>
+                                <button class="reply-action-btn">Report</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reply-item">
+                        <div class="reply-avatar">
+                            <span>M</span>
+                        </div>
+                        <div class="reply-content">
+                            <div class="reply-author">Mike Davis</div>
+                            <div class="reply-text">There's a great music room at the Community Center that you can book for free! Also the park near 5th street has good acoustics and is usually quiet in the mornings.</div>
+                            <div class="reply-actions">
+                                <button class="reply-action-btn">Like</button>
+                                <button class="reply-action-btn">Share</button>
+                                <button class="reply-action-btn">Report</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reply-item">
+                        <div class="reply-avatar">
+                            <span>L</span>
+                        </div>
+                        <div class="reply-content">
+                            <div class="reply-author">Lisa Torres</div>
+                            <div class="reply-text">I've been practicing guitar in Kandy Lake area early in the morning - it's peaceful and the acoustics are amazing! The lakeside pavilion is perfect for acoustic sessions.</div>
+                            <div class="reply-actions">
+                                <button class="reply-action-btn">Like</button>
+                                <button class="reply-action-btn">Share</button>
+                                <button class="reply-action-btn">Report</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reply-item">
+                        <div class="reply-avatar">
+                            <span>R</span>
+                        </div>
+                        <div class="reply-content">
+                            <div class="reply-author">Raj Patel</div>
+                            <div class="reply-text">Check out the Royal Botanical Gardens - they have designated areas for musicians and artists. You might need a small permit but it's usually free for locals practicing.</div>
+                            <div class="reply-actions">
+                                <button class="reply-action-btn">Like</button>
+                                <button class="reply-action-btn">Share</button>
+                                <button class="reply-action-btn">Report</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="add-reply-section">
+                    <textarea id="replyText" placeholder="Share your thoughts, experiences, or helpful tips for guitar practice locations in Kandy..."></textarea>
+                    <div class="reply-actions">
+                        <button class="cancel-btn">Cancel</button>
+                        <button class="submit-btn">Post Reply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Start Your <span class="highlight">SkillHub</span> Journey?</h2>
+            <p>Join thousands of learners and teachers in your neighborhood. Whether you're looking to master a new skill or share your expertise, your community is waiting.</p>
+            <button class="cta-button" id="getStartedBtn">
+                <span>Get Started Today</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </section>
+  
+</body>
+</html>

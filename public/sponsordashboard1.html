@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillHub - Dashboard</title>
+    <link rel="stylesheet" href="css/sponsordashboard1.css">
+    <script src="js/sponsordashboard1.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+   
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Dashboard</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="sponsordashboard1.html" class="sidebar-link active">
+                    <i class="fas fa-chart-bar"></i>
+                    Overview
+                </a>
+                <a href="sponsordashboard2.html" class="sidebar-link">
+                    <i class="fas fa-bullhorn"></i>
+                    Campaigns
+                </a>
+                 <a href="sponsordashboard3.html" class="sidebar-link">
+                    <i class="fas fa-chart-line"></i>
+                    Analytics
+                </a>
+                <a href="sponsordashboard4.html" class="sidebar-link">
+                    <i class="fas fa-cog"></i>
+                    Profile Setting
+                </a>
+            </nav>
+            <button class="logout-btn">LOG OUT</button>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="dashboard-header">
+                <h1>Dashboard Overview</h1>
+                <p>Manage your sponsorship campaigns and track student engagement</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">$24,850</div>
+                    <div class="stat-label">Total Investment</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">1,247</div>
+                    <div class="stat-label">Students Reached</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">8.5%</div>
+                    <div class="stat-label">Conversion Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">Active Campaigns</div>
+                </div>
+            </div>
+
+            <!-- Active Campaigns -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-title">
+                        <i class="fas fa-chart-line"></i>
+                        Active Campaigns
+                    </div>
+                    <button class="create-btn">Create New</button>
+                </div>
+                <div class="campaigns-list">
+                    <div class="campaign-item">
+                        <div class="campaign-icon red"></div>
+                        <div class="campaign-info">
+                            <h3>Web Development Bootcamp</h3>
+                            <p>Target: 500 students • Budget: $12,000</p>
+                        </div>
+                        <span class="status-badge active">Active</span>
+                    </div>
+                    <div class="campaign-item">
+                        <div class="campaign-icon red"></div>
+                        <div class="campaign-info">
+                            <h3>AI/ML Certification</h3>
+                            <p>Target: 300 students • Budget: $8,500</p>
+                        </div>
+                        <span class="status-badge active">Active</span>
+                    </div>
+                    <div class="campaign-item">
+                        <div class="campaign-icon red"></div>
+                        <div class="campaign-info">
+                            <h3>Data Science Program</h3>
+                            <p>Target: 250 students • Budget: $7,200</p>
+                        </div>
+                        <span class="status-badge pending">Pending</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Budget Overview -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-title">Budget Overview</div>
+                </div>
+                <div class="budget-overview">
+                    <div class="budget-amounts">
+                        <div class="budget-total">$45,000</div>
+                        <div class="budget-used">$31,250</div>
+                    </div>
+                    <div class="budget-labels">
+                        <span>Total Budget</span>
+                        <span>69% Used</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 69%"></div>
+                    </div>
+                    <div class="budget-remaining">
+                        <span>Remaining: $13,750</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Students -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-title">
+                        <i class="fas fa-users"></i>
+                        Top Students
+                    </div>
+                </div>
+                <div class="students-list">
+                    <div class="student-item">
+                        <div class="student-avatar">S</div>
+                        <div class="student-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>95% Progress</p>
+                        </div>
+                    </div>
+                    <div class="student-item">
+                        <div class="student-avatar">M</div>
+                        <div class="student-info">
+                            <h4>Mike Thompson</h4>
+                            <p>92% Progress</p>
+                        </div>
+                    </div>
+                    <div class="student-item">
+                        <div class="student-avatar">E</div>
+                        <div class="student-info">
+                            <h4>Emma Brown</h4>
+                            <p>88% Progress</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+   
+</body>
+</html>
