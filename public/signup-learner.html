@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillHub - Learner Sign Up</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="C:\Users\Welcome\OneDrive - NSBM\Desktop\Skillhub\SkillhubGit\SkillHub\public\css\signup-learner.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <meta name="google-signin-client_id" content="928244016011-mpju3m1mdqjkhntbngabieokkfmm6h3e.apps.googleusercontent.com">
+</head>
+<body>
+    <div class="signup-container">
+        <!-- Left Column: Decorative Section -->
+        <div class="signup-left">
+            <div class="circle-pattern circle-1"></div>
+            <div class="circle-pattern circle-2"></div>
+            <div class="circle-pattern circle-3"></div>
+            <div class="circle-pattern circle-4"></div>
+            <div class="circle-pattern circle-5"></div>
+            <div class="circle-pattern circle-6"></div>
+            <div class="circle-pattern circle-7"></div>
+            <div class="circle-pattern circle-8"></div>
+            <div class="circle-pattern circle-9"></div>
+            <div class="circle-pattern circle-10"></div>
+            <div class="circle-pattern circle-11"></div>
+            <div class="circle-pattern circle-12"></div>
+            <div class="circle-pattern circle-13"></div>
+            <div class="circle-pattern circle-14"></div>
+            <div class="circle-pattern circle-15"></div>
+            <div class="circle-pattern circle-16"></div>
+            <div class="circle-pattern circle-17"></div>
+            <div class="circle-pattern circle-18"></div>
+            <div class="circle-pattern circle-19"></div>
+            <div class="circle-pattern circle-20"></div>
+            <div class="circle-pattern circle-21"></div>
+            <div class="circle-pattern circle-22"></div>
+            <div class="circle-pattern circle-23"></div>
+            <div class="circle-pattern circle-24"></div>
+            <div class="circle-pattern circle-25"></div>
+            <div class="circle-pattern circle-26"></div>
+            <div class="circle-pattern circle-27"></div>
+            <div class="circle-pattern circle-28"></div>
+            <div class="circle-pattern circle-29"></div>
+            <div class="circle-pattern circle-30"></div>
+            <div class="left-content">
+                <div class="star-container">
+                    <div class="star-circle"></div>
+                    <span class="star">★</span>
+                </div>
+                <div class="text-content">
+                    <h2 class="main-title">Start Learning Today!</h2>
+                    <p class="main-subtitle">Discover amazing skills from talented teachers in your community. Connect, learn, and grow together.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Sign-Up Form -->
+        <div class="signup-right">
+            <div class="brand-header">
+                <img src="C:\Users\Welcome\OneDrive - NSBM\Desktop\Skillhub\Images\SkillHub LOGO 3.png" alt="SkillHub Logo" class="signup-logo">
+                <span class="brand-text">SkillHub</span>
+            </div>
+            <h2 class="form-title">Join as a Learner</h2>
+            <p class="form-subtitle">Create your account to start your learning journey</p>
+            <form class="signup-form" id="learner-signup-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first-name">First Name:</label>
+                        <input type="text" id="first-name" name="first-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Last Name:</label>
+                        <input type="text" id="last-name" name="last-name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group location-group">
+                    <label for="location">Location:</label>
+                    <input type="text" id="location" name="location" placeholder="City, Province" required>
+                    <div id="map-container" class="map-container" style="display: none;"></div>
+                </div>
+                <div class="form-group">
+                    <label for="interests">What would you like to learn?</label>
+                    <input type="text" id="interests" name="interests" placeholder="Mathematics, Science, Art, History, programming ...">
+                </div>
+                <div class="form-group dropdown-row">
+                    <div class="dropdown-group">
+                        <label for="age-group">Age Group</label>
+                        <div class="dropdown-wrapper">
+                            <select id="age-group" name="age-group" required>
+                                <option value="" disabled selected>Select Age Group</option>
+                                <option value="12-15">12-15</option>
+                                <option value="16-20">16-20</option>
+                                <option value="21-25">21-25</option>
+                                <option value="26-30">26-30</option>
+                                <option value="30+">30+</option>
+                            </select>
+                            <img src="C:\Users\Welcome\OneDrive - NSBM\Desktop\Skillhub\Images\bxs_down-arrow.png" alt="Dropdown Arrow" class="dropdown-icon">
+                        </div>
+                    </div>
+                    <div class="dropdown-group">
+                        <label for="language">Preferred Language</label>
+                        <div class="dropdown-wrapper">
+                            <select id="language" name="language">
+                                <option value="english" selected>English</option>
+                                <option value="sinhala">Sinhala</option>
+                                <option value="tamil">Tamil</option>
+                            </select>
+                            <img src="C:\Users\Welcome\OneDrive - NSBM\Desktop\Skillhub\Images\bxs_down-arrow.png" alt="Dropdown Arrow" class="dropdown-icon">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <span class="custom-checkbox"></span>
+                        I agree to the <a href="./terms-of-service.html" class="policy-link">Terms of Service</a> and <a href="./privacy-policy.html" class="policy-link">Privacy Policy</a>
+                    </label>
+                </div>
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="updates" name="updates">
+                        <span class="custom-checkbox"></span>
+                        Send me updates about new skills and community events
+                    </label>
+                </div>
+                <button type="submit" class="signup-btn">Create My Account</button>
+            </form>
+            <div class="social-login">
+                <div class="divider-text">
+                    <span>Or sign up with</span>
+                </div>
+                <div class="social-buttons">
+                    <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="signup_with" data-logo_alignment="left"></div>
+                    <button class="social-btn facebook">
+                        <img src="C:\Users\Welcome\OneDrive - NSBM\Desktop\Skillhub\Images\logos_facebook.png" alt="Facebook" class="social-icon"> Facebook
+                    </button>
+                </div>
+            </div>
+            <p class="footer-links">
+                Already have an account? <a href="./login-learner.html">Sign In</a> | Want to teach? <a href="./signup-teacher.html">Join as Teacher</a>
+            </p>
+        </div>
+    </div>
+    <footer class="footer">
+        <!-- Content will be dynamically included or copied from footer1.html -->
+    </footer>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="C:\Users\Welcome\OneDrive - NSBM\Desktop\Skillhub\SkillhubGit\SkillHub\public\js\signup-learner.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</body>
+</html>
