@@ -14,7 +14,7 @@ body {
 .signup-left {
     flex: 1;
     width: 50%;
-    background: #51B155;
+    background: linear-gradient(180deg, #F4A261 0%, #E76F51 100%); /* Orange gradient for sponsors */
     position: relative;
     display: flex;
     padding: 2rem;
@@ -190,7 +190,7 @@ body {
 
 /* Consistent input styling */
 .form-group input,
-.form-group select {
+.form-group textarea {
     width: 100%;
     padding: 0.6rem;
     border: 1px solid #ddd;
@@ -203,8 +203,13 @@ body {
     box-sizing: border-box;
 }
 
+.form-group textarea {
+    height: 100px;
+    resize: vertical;
+}
+
 .form-group input:focus,
-.form-group select:focus {
+.form-group textarea:focus {
     border-color: #4CAF50;
     outline: none;
     background-color: #fff;
@@ -214,35 +219,6 @@ body {
 .form-group input[name="interests"] {
     padding: 0.6rem;
     height: 80px;
-}
-
-/* Dropdown row for Age Group and Language */
-.dropdown-row {
-    display: flex;
-    gap: 1rem;
-}
-
-.dropdown-group {
-    flex: 1;
-}
-
-.dropdown-wrapper {
-    position: relative;
-}
-
-.form-group select {
-    appearance: none;
-    padding-right: 2rem;
-}
-
-.dropdown-icon {
-    position: absolute;
-    right: 0.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 12px;
-    height: 12px;
-    pointer-events: none;
 }
 
 /* Checkbox Section */
@@ -308,7 +284,6 @@ body {
     text-decoration: underline;
 }
 
-
 .signup-btn {
     width: 100%;
     padding: 0.8rem;
@@ -327,6 +302,43 @@ body {
 .signup-btn:hover {
     background-color: #45a049;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Verification Note */
+.verification-note {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    background: linear-gradient(180deg, rgba(244, 162, 97, 0.1) 0%, rgba(231, 111, 81, 0.1) 100%); /* Orange gradient */
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #F4A261; /* Orange border */
+}
+
+.verification-icon {
+    margin-right: 0.75rem;
+}
+
+.verification-icon img {
+    width: 20px;
+    height: 20px;
+}
+
+.verification-note p {
+    font-size: 0.9rem;
+    color: #6B7280; /* Gray-blue for description text */
+    margin: 0;
+}
+
+.verification-note p b {
+    color: #D97706; /* Darker amber for "Verification Required" */
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.verification-note p br {
+    display: none;
 }
 
 /* Divider Text Styling */
@@ -456,11 +468,6 @@ body {
         gap: 1rem;
     }
 
-    .dropdown-row {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
     .divider-text::before,
     .divider-text::after {
         width: 30px;
@@ -482,18 +489,9 @@ body {
         width: 100%;
     }
 
-    .password-matrix {
-        grid-template-columns: 1fr;
-    }
-    
-    .location-preview {
-        text-align: center;
-    }
-    
-    .btn-confirm, .btn-change {
-        display: block;
-        width: 100%;
-        margin: 0.5rem 0;
+    .verification-note {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
 
@@ -581,7 +579,7 @@ body {
 }
 
 .interest-tag {
-    background:#e0f7ea;
+    background: #e6f0fa;
     padding: 0.3rem 0.8rem;
     border-radius: 15px;
     font-size: 0.8rem;
@@ -607,44 +605,6 @@ body {
 @keyframes tagEnter {
     from { opacity: 0; transform: translateY(5px); }
     to { opacity: 1; transform: translateY(0); }
-}
-
-/* Location Detection */
-.location-preview {
-    background: #f5f5f5;
-    padding: 0.8rem;
-    margin-top: 0.5rem;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    animation: fadeIn 0.3s;
-    border-left: 3px solid #4CAF50;
-}
-
-.btn-confirm, .btn-change {
-    padding: 0.3rem 0.8rem;
-    margin-right: 0.5rem;
-    margin-top: 0.5rem;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.btn-confirm {
-    background: #4CAF50;
-    color: white;
-}
-
-.btn-confirm:hover {
-    background: #3d8b40;
-}
-
-.btn-change {
-    background: #e0e0e0;
-}
-
-.btn-change:hover {
-    background: #bdbdbd;
 }
 
 /* Loading States */
@@ -702,60 +662,8 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-
-/* Style for the language dropdown to match other fields */
-#language {
-    width: 100%;
-    padding: 0.6rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    height: 40px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1) inset;
-    background-color: #fafafa;
-    transition: all 0.3s ease;
-    box-sizing: border-box;
-}
-
-#language:focus {
-    border-color: #4CAF50;
-    outline: none;
-    background-color: #fff;
-}
-
 /* Make the validation more noticeable */
-input.invalid, select.invalid {
+input.invalid, textarea.invalid {
     border-color: #ff4444 !important;
     animation: shake 0.5s;
-}
-
-/* Add to existing signup-learner.css */
-.map-container {
-    margin-top: 0.5rem;
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.map-controls button {
-    padding: 0.3rem 0.8rem;
-    margin-right: 0.5rem;
-    background: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.map-controls button:hover {
-    background: #3d8b40;
-}
-
-.map-controls #change-location {
-    background: #e0e0e0;
-    color: #333;
-}
-
-.map-controls #change-location:hover {
-    background: #bdbdbd;
 }

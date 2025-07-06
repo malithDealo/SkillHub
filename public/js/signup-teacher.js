@@ -1,49 +1,29 @@
-function onSignIn(googleUser) {
-    // Get user info from Google
-    const profile = googleUser.getBasicProfile();
-    const firstName = profile.getGivenName();
-    const lastName = profile.getFamilyName();
-    const email = profile.getEmail();
-
-    // Put the info into your form
-    document.getElementById('first-name').value = firstName || '';
-    document.getElementById('last-name').value = lastName || '';
-    document.getElementById('email').value = email || '';
-
-    // Show a message (you can change this to redirect or save)
-    alert('Signed up with Google! Please fill the remaining fields.');
-}
-
-// Initialize Google Sign-In
-window.onGoogleLibraryLoad = function() {
-    google.accounts.id.initialize({
-        client_id: '928244016011-mpju3m1mdqjkhntbngabieokkfmm6h3e.apps.googleusercontent.com',
-        callback: onSignIn
-    });
-    google.accounts.id.renderButton(
-        document.querySelector('.g_id_signin'),
-        { theme: 'outline', size: 'large', text: 'signup_with', shape: 'rectangular' }
-    );
-};
 document.addEventListener('DOMContentLoaded', function() {
     // DOM Elements
-    const signupForm = document.getElementById('learner-signup-form');
+    const signupForm = document.getElementById('teacher-signup-form');
     const locationInput = document.getElementById('location');
-    const interestsInput = document.getElementById('interests');
+    const skillsInput = document.getElementById('skills');
+    const aboutInput = document.getElementById('about');
     const passwordInput = document.getElementById('password');
     const emailInput = document.getElementById('email');
     const firstNameInput = document.getElementById('first-name');
     const lastNameInput = document.getElementById('last-name');
+    const phoneInput = document.getElementById('phone');
+    const experienceInput = document.getElementById('experience');
+    const teachingLanguageSelect = document.getElementById('teaching-language');
     const termsCheckbox = document.getElementById('terms');
-    const updatesCheckbox = document.querySelector('input[name="updates"]');
-    const ageGroupSelect = document.getElementById('age-group');
-    const languageSelect = document.getElementById('language');
+    const updatesCheckbox = document.getElementById('updates');
+    const backgroundCheckCheckbox = document.getElementById('background-check');
+    const certificateInput = document.getElementById('certificates');
+    const certificateList = document.getElementById('certificate-list');
     const mapContainer = document.getElementById('map-container');
-    let selectedInterests = [];
+    const mapControls = document.getElementById('map-controls');
+    let selectedSkills = [];
+    let uploadedCertificates = [];
     let map, marker;
 
     // Databases
-    const interestsDatabase = [
+    const skillsDatabase = [
         "Mathematics", "Calculus", "Algebra", "Statistics", "Geometry",
         "Computer Science", "Web Development", "Python", "Java", "JavaScript",
         "Art History", "Digital Art", "Photography", "Music Theory", "Drawing",
@@ -68,19 +48,18 @@ document.addEventListener('DOMContentLoaded', function() {
     function init() {
         createPasswordMatrix();
         setupValidationWithoutIcons();
-        setupSmartInterests();
+        setupSmartSkills();
         setupSmartLocation();
+        setupCertificateManagement();
         setupFormSubmission();
         setupSocialLogins();
-        
-        // Remove any existing validation tooltips on page load
         clearAllValidationErrors();
     }
 
     // Clear all validation error states and tooltips
     function clearAllValidationErrors() {
         document.querySelectorAll('.validation-tooltip').forEach(tooltip => tooltip.remove());
-        const allInputs = document.querySelectorAll('input, select');
+        const allInputs = document.querySelectorAll('input, select, textarea');
         allInputs.forEach(input => input.style.borderColor = '#ddd');
     }
 
@@ -95,14 +74,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const matrixContainer = document.createElement('div');
         matrixContainer.className = 'password-matrix';
-        
         requirements.forEach(req => {
             const item = document.createElement('div');
             item.id = `req-${req.id}`;
             item.innerHTML = `<span class="req-icon">◯</span> ${req.text}`;
             matrixContainer.appendChild(item);
         });
-
         passwordInput.parentNode.appendChild(matrixContainer);
 
         passwordInput.addEventListener('input', () => {
@@ -122,7 +99,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 const isValid = /^[a-zA-Z]{2,}$/.test(input.value.trim());
                 input.style.borderColor = input.value ? (isValid ? '#4CAF50' : '#ff4444') : '#ddd';
             });
-
             input.addEventListener('blur', () => {
                 if (input.value && !/^[a-zA-Z]{2,}$/.test(input.value.trim())) {
                     showValidationTooltip(input, 'Please enter a valid name (letters only, 2+ characters)');
@@ -135,12 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
         emailInput.addEventListener('input', () => {
             const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim());
             emailInput.style.borderColor = emailInput.value ? (isValid ? '#4CAF50' : '#ff4444') : '#ddd';
-            if (isValid) {
-                hideValidationTooltip(emailInput);
-                predictAgeGroup();
-            }
         });
-
         emailInput.addEventListener('blur', () => {
             if (emailInput.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim())) {
                 showValidationTooltip(emailInput, 'Please enter a valid email address');
@@ -149,11 +120,22 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+        phoneInput.addEventListener('input', () => {
+            const isValid = /^\+?[\d\s-]{10,}$/.test(phoneInput.value.trim());
+            phoneInput.style.borderColor = phoneInput.value ? (isValid ? '#4CAF50' : '#ff4444') : '#ddd';
+        });
+        phoneInput.addEventListener('blur', () => {
+            if (phoneInput.value && !/^\+?[\d\s-]{10,}$/.test(phoneInput.value.trim())) {
+                showValidationTooltip(phoneInput, 'Please enter a valid phone number (10+ digits)');
+            } else {
+                hideValidationTooltip(phoneInput);
+            }
+        });
+
         locationInput.addEventListener('input', () => {
             const isValid = locationInput.value.trim().length > 0;
             locationInput.style.borderColor = isValid ? '#4CAF50' : '#ddd';
         });
-
         locationInput.addEventListener('blur', () => {
             if (!locationInput.value.trim()) {
                 showValidationTooltip(locationInput, 'Please enter your location');
@@ -162,25 +144,43 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        ageGroupSelect.addEventListener('change', () => {
-            const isValid = ageGroupSelect.value !== "" && ageGroupSelect.value !== null;
-            ageGroupSelect.style.borderColor = isValid ? '#4CAF50' : '#ddd';
+        aboutInput.addEventListener('input', () => {
+            const isValid = aboutInput.value.trim().length >= 20;
+            aboutInput.style.borderColor = aboutInput.value ? (isValid ? '#4CAF50' : '#ff4444') : '#ddd';
+        });
+        aboutInput.addEventListener('blur', () => {
+            if (aboutInput.value && aboutInput.value.trim().length < 20) {
+                showValidationTooltip(aboutInput, 'Please enter at least 20 characters about yourself');
+            } else {
+                hideValidationTooltip(aboutInput);
+            }
         });
 
-        languageSelect.addEventListener('change', () => {
-            const validLanguages = ['english', 'sinhala', 'tamil'];
-            const isValid = validLanguages.includes(languageSelect.value);
-            languageSelect.style.borderColor = isValid ? '#4CAF50' : '#ddd';
+        experienceInput.addEventListener('input', () => {
+            const isValid = experienceInput.value >= 0 && experienceInput.value !== '';
+            experienceInput.style.borderColor = isValid ? '#4CAF50' : '#ddd';
+        });
+        experienceInput.addEventListener('blur', () => {
+            if (experienceInput.value === '' || experienceInput.value < 0) {
+                showValidationTooltip(experienceInput, 'Please enter a valid number of years (0 or more)');
+            } else {
+                hideValidationTooltip(experienceInput);
+            }
         });
 
-        const validLanguages = ['english', 'sinhala', 'tamil'];
-        if (validLanguages.includes(languageSelect.value)) {
-            languageSelect.style.borderColor = '#4CAF50';
-        }
+        teachingLanguageSelect.addEventListener('change', () => {
+            const isValid = teachingLanguageSelect.value !== "" && teachingLanguageSelect.value !== null;
+            teachingLanguageSelect.style.borderColor = isValid ? '#4CAF50' : '#ddd';
+        });
 
         termsCheckbox.addEventListener('change', () => {
             const isValid = termsCheckbox.checked;
             termsCheckbox.parentNode.style.color = isValid ? '#333' : '#ff4444';
+            if (!isValid) {
+                showValidationTooltip(termsCheckbox, 'Please accept the terms and conditions');
+            } else {
+                hideValidationTooltip(termsCheckbox);
+            }
         });
 
         if (updatesCheckbox) {
@@ -188,8 +188,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 updatesCheckbox.parentNode.style.color = '#333';
             });
         }
+
+        backgroundCheckCheckbox.addEventListener('change', () => {
+            const isValid = backgroundCheckCheckbox.checked;
+            backgroundCheckCheckbox.parentNode.style.color = isValid ? '#333' : '#ff4444';
+            if (!isValid) {
+                showValidationTooltip(backgroundCheckCheckbox, 'Please consent to a background check');
+            } else {
+                hideValidationTooltip(backgroundCheckCheckbox);
+            }
+        });
     }
 
+    // Validation tooltip functions
     function showValidationTooltip(element, message) {
         hideValidationTooltip(element);
         const tooltip = document.createElement('div');
@@ -205,50 +216,53 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function hideValidationTooltip(element) {
-        document.querySelectorAll('.validation-tooltip').forEach(tooltip => tooltip.remove());
+        const existingTooltips = document.querySelectorAll('.validation-tooltip');
+        existingTooltips.forEach(tooltip => tooltip.remove());
     }
 
-    function setupSmartInterests() {
+    // 3. Smart Skills with Tags
+    function setupSmartSkills() {
         const tagsContainer = document.createElement('div');
-        tagsContainer.className = 'interest-tags';
-        interestsInput.parentNode.appendChild(tagsContainer);
+        tagsContainer.className = 'skill-tags';
+        skillsInput.parentNode.appendChild(tagsContainer);
 
         let currentSuggestionIndex = -1;
         let suggestionsContainer = null;
 
+        renderTags();
+
         function renderTags() {
-            tagsContainer.innerHTML = selectedInterests.map(interest => `
-                <span class="interest-tag">
-                    ${interest}
-                    <span class="remove-tag" data-interest="${interest}">×</span>
+            tagsContainer.innerHTML = selectedSkills.map(skill => `
+                <span class="skill-tag">
+                    ${skill}
+                    <span class="remove-tag" data-skill="${skill}">×</span>
                 </span>
             `).join('');
-            tagsContainer.classList.remove('valid');
             document.querySelectorAll('.remove-tag').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    selectedInterests = selectedInterests.filter(i => i !== btn.dataset.interest);
+                    selectedSkills = selectedSkills.filter(s => s !== btn.dataset.skill);
                     renderTags();
                 });
             });
-            updateInterestsValidation();
+            updateSkillsValidation();
         }
 
-        function updateInterestsValidation() {
-            const isValid = selectedInterests.length > 0;
-            hideValidationTooltip(interestsInput);
-            interestsInput.style.borderColor = selectedInterests.length > 0 ? '#4CAF50' : '#ddd';
+        function updateSkillsValidation() {
+            const isValid = selectedSkills.length > 0;
+            hideValidationTooltip(skillsInput);
+            skillsInput.style.borderColor = selectedSkills.length > 0 ? '#4CAF50' : '#ddd';
             return isValid;
         }
 
-        function addInterest(interest) {
-            const trimmedInterest = interest.trim();
-            if (!trimmedInterest) return;
-            if (!selectedInterests.some(i => i.toLowerCase() === trimmedInterest.toLowerCase())) {
-                selectedInterests.push(trimmedInterest);
+        function addSkill(skill) {
+            const trimmedSkill = skill.trim();
+            if (!trimmedSkill) return;
+            if (!selectedSkills.some(s => s.toLowerCase() === trimmedSkill.toLowerCase())) {
+                selectedSkills.push(trimmedSkill);
                 renderTags();
             }
-            interestsInput.value = '';
+            skillsInput.value = '';
             if (suggestionsContainer) {
                 suggestionsContainer.remove();
                 suggestionsContainer = null;
@@ -256,21 +270,20 @@ document.addEventListener('DOMContentLoaded', function() {
             currentSuggestionIndex = -1;
         }
 
-        interestsInput.addEventListener('keydown', (e) => {
+        skillsInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 if (suggestionsContainer) {
                     const suggestions = Array.from(suggestionsContainer.querySelectorAll('.suggestion-item'));
                     if (currentSuggestionIndex >= 0 && suggestions[currentSuggestionIndex]) {
-                        addInterest(suggestions[currentSuggestionIndex].textContent);
+                        addSkill(suggestions[currentSuggestionIndex].textContent);
                         return;
                     }
                 }
-                if (interestsInput.value.trim()) addInterest(interestsInput.value.trim());
+                if (skillsInput.value.trim()) addSkill(skillsInput.value.trim());
             }
             if (!suggestionsContainer) return;
             const suggestions = Array.from(suggestionsContainer.querySelectorAll('.suggestion-item'));
-            if (suggestions.length === 0) return;
             if (e.key === 'ArrowDown') {
                 e.preventDefault();
                 currentSuggestionIndex = (currentSuggestionIndex + 1) % suggestions.length;
@@ -293,15 +306,15 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        interestsInput.addEventListener('input', () => {
-            const value = interestsInput.value.trim();
+        skillsInput.addEventListener('input', () => {
+            const value = skillsInput.value.trim();
             currentSuggestionIndex = -1;
             if (value.length > 1) {
-                const filtered = interestsDatabase.filter(item => 
-                    item.toLowerCase().includes(value.toLowerCase()) && 
-                    !selectedInterests.some(selected => selected.toLowerCase() === item.toLowerCase())
+                const filtered = skillsDatabase.filter(item =>
+                    item.toLowerCase().includes(value.toLowerCase()) &&
+                    !selectedSkills.some(selected => selected.toLowerCase() === item.toLowerCase())
                 );
-                showSuggestions(interestsInput, filtered);
+                showSuggestions(skillsInput, filtered);
             } else if (suggestionsContainer) {
                 suggestionsContainer.remove();
                 suggestionsContainer = null;
@@ -325,25 +338,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 item.textContent = suggestion;
                 item.addEventListener('mousedown', (e) => {
                     e.preventDefault();
-                    addInterest(suggestion);
+                    addSkill(suggestion);
                 });
                 suggestionsContainer.appendChild(item);
             });
             document.body.appendChild(suggestionsContainer);
             document.addEventListener('click', (e) => {
-                if (!suggestionsContainer?.contains(e.target) && e.target !== interestsInput) {
+                if (!suggestionsContainer?.contains(e.target) && e.target !== skillsInput) {
                     if (suggestionsContainer) {
                         suggestionsContainer.remove();
                         suggestionsContainer = null;
                     }
-                    document.removeEventListener('click', arguments.callee);
+                    document.removeEventListener('click', this);
                 }
             });
         }
 
-        window.validateInterests = updateInterestsValidation;
+        window.validateSkills = updateSkillsValidation;
     }
 
+    // 4. Smart Location Detection with Map
     async function setupSmartLocation() {
         if (navigator.geolocation) {
             try {
@@ -355,10 +369,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 const data = await response.json();
                 const city = data.address.city || data.address.town || data.address.village;
                 const state = data.address.state;
-                const location = city ? `${city}, ${state}` : `undefined, ${state}`;
-                locationInput.value = location;
+                locationInput.value = city ? `${city}, ${state}` : `undefined, ${state}`;
 
-                // Show map if city/town is undefined or user wants to refine
                 if (!city) {
                     showMapForSelection(latitude, longitude, true);
                 } else {
@@ -377,7 +389,7 @@ document.addEventListener('DOMContentLoaded', function() {
         locationInput.addEventListener('input', () => {
             const value = locationInput.value.trim();
             if (value.length > 1) {
-                showSuggestions(locationInput, commonLocations.filter(item => 
+                showSuggestions(locationInput, commonLocations.filter(item =>
                     item.toLowerCase().includes(value.toLowerCase())
                 ));
             }
@@ -442,22 +454,6 @@ document.addEventListener('DOMContentLoaded', function() {
         locationInput.value = detailedLocation;
     }
 
-    function predictAgeGroup() {
-        const emailDomain = emailInput.value.split('@')[1] || '';
-        if (emailDomain.match(/\.edu$|\.ac\.|\.school\.|college|university/i)) {
-            ageGroupSelect.value = '16-20';
-            return;
-        }
-        if (emailDomain.match(/\.com$|\.org$|\.net$|\.io/i)) {
-            ageGroupSelect.value = '21-25';
-            return;
-        }
-        const stemInterests = ["Programming", "Math", "Physics", "Engineering", "Web Development"];
-        if (selectedInterests.some(i => stemInterests.includes(i))) {
-            ageGroupSelect.value = '21-25';
-        }
-    }
-
     function showLocationPreview(locationData, lat, lon) {
         const preview = document.createElement('div');
         preview.className = 'location-preview';
@@ -485,6 +481,50 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // 5. Certificate Management
+    function setupCertificateManagement() {
+        certificateInput.addEventListener('change', (e) => {
+            const files = Array.from(e.target.files);
+            const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+
+            files.forEach(file => {
+                if (file.size > maxSize) {
+                    showValidationTooltip(certificateInput, `File ${file.name} exceeds 5MB limit`);
+                    return;
+                }
+                if (!['application/pdf', 'image/jpeg', 'image/png'].includes(file.type)) {
+                    showValidationTooltip(certificateInput, `Invalid file type for ${file.name} (only PDF, JPG, PNG allowed)`);
+                    return;
+                }
+                if (uploadedCertificates.length >= 5) {
+                    showValidationTooltip(certificateInput, 'Maximum 5 certificates allowed');
+                    return;
+                }
+                if (!uploadedCertificates.some(c => c.name === file.name)) {
+                    uploadedCertificates.push(file);
+                    renderCertificates();
+                }
+            });
+            certificateInput.value = ''; // Reset input
+        });
+
+        function renderCertificates() {
+            certificateList.innerHTML = uploadedCertificates.map((cert, index) => `
+                <div class="certificate-item">
+                    <span>${cert.name}</span>
+                    <span class="remove-certificate" data-index="${index}">×</span>
+                </div>
+            `).join('');
+            document.querySelectorAll('.remove-certificate').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    uploadedCertificates.splice(btn.dataset.index, 1);
+                    renderCertificates();
+                });
+            });
+        }
+    }
+
+    // 6. Form Submission
     function setupFormSubmission() {
         signupForm.addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -495,8 +535,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     await new Promise(resolve => setTimeout(resolve, 1500));
                     showSuccessMessage();
                     signupForm.reset();
-                    selectedInterests = [];
-                    document.querySelector('.interest-tags').innerHTML = '';
+                    selectedSkills = [];
+                    uploadedCertificates = [];
+                    document.querySelector('.skill-tags').innerHTML = '';
+                    certificateList.innerHTML = '';
                 } catch (error) {
                     showError("Submission failed. Please try again.");
                 } finally {
@@ -506,63 +548,88 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // 7. Form Validation
     function validateForm() {
         let isValid = true;
         const errors = [];
+
         if (!/^[a-zA-Z]{2,}$/.test(firstNameInput.value.trim())) {
             firstNameInput.style.borderColor = '#ff4444';
             if (!firstNameInput.value.trim()) errors.push('First name is required');
             else errors.push('First name must contain only letters (2+ characters)');
             isValid = false;
         } else firstNameInput.style.borderColor = '#4CAF50';
+
         if (!/^[a-zA-Z]{2,}$/.test(lastNameInput.value.trim())) {
             lastNameInput.style.borderColor = '#ff4444';
             if (!lastNameInput.value.trim()) errors.push('Last name is required');
             else errors.push('Last name must contain only letters (2+ characters)');
             isValid = false;
         } else lastNameInput.style.borderColor = '#4CAF50';
+
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim())) {
             emailInput.style.borderColor = '#ff4444';
             errors.push('Please enter a valid email address');
             isValid = false;
         } else emailInput.style.borderColor = '#4CAF50';
+
         if (passwordInput.value.length < 8) {
             passwordInput.style.borderColor = '#ff4444';
             errors.push('Password must be at least 8 characters long');
             isValid = false;
         } else passwordInput.style.borderColor = '#4CAF50';
-        if (locationInput.value.trim().length === 0) {
+
+        if (!/^\+?[\d\s-]{10,}$/.test(phoneInput.value.trim())) {
+            phoneInput.style.borderColor = '#ff4444';
+            errors.push('Please enter a valid phone number (10+ digits)');
+            isValid = false;
+        } else phoneInput.style.borderColor = '#4CAF50';
+
+        if (!locationInput.value.trim().length) {
             locationInput.style.borderColor = '#ff4444';
             errors.push('Please enter your location');
             isValid = false;
         } else locationInput.style.borderColor = '#4CAF50';
-        if (selectedInterests.length === 0) {
-            interestsInput.style.borderColor = '#ff4444';
-            showValidationTooltip(interestsInput, 'Please select at least one interest');
-            errors.push('Please select at least one interest');
+
+        if (selectedSkills.length === 0) {
+            skillsInput.style.borderColor = '#ff4444';
+            showValidationTooltip(skillsInput, 'Please select at least one skill');
+            errors.push('Please select at least one skill');
             isValid = false;
-        } else interestsInput.style.borderColor = '#4CAF50';
-        if (ageGroupSelect.value === "" || ageGroupSelect.value === null) {
-            ageGroupSelect.style.borderColor = '#ff4444';
-            errors.push('Please select your age group');
+        } else skillsInput.style.borderColor = '#4CAF50';
+
+        if (aboutInput.value.trim().length < 20) {
+            aboutInput.style.borderColor = '#ff4444';
+            errors.push('Please enter at least 20 characters about yourself');
             isValid = false;
-        } else ageGroupSelect.style.borderColor = '#4CAF50';
-        const validLanguages = ['english', 'sinhala', 'tamil'];
-        if (!validLanguages.includes(languageSelect.value)) {
-            languageSelect.style.borderColor = '#ff4444';
-            showValidationTooltip(languageSelect, 'Please select a valid language');
-            errors.push('Please select a valid language');
+        } else aboutInput.style.borderColor = '#4CAF50';
+
+        if (experienceInput.value === '' || experienceInput.value < 0) {
+            experienceInput.style.borderColor = '#ff4444';
+            errors.push('Please enter a valid number of years (0 or more)');
             isValid = false;
-        } else {
-            languageSelect.style.borderColor = '#4CAF50';
-            hideValidationTooltip(languageSelect);
-        }
+        } else experienceInput.style.borderColor = '#4CAF50';
+
+        if (!teachingLanguageSelect.value || teachingLanguageSelect.value === null) {
+            teachingLanguageSelect.style.borderColor = '#ff4444';
+            errors.push('Please select a teaching language');
+            isValid = false;
+        } else teachingLanguageSelect.style.borderColor = '#4CAF50';
+
         if (!termsCheckbox.checked) {
             termsCheckbox.parentNode.style.color = '#ff4444';
             errors.push('Please accept the terms and conditions');
             isValid = false;
         } else termsCheckbox.parentNode.style.color = '#333';
+
         if (updatesCheckbox && !updatesCheckbox.checked) updatesCheckbox.parentNode.style.color = '#333';
+
+        if (!backgroundCheckCheckbox.checked) {
+            backgroundCheckCheckbox.parentNode.style.color = '#ff4444';
+            errors.push('Please consent to a background check');
+            isValid = false;
+        } else backgroundCheckCheckbox.parentNode.style.color = '#333';
+
         if (!isValid) showError(`Please fix the following issues:\n• ${errors.join('\n• ')}`);
         return isValid;
     }
@@ -570,13 +637,13 @@ document.addEventListener('DOMContentLoaded', function() {
     function showLoadingState() {
         const submitButton = signupForm.querySelector('.signup-btn');
         submitButton.disabled = true;
-        submitButton.innerHTML = '<span class="spinner"></span> Creating Account...';
+        submitButton.innerHTML = '<span class="spinner"></span> Starting Verification...';
     }
 
     function hideLoadingState() {
         const submitButton = signupForm.querySelector('.signup-btn');
         submitButton.disabled = false;
-        submitButton.textContent = 'Create My Account';
+        submitButton.textContent = 'Start Verification Process';
     }
 
     function showSuccessMessage() {
@@ -584,11 +651,8 @@ document.addEventListener('DOMContentLoaded', function() {
         message.className = 'success-message';
         message.innerHTML = `
             <h3>🎉 Welcome to SkillHub!</h3>
-            <p>Your account has been created successfully.</p>
-            <p>We've curated these learning paths for you:</p>
-            <ul>
-                ${selectedInterests.slice(0, 3).map(i => `<li>${i} Fundamentals</li>`).join('')}
-            </ul>
+            <p>Your teacher account is being verified. You'll be notified within 1-2 business days.</p>
+            <p>Skills to teach: ${selectedSkills.join(', ')}</p>
         `;
         signupForm.parentNode.insertBefore(message, signupForm.nextSibling);
         setTimeout(() => message.remove(), 5000);
@@ -597,41 +661,20 @@ document.addEventListener('DOMContentLoaded', function() {
     function showError(text) {
         const error = document.createElement('div');
         error.className = 'error-message-popup';
-        error.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #ff4444;
-            color: white;
-            padding: 1rem;
-            border-radius: 8px;
-            z-index: 10000;
-            max-width: 300px;
-            white-space: pre-line;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        `;
+        error.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #ff4444; color: white; padding: 1rem; border-radius: 8px; z-index: 10000; max-width: 300px; white-space: pre-line; box-shadow: 0 4px 12px rgba(0,0,0,0.15);';
         error.textContent = text;
         document.body.appendChild(error);
         setTimeout(() => error.remove(), 5000);
     }
 
+    // Social Logins
     function setupSocialLogins() {
         const googleBtn = document.querySelector('.social-btn.google');
         const facebookBtn = document.querySelector('.social-btn.facebook');
-        if (googleBtn) {
-            googleBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                alert('Google sign-up would be implemented here');
-            });
-        }
-        if (facebookBtn) {
-            facebookBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                alert('Facebook sign-up would be implemented here');
-            });
-        }
+        if (googleBtn) googleBtn.addEventListener('click', (e) => { e.preventDefault(); alert('Google sign-up would be implemented here'); });
+        if (facebookBtn) facebookBtn.addEventListener('click', (e) => { e.preventDefault(); alert('Facebook sign-up would be implemented here'); });
     }
 
-    
+    // Initialize everything
     init();
 });
