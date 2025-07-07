@@ -38,7 +38,7 @@
     width: 48px;
     height: 48px;
     display: flex;
-    align-items: center;
+    margin-left: -230px;
     justify-content:flex-start;
    
 }
@@ -81,6 +81,7 @@
     border-radius: 6px;
     transition: all 0.3s ease;
     position: relative;
+    margin-left: -20px;
 }
 
 .nav-link:hover {

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,22 @@
     <link rel="stylesheet" href="css/dashboard_overview.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="js/auth.js"></script>
-<script src="js/login-integration.js"></script>
+    <script src="js/login-integration.js"></script>
+    <link rel="stylesheet" href="css/navbar1.css">
+    <link rel="stylesheet" href="css/navbar2.css">
+    <link rel="stylesheet" href="css/navbar-enhancements.css">
+    <link rel="stylesheet" href="css/footer2.css">
+    <style>
+        .dashboard-container{
+            margin-top: 10vh;
+        }
+    </style>
 </head>
+
 <body>
+
+    <div id="navbar-container"></div>
+
     <div class="dashboard-container">
         <!-- Sidebar -->
         <div class="sidebar">
@@ -17,65 +31,6 @@
                 <h1>TeacherPro</h1>
                 <p class="welcome-text">Welcome back, Dr. Smith!</p>
             </div>
-            
-            <nav>
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link active" data-section="overview">
-                            <i class="fas fa-home"></i>
-                            Dashboard Overview
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" data-section="classes">
-                            <i class="fas fa-chalkboard"></i>
-                            Class Management
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" data-section="schedule">
-                            <i class="fas fa-calendar-alt"></i>
-                            Schedule & Availability
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" data-section="earnings">
-                            <i class="fas fa-chart-line"></i>
-                            Earnings & Analytics
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" data-section="profile">
-                            <i class="fas fa-user-cog"></i>
-                            Profile Settings
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" data-section="community">
-                            <i class="fas fa-users"></i>
-                            Teacher Community
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" data-section="students">
-                            <i class="fas fa-user-graduate"></i>
-                            Student Management
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" data-section="events">
-                            <i class="fas fa-calendar-check"></i>
-                            Event Organization
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" data-section="sponsors">
-                            <i class="fas fa-handshake"></i>
-                            Sponsor Management
-                        </a>
-                    </li>
-                </ul>
-            </nav>
 
             <div class="filters">
                 <h3><i class="fas fa-filter"></i> Quick Filters</h3>
@@ -175,7 +130,7 @@
                                 <i class="fas fa-chart-bar"></i>
                                 <span>View Reports</span>
                             </button>
-<button class="btn-primary" onclick="window.open('quick_actions_modals.html', '_blank')">
+                            <button class="btn-primary" onclick="window.open('quick_actions_modals.html', '_blank')">
                                 <i class="fas fa-credit-card"></i>
                                 <span>Manage Payments</span>
                             </button>
@@ -328,7 +283,8 @@
                     <input type="number" id="sponsorshipAmount" min="0" step="0.01">
                 </div>
                 <div class="form-actions">
-                    <button type="button" class="btn-secondary" onclick="closeModal('connectSponsorModal')">Cancel</button>
+                    <button type="button" class="btn-secondary"
+                        onclick="closeModal('connectSponsorModal')">Cancel</button>
                     <button type="submit" class="btn-primary">Connect</button>
                 </div>
             </form>
@@ -412,6 +368,11 @@
         </div>
     </div>
 
+    <div id="footer-container"></div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/footer-loader.js"></script>
     <script src="js/dashboard_overview.js"></script>
 </body>
+
 </html>

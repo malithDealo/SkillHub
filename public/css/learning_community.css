@@ -5,11 +5,15 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+body{
+    background: #ffffff!important;
+}
+
 /* Hero Section */
 .hero {
     text-align: center;
     padding: 80px 20px;
-    background: linear-gradient(to bottom, #6b46c1, #4c51bf);
+    background: linear-gradient(to bottom, #6b46c1, #4c51bf)!important;
     color: white;
     position: relative;
     overflow: hidden;

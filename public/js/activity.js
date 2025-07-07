@@ -77,13 +77,13 @@ const activityData = {
     heroTitle: "Enjoy Adaptive Physical Education",
     heroSubtitle: "Modified sports and movement activities tailored to abilities.",
     accessibilityFeatures: ["simple-mode"],
-    heroBackground: "linear-gradient(to bottom, #2E1A47, #5A3AA3)"
+    heroBackground: "linear-gradient(to bottom, #2E1A47,rgb(58, 163, 112))"
   },
   "Assistive Technology": {
     heroTitle: "Empower with Assistive Technology",
     heroSubtitle: "Use devices and tools to foster independence.",
     accessibilityFeatures: ["audio-support", "high-contrast"],
-   heroBackground: "linear-gradient(to bottom, #2E1A47, #5A3AA3)"
+   heroBackground: "linear-gradient(to bottom, #2E1A47,rgb(58, 163, 70))"
   }
 };
 
@@ -91,7 +91,7 @@ const activityData = {
 const defaultHeroContent = {
   heroTitle: '<span class="about-text">Welcome to</span> <span class="skillhub-text">Inclusive Learning</span>',
   heroSubtitle: "Empowering every child with personalized, accessible education tailored to unique abilities",
-  heroBackground: "linear-gradient(to bottom, #3B2A6B, #6A5ACD)"
+  heroBackground: "linear-gradient(to bottom, #3B2A6B,rgb(90, 205, 117))"
 };
 
 // Accessibility feature functions
