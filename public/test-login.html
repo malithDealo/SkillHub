@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillHub - Test Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .test-section h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .credentials {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .btn {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-primary { background: #007bff; color: white; }
+        .btn-success { background: #28a745; color: white; }
+        .btn-warning { background: #ffc107; color: black; }
+        .btn:hover { opacity: 0.8; }
+        #log {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 SkillHub Login Test Page</h1>
+        <p>Use this page to test your SkillHub authentication system.</p>
+
+        <!-- API Test Section -->
+        <div class="test-section">
+            <h3>1. API Connection Test</h3>
+            <button class="btn btn-primary" onclick="testAPI()">Test API Connection</button>
+            <div id="api-status"></div>
+        </div>
+
+        <!-- Database Test Section -->
+        <div class="test-section">
+            <h3>2. Sample Account Login Test</h3>
+            <div class="credentials">
+                <strong>Test Accounts (password: "password"):</strong><br>
+                • Learner: learner@example.com<br>
+                • Teacher: teacher@example.com<br>
+                • Sponsor: sponsor@example.com
+            </div>
+            
+            <label for="testEmail">Email:</label>
+            <input type="email" id="testEmail" value="learner@example.com" style="margin: 5px; padding: 8px; width: 200px;">
+            
+            <label for="testPassword">Password:</label>
+            <input type="password" id="testPassword" value="password" style="margin: 5px; padding: 8px; width: 100px;">
+            
+            <label for="testUserType">User Type:</label>
+            <select id="testUserType" style="margin: 5px; padding: 8px;">
+                <option value="learner">Learner</option>
+                <option value="teacher">Teacher</option>
+                <option value="sponsor">Sponsor</option>
+            </select>
+            
+            <br><br>
+            <button class="btn btn-success" onclick="testLogin()">Test Login</button>
+            <div id="login-status"></div>
+        </div>
+
+        <!-- Page Navigation Test -->
+        <div class="test-section">
+            <h3>3. Login Page Navigation</h3>
+            <a href="login-learner.html" class="btn btn-primary">Test Learner Login Page</a>
+            <a href="login-teacher.html" class="btn btn-primary">Test Teacher Login Page</a>
+            <a href="login-sponsor.html" class="btn btn-primary">Test Sponsor Login Page</a>
+        </div>
+
+        <!-- Debug Log -->
+        <div class="test-section">
+            <h3>4. Debug Log</h3>
+            <button class="btn btn-warning" onclick="clearLog()">Clear Log</button>
+            <div id="log"></div>
+        </div>
+    </div>
+
+    <script>
+        // Debug logging function
+        function log(message) {
+            const logDiv = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString();
+            logDiv.textContent += `[${timestamp}] ${message}\n`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log(message);
+        }
+
+        function clearLog() {
+            document.getElementById('log').textContent = '';
+        }
+
+        // Test API connection
+        async function testAPI() {
+            const statusDiv = document.getElementById('api-status');
+            statusDiv.innerHTML = 'Testing...';
+            
+            try {
+                log('Testing API connection...');
+                const response = await fetch('/api/test');
+                const data = await response.json();
+                
+                if (response.ok) {
+                    statusDiv.innerHTML = `<div class="status success">✅ API Connected Successfully<br>Database: ${data.database}<br>Timestamp: ${data.timestamp}</div>`;
+                    log('✅ API test successful');
+                } else {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="status error">❌ API Connection Failed: ${error.message}</div>`;
+                log(`❌ API test failed: ${error.message}`);
+            }
+        }
+
+        // Test login functionality
+        async function testLogin() {
+            const email = document.getElementById('testEmail').value;
+            const password = document.getElementById('testPassword').value;
+            const userType = document.getElementById('testUserType').value;
+            const statusDiv = document.getElementById('login-status');
+            
+            statusDiv.innerHTML = 'Testing login...';
+            
+            try {
+                log(`Testing login for ${email} as ${userType}...`);
+                
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password,
+                        userType: userType
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    statusDiv.innerHTML = `<div class="status success">✅ Login Successful!<br>User: ${data.user.name}<br>Type: ${data.user.type}<br>Email: ${data.user.email}</div>`;
+                    log(`✅ Login successful for ${data.user.name}`);
+                    
+                    // Store the login data for testing
+                    localStorage.setItem('skillhub_user', JSON.stringify(data.user));
+                    localStorage.setItem('skillhub_authenticated', 'true');
+                    if (data.token) {
+                        localStorage.setItem('skillhub_token', data.token);
+                    }
+                } else {
+                    statusDiv.innerHTML = `<div class="status error">❌ Login Failed: ${data.message}</div>`;
+                    log(`❌ Login failed: ${data.message}`);
+                }
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="status error">❌ Login Error: ${error.message}</div>`;
+                log(`❌ Login error: ${error.message}`);
+            }
+        }
+
+        // Auto-update email when user type changes
+        document.getElementById('testUserType').addEventListener('change', function() {
+            const userType = this.value;
+            document.getElementById('testEmail').value = `${userType}@example.com`;
+        });
+
+        // Initialize page
+        log('Test page loaded');
+        log('Server should be running on http://localhost:3000');
+        log('Click "Test API Connection" to verify server is running');
+    </script>
+</body>
+</html>

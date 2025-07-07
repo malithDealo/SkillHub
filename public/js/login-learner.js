@@ -1,204 +1,79 @@
-// Updated login-teacher.js
-// Replace your existing login-teacher.js with this code
-
+// Corrected login-learner.js - matches actual HTML form IDs
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('teacher-signin-form');
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const signinBtn = document.querySelector('.signin-btn');
-    const rememberMeCheckbox = document.getElementById('remember-me');
-    
-    // Create error message element
-    const errorMessage = document.createElement('p');
-    errorMessage.className = 'error-message';
-    errorMessage.style.color = '#ff4d4d';
-    errorMessage.style.fontSize = '0.9rem';
-    errorMessage.style.marginTop = '0.5rem';
-    errorMessage.style.display = 'none';
-    form.insertBefore(errorMessage, signinBtn);
-
-    // Password visibility toggle
-    const togglePassword = document.createElement('span');
-    togglePassword.className = 'toggle-password';
-    togglePassword.innerHTML = '👁️';
-    togglePassword.style.position = 'absolute';
-    togglePassword.style.right = '10px';
-    togglePassword.style.top = '50%';
-    togglePassword.style.transform = 'translateY(-50%)';
-    togglePassword.style.cursor = 'pointer';
-    passwordInput.parentElement.style.position = 'relative';
-    passwordInput.parentElement.appendChild(togglePassword);
-
-    togglePassword.addEventListener('click', () => {
-        const type = passwordInput.type === 'password' ? 'text' : 'password';
-        passwordInput.type = type;
-        togglePassword.innerHTML = type === 'password' ? '👁️' : '👁️‍🗨️';
-    });
-
-    // Email validation
-    const validateEmail = (email) => {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    };
-
-    // Real-time validation feedback
-    const validateInput = () => {
-        if (!emailInput.value.trim()) {
-            emailInput.style.borderColor = '#ff4d4d';
-        } else if (!validateEmail(emailInput.value.trim())) {
-            emailInput.style.borderColor = '#ff4d4d';
-        } else {
-            emailInput.style.borderColor = '#6A1B9A';
-        }
-
-        if (!passwordInput.value.trim()) {
-            passwordInput.style.borderColor = '#ff4d4d';
-        } else if (passwordInput.value.trim().length < 6) {
-            passwordInput.style.borderColor = '#ff4d4d';
-        } else {
-            passwordInput.style.borderColor = '#6A1B9A';
-        }
-    };
-
-    emailInput.addEventListener('input', validateInput);
-    passwordInput.addEventListener('input', validateInput);
-
-    // Form submission handling with API integration
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const email = emailInput.value.trim();
-        const password = passwordInput.value.trim();
-
-        // Reset error message
-        errorMessage.style.display = 'none';
-        errorMessage.textContent = '';
-
-        // Basic validation
-        if (!email || !password) {
-            errorMessage.textContent = 'Please fill in all fields.';
-            errorMessage.style.display = 'block';
-            return;
-        }
-
-        if (!validateEmail(email)) {
-            errorMessage.textContent = 'Please enter a valid email address.';
-            errorMessage.style.display = 'block';
-            return;
-        }
-
-        if (password.length < 6) {
-            errorMessage.textContent = 'Password must be at least 6 characters long.';
-            errorMessage.style.display = 'block';
-            return;
-        }
-
-        // Show loading state
-        signinBtn.disabled = true;
-        signinBtn.textContent = 'Signing In...';
-
-        try {
-            // API call to backend
-            const response = await fetch('http://localhost:3000/api/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: email,
-                    password: password,
-                    userType: 'teacher'
-                })
-            });
-
-            const data = await response.json();
-
-            if (data.success) {
-                // Handle "Remember Me" functionality
-                if (rememberMeCheckbox.checked) {
-                    localStorage.setItem('teacherEmail', email);
-                } else {
-                    localStorage.removeItem('teacherEmail');
-                }
-
-                // Store user data and token
-                localStorage.setItem('skillhub_user', JSON.stringify(data.user));
-                localStorage.setItem('skillhub_authenticated', 'true');
-                localStorage.setItem('skillhub_token', data.token);
-
-                // Use SkillHub Auth system to sign in
-                if (window.SkillHubAuth) {
-                    await window.SkillHubAuth.signIn(data.user, 'teacher');
-                } else {
-                    // Fallback redirect
-                    window.location.href = 'teacher-dashboard.html';
-                }
-            } else {
-                errorMessage.textContent = data.message || 'Login failed. Please try again.';
-                errorMessage.style.display = 'block';
-            }
-        } catch (error) {
-            console.error('Login error:', error);
-            errorMessage.textContent = 'Network error. Please check your connection and try again.';
-            errorMessage.style.display = 'block';
-        } finally {
-            // Reset button state
-            signinBtn.disabled = false;
-            signinBtn.textContent = 'Sign In';
-        }
-    });
-
-    // Pre-fill form if "Remember Me" was previously checked
-    const savedEmail = localStorage.getItem('teacherEmail');
-    if (savedEmail) {
-        emailInput.value = savedEmail;
-        rememberMeCheckbox.checked = true;
-    }
-
-    // Accessibility enhancements
-    form.setAttribute('aria-label', 'Teacher Sign In Form');
-    emailInput.setAttribute('aria-required', 'true');
-    passwordInput.setAttribute('aria-required', 'true');
-    signinBtn.setAttribute('aria-label', 'Submit teacher login credentials');
-});
-
-// Similar updates for login-learner.js
-// Replace your existing login-learner.js with this code
-
-// login-learner.js
-document.addEventListener('DOMContentLoaded', () => {
+    // Use the correct form ID from login-learner.html
     const form = document.getElementById('learner-signin-form');
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
     const signinBtn = document.querySelector('.signin-btn');
     const rememberMeCheckbox = document.getElementById('remember-me');
     
+    // Debug: Log what elements we found
+    console.log('Form found:', !!form);
+    console.log('Email input found:', !!emailInput);
+    console.log('Password input found:', !!passwordInput);
+    console.log('Signin button found:', !!signinBtn);
+
+    // Check if elements exist before proceeding
+    if (!form) {
+        console.error('Learner signin form not found! Looking for ID: learner-signin-form');
+        return;
+    }
+    
+    if (!emailInput || !passwordInput || !signinBtn) {
+        console.error('Required form elements not found:', {
+            email: !!emailInput,
+            password: !!passwordInput,
+            button: !!signinBtn
+        });
+        return;
+    }
+
     // Create error message element
-    const errorMessage = document.createElement('p');
+    const errorMessage = document.createElement('div');
     errorMessage.className = 'error-message';
-    errorMessage.style.color = '#ff4d4d';
-    errorMessage.style.fontSize = '0.9rem';
-    errorMessage.style.marginTop = '0.5rem';
-    errorMessage.style.display = 'none';
+    errorMessage.style.cssText = `
+        color: #ff4d4d;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        display: none;
+        background: rgba(255, 77, 77, 0.1);
+        padding: 0.8rem;
+        border-radius: 6px;
+        border: 1px solid rgba(255, 77, 77, 0.3);
+        text-align: center;
+    `;
+    
+    // Insert error message before submit button
     form.insertBefore(errorMessage, signinBtn);
 
     // Password visibility toggle
-    const togglePassword = document.createElement('span');
-    togglePassword.className = 'toggle-password';
-    togglePassword.innerHTML = '👁️';
-    togglePassword.style.position = 'absolute';
-    togglePassword.style.right = '10px';
-    togglePassword.style.top = '50%';
-    togglePassword.style.transform = 'translateY(-50%)';
-    togglePassword.style.cursor = 'pointer';
-    passwordInput.parentElement.style.position = 'relative';
-    passwordInput.parentElement.appendChild(togglePassword);
+    const passwordGroup = passwordInput.closest('.form-group');
+    if (passwordGroup) {
+        passwordGroup.style.position = 'relative';
+        
+        const togglePassword = document.createElement('span');
+        togglePassword.className = 'toggle-password';
+        togglePassword.innerHTML = '👁️';
+        togglePassword.style.cssText = `
+            position: absolute;
+            right: 15px;
+            top: 70%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            user-select: none;
+            font-size: 1.2rem;
+            z-index: 10;
+        `;
+        
+        passwordGroup.appendChild(togglePassword);
 
-    togglePassword.addEventListener('click', () => {
-        const type = passwordInput.type === 'password' ? 'text' : 'password';
-        passwordInput.type = type;
-        togglePassword.innerHTML = type === 'password' ? '👁️' : '👁️‍🗨️';
-    });
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            togglePassword.innerHTML = type === 'password' ? '👁️' : '👁️‍🗨️';
+        });
+    }
 
     // Email validation
     const validateEmail = (email) => {
@@ -208,16 +83,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Real-time validation feedback
     const validateInput = () => {
+        // Email validation
         if (!emailInput.value.trim()) {
-            emailInput.style.borderColor = '#ff4d4d';
+            emailInput.style.borderColor = '#ddd';
         } else if (!validateEmail(emailInput.value.trim())) {
             emailInput.style.borderColor = '#ff4d4d';
         } else {
             emailInput.style.borderColor = '#4CAF50';
         }
 
+        // Password validation
         if (!passwordInput.value.trim()) {
-            passwordInput.style.borderColor = '#ff4d4d';
+            passwordInput.style.borderColor = '#ddd';
         } else if (passwordInput.value.trim().length < 6) {
             passwordInput.style.borderColor = '#ff4d4d';
         } else {
@@ -225,46 +102,54 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Add event listeners for real-time validation
     emailInput.addEventListener('input', validateInput);
     passwordInput.addEventListener('input', validateInput);
 
-    // Form submission handling with API integration
+    // Clear error message when user starts typing
+    emailInput.addEventListener('input', () => {
+        hideError();
+    });
+    passwordInput.addEventListener('input', () => {
+        hideError();
+    });
+
+    // Form submission handling
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
         const email = emailInput.value.trim();
         const password = passwordInput.value.trim();
 
+        console.log('Learner login attempt for:', email);
+
         // Reset error message
-        errorMessage.style.display = 'none';
-        errorMessage.textContent = '';
+        hideError();
 
         // Basic validation
         if (!email || !password) {
-            errorMessage.textContent = 'Please fill in all fields.';
-            errorMessage.style.display = 'block';
+            showError('Please fill in all fields.');
             return;
         }
 
         if (!validateEmail(email)) {
-            errorMessage.textContent = 'Please enter a valid email address.';
-            errorMessage.style.display = 'block';
+            showError('Please enter a valid email address.');
             return;
         }
 
         if (password.length < 6) {
-            errorMessage.textContent = 'Password must be at least 6 characters long.';
-            errorMessage.style.display = 'block';
+            showError('Password must be at least 6 characters long.');
             return;
         }
 
         // Show loading state
-        signinBtn.disabled = true;
-        signinBtn.textContent = 'Signing In...';
+        setLoadingState(true);
 
         try {
+            console.log('Making API call to /api/auth/login...');
+            
             // API call to backend
-            const response = await fetch('http://localhost:3000/api/auth/login', {
+            const response = await fetch('/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -276,11 +161,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
             });
 
+            console.log('Response status:', response.status);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
             const data = await response.json();
+            console.log('Login response:', data);
 
             if (data.success) {
                 // Handle "Remember Me" functionality
-                if (rememberMeCheckbox.checked) {
+                if (rememberMeCheckbox && rememberMeCheckbox.checked) {
                     localStorage.setItem('learnerEmail', email);
                 } else {
                     localStorage.removeItem('learnerEmail');
@@ -289,202 +181,111 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Store user data and token
                 localStorage.setItem('skillhub_user', JSON.stringify(data.user));
                 localStorage.setItem('skillhub_authenticated', 'true');
-                localStorage.setItem('skillhub_token', data.token);
-
-                // Use SkillHub Auth system to sign in
-                if (window.SkillHubAuth) {
-                    await window.SkillHubAuth.signIn(data.user, 'learner');
-                } else {
-                    // Fallback redirect
-                    window.location.href = 'learner-dashboard.html';
+                if (data.token) {
+                    localStorage.setItem('skillhub_token', data.token);
                 }
+
+                // Show success message
+                showSuccess('Login successful! Redirecting...');
+
+                // Redirect after a short delay
+                setTimeout(() => {
+                    // Try to use SkillHub Auth system first
+                    if (window.SkillHubAuth) {
+                        try {
+                            window.SkillHubAuth.signIn(data.user, 'learner');
+                        } catch (authError) {
+                            console.error('Auth system error:', authError);
+                            // Fallback redirect
+                            window.location.href = 'learner-dashboard.html';
+                        }
+                    } else {
+                        // Direct redirect if auth system not available
+                        window.location.href = 'dashboard.html';
+                    }
+                }, 1500);
             } else {
-                errorMessage.textContent = data.message || 'Login failed. Please try again.';
-                errorMessage.style.display = 'block';
+                showError(data.message || 'Login failed. Please check your credentials and try again.');
             }
         } catch (error) {
             console.error('Login error:', error);
-            errorMessage.textContent = 'Network error. Please check your connection and try again.';
-            errorMessage.style.display = 'block';
+            
+            if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                showError('Unable to connect to server. Please check your connection and try again.');
+            } else if (error.message.includes('404')) {
+                showError('Login service not found. Please contact support.');
+            } else if (error.message.includes('500')) {
+                showError('Server error. Please try again later.');
+            } else {
+                showError('Login failed. Please try again.');
+            }
         } finally {
             // Reset button state
-            signinBtn.disabled = false;
-            signinBtn.textContent = 'Sign In';
+            setLoadingState(false);
         }
     });
 
+    // Helper functions
+    function showError(message) {
+        errorMessage.textContent = message;
+        errorMessage.style.display = 'block';
+        errorMessage.style.color = '#ff4d4d';
+        errorMessage.style.backgroundColor = 'rgba(255, 77, 77, 0.1)';
+        errorMessage.style.borderColor = 'rgba(255, 77, 77, 0.3)';
+        errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function showSuccess(message) {
+        errorMessage.textContent = message;
+        errorMessage.style.display = 'block';
+        errorMessage.style.color = '#4CAF50';
+        errorMessage.style.backgroundColor = 'rgba(76, 175, 80, 0.1)';
+        errorMessage.style.borderColor = 'rgba(76, 175, 80, 0.3)';
+        errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function hideError() {
+        errorMessage.style.display = 'none';
+    }
+
+    function setLoadingState(isLoading) {
+        if (isLoading) {
+            signinBtn.disabled = true;
+            signinBtn.textContent = 'Signing In...';
+            emailInput.disabled = true;
+            passwordInput.disabled = true;
+            if (rememberMeCheckbox) rememberMeCheckbox.disabled = true;
+        } else {
+            signinBtn.disabled = false;
+            signinBtn.textContent = 'Sign In';
+            emailInput.disabled = false;
+            passwordInput.disabled = false;
+            if (rememberMeCheckbox) rememberMeCheckbox.disabled = false;
+        }
+    }
+
     // Pre-fill form if "Remember Me" was previously checked
     const savedEmail = localStorage.getItem('learnerEmail');
-    if (savedEmail) {
+    if (savedEmail && rememberMeCheckbox) {
         emailInput.value = savedEmail;
         rememberMeCheckbox.checked = true;
     }
+
+    // Social login handlers (placeholder functionality)
+    const socialButtons = document.querySelectorAll('.social-btn');
+    socialButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const platform = btn.textContent.trim().includes('Google') ? 'Google' : 'Facebook';
+            showError(`${platform} sign-in is not yet implemented. Please use email and password.`);
+        });
+    });
 
     // Accessibility enhancements
     form.setAttribute('aria-label', 'Learner Sign In Form');
     emailInput.setAttribute('aria-required', 'true');
     passwordInput.setAttribute('aria-required', 'true');
     signinBtn.setAttribute('aria-label', 'Submit login credentials');
-});
 
-// login-sponsor.js
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('sponsor-signin-form');
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const signinBtn = document.querySelector('.signin-btn');
-    const rememberMeCheckbox = document.getElementById('remember-me');
-    
-    // Create error message element
-    const errorMessage = document.createElement('p');
-    errorMessage.className = 'error-message';
-    errorMessage.style.color = '#ff4d4d';
-    errorMessage.style.fontSize = '0.9rem';
-    errorMessage.style.marginTop = '0.5rem';
-    errorMessage.style.display = 'none';
-    form.insertBefore(errorMessage, signinBtn);
-
-    // Password visibility toggle
-    const togglePassword = document.createElement('span');
-    togglePassword.className = 'toggle-password';
-    togglePassword.innerHTML = '👁️';
-    togglePassword.style.position = 'absolute';
-    togglePassword.style.right = '10px';
-    togglePassword.style.top = '50%';
-    togglePassword.style.transform = 'translateY(-50%)';
-    togglePassword.style.cursor = 'pointer';
-    passwordInput.parentElement.style.position = 'relative';
-    passwordInput.parentElement.appendChild(togglePassword);
-
-    togglePassword.addEventListener('click', () => {
-        const type = passwordInput.type === 'password' ? 'text' : 'password';
-        passwordInput.type = type;
-        togglePassword.innerHTML = type === 'password' ? '👁️' : '👁️‍🗨️';
-    });
-
-    // Email validation
-    const validateEmail = (email) => {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    };
-
-    // Real-time validation feedback
-    const validateInput = () => {
-        if (!emailInput.value.trim()) {
-            emailInput.style.borderColor = '#ff4d4d';
-        } else if (!validateEmail(emailInput.value.trim())) {
-            emailInput.style.borderColor = '#ff4d4d';
-        } else {
-            emailInput.style.borderColor = '#4CAF50';
-        }
-
-        if (!passwordInput.value.trim()) {
-            passwordInput.style.borderColor = '#ff4d4d';
-        } else if (passwordInput.value.trim().length < 6) {
-            passwordInput.style.borderColor = '#ff4d4d';
-        } else {
-            passwordInput.style.borderColor = '#4CAF50';
-        }
-    };
-
-    emailInput.addEventListener('input', validateInput);
-    passwordInput.addEventListener('input', validateInput);
-
-    // Form submission handling with API integration
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const email = emailInput.value.trim();
-        const password = passwordInput.value.trim();
-
-        // Reset error message
-        errorMessage.style.display = 'none';
-        errorMessage.textContent = '';
-
-        // Basic validation
-        if (!email || !password) {
-            errorMessage.textContent = 'Please fill in all fields.';
-            errorMessage.style.display = 'block';
-            return;
-        }
-
-        if (!validateEmail(email)) {
-            errorMessage.textContent = 'Please enter a valid email address.';
-            errorMessage.style.display = 'block';
-            return;
-        }
-
-        if (password.length < 6) {
-            errorMessage.textContent = 'Password must be at least 6 characters long.';
-            errorMessage.style.display = 'block';
-            return;
-        }
-
-        // Show loading state
-        signinBtn.disabled = true;
-        signinBtn.textContent = 'Signing In...';
-
-        try {
-            // API call to backend
-            const response = await fetch('http://localhost:3000/api/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: email,
-                    password: password,
-                    userType: 'sponsor'
-                })
-            });
-
-            const data = await response.json();
-
-            if (data.success) {
-                // Handle "Remember Me" functionality
-                if (rememberMeCheckbox.checked) {
-                    localStorage.setItem('sponsorEmail', email);
-                } else {
-                    localStorage.removeItem('sponsorEmail');
-                }
-
-                // Store user data and token
-                localStorage.setItem('skillhub_user', JSON.stringify(data.user));
-                localStorage.setItem('skillhub_authenticated', 'true');
-                localStorage.setItem('skillhub_token', data.token);
-
-                // Use SkillHub Auth system to sign in
-                if (window.SkillHubAuth) {
-                    await window.SkillHubAuth.signIn(data.user, 'sponsor');
-                } else {
-                    // Fallback redirect
-                    window.location.href = 'sponsor-dashboard.html';
-                }
-            } else {
-                errorMessage.textContent = data.message || 'Login failed. Please try again.';
-                errorMessage.style.display = 'block';
-            }
-        } catch (error) {
-            console.error('Login error:', error);
-            errorMessage.textContent = 'Network error. Please check your connection and try again.';
-            errorMessage.style.display = 'block';
-        } finally {
-            // Reset button state
-            signinBtn.disabled = false;
-            signinBtn.textContent = 'Sign In';
-        }
-    });
-
-    // Pre-fill form if "Remember Me" was previously checked
-    const savedEmail = localStorage.getItem('sponsorEmail');
-    if (savedEmail) {
-        emailInput.value = savedEmail;
-        rememberMeCheckbox.checked = true;
-    }
-
-    // Accessibility enhancements
-    form.setAttribute('aria-label', 'Sponsor Sign In Form');
-    emailInput.setAttribute('aria-required', 'true');
-    passwordInput.setAttribute('aria-required', 'true');
-    signinBtn.setAttribute('aria-label', 'Submit sponsor login credentials');
+    console.log('✅ Learner login form initialized successfully');
 });

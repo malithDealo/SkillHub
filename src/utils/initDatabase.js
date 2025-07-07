@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 
 // Create database directory if it doesn't exist
-const dbDir = path.join(__dirname, '../../database');
+const dbDir = path.join(__dirname, '../database');
 if (!fs.existsSync(dbDir)) {
   fs.mkdirSync(dbDir, { recursive: true });
 }
