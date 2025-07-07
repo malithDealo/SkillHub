@@ -1,30 +1,15 @@
-// Corrected login-learner.js - matches actual HTML form IDs
+// FIXED login-learner.js
 document.addEventListener('DOMContentLoaded', () => {
-    // Use the correct form ID from login-learner.html
     const form = document.getElementById('learner-signin-form');
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
     const signinBtn = document.querySelector('.signin-btn');
     const rememberMeCheckbox = document.getElementById('remember-me');
     
-    // Debug: Log what elements we found
-    console.log('Form found:', !!form);
-    console.log('Email input found:', !!emailInput);
-    console.log('Password input found:', !!passwordInput);
-    console.log('Signin button found:', !!signinBtn);
+    console.log('Learner form found:', !!form);
 
-    // Check if elements exist before proceeding
-    if (!form) {
-        console.error('Learner signin form not found! Looking for ID: learner-signin-form');
-        return;
-    }
-    
-    if (!emailInput || !passwordInput || !signinBtn) {
-        console.error('Required form elements not found:', {
-            email: !!emailInput,
-            password: !!passwordInput,
-            button: !!signinBtn
-        });
+    if (!form || !emailInput || !passwordInput || !signinBtn) {
+        console.error('Required form elements not found');
         return;
     }
 
@@ -44,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
         text-align: center;
     `;
     
-    // Insert error message before submit button
     form.insertBefore(errorMessage, signinBtn);
 
     // Password visibility toggle
@@ -83,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Real-time validation feedback
     const validateInput = () => {
-        // Email validation
         if (!emailInput.value.trim()) {
             emailInput.style.borderColor = '#ddd';
         } else if (!validateEmail(emailInput.value.trim())) {
@@ -92,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
             emailInput.style.borderColor = '#4CAF50';
         }
 
-        // Password validation
         if (!passwordInput.value.trim()) {
             passwordInput.style.borderColor = '#ddd';
         } else if (passwordInput.value.trim().length < 6) {
@@ -102,17 +84,59 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Add event listeners for real-time validation
     emailInput.addEventListener('input', validateInput);
     passwordInput.addEventListener('input', validateInput);
 
-    // Clear error message when user starts typing
-    emailInput.addEventListener('input', () => {
-        hideError();
-    });
-    passwordInput.addEventListener('input', () => {
-        hideError();
-    });
+    emailInput.addEventListener('input', () => hideError());
+    passwordInput.addEventListener('input', () => hideError());
+
+    // Enhanced login success handler function
+    function handleLoginSuccess(data, userType) {
+        console.log(`${userType} login successful:`, data);
+        
+        // Store user data and token
+        const userData = {
+            id: data.user.id || Date.now(),
+            name: data.user.name || `${data.user.first_name || ''} ${data.user.last_name || ''}`.trim(),
+            email: data.user.email,
+            firstName: data.user.first_name,
+            lastName: data.user.last_name,
+            type: userType,
+            profileImage: data.user.profileImage || null,
+            ...data.user
+        };
+        
+        localStorage.setItem('skillhub_user', JSON.stringify(userData));
+        localStorage.setItem('skillhub_authenticated', 'true');
+        
+        if (data.token) {
+            localStorage.setItem('skillhub_token', data.token);
+        }
+
+        showSuccess('Login successful! Redirecting...');
+
+        // Use SkillHub Auth system if available
+        if (window.SkillHubAuth) {
+            try {
+                window.SkillHubAuth.signIn(userData, userType);
+                return;
+            } catch (authError) {
+                console.error('Auth system error:', authError);
+            }
+        }
+        
+        // Manual redirect as fallback
+        setTimeout(() => {
+            const redirectMap = {
+                learner: 'dashboard.html',
+                teacher: 'dashboard_overview.html',
+                sponsor: 'sponsordashboard1.html'
+            };
+            
+            const redirectUrl = redirectMap[userType] || 'dashboard.html';
+            window.location.href = redirectUrl;
+        }, 1500);
+    }
 
     // Form submission handling
     form.addEventListener('submit', async (e) => {
@@ -123,10 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         console.log('Learner login attempt for:', email);
 
-        // Reset error message
         hideError();
 
-        // Basic validation
         if (!email || !password) {
             showError('Please fill in all fields.');
             return;
@@ -142,13 +164,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Show loading state
         setLoadingState(true);
 
         try {
             console.log('Making API call to /api/auth/login...');
             
-            // API call to backend
             const response = await fetch('/api/auth/login', {
                 method: 'POST',
                 headers: {
@@ -171,35 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Login response:', data);
 
             if (data.success) {
-                // OLD CODE - REPLACE THIS:
-                // if (rememberMeCheckbox && rememberMeCheckbox.checked) {
-                //     localStorage.setItem('learnerEmail', email);
-                // } else {
-                //     localStorage.removeItem('learnerEmail');
-                // }
-                // 
-                // localStorage.setItem('skillhub_user', JSON.stringify(data.user));
-                // localStorage.setItem('skillhub_authenticated', 'true');
-                // if (data.token) {
-                //     localStorage.setItem('skillhub_token', data.token);
-                // }
-                // 
-                // showSuccess('Login successful! Redirecting...');
-                // 
-                // setTimeout(() => {
-                //     if (window.SkillHubAuth) {
-                //         try {
-                //             window.SkillHubAuth.signIn(data.user, 'learner');
-                //         } catch (authError) {
-                //             console.error('Auth system error:', authError);
-                //             window.location.href = 'learner-dashboard.html';
-                //         }
-                //     } else {
-                //         window.location.href = 'dashboard.html';
-                //     }
-                // }, 1500);
-            
-                // NEW CODE - ADD THIS:
                 // Handle "Remember Me" functionality
                 if (rememberMeCheckbox && rememberMeCheckbox.checked) {
                     localStorage.setItem('learnerEmail', email);
@@ -207,8 +198,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     localStorage.removeItem('learnerEmail');
                 }
                 
-                // Use the enhanced login success handler
+                // FIXED: Use correct user type
                 handleLoginSuccess(data, 'learner');
+            } else {
+                showError(data.message || 'Login failed. Please check your credentials and try again.');
             }
         } catch (error) {
             console.error('Login error:', error);
@@ -223,7 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 showError('Login failed. Please try again.');
             }
         } finally {
-            // Reset button state
             setLoadingState(false);
         }
     });
@@ -274,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
         rememberMeCheckbox.checked = true;
     }
 
-    // Social login handlers (placeholder functionality)
+    // Social login handlers
     const socialButtons = document.querySelectorAll('.social-btn');
     socialButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -284,7 +276,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Accessibility enhancements
     form.setAttribute('aria-label', 'Learner Sign In Form');
     emailInput.setAttribute('aria-required', 'true');
     passwordInput.setAttribute('aria-required', 'true');
@@ -292,3 +283,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log('✅ Learner login form initialized successfully');
 });
+
+// FIXED login-teacher.js - Update the form submission success handling
+// Replace the success handling section in login-teacher.js with:
+
+// if (data.success) {
+//     if (rememberMeCheckbox && rememberMeCheckbox.checked) {
+//         localStorage.setItem('teacherEmail', email);
+//     } else {
+//         localStorage.removeItem('teacherEmail');
+//     }
+//     
+//     // FIXED: Use correct user type - TEACHER not learner
+//     handleLoginSuccess(data, 'teacher');
+// }
+
+// FIXED login-sponsor.js - Update the form submission success handling  
+// Replace the success handling section in login-sponsor.js with:
+
+// if (data.success) {
+//     if (rememberMeCheckbox && rememberMeCheckbox.checked) {
+//         localStorage.setItem('sponsorEmail', email);
+//     } else {
+//         localStorage.removeItem('sponsorEmail');
+//     }
+//     
+//     // FIXED: Use correct user type - SPONSOR not learner  
+//     handleLoginSuccess(data, 'sponsor');
+// }
