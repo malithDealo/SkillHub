@@ -171,41 +171,44 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Teacher login response:', data);
 
             if (data.success) {
+                // OLD CODE - REPLACE THIS:
+                // if (rememberMeCheckbox && rememberMeCheckbox.checked) {
+                //     localStorage.setItem('learnerEmail', email);
+                // } else {
+                //     localStorage.removeItem('learnerEmail');
+                // }
+                // 
+                // localStorage.setItem('skillhub_user', JSON.stringify(data.user));
+                // localStorage.setItem('skillhub_authenticated', 'true');
+                // if (data.token) {
+                //     localStorage.setItem('skillhub_token', data.token);
+                // }
+                // 
+                // showSuccess('Login successful! Redirecting...');
+                // 
+                // setTimeout(() => {
+                //     if (window.SkillHubAuth) {
+                //         try {
+                //             window.SkillHubAuth.signIn(data.user, 'learner');
+                //         } catch (authError) {
+                //             console.error('Auth system error:', authError);
+                //             window.location.href = 'learner-dashboard.html';
+                //         }
+                //     } else {
+                //         window.location.href = 'dashboard.html';
+                //     }
+                // }, 1500);
+            
+                // NEW CODE - ADD THIS:
                 // Handle "Remember Me" functionality
                 if (rememberMeCheckbox && rememberMeCheckbox.checked) {
-                    localStorage.setItem('teacherEmail', email);
+                    localStorage.setItem('learnerEmail', email);
                 } else {
-                    localStorage.removeItem('teacherEmail');
+                    localStorage.removeItem('learnerEmail');
                 }
-
-                // Store user data and token
-                localStorage.setItem('skillhub_user', JSON.stringify(data.user));
-                localStorage.setItem('skillhub_authenticated', 'true');
-                if (data.token) {
-                    localStorage.setItem('skillhub_token', data.token);
-                }
-
-                // Show success message
-                showSuccess('Login successful! Redirecting...');
-
-                // Redirect after a short delay
-                setTimeout(() => {
-                    // Try to use SkillHub Auth system first
-                    if (window.SkillHubAuth) {
-                        try {
-                            window.SkillHubAuth.signIn(data.user, 'teacher');
-                        } catch (authError) {
-                            console.error('Auth system error:', authError);
-                            // Fallback redirect
-                            window.location.href = 'teacher-dashboard.html';
-                        }
-                    } else {
-                        // Direct redirect if auth system not available
-                        window.location.href = 'teacher-dashboard.html';
-                    }
-                }, 1500);
-            } else {
-                showError(data.message || 'Login failed. Please check your credentials and try again.');
+                
+                // Use the enhanced login success handler
+                handleLoginSuccess(data, 'learner');
             }
         } catch (error) {
             console.error('Teacher login error:', error);
