@@ -1,0 +1,206 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Top Navbar Styles */
+.navbar-top {
+    background: #FFFFFF;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 0.5rem 0;
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    padding-left: 0;
+}
+
+/* Brand Section */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    
+}
+
+.logo {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    margin-left: -230px;
+    justify-content:flex-start;
+   
+}
+
+.brand-text {
+    font-size: 1.75rem;
+    font-weight: 1000;
+    color: #87BE25;
+    letter-spacing: -0.5px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navigation Menu */
+.navbar-menu {
+    display: flex;
+    align-items: center;
+    margin-left: 7rem; /* Adjust this value as needed */
+}
+
+
+.navbar-nav {
+    display: flex;
+    list-style: none;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #495057;
+    font-weight: 500;
+    font-size: 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    position: relative;
+    margin-left: -20px;
+}
+
+.nav-link:hover {
+    color: #28a745;
+    background-color: rgba(40, 167, 69, 0.1);
+}
+
+.nav-link.active {
+    color: #28a745;
+    background-color: rgba(40, 167, 69, 0.15);
+}
+
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    content: "▼";
+    font-size: 0.7rem;
+    
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.dropdown:hover .dropdown-toggle::after {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 0.5rem 0;
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu li {
+    list-style: none;
+}
+
+.dropdown-link {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #495057;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.dropdown-link:hover {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+}
+
+/* Navbar Actions */
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.profile-icon {
+    width: 44px;
+    height: 44px;
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+}
+
+.profile-icon img {
+    width: 40px;
+    height: 40px;
+   
+}
+
+.profile-icon:hover {
+    transform: scale(1.05);
+    
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.mobile-menu-btn span {
+    width: 24px;
+    height: 3px;
+    background: #495057;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
