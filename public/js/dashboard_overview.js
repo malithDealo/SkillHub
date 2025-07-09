@@ -1,3 +1,334 @@
+// Add this code to: public/js/dashboard_overview.js (for teachers)
+// Teacher Dashboard Profile Update Handler
+
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('🔧 Initializing teacher dashboard profile handlers...');
+    
+    // Initialize profile handlers
+    initializeTeacherProfileHandlers();
+});
+
+function initializeTeacherProfileHandlers() {
+    // Profile picture upload (avatar upload button)
+    const avatarUploadBtn = document.querySelector('.avatar-upload');
+    if (avatarUploadBtn) {
+        avatarUploadBtn.addEventListener('click', handleAvatarUpload);
+    }
+    
+    // Settings form submissions
+    const settingsForms = document.querySelectorAll('form, .settings-form');
+    settingsForms.forEach(form => {
+        if (form.id !== 'passwordForm') { // Exclude password form
+            form.addEventListener('submit', handleTeacherProfileUpdate);
+        }
+    });
+    
+    // Tab switching for profile settings
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const tabName = e.target.textContent.toLowerCase().replace(' ', '-');
+            if (tabName.includes('personal') || tabName.includes('professional')) {
+                // These tabs have profile forms
+                setTimeout(initializeTeacherProfileHandlers, 100);
+            }
+        });
+    });
+    
+    // Real-time name updates
+    const nameInputs = document.querySelectorAll('#firstName, #lastName, input[name="firstName"], input[name="lastName"]');
+    nameInputs.forEach(input => {
+        input.addEventListener('blur', handleTeacherNameUpdate);
+    });
+}
+
+function handleAvatarUpload() {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*';
+    fileInput.style.display = 'none';
+    
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            handleTeacherImageUpload(file);
+        }
+    });
+    
+    document.body.appendChild(fileInput);
+    fileInput.click();
+    document.body.removeChild(fileInput);
+}
+
+async function handleTeacherImageUpload(file) {
+    // Validate file
+    if (!file.type.startsWith('image/')) {
+        showTeacherError('Please select a valid image file.');
+        return;
+    }
+    
+    if (file.size > 5 * 1024 * 1024) {
+        showTeacherError('Image file must be less than 5MB.');
+        return;
+    }
+    
+    showTeacherSuccess('Uploading profile picture...');
+    
+    try {
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+            const imageData = e.target.result;
+            
+            // Update avatar image immediately
+            const avatarImg = document.querySelector('.avatar-img');
+            if (avatarImg) {
+                avatarImg.src = imageData;
+            }
+            
+            // Update via API
+            await updateTeacherProfile({ profileImage: imageData });
+        };
+        reader.readAsDataURL(file);
+    } catch (error) {
+        console.error('Error processing teacher image:', error);
+        showTeacherError('Failed to process image. Please try again.');
+    }
+}
+
+async function handleTeacherProfileUpdate(e) {
+    e.preventDefault();
+    
+    const form = e.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+    
+    // Remove empty values
+    Object.keys(data).forEach(key => {
+        if (data[key] === '' || data[key] === null) {
+            delete data[key];
+        }
+    });
+    
+    // Convert skills to array if it's a string
+    if (data.subjects && typeof data.subjects === 'string') {
+        data.skills = data.subjects.split(',').map(s => s.trim());
+        delete data.subjects;
+    }
+    
+    console.log('📝 Updating teacher profile with data:', data);
+    
+    try {
+        const submitBtn = form.querySelector('button[type="submit"], .btn-primary');
+        const originalText = submitBtn ? submitBtn.textContent : '';
+        
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Updating...';
+        }
+        
+        await updateTeacherProfile(data);
+        
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+        }
+        
+    } catch (error) {
+        const submitBtn = form.querySelector('button[type="submit"], .btn-primary');
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Save Changes';
+        }
+    }
+}
+
+async function handleTeacherNameUpdate(e) {
+    const field = e.target;
+    const fieldName = field.name || field.id;
+    const fieldValue = field.value.trim();
+    
+    if (!fieldValue || !fieldName) return;
+    
+    // Update name fields for real-time navbar updates
+    if (fieldName.toLowerCase().includes('name')) {
+        const updateData = {};
+        updateData[fieldName] = fieldValue;
+        
+        try {
+            await updateTeacherProfile(updateData, false); // Silent update
+            console.log('✅ Teacher name field updated:', fieldName, fieldValue);
+        } catch (error) {
+            console.error('❌ Error updating teacher name field:', error);
+        }
+    }
+}
+
+async function updateTeacherProfile(data, showMessage = true) {
+    try {
+        const token = localStorage.getItem('skillhub_token');
+        if (!token) {
+            showTeacherError('Please log in again to update your profile.');
+            return;
+        }
+        
+        const response = await fetch('/api/auth/profile', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            // Update local storage
+            const currentUser = JSON.parse(localStorage.getItem('skillhub_user') || '{}');
+            const updatedUser = { ...currentUser, ...result.user };
+            localStorage.setItem('skillhub_user', JSON.stringify(updatedUser));
+            
+            // Dispatch update event to update navbar
+            if (window.dispatchProfileUpdate) {
+                window.dispatchProfileUpdate(updatedUser);
+            }
+            
+            if (showMessage) {
+                showTeacherSuccess('Profile updated successfully!');
+            }
+            console.log('✅ Teacher profile updated successfully:', updatedUser);
+        } else {
+            throw new Error(result.message || 'Failed to update profile');
+        }
+    } catch (error) {
+        console.error('❌ Teacher profile update error:', error);
+        if (showMessage) {
+            showTeacherError('Failed to update profile. Please try again.');
+        }
+        throw error;
+    }
+}
+
+function showTeacherSuccess(message) {
+    // Remove existing messages
+    const existing = document.querySelector('.teacher-success-message');
+    if (existing) existing.remove();
+    
+    const successDiv = document.createElement('div');
+    successDiv.className = 'teacher-success-message';
+    successDiv.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        z-index: 10001;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: 500;
+        animation: slideInRight 0.3s ease;
+        min-width: 250px;
+        text-align: center;
+    `;
+    successDiv.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 1.2rem;">✅</span>
+            <span>${message}</span>
+        </div>
+    `;
+    
+    document.body.appendChild(successDiv);
+    
+    setTimeout(() => {
+        successDiv.style.animation = 'slideOutRight 0.3s ease';
+        setTimeout(() => successDiv.remove(), 300);
+    }, 3000);
+}
+
+function showTeacherError(message) {
+    // Remove existing messages
+    const existing = document.querySelector('.teacher-error-message');
+    if (existing) existing.remove();
+    
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'teacher-error-message';
+    errorDiv.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #e74c3c, #c0392b);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+        z-index: 10001;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: 500;
+        animation: slideInRight 0.3s ease;
+        min-width: 250px;
+        text-align: center;
+    `;
+    errorDiv.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 1.2rem;">❌</span>
+            <span>${message}</span>
+        </div>
+    `;
+    
+    document.body.appendChild(errorDiv);
+    
+    setTimeout(() => {
+        errorDiv.style.animation = 'slideOutRight 0.3s ease';
+        setTimeout(() => errorDiv.remove(), 300);
+    }, 5000);
+}
+
+// Add teacher-specific styles if not already present
+if (!document.querySelector('#teacher-profile-styles')) {
+    const style = document.createElement('style');
+    style.id = 'teacher-profile-styles';
+    style.textContent = `
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideOutRight {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+        }
+        
+        .avatar-upload {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .avatar-upload:hover {
+            transform: scale(1.1);
+            background: rgba(102, 126, 234, 0.1);
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+console.log('✅ Teacher dashboard profile handlers loaded successfully');
+
+
+
 // Enhanced Dashboard JavaScript
 class TeacherDashboard {
     constructor() {

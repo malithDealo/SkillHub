@@ -17,7 +17,7 @@ function onSignIn(googleUser) {
 // Initialize Google Sign-In
 window.onGoogleLibraryLoad = function() {
     google.accounts.id.initialize({
-        client_id: '928244016011-mpju3m1mdqjkhntbngabieokkfmm6h3e.apps.googleusercontent.com',
+        client_id: '57524147029-981ih9hqts2288nu7uqg0l63os60plrs.apps.googleusercontent.com',
         callback: onSignIn
     });
     google.accounts.id.renderButton(

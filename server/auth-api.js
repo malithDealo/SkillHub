@@ -1,4 +1,4 @@
-// auth-api.js - Fixed Backend API for SkillHub Authentication with Proper DB Init
+// auth-api.js - Complete Enhanced Backend API for SkillHub Authentication
 // Run with: npm start or nodemon server/auth-api.js
 
 const express = require('express');
@@ -15,7 +15,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-this-in-pro
 
 // Middleware
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
+    origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:3002', 'http://127.0.0.1:3002'],
     credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));
@@ -352,6 +352,22 @@ function generateToken(user) {
     );
 }
 
+// Record login attempt
+async function recordLoginAttempt(email, ipAddress, success) {
+    return new Promise((resolve) => {
+        db.run(
+            'INSERT INTO login_attempts (email, ip_address, success) VALUES (?, ?, ?)',
+            [email, ipAddress, success],
+            (err) => {
+                if (err) {
+                    console.error('Error recording login attempt:', err);
+                }
+                resolve();
+            }
+        );
+    });
+}
+
 // API Routes
 
 // Test endpoint
@@ -361,6 +377,240 @@ app.get('/api/test', (req, res) => {
         timestamp: new Date().toISOString(),
         database: db ? 'Connected' : 'Disconnected'
     });
+});
+
+// Email uniqueness check endpoint
+app.post('/api/auth/check-email', async (req, res) => {
+    const { email, userType } = req.body;
+    
+    console.log('📧 Checking email exists:', email, userType);
+
+    try {
+        if (!email || !userType) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Email and user type are required' 
+            });
+        }
+
+        // Check if user exists with this email and different user type
+        const existingUser = await new Promise((resolve, reject) => {
+            db.get(
+                'SELECT email, user_type FROM users WHERE email = ?',
+                [email],
+                (err, row) => {
+                    if (err) reject(err);
+                    else resolve(row);
+                }
+            );
+        });
+
+        if (existingUser) {
+            // Email exists
+            if (existingUser.user_type === userType) {
+                // Same user type - can login
+                return res.json({ 
+                    success: true, 
+                    exists: true, 
+                    canLogin: true,
+                    message: 'User exists with this role' 
+                });
+            } else {
+                // Different user type - cannot register
+                return res.json({ 
+                    success: true, 
+                    exists: true, 
+                    canLogin: false,
+                    existingUserType: existingUser.user_type,
+                    message: `Email already registered as ${existingUser.user_type}` 
+                });
+            }
+        } else {
+            // Email doesn't exist - can register
+            return res.json({ 
+                success: true, 
+                exists: false, 
+                canRegister: true,
+                message: 'Email available for registration' 
+            });
+        }
+
+    } catch (error) {
+        console.error('❌ Email check error:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Internal server error: ' + error.message 
+        });
+    }
+});
+
+// Social authentication endpoint
+app.post('/api/auth/social-login', async (req, res) => {
+    const { email, userType, provider, userData } = req.body;
+
+    console.log('🔗 Social login attempt:', { email, userType, provider });
+
+    try {
+        if (!email || !userType || !provider || !userData) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Missing required social auth data' 
+            });
+        }
+
+        // Check if user exists
+        const existingUser = await new Promise((resolve, reject) => {
+            db.get(
+                'SELECT * FROM users WHERE email = ? AND user_type = ?',
+                [email, userType],
+                (err, row) => {
+                    if (err) reject(err);
+                    else resolve(row);
+                }
+            );
+        });
+
+        if (existingUser) {
+            // User exists - update profile image if provided
+            if (userData.profileImage && userData.profileImage !== existingUser.profile_image) {
+                await new Promise((resolve, reject) => {
+                    db.run(
+                        'UPDATE users SET profile_image = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?',
+                        [userData.profileImage, existingUser.id],
+                        (err) => {
+                            if (err) reject(err);
+                            else resolve();
+                        }
+                    );
+                });
+                existingUser.profile_image = userData.profileImage;
+            }
+
+            // Generate token and return user data
+            const token = generateToken(existingUser);
+
+            let formattedUser = {
+                id: existingUser.id,
+                email: existingUser.email,
+                firstName: existingUser.first_name,
+                lastName: existingUser.last_name,
+                name: `${existingUser.first_name} ${existingUser.last_name}`,
+                phone: existingUser.phone,
+                location: existingUser.location,
+                type: existingUser.user_type,
+                isVerified: existingUser.is_verified,
+                profileImage: existingUser.profile_image
+            };
+
+            // Get user-type specific data
+            try {
+                if (userType === 'teacher') {
+                    const teacherData = await new Promise((resolve, reject) => {
+                        db.get(
+                            'SELECT * FROM teachers WHERE user_id = ?',
+                            [existingUser.id],
+                            (err, row) => {
+                                if (err) reject(err);
+                                else resolve(row);
+                            }
+                        );
+                    });
+                    
+                    if (teacherData) {
+                        formattedUser.skills = JSON.parse(teacherData.skills || '[]');
+                        formattedUser.about = teacherData.about;
+                        formattedUser.experienceYears = teacherData.experience_years;
+                        formattedUser.teachingLanguage = teacherData.teaching_language;
+                        formattedUser.backgroundCheckStatus = teacherData.background_check_status;
+                    }
+                } else if (userType === 'learner') {
+                    const learnerData = await new Promise((resolve, reject) => {
+                        db.get(
+                            'SELECT * FROM learners WHERE user_id = ?',
+                            [existingUser.id],
+                            (err, row) => {
+                                if (err) reject(err);
+                                else resolve(row);
+                            }
+                        );
+                    });
+                    
+                    if (learnerData) {
+                        formattedUser.interests = JSON.parse(learnerData.interests || '[]');
+                        formattedUser.ageGroup = learnerData.age_group;
+                        formattedUser.preferredLanguage = learnerData.preferred_language;
+                    }
+                } else if (userType === 'sponsor') {
+                    const sponsorData = await new Promise((resolve, reject) => {
+                        db.get(
+                            'SELECT * FROM sponsors WHERE user_id = ?',
+                            [existingUser.id],
+                            (err, row) => {
+                                if (err) reject(err);
+                                else resolve(row);
+                            }
+                        );
+                    });
+                    
+                    if (sponsorData) {
+                        formattedUser.companyName = sponsorData.company_name;
+                        formattedUser.address = sponsorData.address;
+                        formattedUser.sponsorshipInterests = JSON.parse(sponsorData.sponsorship_interests || '[]');
+                        formattedUser.about = sponsorData.about;
+                        formattedUser.budget = sponsorData.budget;
+                        formattedUser.organizationVerificationStatus = sponsorData.organization_verification_status;
+                    }
+                }
+            } catch (profileError) {
+                console.warn('⚠️  Error loading social auth profile data:', profileError.message);
+            }
+
+            console.log('✅ Social login successful for existing user:', email);
+
+            return res.json({ 
+                success: true, 
+                message: 'Social login successful',
+                token: token,
+                user: formattedUser
+            });
+
+        } else {
+            // Check if email exists with different user type
+            const emailExists = await new Promise((resolve, reject) => {
+                db.get(
+                    'SELECT user_type FROM users WHERE email = ?',
+                    [email],
+                    (err, row) => {
+                        if (err) reject(err);
+                        else resolve(row);
+                    }
+                );
+            });
+
+            if (emailExists) {
+                return res.status(400).json({ 
+                    success: false, 
+                    message: `Email already registered as ${emailExists.user_type}. Please use the ${emailExists.user_type} login.`,
+                    existingUserType: emailExists.user_type
+                });
+            }
+
+            // User doesn't exist - needs to complete registration
+            return res.json({ 
+                success: false, 
+                needsRegistration: true,
+                message: 'Please complete your registration',
+                userData: userData
+            });
+        }
+
+    } catch (error) {
+        console.error('❌ Social login error:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Internal server error: ' + error.message 
+        });
+    }
 });
 
 // User Registration Endpoint
@@ -511,12 +761,14 @@ app.post('/api/auth/register', async (req, res) => {
 // User Login Endpoint
 app.post('/api/auth/login', async (req, res) => {
     const { email, password, userType } = req.body;
+    const ipAddress = req.ip || req.connection.remoteAddress;
 
-    console.log('🔐 Login attempt:', { email, userType });
+    console.log('🔐 Login attempt:', { email, userType, ip: ipAddress });
 
     try {
         // Validate required fields
         if (!email || !password || !userType) {
+            await recordLoginAttempt(email, ipAddress, false);
             return res.status(400).json({ 
                 success: false, 
                 message: 'Email, password, and user type are required' 
@@ -537,6 +789,7 @@ app.post('/api/auth/login', async (req, res) => {
 
         if (!user) {
             console.log('❌ User not found:', email, userType);
+            await recordLoginAttempt(email, ipAddress, false);
             return res.status(401).json({ 
                 success: false, 
                 message: 'Invalid email, password, or user type' 
@@ -548,6 +801,7 @@ app.post('/api/auth/login', async (req, res) => {
         
         if (!isValidPassword) {
             console.log('❌ Invalid password for:', email);
+            await recordLoginAttempt(email, ipAddress, false);
             return res.status(401).json({ 
                 success: false, 
                 message: 'Invalid email, password, or user type' 
@@ -556,6 +810,7 @@ app.post('/api/auth/login', async (req, res) => {
 
         // Check if user is active
         if (!user.is_active) {
+            await recordLoginAttempt(email, ipAddress, false);
             return res.status(401).json({ 
                 success: false, 
                 message: 'Account is deactivated' 
@@ -563,6 +818,7 @@ app.post('/api/auth/login', async (req, res) => {
         }
 
         console.log('✅ Login successful for:', email);
+        await recordLoginAttempt(email, ipAddress, true);
 
         // Generate JWT token
         const token = generateToken(user);
@@ -653,10 +909,170 @@ app.post('/api/auth/login', async (req, res) => {
 
     } catch (error) {
         console.error('❌ Login error:', error);
+        await recordLoginAttempt(email, ipAddress, false);
         res.status(500).json({ 
             success: false, 
             message: 'Internal server error: ' + error.message 
         });
+    }
+});
+
+// Profile update endpoint
+app.put('/api/auth/profile', async (req, res) => {
+    const token = req.headers.authorization?.replace('Bearer ', '');
+    
+    if (!token) {
+        return res.status(401).json({ 
+            success: false, 
+            message: 'No token provided' 
+        });
+    }
+
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        const { firstName, lastName, phone, location, profileImage, ...otherData } = req.body;
+
+        console.log('📝 Profile update request for user:', decoded.id);
+
+        // Update basic user info
+        await new Promise((resolve, reject) => {
+            db.run(
+                `UPDATE users SET 
+                    first_name = COALESCE(?, first_name),
+                    last_name = COALESCE(?, last_name),
+                    phone = COALESCE(?, phone),
+                    location = COALESCE(?, location),
+                    profile_image = COALESCE(?, profile_image),
+                    updated_at = CURRENT_TIMESTAMP
+                WHERE id = ?`,
+                [firstName, lastName, phone, location, profileImage, decoded.id],
+                (err) => {
+                    if (err) reject(err);
+                    else resolve();
+                }
+            );
+        });
+
+        // Update user-type specific data
+        if (decoded.userType === 'teacher' && Object.keys(otherData).length > 0) {
+            const { skills, about, experienceYears, teachingLanguage } = otherData;
+            await new Promise((resolve, reject) => {
+                db.run(
+                    `UPDATE teachers SET 
+                        skills = COALESCE(?, skills),
+                        about = COALESCE(?, about),
+                        experience_years = COALESCE(?, experience_years),
+                        teaching_language = COALESCE(?, teaching_language)
+                    WHERE user_id = ?`,
+                    [
+                        skills ? JSON.stringify(skills) : null,
+                        about,
+                        experienceYears,
+                        teachingLanguage,
+                        decoded.id
+                    ],
+                    (err) => {
+                        if (err) reject(err);
+                        else resolve();
+                    }
+                );
+            });
+        } else if (decoded.userType === 'learner' && Object.keys(otherData).length > 0) {
+            const { interests, ageGroup, preferredLanguage, learningGoals } = otherData;
+            await new Promise((resolve, reject) => {
+                db.run(
+                    `UPDATE learners SET 
+                        interests = COALESCE(?, interests),
+                        age_group = COALESCE(?, age_group),
+                        preferred_language = COALESCE(?, preferred_language),
+                        learning_goals = COALESCE(?, learning_goals)
+                    WHERE user_id = ?`,
+                    [
+                        interests ? JSON.stringify(interests) : null,
+                        ageGroup,
+                        preferredLanguage,
+                        learningGoals,
+                        decoded.id
+                    ],
+                    (err) => {
+                        if (err) reject(err);
+                        else resolve();
+                    }
+                );
+            });
+        } else if (decoded.userType === 'sponsor' && Object.keys(otherData).length > 0) {
+            const { companyName, address, sponsorshipInterests, about, budget } = otherData;
+            await new Promise((resolve, reject) => {
+                db.run(
+                    `UPDATE sponsors SET 
+                        company_name = COALESCE(?, company_name),
+                        address = COALESCE(?, address),
+                        sponsorship_interests = COALESCE(?, sponsorship_interests),
+                        about = COALESCE(?, about),
+                        budget = COALESCE(?, budget)
+                    WHERE user_id = ?`,
+                    [
+                        companyName,
+                        address,
+                        sponsorshipInterests ? JSON.stringify(sponsorshipInterests) : null,
+                        about,
+                        budget,
+                        decoded.id
+                    ],
+                    (err) => {
+                        if (err) reject(err);
+                        else resolve();
+                    }
+                );
+            });
+        }
+
+        // Get updated user data
+        const updatedUser = await new Promise((resolve, reject) => {
+            db.get(
+                'SELECT * FROM users WHERE id = ?',
+                [decoded.id],
+                (err, row) => {
+                    if (err) reject(err);
+                    else resolve(row);
+                }
+            );
+        });
+
+        const userData = {
+            id: updatedUser.id,
+            email: updatedUser.email,
+            firstName: updatedUser.first_name,
+            lastName: updatedUser.last_name,
+            name: `${updatedUser.first_name} ${updatedUser.last_name}`,
+            phone: updatedUser.phone,
+            location: updatedUser.location,
+            type: updatedUser.user_type,
+            isVerified: updatedUser.is_verified,
+            profileImage: updatedUser.profile_image
+        };
+
+        console.log('✅ Profile updated successfully for user:', decoded.id);
+
+        res.json({ 
+            success: true, 
+            message: 'Profile updated successfully',
+            user: userData
+        });
+
+    } catch (error) {
+        console.error('❌ Profile update error:', error);
+        if (error.name === 'JsonWebTokenError') {
+            res.status(401).json({ 
+                success: false, 
+                message: 'Invalid token' 
+            });
+        } else {
+            res.status(500).json({ 
+                success: false, 
+                message: 'Internal server error: ' + error.message 
+            });
+        }
     }
 });
 
@@ -712,12 +1128,266 @@ app.get('/api/auth/profile', (req, res) => {
     }
 });
 
+// Get all users (admin endpoint)
+app.get('/api/auth/users', async (req, res) => {
+    const token = req.headers.authorization?.replace('Bearer ', '');
+    
+    if (!token) {
+        return res.status(401).json({ 
+            success: false, 
+            message: 'No token provided' 
+        });
+    }
+
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        
+        // Get all users with basic info
+        db.all(
+            'SELECT id, email, user_type, first_name, last_name, is_verified, is_active, created_at FROM users ORDER BY created_at DESC',
+            [],
+            (err, users) => {
+                if (err) {
+                    return res.status(500).json({ 
+                        success: false, 
+                        message: 'Database error' 
+                    });
+                }
+
+                res.json({ 
+                    success: true, 
+                    users: users,
+                    total: users.length
+                });
+            }
+        );
+    } catch (error) {
+        res.status(401).json({ 
+            success: false, 
+            message: 'Invalid token' 
+        });
+    }
+});
+
+// Delete user account
+app.delete('/api/auth/profile', async (req, res) => {
+    const token = req.headers.authorization?.replace('Bearer ', '');
+    
+    if (!token) {
+        return res.status(401).json({ 
+            success: false, 
+            message: 'No token provided' 
+        });
+    }
+
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        const { password } = req.body;
+
+        if (!password) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Password confirmation required' 
+            });
+        }
+
+        // Verify password before deletion
+        const user = await new Promise((resolve, reject) => {
+            db.get(
+                'SELECT password_hash FROM users WHERE id = ?',
+                [decoded.id],
+                (err, row) => {
+                    if (err) reject(err);
+                    else resolve(row);
+                }
+            );
+        });
+
+        if (!user || !await verifyPassword(password, user.password_hash)) {
+            return res.status(401).json({ 
+                success: false, 
+                message: 'Invalid password' 
+            });
+        }
+
+        // Delete user (cascade will handle related tables)
+        await new Promise((resolve, reject) => {
+            db.run(
+                'DELETE FROM users WHERE id = ?',
+                [decoded.id],
+                (err) => {
+                    if (err) reject(err);
+                    else resolve();
+                }
+            );
+        });
+
+        console.log('🗑️ User account deleted:', decoded.email);
+
+        res.json({ 
+            success: true, 
+            message: 'Account deleted successfully' 
+        });
+
+    } catch (error) {
+        console.error('❌ Account deletion error:', error);
+        if (error.name === 'JsonWebTokenError') {
+            res.status(401).json({ 
+                success: false, 
+                message: 'Invalid token' 
+            });
+        } else {
+            res.status(500).json({ 
+                success: false, 
+                message: 'Internal server error: ' + error.message 
+            });
+        }
+    }
+});
+
+// Change password endpoint
+app.put('/api/auth/change-password', async (req, res) => {
+    const token = req.headers.authorization?.replace('Bearer ', '');
+    
+    if (!token) {
+        return res.status(401).json({ 
+            success: false, 
+            message: 'No token provided' 
+        });
+    }
+
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        const { currentPassword, newPassword } = req.body;
+
+        if (!currentPassword || !newPassword) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Current password and new password are required' 
+            });
+        }
+
+        if (newPassword.length < 6) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'New password must be at least 6 characters long' 
+            });
+        }
+
+        // Get current user
+        const user = await new Promise((resolve, reject) => {
+            db.get(
+                'SELECT password_hash FROM users WHERE id = ?',
+                [decoded.id],
+                (err, row) => {
+                    if (err) reject(err);
+                    else resolve(row);
+                }
+            );
+        });
+
+        if (!user || !await verifyPassword(currentPassword, user.password_hash)) {
+            return res.status(401).json({ 
+                success: false, 
+                message: 'Current password is incorrect' 
+            });
+        }
+
+        // Hash new password
+        const newPasswordHash = await hashPassword(newPassword);
+
+        // Update password
+        await new Promise((resolve, reject) => {
+            db.run(
+                'UPDATE users SET password_hash = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?',
+                [newPasswordHash, decoded.id],
+                (err) => {
+                    if (err) reject(err);
+                    else resolve();
+                }
+            );
+        });
+
+        console.log('🔑 Password changed for user:', decoded.email);
+
+        res.json({ 
+            success: true, 
+            message: 'Password changed successfully' 
+        });
+
+    } catch (error) {
+        console.error('❌ Password change error:', error);
+        if (error.name === 'JsonWebTokenError') {
+            res.status(401).json({ 
+                success: false, 
+                message: 'Invalid token' 
+            });
+        } else {
+            res.status(500).json({ 
+                success: false, 
+                message: 'Internal server error: ' + error.message 
+            });
+        }
+    }
+});
+
 // Logout endpoint
 app.post('/api/auth/logout', (req, res) => {
+    // In a real implementation, you might want to blacklist the token
     res.json({ 
         success: true, 
         message: 'Logged out successfully' 
     });
+});
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+    res.json({ 
+        status: 'healthy',
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime(),
+        version: '1.0.0'
+    });
+});
+
+// Get login attempts (for security monitoring)
+app.get('/api/auth/login-attempts', async (req, res) => {
+    const token = req.headers.authorization?.replace('Bearer ', '');
+    
+    if (!token) {
+        return res.status(401).json({ 
+            success: false, 
+            message: 'No token provided' 
+        });
+    }
+
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        
+        // Get recent login attempts
+        db.all(
+            'SELECT email, success, attempted_at, ip_address FROM login_attempts WHERE email = ? ORDER BY attempted_at DESC LIMIT 50',
+            [decoded.email],
+            (err, attempts) => {
+                if (err) {
+                    return res.status(500).json({ 
+                        success: false, 
+                        message: 'Database error' 
+                    });
+                }
+
+                res.json({ 
+                    success: true, 
+                    attempts: attempts
+                });
+            }
+        );
+    } catch (error) {
+        res.status(401).json({ 
+            success: false, 
+            message: 'Invalid token' 
+        });
+    }
 });
 
 // Catch-all route for serving HTML files
@@ -742,6 +1412,16 @@ app.get('*', (req, res) => {
     }
 });
 
+// Error handling middleware
+app.use((error, req, res, next) => {
+    console.error('❌ Unhandled error:', error);
+    res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
+});
+
 // Initialize database and start server
 initializeDatabase()
     .then(() => {
@@ -751,10 +1431,18 @@ initializeDatabase()
             console.log(`📁 Static files served from: ${path.join(__dirname, '../public')}`);
             console.log('📋 Available endpoints:');
             console.log('   - GET  /api/test');
+            console.log('   - GET  /api/health');
+            console.log('   - POST /api/auth/check-email');
+            console.log('   - POST /api/auth/social-login');
             console.log('   - POST /api/auth/login');
             console.log('   - POST /api/auth/register');
             console.log('   - GET  /api/auth/profile');
+            console.log('   - PUT  /api/auth/profile');
+            console.log('   - PUT  /api/auth/change-password');
+            console.log('   - DELETE /api/auth/profile');
             console.log('   - POST /api/auth/logout');
+            console.log('   - GET  /api/auth/users');
+            console.log('   - GET  /api/auth/login-attempts');
             console.log('🔑 Test credentials (password: "password"):');
             console.log('   - learner@example.com (learner)');
             console.log('   - teacher@example.com (teacher)');
@@ -782,6 +1470,17 @@ process.on('SIGINT', () => {
     } else {
         process.exit(0);
     }
+});
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (error) => {
+    console.error('❌ Uncaught Exception:', error);
+    process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('❌ Unhandled Rejection at:', promise, 'reason:', reason);
+    process.exit(1);
 });
 
 module.exports = app;

@@ -1,15 +1,28 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillHub - Teacher Sign Up</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/signup-teacher.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Google Sign-In -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <!-- Facebook SDK -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+
+    <!-- Meta tag for Google -->
+    <meta name="google-signin-client_id"
+        content="928244016011-mpju3m1mdqjkhntbngabieokkfmm6h3e.apps.googleusercontent.com">
 </head>
+
 <body>
     <div class="signup-container">
         <!-- Left Column: Decorative Section -->
@@ -51,7 +64,8 @@
                 </div>
                 <div class="text-content">
                     <h2 class="main-title">Share Your Skills!</h2>
-                    <p class="main-subtitle">Join our community of amazing teachers, share knowledge, earn money, and make meaningful connections.</p>
+                    <p class="main-subtitle">Join our community of amazing teachers, share knowledge, earn money, and
+                        make meaningful connections.</p>
                 </div>
             </div>
         </div>
@@ -94,12 +108,15 @@
                 </div>
                 <div class="form-group">
                     <label for="skills">What skill do you want to teach?</label>
-                    <input type="text" id="skills" name="skills" placeholder="Mathematics, Science, Art, History, Programming ...">
+                    <input type="text" id="skills" name="skills"
+                        placeholder="Mathematics, Science, Art, History, Programming ...">
                     <div id="certificate-list"></div>
                 </div>
                 <div class="form-group">
                     <label for="about">Tell Us About You:</label>
-                    <textarea id="about" name="about" placeholder="A brief introduction about yourself and your teaching experience..." required></textarea>
+                    <textarea id="about" name="about"
+                        placeholder="A brief introduction about yourself and your teaching experience..."
+                        required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="experience">Years of Experience:</label>
@@ -122,17 +139,21 @@
                 <div class="form-group">
                     <label for="certificates">Upload Certificates (Optional)</label>
                     <input type="file" id="certificates" name="certificates" accept=".pdf,.jpg,.png" multiple>
-                    <p class="certificate-note">Upload any certificates or credentials to verify your skills (PDF, JPG, PNG; max 5MB each).</p>
+                    <p class="certificate-note">Upload any certificates or credentials to verify your skills (PDF, JPG,
+                        PNG; max 5MB each).</p>
                 </div>
                 <div class="form-group verification-note">
                     <span class="verification-icon"><img src="images/fxemoji_lock.png" alt="Lock Icon"></span>
-                    <p><b>Verification Required</b><br>After registration, you'll need to complete identity verification and skill validation to ensure safety for all community members. This typically takes 1-2 business days.</p>
+                    <p><b>Verification Required</b><br>After registration, you'll need to complete identity verification
+                        and skill validation to ensure safety for all community members. This typically takes 1-2
+                        business days.</p>
                 </div>
                 <div class="form-group checkbox-group">
                     <label>
                         <input type="checkbox" id="terms" name="terms" required>
                         <span class="custom-checkbox"></span>
-                        I agree to the <a href="terms-of-service.html" class="policy-link">Terms of Services</a> and <a href="privacy-policy.html" class="policy-link">Privacy Policy</a>
+                        I agree to the <a href="terms-of-service.html" class="policy-link">Terms of Services</a> and <a
+                            href="privacy-policy.html" class="policy-link">Privacy Policy</a>
                     </label>
                 </div>
                 <div class="form-group checkbox-group">
@@ -153,19 +174,24 @@
             </form>
             <div class="social-login">
                 <div class="divider-text">
-                    <span>Or sign up with</span>
+                    <span>Or continue with</span>
                 </div>
                 <div class="social-buttons">
-                    <button class="social-btn google">
-                        <img src="images/devicon_google.png" alt="Google" class="social-icon"> Google
-                    </button>
-                    <button class="social-btn facebook">
-                        <img src="images/logos_facebook.png" alt="Facebook" class="social-icon"> Facebook
+                    <!-- Google Sign-In -->
+                    <div class="g_id_signin" data-type="standard" data-size="large" 
+                         data-theme="outline" data-text="continue_with" 
+                         data-logo_alignment="left"></div>
+                    
+                    <!-- Facebook Sign-In -->
+                    <button class="social-btn facebook" type="button">
+                        <img src="images/logos_facebook.png" alt="Facebook" class="social-icon"> 
+                        Continue with Facebook
                     </button>
                 </div>
             </div>
             <p class="footer-links">
-                Already have an account? <a href="login-teacher.html">Sign In</a> | Want to learn? <a href="signup-learner.html">Join as Learner</a>
+                Already have an account? <a href="login-teacher.html">Sign In</a> | Want to learn? <a
+                    href="signup-learner.html">Join as Learner</a>
             </p>
         </div>
     </div>
@@ -175,5 +201,6 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/signup-teacher.js"></script>
 </body>
+
 </html>
 ```

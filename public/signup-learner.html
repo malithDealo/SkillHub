@@ -1,15 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillHub - Learner Sign Up</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/signup-learner.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <meta name="google-signin-client_id" content="928244016011-mpju3m1mdqjkhntbngabieokkfmm6h3e.apps.googleusercontent.com">
+    <!-- Google Sign-In -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <!-- Facebook SDK -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+
+    <!-- Meta tag for Google -->
+    <meta name="google-signin-client_id"
+        content="928244016011-mpju3m1mdqjkhntbngabieokkfmm6h3e.apps.googleusercontent.com">
+    <meta name="google-signin-client_id"
+        content="928244016011-mpju3m1mdqjkhntbngabieokkfmm6h3e.apps.googleusercontent.com">
 </head>
+
 <body>
     <div class="signup-container">
         <!-- Left Column: Decorative Section -->
@@ -51,7 +66,8 @@
                 </div>
                 <div class="text-content">
                     <h2 class="main-title">Start Learning Today!</h2>
-                    <p class="main-subtitle">Discover amazing skills from talented teachers in your community. Connect, learn, and grow together.</p>
+                    <p class="main-subtitle">Discover amazing skills from talented teachers in your community. Connect,
+                        learn, and grow together.</p>
                 </div>
             </div>
         </div>
@@ -90,7 +106,8 @@
                 </div>
                 <div class="form-group">
                     <label for="interests">What would you like to learn?</label>
-                    <input type="text" id="interests" name="interests" placeholder="Mathematics, Science, Art, History, programming ...">
+                    <input type="text" id="interests" name="interests"
+                        placeholder="Mathematics, Science, Art, History, programming ...">
                 </div>
                 <div class="form-group dropdown-row">
                     <div class="dropdown-group">
@@ -123,7 +140,8 @@
                     <label>
                         <input type="checkbox" id="terms" name="terms" required>
                         <span class="custom-checkbox"></span>
-                        I agree to the <a href="terms-of-service.html" class="policy-link">Terms of Service</a> and <a href="privacy-policy.html" class="policy-link">Privacy Policy</a>
+                        I agree to the <a href="terms-of-service.html" class="policy-link">Terms of Service</a> and <a
+                            href="privacy-policy.html" class="policy-link">Privacy Policy</a>
                     </label>
                 </div>
                 <div class="form-group checkbox-group">
@@ -137,17 +155,24 @@
             </form>
             <div class="social-login">
                 <div class="divider-text">
-                    <span>Or sign up with</span>
+                    <span>Or continue with</span>
                 </div>
                 <div class="social-buttons">
-                    <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="signup_with" data-logo_alignment="left"></div>
-                    <button class="social-btn facebook">
-                        <img src="C:\Users\Welcome\OneDrive - NSBM\Desktop\Skillhub\Images\logos_facebook.png" alt="Facebook" class="social-icon"> Facebook
+                    <!-- Google Sign-In -->
+                    <div class="g_id_signin" data-type="standard" data-size="large" 
+                         data-theme="outline" data-text="continue_with" 
+                         data-logo_alignment="left"></div>
+                    
+                    <!-- Facebook Sign-In -->
+                    <button class="social-btn facebook" type="button">
+                        <img src="images/logos_facebook.png" alt="Facebook" class="social-icon"> 
+                        Continue with Facebook
                     </button>
                 </div>
             </div>
             <p class="footer-links">
-                Already have an account? <a href="login-learner.html">Sign In</a> | Want to teach? <a href="signup-teacher.html">Join as Teacher</a>
+                Already have an account? <a href="login-learner.html">Sign In</a> | Want to teach? <a
+                    href="signup-teacher.html">Join as Teacher</a>
             </p>
         </div>
     </div>
@@ -158,4 +183,5 @@
     <script src="js/signup-learner.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </body>
+
 </html>

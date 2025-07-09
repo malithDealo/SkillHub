@@ -1,3 +1,434 @@
+// Add this code to: public/js/dashboard.js (for learners)
+// Dashboard Profile Update Handler for Learners
+
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('🔧 Initializing learner dashboard profile handlers...');
+  
+  // Profile picture upload handler
+  initializeProfilePictureUpload();
+  
+  // Profile form update handler
+  initializeProfileFormUpdate();
+  
+  // File input for profile picture (if it doesn't exist)
+  createProfilePictureInput();
+});
+
+function initializeProfilePictureUpload() {
+  // Handle profile picture upload button click
+  const uploadBtn = document.getElementById('uploadBtn');
+  const profilePicture = document.getElementById('profilePicture');
+  const profileImage = document.getElementById('profileImage');
+  const profilePlaceholder = document.getElementById('profilePlaceholder');
+  const removeBtn = document.getElementById('removeBtn');
+  
+  if (uploadBtn) {
+      uploadBtn.addEventListener('click', () => {
+          const fileInput = document.getElementById('fileInput') || createFileInput();
+          fileInput.click();
+      });
+  }
+  
+  // Handle camera icon clicks on profile pictures
+  const cameraIcons = document.querySelectorAll('.upload-btn, .avatar-upload');
+  cameraIcons.forEach(icon => {
+      icon.addEventListener('click', (e) => {
+          e.preventDefault();
+          const fileInput = document.getElementById('fileInput') || createFileInput();
+          fileInput.click();
+      });
+  });
+  
+  // Handle remove button
+  if (removeBtn) {
+      removeBtn.addEventListener('click', async () => {
+          await updateProfileImage(null);
+          
+          // Hide current image and show placeholder
+          if (profileImage) {
+              profileImage.style.display = 'none';
+          }
+          if (profilePlaceholder) {
+              profilePlaceholder.style.display = 'flex';
+          }
+          if (removeBtn) {
+              removeBtn.style.display = 'none';
+          }
+      });
+  }
+}
+
+function createFileInput() {
+  let fileInput = document.getElementById('fileInput');
+  if (!fileInput) {
+      fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.id = 'fileInput';
+      fileInput.accept = 'image/*';
+      fileInput.style.display = 'none';
+      document.body.appendChild(fileInput);
+  }
+  
+  fileInput.addEventListener('change', handleFileSelection);
+  return fileInput;
+}
+
+function createProfilePictureInput() {
+  // Check if profile picture section exists but input doesn't
+  const profileSection = document.querySelector('.profile-picture-group, .profile-avatar');
+  if (profileSection && !document.getElementById('fileInput')) {
+      createFileInput();
+  }
+}
+
+async function handleFileSelection(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  
+  // Validate file type
+  if (!file.type.startsWith('image/')) {
+      showError('Please select a valid image file.');
+      return;
+  }
+  
+  // Validate file size (5MB limit)
+  if (file.size > 5 * 1024 * 1024) {
+      showError('Image file must be less than 5MB.');
+      return;
+  }
+  
+  showSuccess('Uploading profile picture...');
+  
+  try {
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+          const imageData = e.target.result;
+          
+          // Update UI immediately
+          updateProfileImageUI(imageData);
+          
+          // Update via API
+          await updateProfileImage(imageData);
+      };
+      reader.readAsDataURL(file);
+  } catch (error) {
+      console.error('Error processing image:', error);
+      showError('Failed to process image. Please try again.');
+  }
+  
+  // Clear the input so the same file can be selected again
+  e.target.value = '';
+}
+
+function updateProfileImageUI(imageData) {
+  const profileImage = document.getElementById('profileImage');
+  const profilePlaceholder = document.getElementById('profilePlaceholder');
+  const removeBtn = document.getElementById('removeBtn');
+  
+  if (imageData) {
+      // Show image
+      if (profileImage) {
+          profileImage.src = imageData;
+          profileImage.style.display = 'block';
+      }
+      if (profilePlaceholder) {
+          profilePlaceholder.style.display = 'none';
+      }
+      if (removeBtn) {
+          removeBtn.style.display = 'inline-block';
+      }
+  } else {
+      // Show placeholder
+      if (profileImage) {
+          profileImage.style.display = 'none';
+      }
+      if (profilePlaceholder) {
+          profilePlaceholder.style.display = 'flex';
+      }
+      if (removeBtn) {
+          removeBtn.style.display = 'none';
+      }
+  }
+}
+
+async function updateProfileImage(imageData) {
+  try {
+      const token = localStorage.getItem('skillhub_token');
+      if (!token) {
+          showError('Please log in again to update your profile.');
+          return;
+      }
+      
+      const response = await fetch('/api/auth/profile', {
+          method: 'PUT',
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+              profileImage: imageData
+          })
+      });
+      
+      const result = await response.json();
+      
+      if (result.success) {
+          // Update local storage
+          const currentUser = JSON.parse(localStorage.getItem('skillhub_user') || '{}');
+          currentUser.profileImage = imageData;
+          localStorage.setItem('skillhub_user', JSON.stringify(currentUser));
+          
+          // Dispatch update event to update navbar
+          if (window.dispatchProfileUpdate) {
+              window.dispatchProfileUpdate({ profileImage: imageData });
+          }
+          
+          showSuccess('Profile picture updated successfully!');
+          console.log('✅ Profile picture updated successfully');
+      } else {
+          throw new Error(result.message || 'Failed to update profile picture');
+      }
+  } catch (error) {
+      console.error('❌ Error updating profile picture:', error);
+      showError('Failed to update profile picture. Please try again.');
+  }
+}
+
+function initializeProfileFormUpdate() {
+  // Handle profile form submissions
+  const profileForms = document.querySelectorAll(
+      'form[id*="profile"], .settings-form, .profile-form, #settingsForm'
+  );
+  
+  profileForms.forEach(form => {
+      form.addEventListener('submit', handleProfileFormSubmit);
+  });
+  
+  // Handle individual input changes for real-time updates
+  const profileInputs = document.querySelectorAll(
+      'input[name*="Name"], input[name*="name"], input[id*="Name"], input[id*="name"]'
+  );
+  
+  profileInputs.forEach(input => {
+      input.addEventListener('blur', handleIndividualFieldUpdate);
+  });
+}
+
+async function handleProfileFormSubmit(e) {
+  e.preventDefault();
+  
+  const form = e.target;
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
+  
+  // Remove empty values
+  Object.keys(data).forEach(key => {
+      if (data[key] === '' || data[key] === null) {
+          delete data[key];
+      }
+  });
+  
+  console.log('📝 Updating profile with data:', data);
+  
+  try {
+      const token = localStorage.getItem('skillhub_token');
+      if (!token) {
+          showError('Please log in again to update your profile.');
+          return;
+      }
+      
+      // Show loading state
+      const submitBtn = form.querySelector('button[type="submit"], .save-btn, .btn-primary');
+      const originalText = submitBtn ? submitBtn.textContent : '';
+      if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Updating...';
+      }
+      
+      const response = await fetch('/api/auth/profile', {
+          method: 'PUT',
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(data)
+      });
+      
+      const result = await response.json();
+      
+      if (result.success) {
+          // Update local storage
+          const currentUser = JSON.parse(localStorage.getItem('skillhub_user') || '{}');
+          const updatedUser = { ...currentUser, ...result.user };
+          localStorage.setItem('skillhub_user', JSON.stringify(updatedUser));
+          
+          // Dispatch update event to update navbar
+          if (window.dispatchProfileUpdate) {
+              window.dispatchProfileUpdate(updatedUser);
+          }
+          
+          showSuccess('Profile updated successfully!');
+          console.log('✅ Profile updated successfully:', updatedUser);
+      } else {
+          throw new Error(result.message || 'Failed to update profile');
+      }
+      
+      // Restore button state
+      if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+      }
+      
+  } catch (error) {
+      console.error('❌ Profile update error:', error);
+      showError('Failed to update profile. Please try again.');
+      
+      // Restore button state
+      const submitBtn = form.querySelector('button[type="submit"], .save-btn, .btn-primary');
+      if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText || 'Save Changes';
+      }
+  }
+}
+
+async function handleIndividualFieldUpdate(e) {
+  const field = e.target;
+  const fieldName = field.name || field.id;
+  const fieldValue = field.value.trim();
+  
+  if (!fieldValue || !fieldName) return;
+  
+  // Only update name fields for real-time navbar updates
+  if (fieldName.toLowerCase().includes('name')) {
+      const updateData = {};
+      updateData[fieldName] = fieldValue;
+      
+      try {
+          const token = localStorage.getItem('skillhub_token');
+          if (!token) return;
+          
+          const response = await fetch('/api/auth/profile', {
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${token}`
+              },
+              body: JSON.stringify(updateData)
+          });
+          
+          const result = await response.json();
+          
+          if (result.success) {
+              // Update local storage
+              const currentUser = JSON.parse(localStorage.getItem('skillhub_user') || '{}');
+              const updatedUser = { ...currentUser, ...result.user };
+              localStorage.setItem('skillhub_user', JSON.stringify(updatedUser));
+              
+              // Dispatch update event to update navbar
+              if (window.dispatchProfileUpdate) {
+                  window.dispatchProfileUpdate(updatedUser);
+              }
+              
+              console.log('✅ Field updated:', fieldName, fieldValue);
+          }
+      } catch (error) {
+          console.error('❌ Error updating field:', error);
+      }
+  }
+}
+
+function showSuccess(message) {
+  // Remove existing success messages
+  const existing = document.querySelector('.success-message');
+  if (existing) existing.remove();
+  
+  const successDiv = document.createElement('div');
+  successDiv.className = 'success-message';
+  successDiv.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #28a745;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 10001;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: 500;
+      animation: slideInRight 0.3s ease;
+  `;
+  successDiv.textContent = message;
+  
+  document.body.appendChild(successDiv);
+  
+  setTimeout(() => {
+      successDiv.style.animation = 'slideOutRight 0.3s ease';
+      setTimeout(() => successDiv.remove(), 300);
+  }, 3000);
+}
+
+function showError(message) {
+  // Remove existing error messages
+  const existing = document.querySelector('.error-message-fixed');
+  if (existing) existing.remove();
+  
+  const errorDiv = document.createElement('div');
+  errorDiv.className = 'error-message-fixed';
+  errorDiv.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #dc3545;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 10001;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: 500;
+      animation: slideInRight 0.3s ease;
+  `;
+  errorDiv.textContent = message;
+  
+  document.body.appendChild(errorDiv);
+  
+  setTimeout(() => {
+      errorDiv.style.animation = 'slideOutRight 0.3s ease';
+      setTimeout(() => errorDiv.remove(), 300);
+  }, 5000);
+}
+
+// Add CSS animations
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes slideInRight {
+      from {
+          opacity: 0;
+          transform: translateX(100%);
+      }
+      to {
+          opacity: 1;
+          transform: translateX(0);
+      }
+  }
+  
+  @keyframes slideOutRight {
+      from {
+          opacity: 1;
+          transform: translateX(0);
+      }
+      to {
+          opacity: 0;
+          transform: translateX(100%);
+      }
+  }
+`;
+document.head.appendChild(style);
+
+console.log('✅ Dashboard profile handlers loaded successfully');
+
 // Wait for DOM to be fully loaded
 document.addEventListener("DOMContentLoaded", function () {
   // Get elements
@@ -410,6 +841,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   });
+
+  
 
   // Progress bar animation for courses
   function animateProgressBars() {

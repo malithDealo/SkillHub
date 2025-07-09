@@ -834,3 +834,127 @@ input.invalid, select.invalid, textarea.invalid {
 .btn-change:hover {
     background: #bdbdbd;
 }
+
+
+/* Social Authentication Styles */
+.social-login {
+    margin-top: 1.5rem;
+}
+
+.divider-text {
+    text-align: center;
+    margin: 1.5rem 0;
+    position: relative;
+}
+
+.divider-text::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #e0e0e0;
+    z-index: 1;
+}
+
+.divider-text span {
+    background: white;
+    padding: 0 1rem;
+    color: #666;
+    position: relative;
+    z-index: 2;
+}
+
+.social-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e0e0e0;
+    background: white;
+    color: #333;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.social-btn:hover {
+    border-color: #ccc;
+    background: #f8f9fa;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.social-btn.facebook:hover {
+    border-color: #1877f2;
+    background: #1877f2;
+    color: white;
+}
+
+.social-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+/* Email validation indicator */
+.email-indicator {
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+/* Profile dropdown styles */
+.profile-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    padding: 0.5rem 0;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.user-profile:hover .profile-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.profile-dropdown-link {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.profile-dropdown-link:hover {
+    background-color: #f8f9fa;
+}
+
+.profile-dropdown-link.logout {
+    color: #dc3545;
+    border-top: 1px solid #e9ecef;
+    margin-top: 0.5rem;
+}
+
+.profile-dropdown-link.logout:hover {
+    background-color: rgba(220, 53, 69, 0.1);
+}
