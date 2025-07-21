@@ -42,7 +42,7 @@ function handleLoginSuccess(data, userType) {
     setTimeout(() => {
         const redirectMap = {
             learner: 'dashboard.html',
-            teacher: 'dashboard_overview.html',
+            teacher: 'profile_settings.html',
             sponsor: 'sponsordashboard1.html'
         };
         

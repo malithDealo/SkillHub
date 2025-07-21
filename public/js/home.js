@@ -131,7 +131,7 @@ function handleFindTeachers(e) {
       // Redirect to appropriate dashboard
       const redirectMap = {
           learner: 'dashboard.html',
-          teacher: 'dashboard_overview.html',
+          teacher: 'profile_settings.html',
           sponsor: 'sponsordashboard1.html'
       };
       
@@ -161,7 +161,7 @@ function handleStartTeaching(e) {
       
       if (user.type === 'teacher') {
           // User is already a teacher, go to dashboard
-          window.location.href = 'dashboard_overview.html';
+          window.location.href = 'profile_settings.html';
       } else {
           // User is not a teacher, suggest creating teacher account
           if (confirm('You need a teacher account to start teaching. Would you like to create one?')) {
@@ -188,7 +188,7 @@ function handleGetStarted(e) {
       // Redirect to appropriate dashboard
       const redirectMap = {
           learner: 'dashboard.html',
-          teacher: 'dashboard_overview.html',
+          teacher: 'profile_settings.html',
           sponsor: 'sponsordashboard1.html'
       };
       
