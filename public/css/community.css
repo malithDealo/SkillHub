@@ -314,6 +314,7 @@ body {
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  text-align: center;
 }
 
 .club-card:hover {
@@ -325,23 +326,15 @@ body {
   font-size: 1.8rem;
   margin-bottom: 1rem;
   color: #333;
-  text-align: center;
 }
 
 .club-card p {
   color: #666;
-  margin-bottom: 2rem;
-  text-align: center;
+  margin-bottom: 0;
   line-height: 1.5;
 }
 
-.club-actions {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
+/* Buttons */
 .btn {
   padding: 8px 16px;
   border: none;
@@ -581,6 +574,73 @@ body {
 .club-stat-label {
   font-size: 0.9rem;
   color: #666;
+}
+
+/* Club Membership Section */
+.club-membership-section {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.membership-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.membership-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex: 1;
+}
+
+.membership-icon {
+  font-size: 3rem;
+  background: #e8f5e8;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.membership-text h4 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.membership-text p {
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.join-club-btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.join-club-btn.joined {
+  background: #28a745;
+  cursor: default;
+}
+
+.join-club-btn.joined:hover {
+  background: #28a745;
+  transform: none;
 }
 
 .club-actions-section {
@@ -970,6 +1030,16 @@ body {
   .form-row {
     grid-template-columns: 1fr;
   }
+
+  .membership-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .membership-info {
+    flex-direction: column;
+    text-align: center;
+  }
 }
 
 @media (max-width: 480px) {
@@ -981,15 +1051,21 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .club-actions {
-    flex-direction: column;
-  }
-
   .club-stats-grid {
     grid-template-columns: 1fr;
   }
 
   .members-grid {
     grid-template-columns: 1fr;
+  }
+
+  .membership-container {
+    gap: 1rem;
+  }
+
+  .membership-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
   }
 }

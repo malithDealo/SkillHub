@@ -1,410 +1,683 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Community - SkillHub</title>
+    <link rel="stylesheet" href="community.css" />
+    <link rel="stylesheet" href="footer2.css" />
+    <style>
+      /* Updated Navbar Styles - Consistent with Dashboard and Find Teachers */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: #ffffff;
+        border-bottom: 1px solid #e9ecef;
+        padding: 0 2rem;
+        height: 80px;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Community - SkillHub</title>
-  <link rel="stylesheet" href="css/community.css" />
-  <link rel="stylesheet" href="css/navbar1.css">
-  <link rel="stylesheet" href="css/navbar2.css">
-  <link rel="stylesheet" href="css/navbar-enhancements.css">
-  <link rel="stylesheet" href="css/footer2.css">
-</head>
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
 
-<body>
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: bold;
+        color: #333;
+      }
 
-  <div id="navbar-container"></div>
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-background-circles">
-      <div class="hero-circle circle-1"></div>
-      <div class="hero-circle circle-2"></div>
-      <div class="hero-circle circle-3"></div>
-      <div class="hero-circle circle-4"></div>
-      <div class="hero-circle circle-5"></div>
-      <div class="hero-circle circle-6"></div>
-      <div class="hero-circle circle-7"></div>
-      <div class="hero-circle circle-8"></div>
-    </div>
-    <div class="container">
-      <div class="hero-content">
-        <h1>Your Learning Community</h1>
-        <p>Connect with neighbors, share knowledge, and grow together</p>
-      </div>
-    </div>
-  </section>
+      .logo {
+        font-size: 1.5rem;
+      }
 
-  <!-- Community Stats -->
-  <section class="community-stats-section">
-    <div class="container">
-      <div class="stats-card">
-        <div class="stats-grid">
-          <div class="stat-item">
-            <div class="stat-number" data-target="1234">0</div>
-            <div class="stat-label">Active Learners</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number" data-target="567">0</div>
-            <div class="stat-label">Expert Teachers</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number" data-target="472">0</div>
-            <div class="stat-label">Skills Shared</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number" data-target="30">0</div>
-            <div class="stat-label">Events This Month</div>
+      .brand-text {
+        font-size: 1.3rem;
+        color: #4caf50;
+      }
+
+      .nav-menu {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .nav-link {
+        text-decoration: none;
+        color: #666;
+        font-weight: 500;
+        padding: 8px 16px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover {
+        color: #4caf50;
+        background: #f0f8f0;
+      }
+
+      .nav-link.active {
+        color: #4caf50;
+        background: #e8f5e8;
+        font-weight: 600;
+      }
+
+      .nav-profile {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .nav-user {
+        font-weight: 500;
+        color: #333;
+      }
+
+      .profile-avatar {
+        width: 40px;
+        height: 40px;
+        background: #4caf50;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+      }
+
+      /* Update hero section to account for new navbar height */
+      .hero {
+        padding-top: 120px; /* Increased to account for navbar */
+      }
+
+      /* Responsive navbar */
+      @media (max-width: 768px) {
+        .nav-menu {
+          display: none;
+        }
+
+        .navbar {
+          padding: 0 1rem;
+        }
+
+        .nav-container {
+          gap: 1rem;
+        }
+
+        .nav-profile {
+          gap: 8px;
+        }
+
+        .nav-user {
+          font-size: 0.9rem;
+        }
+
+        .profile-avatar {
+          width: 35px;
+          height: 35px;
+          font-size: 1rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-brand .brand-text {
+          font-size: 1.1rem;
+        }
+
+        .logo {
+          font-size: 1.3rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Updated Navigation Bar - Consistent with Dashboard and Find Teachers -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-brand">
+          <img
+            src="images/SkillHub LOGO 3.png"
+            alt="SkillHub Logo"
+            class="logo"
+          />
+          <span class="brand-text">SkillHub</span>
+        </div>
+
+        <div class="nav-menu">
+          <a href="dashboard.html" class="nav-link">Dashboard</a>
+          <a href="services.html" class="nav-link">Find Teachers</a>
+          <a href="dashboard.html#my-learning" class="nav-link">My Learning</a>
+          <a href="community.html" class="nav-link active">Community</a>
+        </div>
+
+        <div class="nav-profile">
+          <span class="nav-user">Jane Student</span>
+          <div class="profile-avatar">
+            <span>👤</span>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </nav>
 
-  <!-- Upcoming Events Section -->
-  <section class="events-section">
-    <div class="container">
-      <div class="section-header">
-        <h2>Upcoming Community Events</h2>
-        <p>Join local workshops, meetups, and skill-sharing gatherings</p>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-background-circles">
+        <div class="hero-circle circle-1"></div>
+        <div class="hero-circle circle-2"></div>
+        <div class="hero-circle circle-3"></div>
+        <div class="hero-circle circle-4"></div>
+        <div class="hero-circle circle-5"></div>
+        <div class="hero-circle circle-6"></div>
+        <div class="hero-circle circle-7"></div>
+        <div class="hero-circle circle-8"></div>
       </div>
-
-      <div class="events-grid">
-        <div class="event-card">
-          <div class="event-date">
-            <span class="date-badge">June 15, 2025</span>
-          </div>
-          <div class="event-content">
-            <h3>Community Cooking Workshop</h3>
-            <p>
-              Learn traditional Sri Lankan recipes from local grandmothers. A
-              hands-on experience with authentic spices and techniques.
-            </p>
-            <div class="event-meta">
-              <span class="event-location">📍 Community Hall</span>
-              <span class="event-attendees">👥 15 participants</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="event-card">
-          <div class="event-date">
-            <span class="date-badge">June 22, 2025</span>
-          </div>
-          <div class="event-content">
-            <h3>Photography Walk</h3>
-            <p>
-              Explore our beautiful locations while learning photography
-              techniques from professional photographers.
-            </p>
-            <div class="event-meta">
-              <span class="event-location">📍 Viharamahadevi Park</span>
-              <span class="event-attendees">👥 8 participants</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="event-card">
-          <div class="event-date">
-            <span class="date-badge">June 18, 2025</span>
-          </div>
-          <div class="event-content">
-            <h3>Tech Skills Meetup</h3>
-            <p>
-              Monthly gathering for tech enthusiasts to share knowledge,
-              network, and learn new programming skills together.
-            </p>
-            <div class="event-meta">
-              <span class="event-location">📍 Library Center</span>
-              <span class="event-attendees">👥 12 participants</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="event-card">
-          <div class="event-date">
-            <span class="date-badge">June 27, 2025</span>
-          </div>
-          <div class="event-content">
-            <h3>Mindfulness & Meditation</h3>
-            <p>
-              Weekly meditation session in peaceful surroundings. Perfect for
-              beginners and experienced practitioners alike.
-            </p>
-            <div class="event-meta">
-              <span class="event-location">📍 Wellness Studio</span>
-              <span class="event-attendees">👥 20 participants</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Clubs Section -->
-  <section class="clubs-section">
-    <div class="container">
-      <div class="section-header">
-        <h2>Clubs</h2>
-        <p>
-          Share knowledge, ask questions, and connect with fellow learners
-        </p>
-      </div>
-
-      <div class="clubs-grid">
-        <div class="club-card" data-club="science">
-          <h3>Science club</h3>
-          <p>
-            Learn and gain insights of Science in the new world and connect
-            with fellow individuals
-          </p>
-          <div class="club-actions">
-            <button class="btn btn-primary join-club-btn">Join</button>
-          </div>
-        </div>
-
-        <div class="club-card" data-club="maths">
-          <h3>Maths club</h3>
-          <p>
-            Learn and gain insights of Maths in the new world and connect with
-            fellow individuals
-          </p>
-          <div class="club-actions">
-            <button class="btn btn-primary join-club-btn">Join</button>
-          </div>
-        </div>
-
-        <div class="club-card" data-club="commerce">
-          <h3>Commerce club</h3>
-          <p>
-            Learn and gain insights of commerce in the new world and connect
-            with fellow individuals
-          </p>
-          <div class="club-actions">
-            <button class="btn btn-primary join-club-btn">Join</button>
-          </div>
-        </div>
-
-        <div class="club-card" data-club="art">
-          <h3>Art club</h3>
-          <p>
-            Learn and gain insights of art in the new world and connect with
-            fellow individuals
-          </p>
-          <div class="club-actions">
-            <button class="btn btn-primary join-club-btn">Join</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="cta">
-    <div class="container">
-      <h2>SkillHub</h2>
-      <p>Connect ● Learn ● Grow ● Share</p>
-    </div>
-  </section>
-
-  <!-- Footer -->
-
-  <!-- Club Detail Page -->
-  <div class="club-detail-page" id="clubDetailPage">
-    <div class="club-header">
       <div class="container">
-        <div class="club-header-content">
-          <div>
-            <h1 id="clubDetailTitle">Science Club</h1>
-            <p id="clubDetailDescription">
+        <div class="hero-content">
+          <h1>Your Learning Community</h1>
+          <p>Connect with neighbors, share knowledge, and grow together</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Community Stats -->
+    <section class="community-stats-section">
+      <div class="container">
+        <div class="stats-card">
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-number" data-target="1234">0</div>
+              <div class="stat-label">Active Learners</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" data-target="567">0</div>
+              <div class="stat-label">Expert Teachers</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" data-target="472">0</div>
+              <div class="stat-label">Skills Shared</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" data-target="30">0</div>
+              <div class="stat-label">Events This Month</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Upcoming Events Section -->
+    <section class="events-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Upcoming Community Events</h2>
+          <p>Join local workshops, meetups, and skill-sharing gatherings</p>
+        </div>
+
+        <div class="events-grid">
+          <div class="event-card">
+            <div class="event-date">
+              <span class="date-badge">June 15, 2025</span>
+            </div>
+            <div class="event-content">
+              <h3>Community Cooking Workshop</h3>
+              <p>
+                Learn traditional Sri Lankan recipes from local grandmothers. A
+                hands-on experience with authentic spices and techniques.
+              </p>
+              <div class="event-meta">
+                <span class="event-location">📍 Community Hall</span>
+                <span class="event-attendees">👥 15 participants</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-card">
+            <div class="event-date">
+              <span class="date-badge">June 22, 2025</span>
+            </div>
+            <div class="event-content">
+              <h3>Photography Walk</h3>
+              <p>
+                Explore our beautiful locations while learning photography
+                techniques from professional photographers.
+              </p>
+              <div class="event-meta">
+                <span class="event-location">📍 Viharamahadevi Park</span>
+                <span class="event-attendees">👥 8 participants</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-card">
+            <div class="event-date">
+              <span class="date-badge">June 18, 2025</span>
+            </div>
+            <div class="event-content">
+              <h3>Tech Skills Meetup</h3>
+              <p>
+                Monthly gathering for tech enthusiasts to share knowledge,
+                network, and learn new programming skills together.
+              </p>
+              <div class="event-meta">
+                <span class="event-location">📍 Library Center</span>
+                <span class="event-attendees">👥 12 participants</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-card">
+            <div class="event-date">
+              <span class="date-badge">June 27, 2025</span>
+            </div>
+            <div class="event-content">
+              <h3>Mindfulness & Meditation</h3>
+              <p>
+                Weekly meditation session in peaceful surroundings. Perfect for
+                beginners and experienced practitioners alike.
+              </p>
+              <div class="event-meta">
+                <span class="event-location">📍 Wellness Studio</span>
+                <span class="event-attendees">👥 20 participants</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Clubs Section -->
+    <section class="clubs-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Clubs</h2>
+          <p>
+            Share knowledge, ask questions, and connect with fellow learners
+          </p>
+        </div>
+
+        <div class="clubs-grid">
+          <div class="club-card" data-club="science">
+            <h3>Science club</h3>
+            <p>
               Learn and gain insights of Science in the new world and connect
               with fellow individuals
             </p>
           </div>
-          <button class="close-club-btn" id="closeClubBtn">✕</button>
+
+          <div class="club-card" data-club="maths">
+            <h3>Maths club</h3>
+            <p>
+              Learn and gain insights of Maths in the new world and connect with
+              fellow individuals
+            </p>
+          </div>
+
+          <div class="club-card" data-club="commerce">
+            <h3>Commerce club</h3>
+            <p>
+              Learn and gain insights of commerce in the new world and connect
+              with fellow individuals
+            </p>
+          </div>
+
+          <div class="club-card" data-club="art">
+            <h3>Art club</h3>
+            <p>
+              Learn and gain insights of art in the new world and connect with
+              fellow individuals
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="club-content">
+    <!-- CTA Section -->
+    <section class="cta">
       <div class="container">
-        <!-- Club Stats -->
-        <div class="club-stats">
-          <h3 style="margin-bottom: 2rem; text-align: center; color: #333">
-            Club Statistics
-          </h3>
-          <div class="club-stats-grid">
-            <div class="club-stat-item">
-              <div class="club-stat-number" id="clubMemberCount">156</div>
-              <div class="club-stat-label">Members</div>
+        <h2>SkillHub</h2>
+        <p>Connect ● Learn ● Grow ● Share</p>
+      </div>
+    </section>
+
+    <!-- Club Detail Page -->
+    <div class="club-detail-page" id="clubDetailPage">
+      <div class="club-header">
+        <div class="container">
+          <div class="club-header-content">
+            <div>
+              <h1 id="clubDetailTitle">Science Club</h1>
+              <p id="clubDetailDescription">
+                Learn and gain insights of Science in the new world and connect
+                with fellow individuals
+              </p>
             </div>
-            <div class="club-stat-item">
-              <div class="club-stat-number" id="clubEventCount">12</div>
-              <div class="club-stat-label">Events</div>
-            </div>
-            <div class="club-stat-item">
-              <div class="club-stat-number" id="clubDiscussionCount">89</div>
-              <div class="club-stat-label">Discussions</div>
-            </div>
+            <button class="close-club-btn" id="closeClubBtn">✕</button>
           </div>
         </div>
+      </div>
 
-        <!-- Club Actions -->
-        <div class="club-actions-section">
-          <h3 style="margin-bottom: 2rem; text-align: center; color: #333">
-            Club Activities
-          </h3>
-          <div class="club-actions-grid">
-            <div class="action-card" id="addEventAction">
-              <span class="action-icon">📅</span>
-              <div class="action-title">Add Event</div>
-              <div class="action-description">
-                Create a new event for club members
+      <div class="club-content">
+        <div class="container">
+          <!-- Club Stats -->
+          <div class="club-stats">
+            <h3 style="margin-bottom: 2rem; text-align: center; color: #333">
+              Club Statistics
+            </h3>
+            <div class="club-stats-grid">
+              <div class="club-stat-item">
+                <div class="club-stat-number" id="clubMemberCount">156</div>
+                <div class="club-stat-label">Members</div>
               </div>
-            </div>
-            <div class="action-card" id="groupChatAction">
-              <span class="action-icon">💬</span>
-              <div class="action-title">Group Chat</div>
-              <div class="action-description">
-                Join the club group discussion
+              <div class="club-stat-item">
+                <div class="club-stat-number" id="clubEventCount">12</div>
+                <div class="club-stat-label">Events</div>
               </div>
-            </div>
-            <div class="action-card" id="viewEventsAction">
-              <span class="action-icon">🎯</span>
-              <div class="action-title">View Events</div>
-              <div class="action-description">
-                See all upcoming club events
+              <div class="club-stat-item">
+                <div class="club-stat-number" id="clubDiscussionCount">89</div>
+                <div class="club-stat-label">Discussions</div>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Members Section -->
-        <div class="members-section">
-          <h3 style="margin-bottom: 2rem; text-align: center; color: #333">
-            Club Members
-          </h3>
-          <div class="members-grid" id="membersGrid">
-            <!-- Members will be dynamically added here -->
+          <!-- Club Membership Section -->
+          <div class="club-membership-section">
+            <h3 style="margin-bottom: 2rem; text-align: center; color: #333">
+              Club Membership
+            </h3>
+            <div class="membership-container">
+              <div class="membership-info">
+                <div class="membership-icon">🎯</div>
+                <div class="membership-text">
+                  <h4 id="membershipTitle">Ready to Join?</h4>
+                  <p id="membershipDescription">
+                    Join this amazing community and connect with like-minded
+                    learners!
+                  </p>
+                </div>
+              </div>
+              <button class="btn btn-primary join-club-btn" id="joinClubBtn">
+                Join Club
+              </button>
+            </div>
+          </div>
+
+          <!-- Club Actions -->
+          <div class="club-actions-section">
+            <h3 style="margin-bottom: 2rem; text-align: center; color: #333">
+              Club Activities
+            </h3>
+            <div class="club-actions-grid">
+              <div class="action-card" id="addEventAction">
+                <span class="action-icon">📅</span>
+                <div class="action-title">Add Event</div>
+                <div class="action-description">
+                  Create a new event for club members
+                </div>
+              </div>
+              <div class="action-card" id="groupChatAction">
+                <span class="action-icon">💬</span>
+                <div class="action-title">Group Chat</div>
+                <div class="action-description">
+                  Join the club group discussion
+                </div>
+              </div>
+              <div class="action-card" id="viewEventsAction">
+                <span class="action-icon">🎯</span>
+                <div class="action-title">View Events</div>
+                <div class="action-description">
+                  See all upcoming club events
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Members Section -->
+          <div class="members-section">
+            <h3 style="margin-bottom: 2rem; text-align: center; color: #333">
+              Club Members
+            </h3>
+            <div class="members-grid" id="membersGrid">
+              <!-- Members will be dynamically added here -->
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Chat Modal -->
-  <div class="chat-modal" id="chatModal">
-    <div class="chat-container">
-      <div class="chat-header">
-        <h3 id="chatTitle">Science Club Chat</h3>
-        <button class="close-chat-btn" id="closeChatBtn">✕</button>
-      </div>
-      <div class="chat-messages" id="chatMessages">
-        <!-- Sample messages -->
-        <div class="message">
-          <div class="message-avatar">J</div>
-          <div class="message-content">
-            Hey everyone! Welcome to the Science club chat. Feel free to share
-            your thoughts and questions here.
+    <!-- Chat Modal -->
+    <div class="chat-modal" id="chatModal">
+      <div class="chat-container">
+        <div class="chat-header">
+          <h3 id="chatTitle">Science Club Chat</h3>
+          <button class="close-chat-btn" id="closeChatBtn">✕</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+          <!-- Sample messages -->
+          <div class="message">
+            <div class="message-avatar">J</div>
+            <div class="message-content">
+              Hey everyone! Welcome to the Science club chat. Feel free to share
+              your thoughts and questions here.
+            </div>
+          </div>
+          <div class="message">
+            <div class="message-avatar">S</div>
+            <div class="message-content">
+              Thanks for creating this space! I'm excited to learn more about
+              quantum physics.
+            </div>
+          </div>
+          <div class="message own">
+            <div class="message-avatar">Y</div>
+            <div class="message-content">
+              Great! I have some resources on quantum mechanics that I can
+              share.
+            </div>
           </div>
         </div>
-        <div class="message">
-          <div class="message-avatar">S</div>
-          <div class="message-content">
-            Thanks for creating this space! I'm excited to learn more about
-            quantum physics.
-          </div>
+        <div class="chat-input">
+          <input
+            type="text"
+            placeholder="Type your message..."
+            id="chatInputField"
+          />
+          <button id="sendMessageBtn">➤</button>
         </div>
-        <div class="message own">
-          <div class="message-avatar">Y</div>
-          <div class="message-content">
-            Great! I have some resources on quantum mechanics that I can
-            share.
-          </div>
-        </div>
-      </div>
-      <div class="chat-input">
-        <input type="text" placeholder="Type your message..." id="chatInputField" />
-        <button id="sendMessageBtn">➤</button>
       </div>
     </div>
-  </div>
 
-  <!-- Event Creation Modal -->
-  <div class="modal-overlay" id="eventModal">
-    <div class="modal-container">
-      <div class="modal-header">
-        <div class="modal-title">
-          <span>📅</span>
-          <h2>Create Club Event</h2>
+    <!-- Event Creation Modal -->
+    <div class="modal-overlay" id="eventModal">
+      <div class="modal-container">
+        <div class="modal-header">
+          <div class="modal-title">
+            <span>📅</span>
+            <h2>Create Club Event</h2>
+          </div>
+          <button class="modal-close" id="closeEventModal">✕</button>
         </div>
-        <button class="modal-close" id="closeEventModal">✕</button>
-      </div>
-      <div class="modal-content">
-        <form id="eventForm">
-          <div class="form-group">
-            <label for="eventTitle">Event Title:</label>
-            <input type="text" id="eventTitle" name="eventTitle" placeholder="e.g. Physics Workshop" required />
-          </div>
-
-          <div class="form-group">
-            <label for="eventDescription">Event Description:</label>
-            <textarea id="eventDescription" name="eventDescription" rows="4"
-              placeholder="Describe what participants will learn and what to expect..." required></textarea>
-          </div>
-
-          <div class="form-row">
+        <div class="modal-content">
+          <form id="eventForm">
             <div class="form-group">
-              <label for="eventDate">Event Date:</label>
-              <input type="date" id="eventDate" name="eventDate" required />
+              <label for="eventTitle">Event Title:</label>
+              <input
+                type="text"
+                id="eventTitle"
+                name="eventTitle"
+                placeholder="e.g. Physics Workshop"
+                required
+              />
             </div>
-            <div class="form-group">
-              <label for="eventTime">Time:</label>
-              <input type="time" id="eventTime" name="eventTime" required />
-            </div>
-          </div>
 
-          <div class="form-group">
-            <label for="eventLocation">Location:</label>
-            <input type="text" id="eventLocation" name="eventLocation" placeholder="e.g. Science Lab, Community Center"
-              required />
-          </div>
+            <div class="form-group">
+              <label for="eventDescription">Event Description:</label>
+              <textarea
+                id="eventDescription"
+                name="eventDescription"
+                rows="4"
+                placeholder="Describe what participants will learn and what to expect..."
+                required
+              ></textarea>
+            </div>
 
-          <div class="form-row">
-            <div class="form-group">
-              <label for="maxParticipants">Max Participants:</label>
-              <input type="number" id="maxParticipants" name="maxParticipants" placeholder="e.g. 20" min="1" max="100"
-                required />
+            <div class="form-row">
+              <div class="form-group">
+                <label for="eventDate">Event Date:</label>
+                <input type="date" id="eventDate" name="eventDate" required />
+              </div>
+              <div class="form-group">
+                <label for="eventTime">Time:</label>
+                <input type="time" id="eventTime" name="eventTime" required />
+              </div>
             </div>
+
             <div class="form-group">
-              <label for="eventCost">Cost per Person:</label>
-              <select id="eventCost" name="eventCost">
-                <option value="0">Free</option>
-                <option value="500">Rs. 500</option>
-                <option value="1000">Rs. 1000</option>
-                <option value="1500">Rs. 1500</option>
-                <option value="2000">Rs. 2000</option>
-              </select>
+              <label for="eventLocation">Location:</label>
+              <input
+                type="text"
+                id="eventLocation"
+                name="eventLocation"
+                placeholder="e.g. Science Lab, Community Center"
+                required
+              />
             </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" id="cancelEventBtn">
-          Cancel
-        </button>
-        <button type="submit" form="eventForm" class="btn btn-primary" id="createEventBtn">
-          Create Event
-        </button>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="maxParticipants">Max Participants:</label>
+                <input
+                  type="number"
+                  id="maxParticipants"
+                  name="maxParticipants"
+                  placeholder="e.g. 20"
+                  min="1"
+                  max="100"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="eventCost">Cost per Person:</label>
+                <select id="eventCost" name="eventCost">
+                  <option value="0">Free</option>
+                  <option value="500">Rs. 500</option>
+                  <option value="1000">Rs. 1000</option>
+                  <option value="1500">Rs. 1500</option>
+                  <option value="2000">Rs. 2000</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="cancelEventBtn">
+            Cancel
+          </button>
+          <button
+            type="submit"
+            form="eventForm"
+            class="btn btn-primary"
+            id="createEventBtn"
+          >
+            Create Event
+          </button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div id="footer-container"></div>
+    <!-- Footer -->
+    <footer class="footer">
+      <!-- Header Section -->
+      <div class="footer-header">
+        <h1 class="footer-logo">SkillHub</h1>
+        <p class="footer-tagline">Connect • Learn • Grow • Share</p>
+      </div>
+      
+      <!-- Main Content Section -->
+      <div class="footer-content">
+        <!-- Column 1: Description and Social Media -->
+         
+        <div class="footer-column">
+            <h3 class="footer-column-title">
+                <img src="images/SkillHub LOGO 3.png" alt="SkillHub Logo" class="footer-logo-img">
+                <span class="brand-text">SkillHub</span>
+            </h3>
+            <p>Connecting communities through skill sharing. Learn from your neighbors, teach what you love, and build lasting relationships in your local area.</p>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"> <div class="icon-circle"><img src="images\fb.png" alt="Facebook"> </div></a>
+                <a href="#" aria-label="Twitter"> <div class="icon-circle"><img src="images\mdi_twitter.png" alt="Twitter"> </div></a>
+                <a href="#" aria-label="Instagram"> <div class="icon-circle"><img src="images\mdi_instagram.png" alt="Instagram"> </div></a>
+                <a href="#" aria-label="LinkedIn"> <div class="icon-circle"><img src="images\mdi_linkedin.png" alt="LinkedIn"> </div></a>
+            </div>
+        </div>
+         
+        <!-- Column 2: Quick Links -->
+         <div class="footer-columnn">
+        <div class="footer-column">
+            <h3 class="footer-column-title">Quick Links</h3>
+            <ul>
+                <li><a href="dashboard.html">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#how-it-works">How it Works</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="community.html">Community</a></li>
+            </ul>
+        </div>
+         </div>
+        <!-- Column 3: Support -->
+         <div class="footer-columnn">
+        <div class="footer-column">
+            <h3 class="footer-column-title">Support</h3>
+            <ul>
+                <li><a href="#help">Help Center</a></li>
+                <li><a href="#safety">Safety Guidelines</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+                <li><a href="#faq">FAQs</a></li>
+                <li><a href="#feedback">Give Feedback</a></li>
+                <li><a href="#report">Report Issue</a></li>
+                <li><a href="#accessibility">Accessibility</a></li>
+            </ul>
+        </div>
+         </div>
+        
+        <!-- Column 4: Legal -->
+         <div class="footer-columnn">
+        <div class="footer-column">
+            <h3 class="footer-column-title">Legal</h3>
+            <ul>
+                <li><a href="#terms">Terms of Services</a></li>
+                <li><a href="#privacy">Privacy policy</a></li>
+                <li><a href="#cookies">Cookie Policy</a></li>
+                <li><a href="#guidelines">Community Guidelines</a></li>
+            </ul>
+        </div>
+        </div>
+        <!-- Column 5: Stay Connected -->
+         <div class="footer-columnn">
+         <div class="footer-column">
+        <div class="footer-column stay-connected">
+            <h3 class="footer-column-title">Stay Connected</h3>
+            <p>Get updates on new skills, community events, and platform features.</p>
+            <form class="subscription-form">
+                <input type="email" placeholder="Enter your email address" aria-label="Email Address">
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
+    </div>
+        
+    </footer>
 
-  <script src="js/auth.js"></script>
-  <script src="js/footer-loader.js"></script>
-  <script src="js/community.js"></script>
-</body>
-
+    <script src="community.js"></script>
+    <script src="js/footer2.js"></script>
+  </body>
 </html>

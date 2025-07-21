@@ -8,7 +8,7 @@
 body {
   font-family: "Arial", sans-serif;
   line-height: 1.6;
-  color: #ffffff;
+  color: #333;
   background-color: #f8f9fa;
 }
 
@@ -19,15 +19,16 @@ body {
   min-height: calc(100vh - 80px);
 }
 
-/* Sidebar */
+/* Sidebar - Updated for white background and green hover */
 .sidebar {
   width: 250px;
-  background: white;
+  background: #ffffff; /* Ensure pure white background */
   border-right: 1px solid #e9ecef;
   padding: 2rem 0;
   position: fixed;
   height: calc(100vh - 80px);
   overflow-y: auto;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
 }
 
 .dashboard-header {
@@ -38,7 +39,7 @@ body {
 .dashboard-header h2 {
   font-size: 1.3rem;
   margin-bottom: 0.5rem;
-  color: #000000;
+  color: #333;
 }
 
 .status-badge {
@@ -54,30 +55,43 @@ body {
   list-style: none;
 }
 
+/* Enhanced sidebar link styling with proper green hover */
 .sidebar-link {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 12px 1.5rem;
   text-decoration: none;
-  color: #000000;
+  color: #666;
   transition: all 0.3s ease;
   border-left: 3px solid transparent;
+  position: relative;
 }
 
+/* Green hover effect */
 .sidebar-link:hover {
-  background: #f8f9fa;
-  color: #4caf50;
+  background: #f0f8f0; /* Light green background on hover */
+  color: #4caf50; /* Green text on hover */
+  border-left-color: #4caf50; /* Green left border on hover */
+  transform: translateX(2px); /* Subtle slide effect */
 }
 
+/* Active state styling */
 .sidebar-link.active {
-  background: #e8f5e8;
-  color: #4caf50;
-  border-left-color: #4caf50;
+  background: #e8f5e8; /* Light green background for active */
+  color: #4caf50; /* Green text for active */
+  border-left-color: #4caf50; /* Green left border for active */
+  font-weight: 600; /* Bold text for active state */
 }
 
 .sidebar-icon {
   font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+/* Icon animation on hover */
+.sidebar-link:hover .sidebar-icon {
+  transform: scale(1.1);
 }
 
 .logout-btn {
@@ -90,11 +104,13 @@ body {
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .logout-btn:hover {
   background: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
 }
 
 /* Main Content */
@@ -107,10 +123,12 @@ body {
 
 .page-content {
   display: none;
+  background: transparent; /* Ensure no background interference */
 }
 
 .page-content.active {
   display: block;
+  background: transparent; /* Ensure no background interference */
 }
 
 .page-header {
@@ -157,14 +175,49 @@ body {
   margin: 0;
 }
 
-/* Content Sections */
+/* Content Sections - Enhanced white background */
 .content-section {
-  background: white;
+  background: #ffffff !important; /* Force white background */
   border-radius: 12px;
   padding: 1.5rem;
   margin-bottom: 2rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   border: 1px solid #e9ecef;
+}
+
+/* Ensure all page content has proper backgrounds */
+#overview,
+#my-learning,
+#booking,
+#learning-group,
+#profile-setting {
+  background: transparent !important;
+}
+
+/* Make sure all cards and items have white backgrounds */
+.upcoming-sessions {
+  background: #ffffff !important; /* Force white background */
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e9ecef;
+}
+
+.session-card {
+  background: #f8f9fa !important; /* Light gray background for contrast */
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid #4caf50;
+  transition: all 0.3s ease;
+}
+
+/* Profile form styling */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background: transparent;
 }
 
 .section-header {
@@ -184,7 +237,7 @@ body {
 
 .section-title h2 {
   font-size: 1.5rem;
-  color: #000000;
+  color: #333;
 }
 
 .section-icon {
@@ -341,7 +394,7 @@ body {
 
 .btn-outline:hover {
   background: #4caf50;
-  color: rgb(0, 0, 0);
+  color: white;
   transform: translateY(-1px);
 }
 
@@ -633,11 +686,27 @@ body {
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.3s ease;
+  background: transparent !important; /* Ensure no background conflicts */
 }
 
 .page-content.active {
   opacity: 1;
   transform: translateY(0);
+  background: transparent !important; /* Ensure no background conflicts */
+}
+
+/* Additional white background enforcement */
+.course-item,
+.session-item,
+.group-item {
+  background: #ffffff !important;
+  color: #333 !important;
+}
+
+.course-item:hover,
+.session-item:hover,
+.group-item:hover {
+  background: #ffffff !important;
 }
 
 /* Loading Animation */
@@ -702,6 +771,7 @@ body {
     width: 100%;
     height: auto;
     padding: 1rem 0;
+    background: #ffffff; /* Maintain white background on mobile */
   }
 
   .sidebar-nav ul {
@@ -721,6 +791,12 @@ body {
 
   .sidebar-link.active {
     border-left: none;
+    border-bottom-color: #4caf50;
+    background: #e8f5e8; /* Maintain green active background */
+  }
+
+  .sidebar-link:hover {
+    background: #f0f8f0; /* Maintain green hover background */
     border-bottom-color: #4caf50;
   }
 
@@ -831,27 +907,63 @@ body {
   .dashboard-header {
     text-align: center;
   }
+
+  /* Ensure sidebar remains white on mobile */
+  .sidebar {
+    background: #ffffff !important;
+  }
 }
 
-/* Dark mode support (if needed) */
-@media (prefers-color-scheme: light) {
+/* Dark mode support (disabled to force white backgrounds) */
+@media (prefers-color-scheme: dark) {
   body {
-    background-color: #1a1a1a;
-    color: #e0e0e0;
+    background-color: #f8f9fa !important; /* Force light background */
+    color: #333 !important; /* Force dark text */
   }
 
   .sidebar {
-    background: #2d2d2d;
-    border-right-color: #404040;
+    background: #ffffff !important; /* Force white sidebar */
+    border-right-color: #e9ecef !important;
+    color: #333 !important;
   }
 
   .content-section {
-    background: #2d2d2d;
-    border-color: #404040;
+    background: #ffffff !important; /* Force white content sections */
+    border-color: #e9ecef !important;
+    color: #333 !important;
+  }
+
+  .upcoming-sessions {
+    background: #ffffff !important; /* Force white upcoming sessions */
+    color: #333 !important;
+  }
+
+  .session-card {
+    background: #f8f9fa !important; /* Force light session cards */
+    color: #333 !important;
   }
 
   .profile-picture {
-    border-color: #404040;
+    border-color: #e9ecef !important;
+  }
+
+  /* Force all text to be dark */
+  .page-header h1,
+  .section-title h2,
+  .course-info h3,
+  .session-info h3,
+  .group-info h3,
+  .form-group label,
+  .dashboard-header h2 {
+    color: #333 !important;
+  }
+
+  .page-subtitle,
+  .course-progress,
+  .session-details,
+  .group-details,
+  .form-value {
+    color: #666 !important;
   }
 }
 
@@ -899,76 +1011,4 @@ button:focus,
   .profile-picture-actions {
     display: none;
   }
-}
-
-
-
-/* Profile Picture Upload */
-.profile-picture-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-.profile-picture {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 4px solid #e9ecef;
-  position: relative;
-}
-
-.profile-picture img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.profile-placeholder {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-.profile-picture-actions {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.upload-btn, .remove-btn {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: all 0.3s ease;
-}
-
-.upload-btn {
-  background: #007bff;
-  color: white;
-}
-
-.upload-btn:hover {
-  background: #0056b3;
-}
-
-.remove-btn {
-  background: #dc3545;
-  color: white;
-}
-
-.remove-btn:hover {
-  background: #c82333;
 }

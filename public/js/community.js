@@ -129,30 +129,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let currentClub = null;
 
-  // Club card click handlers
+  // Check if there's a target club to open from dashboard
+  function checkForTargetClub() {
+    const targetClub = localStorage.getItem("targetClub");
+    if (targetClub && clubData[targetClub]) {
+      // Clear the stored target club
+      localStorage.removeItem("targetClub");
+      // Open the club detail page
+      setTimeout(() => {
+        openClubDetail(targetClub);
+      }, 500); // Small delay to ensure page is fully loaded
+    }
+  }
+
+  // Club card click handlers - Updated to remove join button logic
   clubCards.forEach((card) => {
-    const joinBtn = card.querySelector(".join-club-btn");
-
-    // Join button
-    joinBtn.addEventListener("click", function (e) {
-      e.stopPropagation();
-      if (this.textContent === "Join") {
-        this.textContent = "Joined";
-        this.style.background = "#28a745";
-        this.disabled = true;
-        showNotification("Successfully joined the club!");
-      }
-    });
-
-    // Card click (open club detail) - only if not clicking on join button
+    // Card click to open club detail
     card.addEventListener("click", function (e) {
-      // Prevent opening club detail if clicking on join button
-      if (e.target.classList.contains("join-club-btn")) {
-        return;
-      }
-
       const clubType = this.getAttribute("data-club");
       openClubDetail(clubType);
+    });
+
+    // Add hover effect
+    card.addEventListener("mouseenter", function () {
+      this.style.transform = "translateY(-8px)";
+    });
+
+    card.addEventListener("mouseleave", function () {
+      this.style.transform = "translateY(-5px)";
     });
   });
 
@@ -161,6 +165,11 @@ document.addEventListener("DOMContentLoaded", function () {
     currentClub = clubType;
     const club = clubData[clubType];
 
+    if (!club) {
+      console.error("Club data not found for:", clubType);
+      return;
+    }
+
     document.getElementById("clubDetailTitle").textContent = club.title;
     document.getElementById("clubDetailDescription").textContent =
       club.description;
@@ -168,6 +177,9 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("clubEventCount").textContent = club.events;
     document.getElementById("clubDiscussionCount").textContent =
       club.discussions;
+
+    // Set up membership section
+    setupMembershipSection(club);
 
     // Populate members
     const membersGrid = document.getElementById("membersGrid");
@@ -190,6 +202,81 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.style.overflow = "hidden";
   }
 
+  // Setup membership section with join functionality
+  function setupMembershipSection(club) {
+    const joinBtn = document.getElementById("joinClubBtn");
+    const membershipTitle = document.getElementById("membershipTitle");
+    const membershipDescription = document.getElementById(
+      "membershipDescription"
+    );
+
+    // Check if user is already a member (you can enhance this with actual user data)
+    const isAlreadyMember =
+      localStorage.getItem(`joined_${currentClub}`) === "true";
+
+    if (isAlreadyMember) {
+      joinBtn.textContent = "Joined";
+      joinBtn.classList.add("joined");
+      joinBtn.disabled = true;
+      membershipTitle.textContent = "Welcome Back!";
+      membershipDescription.textContent =
+        "You're already a member of this amazing community!";
+    } else {
+      joinBtn.textContent = "Join Club";
+      joinBtn.classList.remove("joined");
+      joinBtn.disabled = false;
+      membershipTitle.textContent = "Ready to Join?";
+      membershipDescription.textContent =
+        "Join this amazing community and connect with like-minded learners!";
+    }
+
+    // Remove existing event listeners to prevent multiple bindings
+    const newJoinBtn = joinBtn.cloneNode(true);
+    joinBtn.parentNode.replaceChild(newJoinBtn, joinBtn);
+
+    // Add join functionality
+    newJoinBtn.addEventListener("click", function () {
+      if (!this.disabled) {
+        // Mark as joined
+        localStorage.setItem(`joined_${currentClub}`, "true");
+
+        // Update dashboard clubs list
+        updateDashboardClubs(currentClub, club.title);
+
+        // Update UI
+        this.textContent = "Joined";
+        this.classList.add("joined");
+        this.disabled = true;
+
+        membershipTitle.textContent = "Welcome to the Club!";
+        membershipDescription.textContent =
+          "You're now part of this amazing community!";
+
+        showNotification(`Successfully joined ${club.title}!`);
+      }
+    });
+  }
+
+  // Update dashboard clubs list when user joins a club
+  function updateDashboardClubs(clubKey, clubTitle) {
+    // Get existing joined clubs from localStorage
+    let joinedClubs = JSON.parse(localStorage.getItem("joinedClubs") || "[]");
+
+    // Add new club if not already present
+    const clubExists = joinedClubs.some((club) => club.key === clubKey);
+    if (!clubExists) {
+      const newClub = {
+        key: clubKey,
+        title: clubTitle,
+        joinedDate: new Date().toISOString(),
+      };
+      joinedClubs.push(newClub);
+      localStorage.setItem("joinedClubs", JSON.stringify(joinedClubs));
+
+      console.log(`Added ${clubTitle} to dashboard clubs list`);
+    }
+  }
+
   // Close club detail page
   closeClubBtn.addEventListener("click", function () {
     clubDetailPage.classList.remove("active");
@@ -209,10 +296,18 @@ document.addEventListener("DOMContentLoaded", function () {
       openChat(currentClub);
     });
 
+  // Updated View Events handler - Navigate to club events page
   document
     .getElementById("viewEventsAction")
     .addEventListener("click", function () {
-      showNotification("Events page would open here!");
+      if (currentClub) {
+        // Store current club in localStorage for the events page
+        localStorage.setItem("currentClub", currentClub);
+        // Navigate to club events page with club parameter
+        window.location.href = `club-events.html?club=${currentClub}`;
+      } else {
+        showNotification("Please select a club first!");
+      }
     });
 
   // Open chat modal
@@ -444,6 +539,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  // Check for target club on page load
+  checkForTargetClub();
+
   console.log("🎓 SkillHub Community Page - Connect and Grow Together! 🚀");
   console.log("✅ All Community page features initialized successfully!");
+  console.log("📅 Club Events integration enabled!");
+  console.log("🎯 Dashboard club navigation integration enabled!");
 });

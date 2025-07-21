@@ -1,414 +1,747 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Dashboard - SkillHub</title>
+    <link rel="stylesheet" href="dashboard.css" />
+    <link rel="stylesheet" href="footer2.css" />
+  </head>
+  <body>
+    <style>
+      /* Navbar Styles */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: #ffffff;
+        border-bottom: 1px solid #e9ecef;
+        padding: 0 2rem;
+        height: 80px;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Student Dashboard - SkillHub</title>
-  <link rel="stylesheet" href="css/dashboard.css" />
-  <link rel="stylesheet" href="css/navbar1.css">
-  <link rel="stylesheet" href="css/navbar2.css">
-  <link rel="stylesheet" href="css/navbar-enhancements.css">
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
 
-  <link rel="stylesheet" href="css/footer2.css">
-  <script src="js/auth.js"></script>
-<script src="js/login-integration.js"></script>
-</head>
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: bold;
+        color: #333;
+      }
 
-<body>
-  <div id="navbar-container"></div>
+      .logo {
+        font-size: 1.5rem;
+      }
 
-  <div class="dashboard-container">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="dashboard-header">
-        <h2>Student Dashboard</h2>
-        <span class="status-badge">Active Learner</span>
+      .brand-text {
+        font-size: 1.3rem;
+        color: #4caf50;
+      }
+
+      .nav-menu {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .nav-link {
+        text-decoration: none;
+        color: #666;
+        font-weight: 500;
+        padding: 8px 16px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover {
+        color: #4caf50;
+        background: #f0f8f0;
+      }
+
+      .nav-profile {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .nav-user {
+        font-weight: 500;
+        color: #333;
+      }
+
+      .profile-avatar {
+        width: 40px;
+        height: 40px;
+        background: #4caf50;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+      }
+
+      /* Responsive navbar */
+      @media (max-width: 768px) {
+        .nav-menu {
+          display: none;
+        }
+
+        .navbar {
+          padding: 0 1rem;
+        }
+      }
+    </style>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-brand">
+          <img
+            src="images/SkillHub LOGO 3.png"
+            alt="SkillHub Logo"
+            class="logo"
+          />
+          <span class="brand-text">SkillHub</span>
+        </div>
+
+        <div class="nav-menu">
+          <a href="dashboard.html" class="nav-link">Dashboard</a>
+          <a href="services.html" class="nav-link">Find Teachers</a>
+          <a href="#my-learning" class="nav-link">My Learning</a>
+          <a href="community.html" class="nav-link">Community</a>
+        </div>
+
+        <div class="nav-profile">
+          <span class="nav-user">Jane Student</span>
+          <div class="profile-avatar">
+            <span>👤</span>
+          </div>
+        </div>
       </div>
+    </nav>
 
-      <nav class="sidebar-nav">
-        <ul>
-          <li>
-            <a href="#overview" class="sidebar-link active" data-page="overview">
-              <span class="sidebar-icon">📊</span>
-              Overview
-            </a>
-          </li>
-          <li>
-            <a href="#my-learning" class="sidebar-link" data-page="my-learning">
-              <span class="sidebar-icon">🎓</span>
-              My Learning
-            </a>
-          </li>
-          <li>
-            <a href="#booking" class="sidebar-link" data-page="booking">
-              <span class="sidebar-icon">📋</span>
-              Booking
-            </a>
-          </li>
-          <li>
-            <a href="#learning-group" class="sidebar-link" data-page="learning-group">
-              <span class="sidebar-icon">👥</span>
-              Clubs
-            </a>
-          </li>
-          <li>
-            <a href="#profile-setting" class="sidebar-link" data-page="profile-setting">
-              <span class="sidebar-icon">⚙️</span>
-              Profile Setting
-            </a>
-          </li>
-        </ul>
-      </nav>
-
-      <button class="logout-btn">LOG OUT</button>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="main-content">
-      <!-- Overview Page -->
-      <div id="overview" class="page-content active">
-        <div class="page-header">
-          <h1>Dashboard Overview</h1>
-          <p class="page-subtitle">
-            Track your learning progress and manage your activities
-          </p>
+    <div class="dashboard-container">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="dashboard-header">
+          <h2>Student Dashboard</h2>
+          <span class="status-badge">Active Learner</span>
         </div>
 
-        <!-- Stats Grid -->
-        <div class="overview-stats">
-          <div class="stat-card">
-            <div class="stat-number">5</div>
-            <h3>Active courses</h3>
+        <nav class="sidebar-nav">
+          <ul>
+            <li>
+              <a
+                href="#overview"
+                class="sidebar-link active"
+                data-page="overview"
+              >
+                <span class="sidebar-icon">📊</span>
+                Overview
+              </a>
+            </li>
+            <li>
+              <a
+                href="#my-learning"
+                class="sidebar-link"
+                data-page="my-learning"
+              >
+                <span class="sidebar-icon">🎓</span>
+                My Learning
+              </a>
+            </li>
+            <li>
+              <a href="#booking" class="sidebar-link" data-page="booking">
+                <span class="sidebar-icon">📋</span>
+                Booking
+              </a>
+            </li>
+            <li>
+              <a
+                href="#learning-group"
+                class="sidebar-link"
+                data-page="learning-group"
+              >
+                <span class="sidebar-icon">👥</span>
+                Clubs
+              </a>
+            </li>
+            <li>
+              <a
+                href="#profile-setting"
+                class="sidebar-link"
+                data-page="profile-setting"
+              >
+                <span class="sidebar-icon">⚙️</span>
+                Profile Setting
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <button class="logout-btn">LOG OUT</button>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Overview Page -->
+        <div id="overview" class="page-content active">
+          <div class="page-header">
+            <h1>Dashboard Overview</h1>
+            <p class="page-subtitle">
+              Track your learning progress and manage your activities
+            </p>
           </div>
-          <div class="stat-card">
-            <div class="stat-number">24</div>
-            <h3>Hours Learned</h3>
+
+          <!-- Stats Grid -->
+          <div class="overview-stats">
+            <div class="stat-card">
+              <div class="stat-number" id="activeCourses">5</div>
+              <h3>Active courses</h3>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" id="hoursLearned">24</div>
+              <h3>Hours Learned</h3>
+            </div>
+          </div>
+
+          <!-- Upcoming Sessions -->
+          <div class="upcoming-sessions">
+            <div class="upcoming-header">
+              <h3>Upcoming Sessions</h3>
+              <!-- Manage button removed as requested -->
+            </div>
+
+            <div class="session-card">
+              <h4>Guitar Practice Session</h4>
+              <div class="session-time">Tomorrow at 2:00 PM</div>
+              <div class="session-location">• Community Center</div>
+              <span class="session-status pending">Pending</span>
+            </div>
+
+            <div class="session-card">
+              <h4>Cooking Class: Pasta Making</h4>
+              <div class="session-time">Friday at 6:00 PM</div>
+              <div class="session-location">• Kitchen Studio</div>
+              <span class="session-status pending">Pending</span>
+            </div>
+
+            <div class="session-card">
+              <h4>Code Review Session</h4>
+              <div class="session-time">Saturday at 10:00 AM</div>
+              <div class="session-location">• Online</div>
+              <span class="session-status pending">Pending</span>
+            </div>
           </div>
         </div>
 
-        <!-- Upcoming Sessions -->
-        <div class="upcoming-sessions">
-          <div class="upcoming-header">
-            <h3>Upcoming Sessions</h3>
-            <button class="manage-btn">Manage</button>
+        <!-- My Learning Page -->
+        <div id="my-learning" class="page-content">
+          <div class="page-header">
+            <h1>My Learning</h1>
+            <p class="page-subtitle">
+              Manage your courses, progress, and learning preferences
+            </p>
           </div>
 
-          <div class="session-card">
-            <h4>Guitar Practice Session</h4>
-            <div class="session-time">Tomorrow at 2:00 PM</div>
-            <div class="session-location">• Community Center</div>
-            <span class="session-status pending">Pending</span>
-          </div>
-
-          <div class="session-card">
-            <h4>Cooking Class: Pasta Making</h4>
-            <div class="session-time">Friday at 6:00 PM</div>
-            <div class="session-location">• Kitchen Studio</div>
-            <span class="session-status pending">Pending</span>
-          </div>
-
-          <div class="session-card">
-            <h4>Code Review Session</h4>
-            <div class="session-time">Saturday at 10:00 AM</div>
-            <div class="session-location">• Online</div>
-            <span class="session-status pending">Pending</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- My Learning Page -->
-      <div id="my-learning" class="page-content">
-        <div class="page-header">
-          <h1>My Learning</h1>
-          <p class="page-subtitle">
-            Manage your courses, progress, and learning preferences
-          </p>
-        </div>
-
-        <!-- Current Courses -->
-        <section class="content-section">
-          <div class="section-header">
-            <div class="section-title">
-              <span class="section-icon">🎓</span>
-              <h2>Current Courses</h2>
-            </div>
-          </div>
-
-          <div class="course-item">
-            <div class="course-icon">🎸</div>
-            <div class="course-info">
-              <h3>Guitar Basics</h3>
-              <p class="course-progress">
-                Progress: 60% • 12 sessions completed
-              </p>
-            </div>
-            <span class="status-badge active">Active</span>
-          </div>
-
-          <div class="course-item">
-            <div class="course-icon">🍳</div>
-            <div class="course-info">
-              <h3>Italian Cooking</h3>
-              <p class="course-progress">
-                Progress: 40% • 6 sessions completed
-              </p>
-            </div>
-            <span class="status-badge active">Active</span>
-          </div>
-        </section>
-
-        <!-- Wishlist -->
-        <section class="content-section">
-          <div class="section-header">
-            <div class="section-title">
-              <span class="section-icon">💚</span>
-              <h2>Wishlist</h2>
-            </div>
-          </div>
-
-          <div class="course-item">
-            <div class="course-icon">🎨</div>
-            <div class="course-info">
-              <h3>Digital Art Fundamentals</h3>
-              <p class="course-progress">
-                Saved for later • 3 teachers available
-              </p>
-            </div>
-            <button class="btn-primary">Explore</button>
-          </div>
-        </section>
-      </div>
-
-      <!-- Booking Page -->
-      <div id="booking" class="page-content">
-        <div class="page-header">
-          <h1>Booking</h1>
-          <p class="page-subtitle">
-            Manage your courses, progress, and learning preferences
-          </p>
-        </div>
-
-        <!-- Upcoming Sessions -->
-        <section class="content-section">
-          <div class="section-header">
-            <div class="section-title">
-              <span class="section-icon">📅</span>
-              <h2>Upcoming Sessions</h2>
-            </div>
-          </div>
-
-          <div class="session-item">
-            <div class="session-info">
-              <h3>Guitar Practice Session</h3>
-              <p class="session-details">
-                Tomorrow at 2:00 PM • Community Center
-              </p>
-            </div>
-            <div class="session-actions">
-              <button class="btn-outline">Reschedule</button>
-              <button class="btn-outline">Cancel</button>
-            </div>
-          </div>
-
-          <div class="session-item">
-            <div class="session-info">
-              <h3>Cooking Class: Pasta Making</h3>
-              <p class="session-details">
-                Friday at 6:00 PM • Kitchen Studio
-              </p>
-            </div>
-            <div class="session-actions">
-              <button class="btn-outline">Reschedule</button>
-              <button class="btn-outline">Cancel</button>
-            </div>
-          </div>
-        </section>
-
-        <!-- Payment History -->
-        <section class="content-section">
-          <div class="section-header">
-            <div class="section-title">
-              <span class="section-icon">💳</span>
-              <h2>Payment History</h2>
-            </div>
-          </div>
-
-          <div class="session-item">
-            <div class="session-info">
-              <h3>Guitar Lessons Package</h3>
-              <p class="session-details">Dec 15, 2024 • Rs.120.00</p>
-            </div>
-            <span class="status-badge paid">Paid</span>
-          </div>
-
-          <div class="session-item">
-            <div class="session-info">
-              <h3>Cooking Class Session</h3>
-              <p class="session-details">Dec 10, 2024 • Rs.45.00</p>
-            </div>
-            <span class="status-badge paid">Paid</span>
-          </div>
-        </section>
-      </div>
-
-      <!-- Learning Groups Page -->
-      <div id="learning-group" class="page-content">
-        <div class="page-header">
-          <h1>Clubs</h1>
-          <p class="page-subtitle">Connect with peers and join clubs</p>
-        </div>
-
-        <!-- My Groups Section -->
-        <section class="content-section">
-          <div class="section-header">
-            <div class="section-title">
-              <span class="section-icon">👥</span>
-              <h2>My Clubs</h2>
-            </div>
-          </div>
-
-          <div class="group-item">
-            <div class="group-info">
-              <h3>Science club</h3>
-              <p class="group-details">
-                15 members • Next meetup: Sunday 3PM
-              </p>
-            </div>
-            <button class="btn-secondary">View</button>
-          </div>
-
-          <div class="group-item">
-            <div class="group-info">
-              <h3>Art club</h3>
-              <p class="group-details">28 members • Active discussions</p>
-            </div>
-            <button class="btn-secondary">View</button>
-          </div>
-        </section>
-
-        <!-- Discover Groups Section -->
-        <section class="content-section">
-          <div class="section-header">
-            <div class="section-title">
-              <span class="section-icon">🔍</span>
-              <h2>Discover Clubs</h2>
-            </div>
-          </div>
-
-          <div class="group-item">
-            <div class="group-info">
-              <h3>Maths club</h3>
-              <p class="group-details">
-                42 members • Weekly cooking sessions
-              </p>
-            </div>
-            <button class="btn-primary">Join</button>
-          </div>
-
-          <div class="group-item">
-            <div class="group-info">
-              <h3>Commerce club</h3>
-              <p class="group-details">89 members • Daily challenges</p>
-            </div>
-            <button class="btn-primary">Join</button>
-          </div>
-        </section>
-      </div>
-
-      <!-- Profile Settings Page -->
-      <div id="profile-setting" class="page-content">
-        <div class="page-header">
-          <h1>Profile Settings</h1>
-          <p class="page-subtitle">
-            Manage your personal information and preferences
-          </p>
-        </div>
-
-        <!-- Personal Information -->
-        <section class="content-section">
-          <div class="section-header">
-            <div class="section-title">
-              <span class="section-icon">👤</span>
-              <h2>Personal Information</h2>
-            </div>
-            <button class="btn-primary">Edit</button>
-          </div>
-
-          <div class="profile-form">
-            <!-- Profile Picture Section -->
-            <div class="form-group profile-picture-group">
-              <label>Profile Picture</label>
-              <div class="profile-picture-container">
-                <div class="profile-picture" id="profilePicture">
-                  <img id="profileImage" src="" alt="Profile" style="display: none" />
-                  <div class="profile-placeholder" id="profilePlaceholder">
-                    <span class="profile-initials">SJ</span>
-                  </div>
-                </div>
-                <div class="profile-picture-actions">
-                  <button class="upload-btn" id="uploadBtn">
-                    <span>📷</span>
-                    Upload Photo
-                  </button>
-                  <button class="remove-btn" id="removeBtn" style="display: none">
-                    <span>🗑️</span>
-                    Remove
-                  </button>
-                  <input type="file" id="fileInput" accept="image/*" style="display: none" />
-                </div>
+          <!-- Current Courses -->
+          <section class="content-section">
+            <div class="section-header">
+              <div class="section-title">
+                <span class="section-icon">🎓</span>
+                <h2>Current Courses</h2>
               </div>
             </div>
 
-            <div class="form-group">
-              <label>Name</label>
-              <div class="form-value">Sarah Johnson</div>
-            </div>
-            <div class="form-group">
-              <label>Email</label>
-              <div class="form-value">sarah.johnson@email.com</div>
-            </div>
-            <div class="form-group">
-              <label>Location</label>
-              <div class="form-value">Downtown District, Central City</div>
-            </div>
-          </div>
-        </section>
+            <div id="currentCoursesList">
+              <!-- Courses will be dynamically loaded here -->
+              <div class="course-item">
+                <div class="course-icon">🎸</div>
+                <div class="course-info">
+                  <h3>Guitar Basics</h3>
+                  <p class="course-progress">
+                    Progress: 60% • 12 sessions completed
+                  </p>
+                </div>
+                <span class="status-badge active">Active</span>
+              </div>
 
-        <!-- Learning Preferences -->
-        <section class="content-section">
-          <div class="section-header">
-            <div class="section-title">
-              <span class="section-icon">⭐</span>
-              <h2>Learning Preferences</h2>
+              <div class="course-item">
+                <div class="course-icon">🍳</div>
+                <div class="course-info">
+                  <h3>Italian Cooking</h3>
+                  <p class="course-progress">
+                    Progress: 40% • 6 sessions completed
+                  </p>
+                </div>
+                <span class="status-badge active">Active</span>
+              </div>
             </div>
-            <button class="btn-primary">Update</button>
+          </section>
+
+          <!-- Wishlist -->
+          <section class="content-section">
+            <div class="section-header">
+              <div class="section-title">
+                <span class="section-icon">💚</span>
+                <h2>Wishlist</h2>
+              </div>
+            </div>
+
+            <div class="course-item">
+              <div class="course-icon">🎨</div>
+              <div class="course-info">
+                <h3>Digital Art Fundamentals</h3>
+                <p class="course-progress">
+                  Saved for later • 3 teachers available
+                </p>
+              </div>
+              <button class="btn-primary">Explore</button>
+            </div>
+          </section>
+        </div>
+
+        <!-- Booking Page -->
+        <div id="booking" class="page-content">
+          <div class="page-header">
+            <h1>Booking</h1>
+            <p class="page-subtitle">
+              Manage your courses, progress, and learning preferences
+            </p>
           </div>
 
-          <div class="profile-form">
-            <div class="form-group">
-              <label>Preferred Learning Style</label>
-              <div class="form-value">Visual & Hands-on</div>
+          <!-- Upcoming Sessions -->
+          <section class="content-section">
+            <div class="section-header">
+              <div class="section-title">
+                <span class="section-icon">📅</span>
+                <h2>Upcoming Sessions</h2>
+              </div>
             </div>
-            <div class="form-group">
-              <label>Availability</label>
-              <div class="form-value">Weekday evenings, Weekend mornings</div>
+
+            <div class="session-item">
+              <div class="session-info">
+                <h3>Guitar Practice Session</h3>
+                <p class="session-details">
+                  Tomorrow at 2:00 PM • Community Center
+                </p>
+              </div>
+              <div class="session-actions">
+                <button class="btn-outline">Reschedule</button>
+                <button class="btn-outline">Cancel</button>
+              </div>
             </div>
-            <div class="form-group">
-              <label>Budget Range</label>
-              <div class="form-value">Rs.25 - Rs.60 per session</div>
+
+            <div class="session-item">
+              <div class="session-info">
+                <h3>Cooking Class: Pasta Making</h3>
+                <p class="session-details">
+                  Friday at 6:00 PM • Kitchen Studio
+                </p>
+              </div>
+              <div class="session-actions">
+                <button class="btn-outline">Reschedule</button>
+                <button class="btn-outline">Cancel</button>
+              </div>
             </div>
+          </section>
+
+          <!-- Payment History -->
+          <section class="content-section">
+            <div class="section-header">
+              <div class="section-title">
+                <span class="section-icon">💳</span>
+                <h2>Payment History</h2>
+              </div>
+            </div>
+
+            <div class="session-item">
+              <div class="session-info">
+                <h3>Guitar Lessons Package</h3>
+                <p class="session-details">Dec 15, 2024 • Rs.120.00</p>
+              </div>
+              <span class="status-badge paid">Paid</span>
+            </div>
+
+            <div class="session-item">
+              <div class="session-info">
+                <h3>Cooking Class Session</h3>
+                <p class="session-details">Dec 10, 2024 • Rs.45.00</p>
+              </div>
+              <span class="status-badge paid">Paid</span>
+            </div>
+          </section>
+        </div>
+
+        <!-- Learning Groups Page -->
+        <div id="learning-group" class="page-content">
+          <div class="page-header">
+            <h1>Clubs</h1>
+            <p class="page-subtitle">Connect with peers and join clubs</p>
           </div>
-        </section>
+
+          <!-- My Groups Section -->
+          <section class="content-section">
+            <div class="section-header">
+              <div class="section-title">
+                <span class="section-icon">👥</span>
+                <h2>My Clubs</h2>
+              </div>
+            </div>
+
+            <!-- My Clubs will be dynamically populated here -->
+            <div id="myClubsContainer">
+              <!-- Clubs will be added here when user joins them -->
+            </div>
+          </section>
+
+          <!-- Discover Groups Section -->
+          <section class="content-section">
+            <div class="section-header">
+              <div class="section-title">
+                <span class="section-icon">🔍</span>
+                <h2>Discover Clubs</h2>
+              </div>
+            </div>
+
+            <div class="group-item discover-club-item">
+              <div class="group-info">
+                <h3>Maths club</h3>
+                <p class="group-details">
+                  42 members • Weekly problem solving sessions
+                </p>
+              </div>
+            </div>
+
+            <div class="group-item discover-club-item">
+              <div class="group-info">
+                <h3>Commerce club</h3>
+                <p class="group-details">
+                  89 members • Business case discussions
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Profile Settings Page -->
+        <div id="profile-setting" class="page-content">
+          <div class="page-header">
+            <h1>Profile Settings</h1>
+            <p class="page-subtitle">
+              Manage your personal information and preferences
+            </p>
+          </div>
+
+          <!-- Personal Information -->
+          <section class="content-section">
+            <div class="section-header">
+              <div class="section-title">
+                <span class="section-icon">👤</span>
+                <h2>Personal Information</h2>
+              </div>
+              <button class="btn-primary">Edit</button>
+            </div>
+
+            <div class="profile-form">
+              <!-- Profile Picture Section -->
+              <div class="form-group profile-picture-group">
+                <label>Profile Picture</label>
+                <div class="profile-picture-container">
+                  <div class="profile-picture" id="profilePicture">
+                    <img
+                      id="profileImage"
+                      src=""
+                      alt="Profile"
+                      style="display: none"
+                    />
+                    <div class="profile-placeholder" id="profilePlaceholder">
+                      <span class="profile-initials">SJ</span>
+                    </div>
+                  </div>
+                  <div class="profile-picture-actions">
+                    <button class="upload-btn" id="uploadBtn">
+                      <span>📷</span>
+                      Upload Photo
+                    </button>
+                    <button
+                      class="remove-btn"
+                      id="removeBtn"
+                      style="display: none"
+                    >
+                      <span>🗑️</span>
+                      Remove
+                    </button>
+                    <input
+                      type="file"
+                      id="fileInput"
+                      accept="image/*"
+                      style="display: none"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Name</label>
+                <div class="form-value">Sarah Johnson</div>
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <div class="form-value">sarah.johnson@email.com</div>
+              </div>
+              <div class="form-group">
+                <label>Location</label>
+                <div class="form-value">Downtown District, Central City</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Learning Preferences -->
+          <section class="content-section">
+            <div class="section-header">
+              <div class="section-title">
+                <span class="section-icon">⭐</span>
+                <h2>Learning Preferences</h2>
+              </div>
+              <button class="btn-primary">Update</button>
+            </div>
+
+            <div class="profile-form">
+              <div class="form-group">
+                <label>Preferred Learning Style</label>
+                <div class="form-value">Visual & Hands-on</div>
+              </div>
+              <div class="form-group">
+                <label>Availability</label>
+                <div class="form-value">Weekday evenings, Weekend mornings</div>
+              </div>
+              <div class="form-group">
+                <label>Budget Range</label>
+                <div class="form-value">Rs.25 - Rs.60 per session</div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <!-- Header Section -->
+      <div class="footer-header">
+        <h1 class="footer-logo">SkillHub</h1>
+        <p class="footer-tagline">Connect • Learn • Grow • Share</p>
       </div>
-    </main>
-  </div>
+      
+      <!-- Main Content Section -->
+      <div class="footer-content">
+        <!-- Column 1: Description and Social Media -->
+         
+        <div class="footer-column">
+            <h3 class="footer-column-title">
+                <img src="images/SkillHub LOGO 3.png" alt="SkillHub Logo" class="footer-logo-img">
+                <span class="brand-text">SkillHub</span>
+            </h3>
+            <p>Connecting communities through skill sharing. Learn from your neighbors, teach what you love, and build lasting relationships in your local area.</p>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"> <div class="icon-circle"><img src="images\fb.png" alt="Facebook"> </div></a>
+                <a href="#" aria-label="Twitter"> <div class="icon-circle"><img src="images\mdi_twitter.png" alt="Twitter"> </div></a>
+                <a href="#" aria-label="Instagram"> <div class="icon-circle"><img src="images\mdi_instagram.png" alt="Instagram"> </div></a>
+                <a href="#" aria-label="LinkedIn"> <div class="icon-circle"><img src="images\mdi_linkedin.png" alt="LinkedIn"> </div></a>
+            </div>
+        </div>
+         
+        <!-- Column 2: Quick Links -->
+         <div class="footer-columnn">
+        <div class="footer-column">
+            <h3 class="footer-column-title">Quick Links</h3>
+            <ul>
+                <li><a href="dashboard.html">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#how-it-works">How it Works</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="community.html">Community</a></li>
+            </ul>
+        </div>
+         </div>
+        <!-- Column 3: Support -->
+         <div class="footer-columnn">
+        <div class="footer-column">
+            <h3 class="footer-column-title">Support</h3>
+            <ul>
+                <li><a href="#help">Help Center</a></li>
+                <li><a href="#safety">Safety Guidelines</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+                <li><a href="#faq">FAQs</a></li>
+                <li><a href="#feedback">Give Feedback</a></li>
+                <li><a href="#report">Report Issue</a></li>
+                <li><a href="#accessibility">Accessibility</a></li>
+            </ul>
+        </div>
+         </div>
+        
+        <!-- Column 4: Legal -->
+         <div class="footer-columnn">
+        <div class="footer-column">
+            <h3 class="footer-column-title">Legal</h3>
+            <ul>
+                <li><a href="#terms">Terms of Services</a></li>
+                <li><a href="#privacy">Privacy policy</a></li>
+                <li><a href="#cookies">Cookie Policy</a></li>
+                <li><a href="#guidelines">Community Guidelines</a></li>
+            </ul>
+        </div>
+        </div>
+        <!-- Column 5: Stay Connected -->
+         <div class="footer-columnn">
+         <div class="footer-column">
+        <div class="footer-column stay-connected">
+            <h3 class="footer-column-title">Stay Connected</h3>
+            <p>Get updates on new skills, community events, and platform features.</p>
+            <form class="subscription-form">
+                <input type="email" placeholder="Enter your email address" aria-label="Email Address">
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
+    </div>
+        
+    </footer>
 
-  <div id="footer-container"></div>
+    <script>
+      // DATABASE INTEGRATION FUNCTIONS - TO BE IMPLEMENTED
 
-  <script src="js/footer-loader.js"></script>
-  <script src="js/auth.js"></script>
-  <script src="js/dashboard.js"></script>
-</body>
-
+      /*
+        STATISTICS LOADING FUNCTION:
+        
+        async function loadDashboardStats(studentId) {
+          try {
+            const response = await fetch(`/api/student/stats/${studentId}`);
+            const stats = await response.json();
+            
+            document.getElementById('activeCourses').textContent = stats.activeCourses;
+            document.getElementById('hoursLearned').textContent = stats.totalHoursLearned;
+            
+          } catch (error) {
+            console.error('Error loading stats:', error);
+            // Show error message to user
+          }
+        }
+        
+        UPCOMING SESSIONS LOADING FUNCTION:
+        
+        async function loadUpcomingSessions(studentId) {
+          try {
+            const response = await fetch(`/api/student/upcoming-sessions/${studentId}`);
+            const sessions = await response.json();
+            
+            const container = document.querySelector('.upcoming-sessions');
+            const headerDiv = container.querySelector('.upcoming-header');
+            
+            // Clear existing sessions
+            const existingSessions = container.querySelectorAll('.session-card');
+            existingSessions.forEach(session => session.remove());
+            
+            sessions.forEach(session => {
+              const sessionCard = document.createElement('div');
+              sessionCard.className = 'session-card';
+              sessionCard.innerHTML = `
+                <h4>${session.courseName}</h4>
+                <div class="session-time">${formatDateTime(session.sessionDate)}</div>
+                <div class="session-location">• ${session.location}</div>
+                <span class="session-status ${session.status}">${session.status}</span>
+              `;
+              container.appendChild(sessionCard);
+            });
+            
+          } catch (error) {
+            console.error('Error loading upcoming sessions:', error);
+          }
+        }
+        
+        CURRENT COURSES LOADING FUNCTION:
+        
+        async function loadCurrentCourses(studentId) {
+          try {
+            const response = await fetch(`/api/student/current-courses/${studentId}`);
+            const courses = await response.json();
+            
+            const container = document.getElementById('currentCoursesList');
+            container.innerHTML = ''; // Clear existing courses
+            
+            if (courses.length === 0) {
+              container.innerHTML = '<p class="no-courses">No active courses found.</p>';
+              return;
+            }
+            
+            courses.forEach(course => {
+              const courseItem = document.createElement('div');
+              courseItem.className = 'course-item';
+              courseItem.innerHTML = `
+                <div class="course-icon">${course.courseIcon}</div>
+                <div class="course-info">
+                  <h3>${course.courseName}</h3>
+                  <p class="course-progress">
+                    Progress: ${course.progress}% • ${course.completedSessions} sessions completed
+                  </p>
+                </div>
+                <span class="status-badge ${course.status}">${course.status}</span>
+              `;
+              container.appendChild(courseItem);
+            });
+            
+            // Re-initialize progress bars
+            animateProgressBars();
+            
+          } catch (error) {
+            console.error('Error loading current courses:', error);
+            document.getElementById('currentCoursesList').innerHTML = 
+              '<p class="error-message">Error loading courses. Please try again.</p>';
+          }
+        }
+        
+        INITIALIZE DATA LOADING:
+        
+        document.addEventListener('DOMContentLoaded', function() {
+          const studentId = getCurrentStudentId(); // Get from session/auth
+          
+          // Load all data
+          loadDashboardStats(studentId);
+          loadUpcomingSessions(studentId);
+          loadCurrentCourses(studentId);
+          
+          // Set up periodic refresh for real-time updates
+          setInterval(() => {
+            loadDashboardStats(studentId);
+            loadUpcomingSessions(studentId);
+          }, 60000); // Refresh every minute
+        });
+        
+        UTILITY FUNCTIONS:
+        
+        function getCurrentStudentId() {
+          // Get student ID from JWT token, session storage, or API call
+          return localStorage.getItem('studentId') || '1';
+        }
+        
+        function formatDateTime(dateString) {
+          const date = new Date(dateString);
+          return date.toLocaleDateString() + ' at ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        }
+      */
+    </script>
+    <script src="dashboard.js"></script>
+    <script src="js/footer2.js"></script>
+  </body>
 </html>

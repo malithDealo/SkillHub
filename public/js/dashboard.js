@@ -1,434 +1,3 @@
-// Add this code to: public/js/dashboard.js (for learners)
-// Dashboard Profile Update Handler for Learners
-
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('🔧 Initializing learner dashboard profile handlers...');
-  
-  // Profile picture upload handler
-  initializeProfilePictureUpload();
-  
-  // Profile form update handler
-  initializeProfileFormUpdate();
-  
-  // File input for profile picture (if it doesn't exist)
-  createProfilePictureInput();
-});
-
-function initializeProfilePictureUpload() {
-  // Handle profile picture upload button click
-  const uploadBtn = document.getElementById('uploadBtn');
-  const profilePicture = document.getElementById('profilePicture');
-  const profileImage = document.getElementById('profileImage');
-  const profilePlaceholder = document.getElementById('profilePlaceholder');
-  const removeBtn = document.getElementById('removeBtn');
-  
-  if (uploadBtn) {
-      uploadBtn.addEventListener('click', () => {
-          const fileInput = document.getElementById('fileInput') || createFileInput();
-          fileInput.click();
-      });
-  }
-  
-  // Handle camera icon clicks on profile pictures
-  const cameraIcons = document.querySelectorAll('.upload-btn, .avatar-upload');
-  cameraIcons.forEach(icon => {
-      icon.addEventListener('click', (e) => {
-          e.preventDefault();
-          const fileInput = document.getElementById('fileInput') || createFileInput();
-          fileInput.click();
-      });
-  });
-  
-  // Handle remove button
-  if (removeBtn) {
-      removeBtn.addEventListener('click', async () => {
-          await updateProfileImage(null);
-          
-          // Hide current image and show placeholder
-          if (profileImage) {
-              profileImage.style.display = 'none';
-          }
-          if (profilePlaceholder) {
-              profilePlaceholder.style.display = 'flex';
-          }
-          if (removeBtn) {
-              removeBtn.style.display = 'none';
-          }
-      });
-  }
-}
-
-function createFileInput() {
-  let fileInput = document.getElementById('fileInput');
-  if (!fileInput) {
-      fileInput = document.createElement('input');
-      fileInput.type = 'file';
-      fileInput.id = 'fileInput';
-      fileInput.accept = 'image/*';
-      fileInput.style.display = 'none';
-      document.body.appendChild(fileInput);
-  }
-  
-  fileInput.addEventListener('change', handleFileSelection);
-  return fileInput;
-}
-
-function createProfilePictureInput() {
-  // Check if profile picture section exists but input doesn't
-  const profileSection = document.querySelector('.profile-picture-group, .profile-avatar');
-  if (profileSection && !document.getElementById('fileInput')) {
-      createFileInput();
-  }
-}
-
-async function handleFileSelection(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  
-  // Validate file type
-  if (!file.type.startsWith('image/')) {
-      showError('Please select a valid image file.');
-      return;
-  }
-  
-  // Validate file size (5MB limit)
-  if (file.size > 5 * 1024 * 1024) {
-      showError('Image file must be less than 5MB.');
-      return;
-  }
-  
-  showSuccess('Uploading profile picture...');
-  
-  try {
-      const reader = new FileReader();
-      reader.onload = async (e) => {
-          const imageData = e.target.result;
-          
-          // Update UI immediately
-          updateProfileImageUI(imageData);
-          
-          // Update via API
-          await updateProfileImage(imageData);
-      };
-      reader.readAsDataURL(file);
-  } catch (error) {
-      console.error('Error processing image:', error);
-      showError('Failed to process image. Please try again.');
-  }
-  
-  // Clear the input so the same file can be selected again
-  e.target.value = '';
-}
-
-function updateProfileImageUI(imageData) {
-  const profileImage = document.getElementById('profileImage');
-  const profilePlaceholder = document.getElementById('profilePlaceholder');
-  const removeBtn = document.getElementById('removeBtn');
-  
-  if (imageData) {
-      // Show image
-      if (profileImage) {
-          profileImage.src = imageData;
-          profileImage.style.display = 'block';
-      }
-      if (profilePlaceholder) {
-          profilePlaceholder.style.display = 'none';
-      }
-      if (removeBtn) {
-          removeBtn.style.display = 'inline-block';
-      }
-  } else {
-      // Show placeholder
-      if (profileImage) {
-          profileImage.style.display = 'none';
-      }
-      if (profilePlaceholder) {
-          profilePlaceholder.style.display = 'flex';
-      }
-      if (removeBtn) {
-          removeBtn.style.display = 'none';
-      }
-  }
-}
-
-async function updateProfileImage(imageData) {
-  try {
-      const token = localStorage.getItem('skillhub_token');
-      if (!token) {
-          showError('Please log in again to update your profile.');
-          return;
-      }
-      
-      const response = await fetch('/api/auth/profile', {
-          method: 'PUT',
-          headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify({
-              profileImage: imageData
-          })
-      });
-      
-      const result = await response.json();
-      
-      if (result.success) {
-          // Update local storage
-          const currentUser = JSON.parse(localStorage.getItem('skillhub_user') || '{}');
-          currentUser.profileImage = imageData;
-          localStorage.setItem('skillhub_user', JSON.stringify(currentUser));
-          
-          // Dispatch update event to update navbar
-          if (window.dispatchProfileUpdate) {
-              window.dispatchProfileUpdate({ profileImage: imageData });
-          }
-          
-          showSuccess('Profile picture updated successfully!');
-          console.log('✅ Profile picture updated successfully');
-      } else {
-          throw new Error(result.message || 'Failed to update profile picture');
-      }
-  } catch (error) {
-      console.error('❌ Error updating profile picture:', error);
-      showError('Failed to update profile picture. Please try again.');
-  }
-}
-
-function initializeProfileFormUpdate() {
-  // Handle profile form submissions
-  const profileForms = document.querySelectorAll(
-      'form[id*="profile"], .settings-form, .profile-form, #settingsForm'
-  );
-  
-  profileForms.forEach(form => {
-      form.addEventListener('submit', handleProfileFormSubmit);
-  });
-  
-  // Handle individual input changes for real-time updates
-  const profileInputs = document.querySelectorAll(
-      'input[name*="Name"], input[name*="name"], input[id*="Name"], input[id*="name"]'
-  );
-  
-  profileInputs.forEach(input => {
-      input.addEventListener('blur', handleIndividualFieldUpdate);
-  });
-}
-
-async function handleProfileFormSubmit(e) {
-  e.preventDefault();
-  
-  const form = e.target;
-  const formData = new FormData(form);
-  const data = Object.fromEntries(formData.entries());
-  
-  // Remove empty values
-  Object.keys(data).forEach(key => {
-      if (data[key] === '' || data[key] === null) {
-          delete data[key];
-      }
-  });
-  
-  console.log('📝 Updating profile with data:', data);
-  
-  try {
-      const token = localStorage.getItem('skillhub_token');
-      if (!token) {
-          showError('Please log in again to update your profile.');
-          return;
-      }
-      
-      // Show loading state
-      const submitBtn = form.querySelector('button[type="submit"], .save-btn, .btn-primary');
-      const originalText = submitBtn ? submitBtn.textContent : '';
-      if (submitBtn) {
-          submitBtn.disabled = true;
-          submitBtn.textContent = 'Updating...';
-      }
-      
-      const response = await fetch('/api/auth/profile', {
-          method: 'PUT',
-          headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify(data)
-      });
-      
-      const result = await response.json();
-      
-      if (result.success) {
-          // Update local storage
-          const currentUser = JSON.parse(localStorage.getItem('skillhub_user') || '{}');
-          const updatedUser = { ...currentUser, ...result.user };
-          localStorage.setItem('skillhub_user', JSON.stringify(updatedUser));
-          
-          // Dispatch update event to update navbar
-          if (window.dispatchProfileUpdate) {
-              window.dispatchProfileUpdate(updatedUser);
-          }
-          
-          showSuccess('Profile updated successfully!');
-          console.log('✅ Profile updated successfully:', updatedUser);
-      } else {
-          throw new Error(result.message || 'Failed to update profile');
-      }
-      
-      // Restore button state
-      if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = originalText;
-      }
-      
-  } catch (error) {
-      console.error('❌ Profile update error:', error);
-      showError('Failed to update profile. Please try again.');
-      
-      // Restore button state
-      const submitBtn = form.querySelector('button[type="submit"], .save-btn, .btn-primary');
-      if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = originalText || 'Save Changes';
-      }
-  }
-}
-
-async function handleIndividualFieldUpdate(e) {
-  const field = e.target;
-  const fieldName = field.name || field.id;
-  const fieldValue = field.value.trim();
-  
-  if (!fieldValue || !fieldName) return;
-  
-  // Only update name fields for real-time navbar updates
-  if (fieldName.toLowerCase().includes('name')) {
-      const updateData = {};
-      updateData[fieldName] = fieldValue;
-      
-      try {
-          const token = localStorage.getItem('skillhub_token');
-          if (!token) return;
-          
-          const response = await fetch('/api/auth/profile', {
-              method: 'PUT',
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${token}`
-              },
-              body: JSON.stringify(updateData)
-          });
-          
-          const result = await response.json();
-          
-          if (result.success) {
-              // Update local storage
-              const currentUser = JSON.parse(localStorage.getItem('skillhub_user') || '{}');
-              const updatedUser = { ...currentUser, ...result.user };
-              localStorage.setItem('skillhub_user', JSON.stringify(updatedUser));
-              
-              // Dispatch update event to update navbar
-              if (window.dispatchProfileUpdate) {
-                  window.dispatchProfileUpdate(updatedUser);
-              }
-              
-              console.log('✅ Field updated:', fieldName, fieldValue);
-          }
-      } catch (error) {
-          console.error('❌ Error updating field:', error);
-      }
-  }
-}
-
-function showSuccess(message) {
-  // Remove existing success messages
-  const existing = document.querySelector('.success-message');
-  if (existing) existing.remove();
-  
-  const successDiv = document.createElement('div');
-  successDiv.className = 'success-message';
-  successDiv.style.cssText = `
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #28a745;
-      color: white;
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      z-index: 10001;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      font-weight: 500;
-      animation: slideInRight 0.3s ease;
-  `;
-  successDiv.textContent = message;
-  
-  document.body.appendChild(successDiv);
-  
-  setTimeout(() => {
-      successDiv.style.animation = 'slideOutRight 0.3s ease';
-      setTimeout(() => successDiv.remove(), 300);
-  }, 3000);
-}
-
-function showError(message) {
-  // Remove existing error messages
-  const existing = document.querySelector('.error-message-fixed');
-  if (existing) existing.remove();
-  
-  const errorDiv = document.createElement('div');
-  errorDiv.className = 'error-message-fixed';
-  errorDiv.style.cssText = `
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #dc3545;
-      color: white;
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      z-index: 10001;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      font-weight: 500;
-      animation: slideInRight 0.3s ease;
-  `;
-  errorDiv.textContent = message;
-  
-  document.body.appendChild(errorDiv);
-  
-  setTimeout(() => {
-      errorDiv.style.animation = 'slideOutRight 0.3s ease';
-      setTimeout(() => errorDiv.remove(), 300);
-  }, 5000);
-}
-
-// Add CSS animations
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes slideInRight {
-      from {
-          opacity: 0;
-          transform: translateX(100%);
-      }
-      to {
-          opacity: 1;
-          transform: translateX(0);
-      }
-  }
-  
-  @keyframes slideOutRight {
-      from {
-          opacity: 1;
-          transform: translateX(0);
-      }
-      to {
-          opacity: 0;
-          transform: translateX(100%);
-      }
-  }
-`;
-document.head.appendChild(style);
-
-console.log('✅ Dashboard profile handlers loaded successfully');
-
 // Wait for DOM to be fully loaded
 document.addEventListener("DOMContentLoaded", function () {
   // Get elements
@@ -443,6 +12,172 @@ document.addEventListener("DOMContentLoaded", function () {
   const uploadBtn = document.getElementById("uploadBtn");
   const removeBtn = document.getElementById("removeBtn");
   const fileInput = document.getElementById("fileInput");
+
+  // Club navigation mapping
+  const clubMapping = {
+    "Science club": "science",
+    "Art club": "art",
+    "Maths club": "maths",
+    "Commerce club": "commerce",
+  };
+
+  // Wishlist functionality
+  function loadWishlistItems() {
+    const wishlist = localStorage.getItem("skillWishlist");
+    const wishlistItems = wishlist ? JSON.parse(wishlist) : [];
+
+    const wishlistSection = document.querySelector(
+      "#my-learning .content-section:last-child"
+    );
+    const wishlistContainer =
+      wishlistSection.querySelector(".course-item").parentNode;
+
+    // Clear existing wishlist items (keep only the default one as template)
+    const existingItems = wishlistContainer.querySelectorAll(".course-item");
+    existingItems.forEach((item, index) => {
+      if (index > 0) {
+        // Keep first item as template, remove others
+        item.remove();
+      }
+    });
+
+    if (wishlistItems.length === 0) {
+      // Hide the default item if no wishlist items
+      existingItems[0].style.display = "none";
+      const noItemsMessage = document.createElement("p");
+      noItemsMessage.className = "no-wishlist-items";
+      noItemsMessage.textContent =
+        "No items in your wishlist yet. Add skills from Find Teachers page!";
+      noItemsMessage.style.color = "#666";
+      noItemsMessage.style.fontStyle = "italic";
+      noItemsMessage.style.padding = "1rem 0";
+      wishlistContainer.appendChild(noItemsMessage);
+      return;
+    }
+
+    // Show the default item and update it with first wishlist item
+    existingItems[0].style.display = "flex";
+    updateWishlistItem(existingItems[0], wishlistItems[0]);
+
+    // Add additional wishlist items
+    for (let i = 1; i < wishlistItems.length; i++) {
+      const wishlistItem = createWishlistItem(wishlistItems[i]);
+      wishlistContainer.appendChild(wishlistItem);
+    }
+  }
+
+  function updateWishlistItem(element, wishlistData) {
+    const iconElement = element.querySelector(".course-icon");
+    const nameElement = element.querySelector("h3");
+    const progressElement = element.querySelector(".course-progress");
+    const buttonElement = element.querySelector(".btn-primary");
+
+    iconElement.textContent = wishlistData.courseIcon;
+    nameElement.textContent = wishlistData.skillName;
+    progressElement.textContent = `Saved for later • ${
+      wishlistData.availableTeachers || 0
+    } teachers available`;
+
+    // Update button functionality
+    buttonElement.textContent = "Explore";
+    buttonElement.onclick = function () {
+      exploreSkill(wishlistData.skillName);
+    };
+
+    // Add remove button
+    addRemoveButton(element, wishlistData.skillName);
+  }
+
+  function createWishlistItem(wishlistData) {
+    const courseItem = document.createElement("div");
+    courseItem.className = "course-item";
+    courseItem.innerHTML = `
+      <div class="course-icon">${wishlistData.courseIcon}</div>
+      <div class="course-info">
+        <h3>${wishlistData.skillName}</h3>
+        <p class="course-progress">
+          Saved for later • ${
+            wishlistData.availableTeachers || 0
+          } teachers available
+        </p>
+      </div>
+      <button class="btn-primary" onclick="exploreSkill('${
+        wishlistData.skillName
+      }')">Explore</button>
+    `;
+
+    addRemoveButton(courseItem, wishlistData.skillName);
+    return courseItem;
+  }
+
+  function addRemoveButton(element, skillName) {
+    const actionsContainer = document.createElement("div");
+    actionsContainer.className = "wishlist-actions";
+    actionsContainer.style.display = "flex";
+    actionsContainer.style.gap = "0.5rem";
+    actionsContainer.style.alignItems = "center";
+
+    const exploreBtn = element.querySelector(".btn-primary");
+    const removeBtn = document.createElement("button");
+    removeBtn.className = "btn-outline remove-wishlist-btn";
+    removeBtn.innerHTML = "🗑️";
+    removeBtn.style.padding = "6px 8px";
+    removeBtn.style.fontSize = "0.9rem";
+    removeBtn.title = "Remove from wishlist";
+    removeBtn.onclick = function (e) {
+      e.stopPropagation();
+      removeFromWishlist(skillName, element);
+    };
+
+    // Replace the button with actions container
+    exploreBtn.parentNode.replaceChild(actionsContainer, exploreBtn);
+    actionsContainer.appendChild(exploreBtn);
+    actionsContainer.appendChild(removeBtn);
+  }
+
+  function removeFromWishlist(skillName, element) {
+    if (confirm(`Remove ${skillName} from your wishlist?`)) {
+      // Remove from localStorage
+      const wishlist = localStorage.getItem("skillWishlist");
+      const wishlistItems = wishlist ? JSON.parse(wishlist) : [];
+      const updatedWishlist = wishlistItems.filter(
+        (item) => item.skillName !== skillName
+      );
+      localStorage.setItem("skillWishlist", JSON.stringify(updatedWishlist));
+
+      // Remove from DOM
+      element.remove();
+
+      // Show success message
+      showNotification(`${skillName} removed from your wishlist!`, "success");
+
+      // Reload wishlist to handle empty state
+      setTimeout(loadWishlistItems, 100);
+    }
+  }
+
+  function exploreSkill(skillName) {
+    // Store the skill to explore in localStorage for the services page
+    localStorage.setItem("exploreSkill", skillName);
+
+    // Navigate to Find Teachers page
+    window.location.href = "services.html";
+  }
+
+  // Function to navigate to specific club in community page
+  function navigateToClub(clubName) {
+    const clubKey = clubMapping[clubName];
+    if (clubKey) {
+      // Store the target club in localStorage
+      localStorage.setItem("targetClub", clubKey);
+      // Navigate to community page
+      window.location.href = "community.html";
+    } else {
+      console.error("Club mapping not found for:", clubName);
+      // Fallback - just navigate to community page
+      window.location.href = "community.html";
+    }
+  }
 
   // Navigation functionality
   function showPage(pageId) {
@@ -466,6 +201,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const activeLink = document.querySelector(`[data-page="${pageId}"]`);
     if (activeLink) {
       activeLink.classList.add("active");
+    }
+
+    // Load wishlist when My Learning page is shown
+    if (pageId === "my-learning") {
+      setTimeout(loadWishlistItems, 100);
+    }
+
+    // Load clubs when Clubs page is shown
+    if (pageId === "learning-group") {
+      setTimeout(() => {
+        loadJoinedClubs();
+        updateDiscoverClubs();
+      }, 100);
     }
   }
 
@@ -497,8 +245,18 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize page based on current hash
   handleHashChange();
 
+  // Load clubs data on initial page load if on clubs page
+  if (window.location.hash === "#learning-group") {
+    setTimeout(() => {
+      loadJoinedClubs();
+      updateDiscoverClubs();
+    }, 100);
+  }
+
   // Profile Picture Upload Functionality
   function setupProfilePictureUpload() {
+    if (!uploadBtn || !fileInput) return; // Safety check
+
     // Upload button click handler
     uploadBtn.addEventListener("click", function () {
       fileInput.click();
@@ -513,35 +271,39 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Remove button click handler
-    removeBtn.addEventListener("click", function () {
-      removeProfilePicture();
-    });
+    if (removeBtn) {
+      removeBtn.addEventListener("click", function () {
+        removeProfilePicture();
+      });
+    }
 
     // Drag and drop functionality
-    profilePicture.addEventListener("dragover", function (e) {
-      e.preventDefault();
-      this.classList.add("drag-over");
-    });
+    if (profilePicture) {
+      profilePicture.addEventListener("dragover", function (e) {
+        e.preventDefault();
+        this.classList.add("drag-over");
+      });
 
-    profilePicture.addEventListener("dragleave", function (e) {
-      e.preventDefault();
-      this.classList.remove("drag-over");
-    });
+      profilePicture.addEventListener("dragleave", function (e) {
+        e.preventDefault();
+        this.classList.remove("drag-over");
+      });
 
-    profilePicture.addEventListener("drop", function (e) {
-      e.preventDefault();
-      this.classList.remove("drag-over");
+      profilePicture.addEventListener("drop", function (e) {
+        e.preventDefault();
+        this.classList.remove("drag-over");
 
-      const files = e.dataTransfer.files;
-      if (files.length > 0) {
-        const file = files[0];
-        if (file.type.startsWith("image/")) {
-          handleFileUpload(file);
-        } else {
-          showNotification("Please upload an image file.", "error");
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+          const file = files[0];
+          if (file.type.startsWith("image/")) {
+            handleFileUpload(file);
+          } else {
+            showNotification("Please upload an image file.", "error");
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   // Handle file upload
@@ -565,12 +327,18 @@ document.addEventListener("DOMContentLoaded", function () {
       const imageUrl = e.target.result;
 
       // Update profile image
-      profileImage.src = imageUrl;
-      profileImage.style.display = "block";
-      profilePlaceholder.style.display = "none";
+      if (profileImage) {
+        profileImage.src = imageUrl;
+        profileImage.style.display = "block";
+      }
+      if (profilePlaceholder) {
+        profilePlaceholder.style.display = "none";
+      }
 
       // Show remove button
-      removeBtn.style.display = "flex";
+      if (removeBtn) {
+        removeBtn.style.display = "flex";
+      }
 
       // Show success message
       showNotification("Profile picture updated successfully!", "success");
@@ -589,9 +357,15 @@ document.addEventListener("DOMContentLoaded", function () {
   // Remove profile picture
   function removeProfilePicture() {
     if (confirm("Are you sure you want to remove your profile picture?")) {
-      profileImage.style.display = "none";
-      profilePlaceholder.style.display = "flex";
-      removeBtn.style.display = "none";
+      if (profileImage) {
+        profileImage.style.display = "none";
+      }
+      if (profilePlaceholder) {
+        profilePlaceholder.style.display = "flex";
+      }
+      if (removeBtn) {
+        removeBtn.style.display = "none";
+      }
 
       // Clear stored image
       localStorage.removeItem("profileImage");
@@ -603,7 +377,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Load stored profile picture on page load
   function loadStoredProfilePicture() {
     const storedImage = localStorage.getItem("profileImage");
-    if (storedImage) {
+    if (storedImage && profileImage && profilePlaceholder && removeBtn) {
       profileImage.src = storedImage;
       profileImage.style.display = "block";
       profilePlaceholder.style.display = "none";
@@ -648,58 +422,159 @@ document.addEventListener("DOMContentLoaded", function () {
   loadStoredProfilePicture();
 
   // Logout functionality
-  logoutBtn.addEventListener("click", function () {
-    if (confirm("Are you sure you want to log out?")) {
-      // Clear stored data
-      localStorage.removeItem("profileImage");
-      alert("Logged out successfully!");
-      // In real app, redirect to login page
-      // window.location.href = 'login.html';
-    }
-  });
-
-  // My Groups functionality
-  const viewBtns = document.querySelectorAll(".btn-secondary");
-  viewBtns.forEach((btn) => {
-    if (btn.textContent === "View") {
-      btn.addEventListener("click", function () {
-        const groupItem = this.closest(".group-item");
-        if (groupItem) {
-          const groupName = groupItem.querySelector("h3").textContent;
-          alert(`Viewing ${groupName} details...`);
-        }
-      });
-    }
-  });
-
-  // Join group functionality
-  const joinBtns = document.querySelectorAll(".btn-primary");
-  joinBtns.forEach((btn) => {
-    if (btn.textContent === "Join") {
-      btn.addEventListener("click", function () {
-        const groupItem = this.closest(".group-item");
-        if (groupItem) {
-          const groupName = groupItem.querySelector("h3").textContent;
-          if (confirm(`Do you want to join ${groupName}?`)) {
-            this.textContent = "Joined";
-            this.style.background = "#28a745";
-            this.disabled = true;
-            alert(`Successfully joined ${groupName}!`);
-          }
-        }
-      });
-    }
-  });
-
-  // Create group functionality
-  const createGroupBtn = document.querySelector(".btn-primary");
-  if (createGroupBtn && createGroupBtn.textContent === "Create Group") {
-    createGroupBtn.addEventListener("click", function () {
-      const groupName = prompt("Enter group name:");
-      if (groupName && groupName.trim()) {
-        alert(`Creating group: ${groupName.trim()}`);
-        // In real app, this would create a new group
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", function () {
+      if (confirm("Are you sure you want to log out?")) {
+        // Clear stored data
+        localStorage.removeItem("profileImage");
+        localStorage.removeItem("skillWishlist");
+        alert("Logged out successfully!");
+        // In real app, redirect to login page
+        // window.location.href = 'login.html';
       }
+    });
+  }
+
+  // Function to load and display joined clubs in My Clubs section
+  function loadJoinedClubs() {
+    const joinedClubs = JSON.parse(localStorage.getItem("joinedClubs") || "[]");
+    const myClubsContainer = document.getElementById("myClubsContainer");
+
+    if (!myClubsContainer) return;
+
+    // Clear existing clubs
+    myClubsContainer.innerHTML = "";
+
+    if (joinedClubs.length === 0) {
+      // Show message if no clubs joined
+      const noClubsMessage = document.createElement("div");
+      noClubsMessage.className = "no-clubs-message";
+      noClubsMessage.innerHTML = `
+        <div style="text-align: center; padding: 2rem; color: #666;">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">🎯</div>
+          <h3 style="margin-bottom: 0.5rem; color: #333;">No Clubs Joined Yet</h3>
+          <p style="margin-bottom: 1.5rem;">Discover amazing clubs in the Community section and start connecting with like-minded learners!</p>
+          <button onclick="window.location.href='community.html'" style="background: #4caf50; color: white; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer;">
+            Explore Clubs
+          </button>
+        </div>
+      `;
+      myClubsContainer.appendChild(noClubsMessage);
+      return;
+    }
+
+    // Add joined clubs to the section
+    joinedClubs.forEach((club) => {
+      const clubItem = createClubItem(club);
+      myClubsContainer.appendChild(clubItem);
+    });
+  }
+
+  // Create a club item element for My Clubs section
+  function createClubItem(club) {
+    const clubItem = document.createElement("div");
+    clubItem.className = "group-item";
+
+    // Get additional club details
+    const clubDetails = getClubDetails(club.key);
+
+    clubItem.innerHTML = `
+      <div class="group-info">
+        <h3>${club.title}</h3>
+        <p class="group-details">${clubDetails.members} members • ${clubDetails.activity}</p>
+      </div>
+      <button class="btn-secondary view-club-btn">View</button>
+    `;
+
+    // Add click handler for the View button
+    const viewBtn = clubItem.querySelector(".view-club-btn");
+    viewBtn.addEventListener("click", function () {
+      navigateToClub(club.title);
+    });
+
+    return clubItem;
+  }
+
+  // Get club details based on club key
+  function getClubDetails(clubKey) {
+    const clubDetailsMap = {
+      science: { members: 156, activity: "Next meetup: Sunday 3PM" },
+      art: { members: 78, activity: "Active discussions" },
+      maths: { members: 89, activity: "Weekly problem sessions" },
+      commerce: { members: 124, activity: "Business case discussions" },
+    };
+
+    return (
+      clubDetailsMap[clubKey] || { members: 0, activity: "Active community" }
+    );
+  }
+
+  // Update discover clubs section to show all clubs (user can join from community page)
+  function updateDiscoverClubs() {
+    const discoverClubsSection = document.querySelector(
+      "#learning-group .content-section:last-child"
+    );
+    if (!discoverClubsSection) return;
+
+    // Clear existing discover clubs
+    const existingClubs = discoverClubsSection.querySelectorAll(".group-item");
+    existingClubs.forEach((club) => club.remove());
+
+    // Define all available clubs for discovery
+    const allClubs = [
+      {
+        key: "science",
+        title: "Science club",
+        description:
+          "Learn insights of Science and connect with fellow individuals",
+      },
+      {
+        key: "art",
+        title: "Art club",
+        description: "Explore creativity and artistic expressions",
+      },
+      {
+        key: "maths",
+        title: "Maths club",
+        description: "Weekly problem solving sessions",
+      },
+      {
+        key: "commerce",
+        title: "Commerce club",
+        description: "Business case discussions",
+      },
+    ];
+
+    // Add all clubs to discover section (joining happens in community page)
+    allClubs.forEach((club) => {
+      const clubDetails = getClubDetails(club.key);
+      const clubItem = document.createElement("div");
+      clubItem.className = "group-item discover-club-item";
+      clubItem.innerHTML = `
+        <div class="group-info">
+          <h3>${club.title}</h3>
+          <p class="group-details">${clubDetails.members} members • ${club.description}</p>
+        </div>
+      `;
+
+      // Add click handler to navigate to club
+      clubItem.style.cursor = "pointer";
+      clubItem.addEventListener("click", function () {
+        navigateToClub(club.title);
+      });
+
+      // Add hover effect
+      clubItem.addEventListener("mouseenter", function () {
+        this.style.transform = "translateY(-2px)";
+        this.style.boxShadow = "0 4px 12px rgba(76, 175, 80, 0.2)";
+      });
+
+      clubItem.addEventListener("mouseleave", function () {
+        this.style.transform = "translateY(0)";
+        this.style.boxShadow = "0 2px 8px rgba(76, 175, 80, 0.1)";
+      });
+
+      discoverClubsSection.appendChild(clubItem);
     });
   }
 
@@ -739,20 +614,6 @@ document.addEventListener("DOMContentLoaded", function () {
             this.disabled = true;
             alert(`${sessionName} has been cancelled.`);
           }
-        }
-      });
-    }
-  });
-
-  // Explore wishlist functionality
-  const exploreBtns = document.querySelectorAll(".btn-primary");
-  exploreBtns.forEach((btn) => {
-    if (btn.textContent === "Explore") {
-      btn.addEventListener("click", function () {
-        const courseItem = this.closest(".course-item");
-        if (courseItem) {
-          const courseName = courseItem.querySelector("h3").textContent;
-          alert(`Exploring ${courseName}...`);
         }
       });
     }
@@ -809,14 +670,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Manage button functionality
-  const manageBtns = document.querySelectorAll(".manage-btn");
-  manageBtns.forEach((btn) => {
-    btn.addEventListener("click", function () {
-      alert("Opening session management...");
-    });
-  });
-
   // Add hover effects to interactive elements
   document.querySelectorAll("button, .sidebar-link").forEach((element) => {
     element.addEventListener("mouseenter", function () {
@@ -827,22 +680,6 @@ document.addEventListener("DOMContentLoaded", function () {
       this.style.transform = "translateY(0)";
     });
   });
-
-  // Add scroll effect to header
-  window.addEventListener("scroll", function () {
-    const header = document.querySelector(".header");
-    if (header) {
-      if (window.scrollY > 50) {
-        header.style.background = "rgba(255, 255, 255, 0.98)";
-        header.style.boxShadow = "0 2px 25px rgba(0, 0, 0, 0.15)";
-      } else {
-        header.style.background = "white";
-        header.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.1)";
-      }
-    }
-  });
-
-  
 
   // Progress bar animation for courses
   function animateProgressBars() {
@@ -861,53 +698,11 @@ document.addEventListener("DOMContentLoaded", function () {
           progressBar.style.borderRadius = "3px";
           progressBar.style.marginTop = "8px";
           progressBar.style.overflow = "hidden";
-
-          const progressFill = document.createElement("div");
-          progressFill.style.width = "0%";
-          progressFill.style.height = "100%";
-          progressFill.style.background = "#4CAF50";
-          progressFill.style.borderRadius = "3px";
-          progressFill.style.transition = "width 1s ease";
-
-          progressBar.appendChild(progressFill);
-          text.parentNode.appendChild(progressBar);
-
-          // Animate progress fill
-          setTimeout(() => {
-            progressFill.style.width = percentage + "%";
-          }, 500);
         }
       }
     });
   }
 
-  // Initialize progress bars
-  setTimeout(animateProgressBars, 1000);
-
-  // Add animation to content sections
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px",
-  };
-
-  const observer = new IntersectionObserver(function (entries) {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = "1";
-        entry.target.style.transform = "translateY(0)";
-      }
-    });
-  }, observerOptions);
-
-  // Observe content sections for animation
-  document.querySelectorAll(".content-section").forEach((section) => {
-    section.style.opacity = "0";
-    section.style.transform = "translateY(30px)";
-    section.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-    observer.observe(section);
-  });
-
-  // Initialize page
-  console.log("SkillHub Student Dashboard Loaded Successfully!");
-  console.log("Profile picture upload functionality initialized!");
+  // Call progress bar animation on page load
+  animateProgressBars();
 });

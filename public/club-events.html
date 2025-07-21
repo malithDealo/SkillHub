@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Club Events - SkillHub</title>
+    <link rel="stylesheet" href="club-events.css" />
+    <link rel="stylesheet" href="footer2.css" />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-brand">
+          <img
+            src="images/SkillHub LOGO 3.png"
+            alt="SkillHub Logo"
+            class="logo"
+          />
+          <span class="brand-text">SkillHub</span>
+        </div>
+
+        <div class="nav-menu">
+          <a href="dashboard.html" class="nav-link">Dashboard</a>
+          <a href="services.html" class="nav-link">Find Teachers</a>
+          <a href="dashboard.html#my-learning" class="nav-link">My Learning</a>
+          <a href="community.html" class="nav-link active">Community</a>
+        </div>
+
+        <div class="nav-profile">
+          <span class="nav-user">Jane Student</span>
+          <div class="profile-avatar">
+            <span>👤</span>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Events Header -->
+    <section class="events-header">
+      <div class="container">
+        <div class="header-content">
+          <div class="header-info">
+            <button class="back-btn" onclick="goBackToCommunity()">
+              ← Back to Community
+            </button>
+            <h1 id="clubEventsTitle">Science Club Events</h1>
+            <p id="clubEventsDescription">
+              Discover and join exciting science events in your community
+            </p>
+          </div>
+          <div class="header-stats">
+            <div class="stat-item">
+              <span class="stat-number" id="totalEvents">8</span>
+              <span class="stat-label">Total Events</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" id="upcomingEvents">5</span>
+              <span class="stat-label">Upcoming</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+      <div class="container">
+        <div class="filter-controls">
+          <div class="filter-group">
+            <label for="eventStatus">Status:</label>
+            <select id="eventStatus" class="filter-select">
+              <option value="all">All Events</option>
+              <option value="upcoming">Upcoming</option>
+              <option value="past">Past Events</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="eventType">Type:</label>
+            <select id="eventType" class="filter-select">
+              <option value="all">All Types</option>
+              <option value="workshop">Workshop</option>
+              <option value="meetup">Meetup</option>
+              <option value="seminar">Seminar</option>
+              <option value="competition">Competition</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="sortBy">Sort by:</label>
+            <select id="sortBy" class="filter-select">
+              <option value="date-asc">Date: Earliest First</option>
+              <option value="date-desc">Date: Latest First</option>
+              <option value="participants">Most Participants</option>
+              <option value="name">Name A-Z</option>
+            </select>
+          </div>
+          <button class="create-event-btn" onclick="openCreateEventModal()">
+            + Create Event
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Events Grid -->
+    <section class="events-section">
+      <div class="container">
+        <div class="events-grid" id="eventsGrid">
+          <!-- Events will be dynamically loaded here -->
+        </div>
+
+        <!-- No Events State -->
+        <div class="no-events" id="noEventsMessage" style="display: none">
+          <div class="no-events-icon">📅</div>
+          <h3>No Events Found</h3>
+          <p>There are no events matching your current filters.</p>
+          <button class="btn-primary" onclick="clearFilters()">
+            Clear Filters
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Event Detail Modal -->
+    <div class="modal-overlay" id="eventDetailModal">
+      <div class="modal-container event-detail-modal">
+        <div class="modal-header">
+          <div class="modal-title">
+            <span id="eventDetailIcon">🔬</span>
+            <h2 id="eventDetailTitle">Physics Workshop</h2>
+          </div>
+          <button class="modal-close" onclick="closeEventDetailModal()">
+            ✕
+          </button>
+        </div>
+        <div class="modal-content">
+          <div class="event-detail-content">
+            <div class="event-meta-info">
+              <div class="meta-item">
+                <span class="meta-icon">📅</span>
+                <div class="meta-details">
+                  <strong>Date & Time</strong>
+                  <span id="eventDetailDateTime">June 25, 2025 at 2:00 PM</span>
+                </div>
+              </div>
+              <div class="meta-item">
+                <span class="meta-icon">📍</span>
+                <div class="meta-details">
+                  <strong>Location</strong>
+                  <span id="eventDetailLocation">Science Lab, Building A</span>
+                </div>
+              </div>
+              <div class="meta-item">
+                <span class="meta-icon">👥</span>
+                <div class="meta-details">
+                  <strong>Participants</strong>
+                  <span id="eventDetailParticipants">15 / 25 registered</span>
+                </div>
+              </div>
+              <div class="meta-item">
+                <span class="meta-icon">💰</span>
+                <div class="meta-details">
+                  <strong>Cost</strong>
+                  <span id="eventDetailCost">Free</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-description">
+              <h3>About This Event</h3>
+              <p id="eventDetailDescription">
+                Join us for an interactive physics workshop where we'll explore
+                fascinating concepts through hands-on experiments and
+                demonstrations.
+              </p>
+            </div>
+
+            <div class="event-organizer">
+              <h3>Organized by</h3>
+              <div class="organizer-info">
+                <div class="organizer-avatar" id="organizerAvatar">J</div>
+                <div class="organizer-details">
+                  <strong id="organizerName">John Smith</strong>
+                  <span id="organizerRole">Science Club Organizer</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-secondary" onclick="closeEventDetailModal()">
+            Close
+          </button>
+          <button class="btn-primary" id="joinEventBtn" onclick="joinEvent()">
+            Join Event
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Event Modal -->
+    <div class="modal-overlay" id="createEventModal">
+      <div class="modal-container">
+        <div class="modal-header">
+          <div class="modal-title">
+            <span>📅</span>
+            <h2>Create Club Event</h2>
+          </div>
+          <button class="modal-close" onclick="closeCreateEventModal()">
+            ✕
+          </button>
+        </div>
+        <div class="modal-content">
+          <form id="createEventForm">
+            <div class="form-group">
+              <label for="newEventTitle">Event Title:</label>
+              <input
+                type="text"
+                id="newEventTitle"
+                name="title"
+                placeholder="e.g. Physics Workshop"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="newEventType">Event Type:</label>
+              <select id="newEventType" name="type" required>
+                <option value="">Select Type</option>
+                <option value="workshop">Workshop</option>
+                <option value="meetup">Meetup</option>
+                <option value="seminar">Seminar</option>
+                <option value="competition">Competition</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="newEventDescription">Description:</label>
+              <textarea
+                id="newEventDescription"
+                name="description"
+                rows="4"
+                placeholder="Describe what participants will learn and what to expect..."
+                required
+              ></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="newEventDate">Date:</label>
+                <input type="date" id="newEventDate" name="date" required />
+              </div>
+              <div class="form-group">
+                <label for="newEventTime">Time:</label>
+                <input type="time" id="newEventTime" name="time" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="newEventLocation">Location:</label>
+              <input
+                type="text"
+                id="newEventLocation"
+                name="location"
+                placeholder="e.g. Science Lab, Community Center"
+                required
+              />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="newEventMaxParticipants">Max Participants:</label>
+                <input
+                  type="number"
+                  id="newEventMaxParticipants"
+                  name="maxParticipants"
+                  placeholder="e.g. 25"
+                  min="1"
+                  max="100"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="newEventCost">Cost:</label>
+                <select id="newEventCost" name="cost">
+                  <option value="0">Free</option>
+                  <option value="500">Rs. 500</option>
+                  <option value="1000">Rs. 1000</option>
+                  <option value="1500">Rs. 1500</option>
+                  <option value="2000">Rs. 2000</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn-secondary"
+            onclick="closeCreateEventModal()"
+          >
+            Cancel
+          </button>
+          <button type="submit" form="createEventForm" class="btn-primary">
+            Create Event
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage" style="display: none">
+      <span id="successText">Event created successfully!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <!-- Header Section -->
+      <div class="footer-header">
+        <h1 class="footer-logo">SkillHub</h1>
+        <p class="footer-tagline">Connect • Learn • Grow • Share</p>
+      </div>
+      
+      <!-- Main Content Section -->
+      <div class="footer-content">
+        <!-- Column 1: Description and Social Media -->
+         
+        <div class="footer-column">
+            <h3 class="footer-column-title">
+                <img src="images/SkillHub LOGO 3.png" alt="SkillHub Logo" class="footer-logo-img">
+                <span class="brand-text">SkillHub</span>
+            </h3>
+            <p>Connecting communities through skill sharing. Learn from your neighbors, teach what you love, and build lasting relationships in your local area.</p>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"> <div class="icon-circle"><img src="images\fb.png" alt="Facebook"> </div></a>
+                <a href="#" aria-label="Twitter"> <div class="icon-circle"><img src="images\mdi_twitter.png" alt="Twitter"> </div></a>
+                <a href="#" aria-label="Instagram"> <div class="icon-circle"><img src="images\mdi_instagram.png" alt="Instagram"> </div></a>
+                <a href="#" aria-label="LinkedIn"> <div class="icon-circle"><img src="images\mdi_linkedin.png" alt="LinkedIn"> </div></a>
+            </div>
+        </div>
+         
+        <!-- Column 2: Quick Links -->
+         <div class="footer-columnn">
+        <div class="footer-column">
+            <h3 class="footer-column-title">Quick Links</h3>
+            <ul>
+                <li><a href="dashboard.html">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#how-it-works">How it Works</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="community.html">Community</a></li>
+            </ul>
+        </div>
+         </div>
+        <!-- Column 3: Support -->
+         <div class="footer-columnn">
+        <div class="footer-column">
+            <h3 class="footer-column-title">Support</h3>
+            <ul>
+                <li><a href="#help">Help Center</a></li>
+                <li><a href="#safety">Safety Guidelines</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+                <li><a href="#faq">FAQs</a></li>
+                <li><a href="#feedback">Give Feedback</a></li>
+                <li><a href="#report">Report Issue</a></li>
+                <li><a href="#accessibility">Accessibility</a></li>
+            </ul>
+        </div>
+         </div>
+        
+        <!-- Column 4: Legal -->
+         <div class="footer-columnn">
+        <div class="footer-column">
+            <h3 class="footer-column-title">Legal</h3>
+            <ul>
+                <li><a href="#terms">Terms of Services</a></li>
+                <li><a href="#privacy">Privacy policy</a></li>
+                <li><a href="#cookies">Cookie Policy</a></li>
+                <li><a href="#guidelines">Community Guidelines</a></li>
+            </ul>
+        </div>
+        </div>
+        <!-- Column 5: Stay Connected -->
+         <div class="footer-columnn">
+         <div class="footer-column">
+        <div class="footer-column stay-connected">
+            <h3 class="footer-column-title">Stay Connected</h3>
+            <p>Get updates on new skills, community events, and platform features.</p>
+            <form class="subscription-form">
+                <input type="email" placeholder="Enter your email address" aria-label="Email Address">
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
+    </div>
+        
+    </footer>
+
+    <script src="club-events.js"></script>
+    <script src="js/footer2.js"></script>
+  </body>
+</html>
