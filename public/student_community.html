@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillHub - Student Community</title>
+    <link href="../public/css/dashboard_overview.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="flex bg-gray-100">
+    <div class="sidebar bg-white p-4 shadow-md fixed h-full">
+        <h1 class="text-2xl font-bold mb-4">SkillHub</h1>
+        <p class="text-gray-600 mb-4">Level 3 - Pro Instructor</p>
+        <nav>
+            <ul>
+                <li><a href="../public/dashboard_overview.html" id="dashboardLink" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="../public/schedule.html" id="scheduleLink"><i class="fas fa-calendar-alt"></i> Schedule</a></li>
+                <li><a href="../public/student_community.html" id="studentsLink"><i class="fas fa-users"></i> Students</a></li>
+                <li><a href="../public/assignments.html" id="assignmentsLink"><i class="fas fa-book"></i> Assignments</a></li>
+                <li><a href="../public/earnings_analytics.html" class="block p-2 hover:bg-gray-200 rounded">Earning & Analytics</a></li>
+                <li><a href="../public/sponsor_conversations.html" id="sponsorConnectLink"><i class="fas fa-handshake"></i> Connect Sponsor</a></li>
+                <li><a href="../public/profile_setting.html" class="block p-2 hover:bg-gray-200 rounded">Profile Setting</a></li>
+                <li><a href="../public/event_organization.html" class="block p-2 hover:bg-gray-200 rounded">Event Organization</a></li>
+            </ul>
+        </nav>
+        <a href="#" class="block p-2 text-red-500 hover:bg-gray-200 rounded mt-4">LOG OUT</a>
+    </div>
+
+    <div class="ml-64 p-8 w-full">
+        <header class="mb-6">
+            <h2 class="text-3xl font-bold">Student Community</h2>
+            <p class="text-gray-600">View student discussions and achievements</p>
+        </header>
+
+        <div class="bg-white p-4 rounded shadow">
+            <h3 class="text-lg font-semibold mb-4">Student Posts</h3>
+            <div id="student-posts" class="space-y-4">
+                <div class="community-post">
+                    <p class="font-semibold">Sarah Johnson</p>
+                    <p>Just mastered my first chord progression!</p>
+                    <p class="text-sm text-gray-600">1 hour ago</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

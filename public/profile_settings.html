@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TeacherPro - Profile Settings</title>
+    <title>TeacherPro - Navigation Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -16,931 +16,866 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            padding: 2rem;
         }
 
-        .dashboard-container {
-            display: flex;
-            min-height: 100vh;
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        .sidebar {
-            width: 280px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-right: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 2rem 0;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-        }
-
-        .logo {
+        .header {
             text-align: center;
-            margin-bottom: 2rem;
-            padding: 0 2rem;
-        }
-
-        .logo h1 {
-            color: #764ba2;
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .welcome-text {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .nav-menu {
-            list-style: none;
-            padding: 0 1rem;
-        }
-
-        .nav-item {
-            margin-bottom: 0.5rem;
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-            color: #555;
-            text-decoration: none;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link:hover {
-            background: rgba(118, 75, 162, 0.1);
-            color: #764ba2;
-        }
-
-        .nav-link.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin-bottom: 3rem;
             color: white;
-        }
-
-        .nav-link i {
-            margin-right: 1rem;
-            width: 20px;
-        }
-
-        .main-content {
-            margin-left: 280px;
-            flex: 1;
-            padding: 2rem;
-        }
-
-        .page-header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .page-header h1 {
-            color: #333;
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .profile-container {
-            display: grid;
-            grid-template-columns: 350px 1fr;
-            gap: 2rem;
-        }
-
-        .profile-sidebar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            height: fit-content;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .profile-avatar {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .avatar-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 1rem;
-        }
-
-        .avatar-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #667eea;
-        }
-
-        .avatar-upload {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .profile-info h3 {
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
-
-        .profile-info p {
-            color: #666;
-            margin-bottom: 0.25rem;
-        }
-
-        .profile-stats {
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        .stat-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-        }
-
-        .stat-label {
-            color: #666;
-        }
-
-        .stat-value {
-            font-weight: 600;
-            color: #333;
-        }
-
-        .profile-main {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 2rem;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
-        .settings-tabs {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .tab-btn {
-            padding: 1rem 1.5rem;
-            border: none;
-            background: none;
-            color: #666;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        .tab-btn.active {
-            color: #667eea;
-            border-bottom-color: #667eea;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .form-section {
-            margin-bottom: 2rem;
-        }
-
-        .form-section h3 {
-            color: #333;
+        .header h1 {
+            font-size: 3rem;
             margin-bottom: 1rem;
-            font-size: 1.3rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .form-group {
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
             margin-bottom: 1.5rem;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #333;
-            font-weight: 600;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-        }
-
-        .btn-secondary {
-            background: rgba(102, 126, 234, 0.1);
-            color: #667eea;
-        }
-
-        .btn-danger {
-            background: rgba(239, 68, 68, 0.1);
-            color: #ef4444;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .notification-item {
+        .nav-bar {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            background: rgba(102, 126, 234, 0.05);
-            border-radius: 10px;
-        }
-
-        .notification-info h4 {
-            color: #333;
-            margin-bottom: 0.25rem;
-        }
-
-        .notification-info p {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 24px;
-        }
-
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 24px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 18px;
-            width: 18px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-
-        input:checked + .slider {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(26px);
-        }
-
-        .security-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .security-item:hover {
-            border-color: #667eea;
-        }
-
-        .security-info {
-            display: flex;
-            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 1rem;
         }
 
-        .security-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(102, 126, 234, 0.1);
+        .nav-bar a {
+            text-decoration: none;
+            color: #333;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-bar a:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .nav-bar .logout {
+            background: rgba(220, 53, 69, 0.95);
+            color: white;
+        }
+
+        .nav-bar .logout:hover {
+            background: rgba(220, 53, 69, 1);
+        }
+
+        .content {
+            flex-grow: 1;
+        }
+
+        .navigation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .nav-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .nav-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #667eea;
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 1rem;
         }
 
-        .verification-badge {
+        .nav-icon.live-session {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        }
+
+        .nav-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-subtitle {
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .nav-subtitle.live {
+            color: #ff6b6b;
+        }
+
+        .nav-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .feature-tag {
             padding: 0.25rem 0.75rem;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .feature-tag.live {
+            background: rgba(255, 107, 107, 0.1);
+            color: #ff6b6b;
+        }
+
+        .quick-links {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .quick-links h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .quick-link {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 10px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .quick-link:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateX(5px);
+        }
+
+        .quick-link i {
+            margin-right: 1rem;
+            color: #667eea;
+            width: 20px;
+        }
+
+        .status-indicator {
+            margin-left: auto;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
             font-size: 0.8rem;
             font-weight: 600;
         }
 
-        .verified {
+        .status-ready {
             background: rgba(34, 197, 94, 0.1);
             color: #22c55e;
         }
 
-        .unverified {
-            background: rgba(239, 68, 68, 0.1);
-            color: #ef4444;
+        .status-beta {
+            background: rgba(251, 191, 36, 0.1);
+            color: #fbbf24;
+        }
+
+        .status-new {
+            background: rgba(255, 107, 107, 0.1);
+            color: #ff6b6b;
+        }
+
+        .demo-notice {
+            background: rgba(59, 130, 246, 0.1);
+            border: 2px solid rgba(59, 130, 246, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .demo-notice h3 {
+            color: #3b82f6;
+            margin-bottom: 0.5rem;
+        }
+
+        .demo-notice p {
+            color: #666;
+        }
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            color: white;
+            padding: 60px 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .footer-section ul li a:hover {
+            color: #9ae6b4;
+            transform: translateX(5px);
+        }
+
+        .brand-section {
+            padding-right: 20px;
+        }
+
+        .brand-section .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .brand-section .logo i {
+            font-size: 28px;
+            color: #9ae6b4;
+            margin-right: 10px;
+        }
+
+        .brand-section .logo h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .brand-section p {
+            color: #cbd5e0;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-icons a:hover {
+            background: #9ae6b4;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(154, 230, 180, 0.3);
+        }
+
+        .newsletter-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .newsletter-section h3 {
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .newsletter-section p {
+            color: #cbd5e0;
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .newsletter-form input {
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-form input::placeholder {
+            color: #a0aec0;
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: #9ae6b4;
+            box-shadow: 0 0 0 3px rgba(154, 230, 180, 0.2);
+        }
+
+        .newsletter-form button {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #9ae6b4 0%, #68d391 100%);
+            color: #2d3748;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .newsletter-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(154, 230, 180, 0.4);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            color: #a0aec0;
+            font-size: 14px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-bar a {
+                width: 100%;
+                text-align: center;
+            }
+            .navigation-grid {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="dashboard-container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="logo">
-                <h1>TeacherPro</h1>
-                <p class="welcome-text">Welcome back, Dr. Smith!</p>
-            </div>
-            
-            <nav>
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a href="dashboard_overview.html" class="nav-link">
-                            <i class="fas fa-home"></i>
-                            Dashboard Overview
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="class_management.html" class="nav-link">
-                            <i class="fas fa-chalkboard"></i>
-                            Class Management
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="schedule & Availability.html" class="nav-link">
-                            <i class="fas fa-calendar-alt"></i>
-                            Schedule & Availability
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="earnings-&-analytics.html" class="nav-link">
-                            <i class="fas fa-chart-line"></i>
-                            Earnings & Analytics
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="profile_settings.html" class="nav-link active">
-                            <i class="fas fa-user-cog"></i>
-                            Profile Settings
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="teachers_community.html" class="nav-link">
-                            <i class="fas fa-users"></i>
-                            Teacher Community
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="students.html" class="nav-link">
-                            <i class="fas fa-user-graduate"></i>
-                            Student Management
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="event_organization.html" class="nav-link">
-                            <i class="fas fa-calendar-check"></i>
-                            Event Organization
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="sponsor_conversations.html" class="nav-link">
-                            <i class="fas fa-handshake"></i>
-                            Sponsor Management
-                        </a>
-                    </li>
-                </ul>
+    <div class="container">
+        <header class="header">
+            <h1>🎓 TeacherPro</h1>
+            <p>Welcome back, Dr. Smith!</p>
+            <nav class="nav-bar">
+                <a href="homepage.html">Home Page</a>
+                <a href="dashboard_overview.html">Dashboard Overview</a>
+                <a href="class_management.html">Class Management</a>
+                <a href="schedule & Availability.html">Schedule & Availability</a>
+                <a href="earnings & analytics.html">Earnings & Analytics</a>
+                <a href="profile_settings.html">Profile Settings</a>
+                <a href="teachers_community.html">Teacher Community</a>
+                <a href="student_community.html">Student Management</a>
+                <a href="sponsor_conversations.html">Event Organization</a>
+                <a href="sponsors.html">Sponsor Management</a>
+                <a href="live_sessions.html">Live Sessions</a>
+                <a href="logout.html" class="logout">Logout</a>
             </nav>
-        </div>
-
-        <!-- Main Content -->
-        <div class="main-content">
-            <header class="page-header">
-                <h1>Profile Settings</h1>
-                <p>Manage your personal information and account preferences</p>
-            </header>
-
-            <div class="profile-container">
-                <!-- Profile Sidebar -->
-                <div class="profile-sidebar">
-                    <div class="profile-avatar">
-                        <div class="avatar-container">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face" alt="Profile" class="avatar-img">
-                            <button class="avatar-upload">
-                                <i class="fas fa-camera"></i>
-                            </button>
+        </header>
+        <div class="content">
+            <div class="navigation-grid">
+                <!-- Dashboard Overview -->
+                <a href="dashboard_overview.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <div class="nav-icon">
+                            <i class="fas fa-home"></i>
                         </div>
-                        <div class="profile-info">
-                            <h3>Dr. James Smith</h3>
-                            <p><i class="fas fa-envelope"></i> dr.smith@teacherpro.com</p>
-                            <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
-                            <p><i class="fas fa-map-marker-alt"></i> New York, NY</p>
+                        <div>
+                            <div class="nav-title">Dashboard Overview</div>
+                            <div class="nav-subtitle">Main Hub</div>
                         </div>
                     </div>
+                    <p class="nav-description">
+                        Your central command center with weekly schedules, upcoming sessions, advertisements, and quick actions. Get a bird's eye view of your teaching activities.
+                    </p>
+                    <div class="nav-features">
+                        <span class="feature-tag">Weekly Schedule</span>
+                        <span class="feature-tag">Session Management</span>
+                        <span class="feature-tag">Quick Actions</span>
+                        <span class="feature-tag">Advertisements</span>
+                    </div>
+                </a>
 
-                    <div class="profile-stats">
-                        <h4 style="margin-bottom: 1rem; color: #333;">Account Stats</h4>
-                        <div class="stat-item">
-                            <span class="stat-label">Member Since</span>
-                            <span class="stat-value">Jan 2023</span>
+                <!-- Class Management -->
+                <a href="class_management.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <div class="nav-icon">
+                            <i class="fas fa-chalkboard"></i>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Total Students</span>
-                            <span class="stat-value">73</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Classes Taught</span>
-                            <span class="stat-value">4</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Total Hours</span>
-                            <span class="stat-value">456</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Rating</span>
-                            <span class="stat-value">4.8/5.0</span>
+                        <div>
+                            <div class="nav-title">Class Management</div>
+                            <div class="nav-subtitle">Organize Classes</div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Profile Main Content -->
-                <div class="profile-main">
-                    <div class="settings-tabs">
-                        <button class="tab-btn active" onclick="showTab('personal')">Personal Info</button>
-                        <button class="tab-btn" onclick="showTab('professional')">Professional</button>
-                        <button class="tab-btn" onclick="showTab('notifications')">Notifications</button>
-                        <button class="tab-btn" onclick="showTab('security')">Security</button>
+                    <p class="nav-description">
+                        Manage all your classes, students, and course content. Create new classes, view class statistics, and handle student enrollments efficiently.
+                    </p>
+                    <div class="nav-features">
+                        <span class="feature-tag">Class Creation</span>
+                        <span class="feature-tag">Student Stats</span>
+                        <span class="feature-tag">Course Content</span>
+                        <span class="feature-tag">Ratings</span>
                     </div>
+                </a>
 
-                    <!-- Personal Information Tab -->
-                    <div id="personal" class="tab-content active">
-                        <div class="form-section">
-                            <h3>Basic Information</h3>
-                            <div class="form-grid">
-                                <div class="form-group">
-                                    <label for="firstName">First Name</label>
-                                    <input type="text" id="firstName" value="James">
-                                </div>
-                                <div class="form-group">
-                                    <label for="lastName">Last Name</label>
-                                    <input type="text" id="lastName" value="Smith">
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email Address</label>
-                                    <input type="email" id="email" value="dr.smith@teacherpro.com">
-                                </div>
-                                <div class="form-group">
-                                    <label for="phone">Phone Number</label>
-                                    <input type="tel" id="phone" value="+1 (555) 123-4567">
-                                </div>
-                                <div class="form-group">
-                                    <label for="dateOfBirth">Date of Birth</label>
-                                    <input type="date" id="dateOfBirth" value="1985-03-15">
-                                </div>
-                                <div class="form-group">
-                                    <label for="gender">Gender</label>
-                                    <select id="gender">
-                                        <option value="male" selected>Male</option>
-                                        <option value="female">Female</option>
-                                        <option value="other">Other</option>
-                                        <option value="prefer-not-to-say">Prefer not to say</option>
-                                    </select>
-                                </div>
-                            </div>
+                <!-- Live Session Management - NEW CARD -->
+                <a href="Live Session Management - TeacherPro.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <div class="nav-icon live-session">
+                            <i class="fas fa-video"></i>
                         </div>
-
-                        <div class="form-section">
-                            <h3>Address Information</h3>
-                            <div class="form-grid">
-                                <div class="form-group">
-                                    <label for="address">Street Address</label>
-                                    <input type="text" id="address" value="123 Main Street, Apt 4B">
-                                </div>
-                                <div class="form-group">
-                                    <label for="city">City</label>
-                                    <input type="text" id="city" value="New York">
-                                </div>
-                                <div class="form-group">
-                                    <label for="state">State</label>
-                                    <input type="text" id="state" value="NY">
-                                </div>
-                                <div class="form-group">
-                                    <label for="zipCode">ZIP Code</label>
-                                    <input type="text" id="zipCode" value="10001">
-                                </div>
-                                <div class="form-group">
-                                    <label for="country">Country</label>
-                                    <select id="country">
-                                        <option value="us" selected>United States</option>
-                                        <option value="ca">Canada</option>
-                                        <option value="uk">United Kingdom</option>
-                                        <option value="au">Australia</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-section">
-                            <h3>Biography</h3>
-                            <div class="form-group">
-                                <label for="bio">About Me</label>
-                                <textarea id="bio" rows="6" placeholder="Tell students about yourself, your teaching philosophy, and experience...">Passionate educator with over 15 years of experience in mathematics and sciences. I believe in making complex concepts accessible and engaging for all students. My teaching approach focuses on building strong foundational knowledge while encouraging critical thinking and problem-solving skills.</textarea>
-                            </div>
-                        </div>
-
-                        <div style="display: flex; gap: 1rem;">
-                            <button class="btn btn-primary">
-                                <i class="fas fa-save"></i>
-                                Save Changes
-                            </button>
-                            <button class="btn btn-secondary">
-                                <i class="fas fa-undo"></i>
-                                Reset
-                            </button>
+                        <div>
+                            <div class="nav-title">Live Session Management</div>
+                            <div class="nav-subtitle live">Interactive Teaching</div>
                         </div>
                     </div>
+                    <p class="nav-description">
+                        Select students for live sessions, organize virtual classrooms, share session links, and engage with students through real-time chat during classes.
+                    </p>
+                    <div class="nav-features">
+                        <span class="feature-tag live">Student Selection</span>
+                        <span class="feature-tag live">Link Sharing</span>
+                        <span class="feature-tag live">Live Chat</span>
+                        <span class="feature-tag live">Session Recording</span>
+                    </div>
+                </a>
 
-                    <!-- Professional Information Tab -->
-                    <div id="professional" class="tab-content">
-                        <div class="form-section">
-                            <h3>Educational Background</h3>
-                            <div class="form-grid">
-                                <div class="form-group">
-                                    <label for="degree">Highest Degree</label>
-                                    <select id="degree">
-                                        <option value="phd" selected>Ph.D.</option>
-                                        <option value="masters">Master's Degree</option>
-                                        <option value="bachelors">Bachelor's Degree</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="field">Field of Study</label>
-                                    <input type="text" id="field" value="Applied Mathematics">
-                                </div>
-                                <div class="form-group">
-                                    <label for="university">University</label>
-                                    <input type="text" id="university" value="MIT">
-                                </div>
-                                <div class="form-group">
-                                    <label for="graduationYear">Graduation Year</label>
-                                    <input type="number" id="graduationYear" value="2010" min="1950" max="2025">
-                                </div>
-                            </div>
+                <!-- Schedule & Availability -->
+                <a href="schedule & Availability.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <div class="nav-icon">
+                            <i class="fas fa-calendar-alt"></i>
                         </div>
-
-                        <div class="form-section">
-                            <h3>Teaching Experience</h3>
-                            <div class="form-grid">
-                                <div class="form-group">
-                                    <label for="experience">Years of Experience</label>
-                                    <select id="experience">
-                                        <option value="15+" selected>15+ years</option>
-                                        <option value="10-15">10-15 years</option>
-                                        <option value="5-10">5-10 years</option>
-                                        <option value="1-5">1-5 years</option>
-                                        <option value="<1">Less than 1 year</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="subjects">Subjects Taught</label>
-                                    <input type="text" id="subjects" value="Mathematics, Physics, Chemistry">
-                                </div>
-                                <div class="form-group">
-                                    <label for="grades">Grade Levels</label>
-                                    <input type="text" id="grades" value="Grades 9-13">
-                                </div>
-                                <div class="form-group">
-                                    <label for="certifications">Certifications</label>
-                                    <input type="text" id="certifications" value="State Teaching License, AP Certified">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-section">
-                            <h3>Teaching Preferences</h3>
-                            <div class="form-grid">
-                                <div class="form-group">
-                                    <label for="teachingStyle">Teaching Style</label>
-                                    <select id="teachingStyle">
-                                        <option value="interactive" selected>Interactive</option>
-                                        <option value="lecture">Lecture-based</option>
-                                        <option value="hands-on">Hands-on</option>
-                                        <option value="mixed">Mixed Approach</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="maxStudents">Maximum Class Size</label>
-                                    <input type="number" id="maxStudents" value="30" min="1" max="50">
-                                </div>
-                                <div class="form-group">
-                                    <label for="hourlyRate">Hourly Rate ($)</label>
-                                    <input type="number" id="hourlyRate" value="50" min="10" step="5">
-                                </div>
-                                <div class="form-group">
-                                    <label for="availability">Preferred Hours</label>
-                                    <select id="availability">
-                                        <option value="morning">Morning (8AM-12PM)</option>
-                                        <option value="afternoon" selected>Afternoon (12PM-6PM)</option>
-                                        <option value="evening">Evening (6PM-10PM)</option>
-                                        <option value="flexible">Flexible</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div style="display: flex; gap: 1rem;">
-                            <button class="btn btn-primary">
-                                <i class="fas fa-save"></i>
-                                Save Changes
-                            </button>
-                            <button class="btn btn-secondary">
-                                <i class="fas fa-undo"></i>
-                                Reset
-                            </button>
+                        <div>
+                            <div class="nav-title">Schedule & Availability</div>
+                            <div class="nav-subtitle">Time Management</div>
                         </div>
                     </div>
+                    <p class="nav-description">
+                        Set your teaching schedule, manage availability slots, and view your weekly calendar. Perfect for organizing your teaching time effectively.
+                    </p>
+                    <div class="nav-features">
+                        <span class="feature-tag">Calendar View</span>
+                        <span class="feature-tag">Availability Slots</span>
+                        <span class="feature-tag">Session Planning</span>
+                        <span class="feature-tag">Time Blocking</span>
+                    </div>
+                </a>
 
-                    <!-- Notifications Tab -->
-                    <div id="notifications" class="tab-content">
-                        <div class="form-section">
-                            <h3>Email Notifications</h3>
-                            <div class="notification-item">
-                                <div class="notification-info">
-                                    <h4>New Student Enrollments</h4>
-                                    <p>Get notified when students enroll in your classes</p>
-                                </div>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" checked>
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
-                            <div class="notification-item">
-                                <div class="notification-info">
-                                    <h4>Session Reminders</h4>
-                                    <p>Receive reminders 30 minutes before sessions</p>
-                                </div>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" checked>
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
-                            <div class="notification-item">
-                                <div class="notification-info">
-                                    <h4>Payment Notifications</h4>
-                                    <p>Get notified about successful payments and failures</p>
-                                </div>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" checked>
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
-                            <div class="notification-item">
-                                <div class="notification-info">
-                                    <h4>Marketing Updates</h4>
-                                    <p>Receive updates about new features and promotions</p>
-                                </div>
-                                <label class="toggle-switch">
-                                    <input type="checkbox">
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
+                <!-- Earnings & Analytics -->
+                <a href="earnings & analytics.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <div class="nav-icon">
+                            <i class="fas fa-chart-line"></i>
                         </div>
-
-                        <div class="form-section">
-                            <h3>SMS Notifications</h3>
-                            <div class="notification-item">
-                                <div class="notification-info">
-                                    <h4>Urgent Messages</h4>
-                                    <p>Emergency notifications and urgent updates</p>
-                                </div>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" checked>
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
-                            <div class="notification-item">
-                                <div class="notification-info">
-                                    <h4>Session Cancellations</h4>
-                                    <p>Immediate notification if a student cancels</p>
-                                </div>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" checked>
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div style="display: flex; gap: 1rem;">
-                            <button class="btn btn-primary">
-                                <i class="fas fa-save"></i>
-                                Save Preferences
-                            </button>
+                        <div>
+                            <div class="nav-title">Earnings & Analytics</div>
+                            <div class="nav-subtitle">Financial Insights</div>
                         </div>
                     </div>
+                    <p class="nav-description">
+                        Track your income, analyze performance metrics, and view detailed financial reports. Monitor your teaching business growth with comprehensive analytics.
+                    </p>
+                    <div class="nav-features">
+                        <span class="feature-tag">Revenue Tracking</span>
+                        <span class="feature-tag">Performance Metrics</span>
+                        <span class="feature-tag">Payment History</span>
+                        <span class="feature-tag">Growth Analytics</span>
+                    </div>
+                </a>
 
-                    <!-- Security Tab -->
-                    <div id="security" class="tab-content">
-                        <div class="form-section">
-                            <h3>Account Security</h3>
-                            <div class="security-item">
-                                <div class="security-info">
-                                    <div class="security-icon">
-                                        <i class="fas fa-key"></i>
-                                    </div>
-                                    <div>
-                                        <h4>Password</h4>
-                                        <p>Last changed 3 months ago</p>
-                                    </div>
-                                </div>
-                                <button class="btn btn-secondary">Change Password</button>
-                            </div>
-                            <div class="security-item">
-                                <div class="security-info">
-                                    <div class="security-icon">
-                                        <i class="fas fa-shield-alt"></i>
-                                    </div>
-                                    <div>
-                                        <h4>Two-Factor Authentication</h4>
-                                        <p>Add an extra layer of security</p>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary">Enable 2FA</button>
-                            </div>
-                            <div class="security-item">
-                                <div class="security-info">
-                                    <div class="security-icon">
-                                        <i class="fas fa-mobile-alt"></i>
-                                    </div>
-                                    <div>
-                                        <h4>Phone Verification</h4>
-                                        <p>+1 (555) 123-4567</p>
-                                    </div>
-                                </div>
-                                <span class="verification-badge verified">Verified</span>
-                            </div>
-                            <div class="security-item">
-                                <div class="security-info">
-                                    <div class="security-icon">
-                                        <i class="fas fa-envelope"></i>
-                                    </div>
-                                    <div>
-                                        <h4>Email Verification</h4>
-                                        <p>dr.smith@teacherpro.com</p>
-                                    </div>
-                                </div>
-                                <span class="verification-badge verified">Verified</span>
-                            </div>
+                <!-- Profile Settings -->
+                <a href="profile_settings.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <div class="nav-icon">
+                            <i class="fas fa-user-cog"></i>
                         </div>
-
-                        <div class="form-section">
-                            <h3>Login Activity</h3>
-                            <div style="background: rgba(102, 126, 234, 0.05); padding: 1.5rem; border-radius: 10px;">
-                                <h4 style="margin-bottom: 1rem; color: #333;">Recent Login Sessions</h4>
-                                <div style="margin-bottom: 1rem;">
-                                    <strong>Current Session</strong> - Chrome on Windows
-                                    <br><small style="color: #666;">New York, NY • July 6, 2025 at 9:30 AM</small>
-                                </div>
-                                <div style="margin-bottom: 1rem;">
-                                    <strong>Previous Session</strong> - Safari on iPhone
-                                    <br><small style="color: #666;">New York, NY • July 5, 2025 at 6:45 PM</small>
-                                </div>
-                                <div>
-                                    <strong>Previous Session</strong> - Chrome on Windows
-                                    <br><small style="color: #666;">New York, NY • July 4, 2025 at 10:15 AM</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-section">
-                            <h3>Danger Zone</h3>
-                            <div style="border: 2px solid #ef4444; border-radius: 15px; padding: 2rem;">
-                                <h4 style="color: #ef4444; margin-bottom: 1rem;">Delete Account</h4>
-                                <p style="margin-bottom: 1.5rem; color: #666;">Once you delete your account, there is no going back. Please be certain.</p>
-                                <button class="btn btn-danger">
-                                    <i class="fas fa-trash"></i>
-                                    Delete Account
-                                </button>
-                            </div>
+                        <div>
+                            <div class="nav-title">Profile Settings</div>
+                            <div class="nav-subtitle">Account Management</div>
                         </div>
                     </div>
+                    <p class="nav-description">
+                        Manage your personal information, professional credentials, notification preferences, and security settings. Keep your profile up to date.
+                    </p>
+                    <div class="nav-features">
+                        <span class="feature-tag">Personal Info</span>
+                        <span class="feature-tag">Professional Details</span>
+                        <span class="feature-tag">Notifications</span>
+                        <span class="feature-tag">Security</span>
+                    </div>
+                </a>
+
+                <!-- Teacher Community -->
+                <a href="teachers_community.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <div class="nav-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <div class="nav-title">Teacher Community</div>
+                            <div class="nav-subtitle">Connect & Share</div>
+                        </div>
+                    </div>
+                    <p class="nav-description">
+                        Connect with fellow educators, share experiences, ask questions, and participate in professional discussions. Build your teaching network.
+                    </p>
+                    <div class="nav-features">
+                        <span class="feature-tag">Discussion Forums</span>
+                        <span class="feature-tag">Resource Sharing</span>
+                        <span class="feature-tag">Networking</span>
+                        <span class="feature-tag">Professional Growth</span>
+                    </div>
+                </a>
+
+                <!-- Event Organization -->
+                <a href="event_organization.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <div class="nav-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div>
+                            <div class="nav-title">Event Organization</div>
+                            <div class="nav-subtitle">Workshops & Seminars</div>
+                        </div>
+                    </div>
+                    <p class="nav-description">
+                        Create and manage educational events, workshops, seminars, and study groups. Organize special learning opportunities for your students.
+                    </p>
+                    <div class="nav-features">
+                        <span class="feature-tag">Event Creation</span>
+                        <span class="feature-tag">Registration Management</span>
+                        <span class="feature-tag">Workshop Planning</span>
+                        <span class="feature-tag">Attendee Tracking</span>
+                    </div>
+                </a>
+
+                <!-- Sponsor Management -->
+                <a href="sponsor_conversations.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <div class="nav-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div>
+                            <div class="nav-title">Sponsor Management</div>
+                            <div class="nav-subtitle">Partnership Hub</div>
+                        </div>
+                    </div>
+                    <p class="nav-description">
+                        Manage sponsor relationships, track partnerships, and handle sponsor communications. Build valuable connections for educational funding.
+                    </p>
+                    <div class="nav-features">
+                        <span class="feature-tag">Sponsor Relations</span>
+                        <span class="feature-tag">Partnership Tracking</span>
+                        <span class="feature-tag">Communication Hub</span>
+                        <span class="feature-tag">Funding Management</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Quick Links Section -->
+            <div class="quick-links">
+                <h2>🚀 Quick Access Links</h2>
+                <div class="links-grid">
+                    <a href="homepage.html" class="quick-link">
+                        <i class="fas fa-home"></i>
+                        <span>Home Page</span>
+                        <span class="status-indicator status-ready">Ready</span>
+                    </a>
+                    <a href="dashboard_overview.html" class="quick-link">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                        <span class="status-indicator status-ready">Ready</span>
+                    </a>
+                    <a href="class_management.html" class="quick-link">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <span>My Classes</span>
+                        <span class="status-indicator status-ready">Ready</span>
+                    </a>
+                    <a href="live_sessions.html" class="quick-link">
+                        <i class="fas fa-video"></i>
+                        <span>Live Sessions</span>
+                        <span class="status-indicator status-new">New</span>
+                    </a>
+                    <a href="schedule & Availability.html" class="quick-link">
+                        <i class="fas fa-calendar"></i>
+                        <span>Schedule</span>
+                        <span class="status-indicator status-ready">Ready</span>
+                    </a>
+                    <a href="earnings & analytics.html" class="quick-link">
+                        <i class="fas fa-dollar-sign"></i>
+                        <span>Earnings</span>
+                        <span class="status-indicator status-ready">Ready</span>
+                    </a>
+                    <a href="profile_settings.html" class="quick-link">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                        <span class="status-indicator status-ready">Ready</span>
+                    </a>
+                    <a href="teachers_community.html" class="quick-link">
+                        <i class="fas fa-comments"></i>
+                        <span>Community</span>
+                        <span class="status-indicator status-ready">Ready</span>
+                    </a>
+                    <a href="sponsor_conversations.html" class="quick-link">
+                        <i class="fas fa-calendar-plus"></i>
+                        <span>Events</span>
+                        <span class="status-indicator status-beta">Beta</span>
+                    </a>
+                    <a href="sponsors.html" class="quick-link">
+                        <i class="fas fa-handshake"></i>
+                        <span>Sponsors</span>
+                        <span class="status-indicator status-beta">Beta</span>
+                    </a>
                 </div>
             </div>
+
+            <!-- Demo Notice -->
+            <div class="demo-notice">
+                <h3>📋 Demo Platform Notice</h3>
+                <p>This is a demonstration of the TeacherPro platform. All navigation links are functional and will take you to the respective modules. The platform showcases a complete teaching management system with modern UI/UX design.</p>
+            </div>
+
+            <footer class="footer">
+                <div class="container">
+                    <div class="footer-content">
+                        <div class="footer-section brand-section">
+                            <div class="logo">
+                                <img src="images/SkillHub LOGO 1.png" alt="">
+                                <h2>SkillHub</h2>
+                            </div>
+                            <p>Connecting communities through skill sharing. Learn from your neighbors, teach what you love, and build lasting relationships in your local area.</p>
+                            <div class="social-icons">
+                                <a href="#" aria-label="Facebook"> <div class="icon-circle"><img src="images/Vector.png" alt="Facebook"> </div></a>
+                                <a href="#" aria-label="Twitter"> <div class="icon-circle"><img src="images\mdi_twitter.png" alt="Twitter"> </div></a>
+                                <a href="#" aria-label="Instagram"> <div class="icon-circle"><img src="images\mdi_instagram.png" alt="Instagram"> </div></a>
+                                <a href="#" aria-label="LinkedIn"> <div class="icon-circle"><img src="images\mdi_linkedin.png" alt="LinkedIn"> </div></a>
+                            </div>
+                        </div>
+
+                        <div class="footer-section">
+                            <h3>Quick Links</h3>
+                            <ul>
+                                <li><a href="homepage.html">Home</a></li>
+                                <li><a href="aboutus.html">About Us</a></li>
+                                <li><a href="works_teaching.html">How it Works</a></li>
+                                <li><a href="servicess.html">Services</a></li>
+                                <li><a href="learning_community.html">Community</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="footer-section">
+                            <h3>Support</h3>
+                            <ul>
+                                <li><a href="#">Help Center</a></li>
+                                <li><a href="#">Safety Guidelines</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="#">FAQs</a></li>
+                                <li><a href="#">Give Feedback</a></li>
+                                <li><a href="#">Report Issue</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="footer-section">
+                            <h3>Legal</h3>
+                            <ul>
+                                <li><a href="#">Terms of Services</a></li>
+                                <li><a href="#">Privacy policy</a></li>
+                                <li><a href="#">Cookie Policy</a></li>
+                                <li><a href="#">Community Guidelines</a></li>
+                                <li><a href="#">Accessibility</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="footer-section newsletter-section">
+                            <h3>Stay Connected</h3>
+                            <p>Get updates on new skills, community events, and platform features.</p>
+                            <form class="newsletter-form">
+                                <input type="email" placeholder="Enter your email address" required>
+                                <button type="submit">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="footer-bottom">
+                        <p>&copy; 2025 SkillHub. All rights reserved. Made with ❤️ for community builders.</p>
+                    </div>
+                </div>
+            </footer>
         </div>
     </div>
 
     <script>
-        function showTab(tabName) {
-            // Hide all tab contents
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
+        // Add smooth hover animations for nav cards and header nav links
+        document.querySelectorAll('.nav-card, .nav-bar a').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.transform = this.classList.contains('nav-card') ? 
+                    'translateY(-10px) scale(1.02)' : 
+                    'translateY(-3px)';
             });
-            
-            // Remove active class from all tab buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
+            element.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
             });
-            
-            // Show selected tab content
-            document.getElementById(tabName).classList.add('active');
-            
-            // Add active class to clicked button
-            event.target.classList.add('active');
-        }
-
-        // File upload for avatar
-        document.querySelector('.avatar-upload').addEventListener('click', function() {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'image/*';
-            input.onchange = function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        document.querySelector('.avatar-img').src = e.target.result;
-                    };
-                    reader.readAsDataURL(file);
-                }
-            };
-            input.click();
         });
+
+        // Add click tracking
+        document.querySelectorAll('a[href$=".html"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const pageName = this.getAttribute('href');
+                console.log(`Navigating to: ${pageName}`);
+                this.style.opacity = '0.7';
+                setTimeout(() => {
+                    this.style.opacity = '1';
+                }, 200);
+            });
+        });
+
+        // Welcome animation
+        window.addEventListener('load', function() {
+            document.querySelector('.header').style.animation = 'fadeInDown 1s ease-out';
+            const cards = document.querySelectorAll('.nav-card');
+            cards.forEach((card, index) => {
+                card.style.animation = `fadeInUp 0.6s ease-out ${index * 0.1}s both`;
+            });
+        });
+
+        // Add CSS for animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>

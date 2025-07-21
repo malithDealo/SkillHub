@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeacherPro - Analytics Dashboard</title>
+    <link rel="stylesheet" href="../public/css/dashboard_overview.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h1>TeacherPro</h1>
+        <p>Welcome back, Dr. Smith!</p>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html" id="dashboardLink"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="schedule.html" id="scheduleLink"><i class="fas fa-calendar-alt"></i> Schedule</a></li>
+                <li><a href="students.html" id="studentsLink"><i class="fas fa-users"></i> Students</a></li>
+                <li><a href="assignments.html" id="assignmentsLink"><i class="fas fa-book"></i> Assignments</a></li>
+                <li><a href="analytics.html" id="analyticsLink" class="active"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                <li><a href="sponsor-connect.html" id="sponsorConnectLink"><i class="fas fa-handshake"></i> Connect Sponsor</a></li>
+            </ul>
+        </nav>
+        <div class="filter-section">
+            <h3><i class="fas fa-filter"></i> Quick Filters</h3>
+            <div class="filter-checkbox"><input type="checkbox" id="filter-weekly" checked><label for="filter-weekly">Weekly</label></div>
+            <div class="filter-checkbox"><input type="checkbox" id="filter-monthly" checked><label for="filter-monthly">Monthly</label></div>
+        </div>
+        <a href="#" id="logoutBtn" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+
+    <div class="main-content">
+        <header class="header-content">
+            <h2 id="pageTitle">Analytics Dashboard</h2>
+            <p id="dateRange">July 5, 2025 - July 11, 2025</p>
+        </header>
+
+        <div class="grid grid-cols-2 gap-4">
+            <div class="card">
+                <h3>Session Statistics</h3>
+                <div id="sessionChart" class="h-64">
+                    <!-- Chart will be populated by JS -->
+                </div>
+            </div>
+            <div class="card">
+                <h3>Student Performance</h3>
+                <div id="performanceChart" class="h-64">
+                    <!-- Chart will be populated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Recent Trends</h3>
+            <div id="trendList" class="space-y-2">
+                <p class="text-sm">Increase in Math session bookings by 15% this week.</p>
+                <p class="text-sm">Physics assignments submitted on time: 90%.</p>
+            </div>
+        </div>
+    </div>
+
+    <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../public/js/analytics.js"></script>
+</body>
+</html>

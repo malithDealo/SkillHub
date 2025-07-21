@@ -4,18 +4,68 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inclusive Learning</title>
-  <link rel="stylesheet" href="css/servicess.css">
-  <link rel="stylesheet" href="css/about.css" />
-  <link rel="stylesheet" href="css/navbar1.css">
-  <link rel="stylesheet" href="css/navbar2.css">
-  <link rel="stylesheet" href="css/navbar-enhancements.css">
-
-  <link rel="stylesheet" href="css/footer2.css">
+  <link rel="stylesheet" href="../public/css/servicess.css">
 </head>
-
 <body>
+  <header>
+        <!-- Navbar -->
+        <nav class="navbar-top">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <img src="images/SkillHub LOGO 1.png" alt="SkillHub Logo" class="logo">
+                    <span class="brand-text">SkillHub</span>
+                </div>
+                
+                <div class="navbar-menu">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a href="homepage.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="works_teaching.html" class="nav-link">How it Works</a></li>
 
-  <div id="navbar-container"></div>
+                        <!-- Services Dropdown Start -->
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle">Services</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="skills_teachers.html" class="dropdown-item">Teachers</a></li>
+                                <li><a href="skills_category.html" class="dropdown-item">Subjects</a></li>
+                                <li><a href="servicess.html" class="dropdown-item">Disabled Children Service</a></li>
+                            </ul>
+                        </li>
+                        <!-- Services Dropdown End -->
+
+                        <li class="nav-item"><a href="learning_community.html" class="nav-link">Community</a></li>
+                        <li class="nav-item"><a href="sponsors.html" class="nav-link">Sponsor</a></li>
+                        <li class="nav-item"><a href="aboutus.html" class="nav-link">About Us</a></li>
+                        <li class="nav-item"><a href="profile_settings.html" class="nav-link">Dashboard</a></li>
+                    </ul>
+                </div>
+
+                
+                <div class="navbar-actions">
+                    <div class="user-profile">
+                        <div class="profile-icon">
+                            <img src="images/default-avatar.png" alt="User Profile">
+                        </div>
+                    </div>
+                </div>
+
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <nav class="mobile-nav" id="mobileNav">
+                <a href="#" class="mobile-nav-item">Home</a>
+                <a href="#" class="mobile-nav-item">How it Works</a>
+                <a href="#" class="mobile-nav-item">Services</a>
+                <a href="#" class="mobile-nav-item">Community</a>
+                <a href="#" class="mobile-nav-item">Sponsor</a>
+                <a href="#" class="mobile-nav-item">About Us</a>
+                <a href="#" class="mobile-nav-item">Contact Us</a>
+            </nav>
+        </nav>
+    </header>
   <section class="hero">
     <h1><span class="about-text">Welcome to</span> <span class="skillhub-text">Inclusive Learning</span></h1>
     <p class="subtitle">Empowering every child with personalized, accessible education tailored to unique abilities</p>
@@ -47,7 +97,7 @@
   <section class="category-grid">
     <h2>Specialized Learning Categories</h2>
     <div class="card">
-      <img src="images/cognitive.png" alt="Cognitive Development Icon">
+      <img src="../public/images/cognitive.png" alt="Cognitive Development Icon">
       <h3>Cognitive Development</h3>
       <p>Memory games, problem-solving activities, and thinking skills development with adaptive difficulty levels.</p>
       <button class="activity-button">Try Memory Match</button>
@@ -55,7 +105,7 @@
       <button class="activity-button">Try Pattern Play</button>
     </div>
     <div class="card">
-      <img src="images/sensory.png" alt="Sensory Integration Icon">
+      <img src="../public/images/sensory.png" alt="Sensory Integration Icon">
       <h3>Sensory Integration</h3>
       <p>Visual, auditory, and tactile exercises to enhance sensory processing and integration skills.</p>
       <button class="activity-button">Try Sound Safari</button>
@@ -63,7 +113,7 @@
       <button class="activity-button">Try Light Chase</button>
     </div>
     <div class="card">
-      <img src="images/communication.png" alt="Communication Skills Icon">
+      <img src="../public/images/communication.png" alt="Communication Skills Icon">
       <h3>Communication Skills</h3>
       <p>Speech therapy, sign language, picture communication, and assistive communication tools.</p>
       <button class="activity-button">Try Story Circle</button>
@@ -71,7 +121,7 @@
       <button class="activity-button">Try Emotion Talk</button>
     </div>
     <div class="card">
-      <img src="images/social.png" alt="Social Interaction Icon">
+      <img src="../public/images/social.png" alt="Social Interaction Icon">
       <h3>Social Interaction</h3>
       <p>Social cues, friendship skills, emotional regulation, and community interaction practice.</p>
       <button class="activity-button">Try Friendship Game</button>
@@ -79,7 +129,7 @@
       <button class="activity-button">Try Group Story</button>
     </div>
     <div class="card">
-      <img src="images/social.png" alt="Daily Living Skills Icon">
+      <img src="../public/images/social.png" alt="Daily Living Skills Icon">
       <h3>Daily Living Skills</h3>
       <p>Self-care, household tasks, personal hygiene, and independent living preparation.</p>
       <button class="activity-button">Try Morning Routine</button>
@@ -87,7 +137,7 @@
       <button class="activity-button">Try Tidy Time</button>
     </div>
     <div class="card">
-      <img src="images/motor.png" alt="Motor Skills Icon">
+      <img src="../public/images/motor.png" alt="Motor Skills Icon">
       <h3>Motor Skills</h3>
       <p>Fine and gross motor development, coordination exercises, and adaptive physical activities.</p>
       <button class="activity-button">Try Draw & Trace</button>
@@ -159,11 +209,73 @@
     <p>Join thousands of learners and teachers in your neighborhood. Whether you're looking to master a new skill or share your expertise, your community is waiting.</p>
     <button class="cta-button">Get Started Today</button>
   </section>
-  <div id="footer-container"></div>
+  
+  <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section brand-section">
+                    <div class="logo">
+                        <img src="images/SkillHub LOGO 1.png" alt="">
+                        <h2>SkillHub</h2>
+                    </div>
+                    <p>Connecting communities through skill sharing. Learn from your neighbors, teach what you love, and build lasting relationships in your local area.</p>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"> <div class="icon-circle"><img src="images/Vector.png" alt="Facebook"> </div></a>
+                        <a href="#" aria-label="Twitter"> <div class="icon-circle"><img src="images\mdi_twitter.png" alt="Twitter"> </div></a>
+                        <a href="#" aria-label="Instagram"> <div class="icon-circle"><img src="images\mdi_instagram.png" alt="Instagram"> </div></a>
+                        <a href="#" aria-label="LinkedIn"> <div class="icon-circle"><img src="images\mdi_linkedin.png" alt="LinkedIn"> </div></a>
+                    </div>
+                </div>
 
-  <script src="js/footer-loader.js"></script>
-  <script src="js/auth.js"></script>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="homepage.html">Home</a></li>
+                        <li><a href="aboutus.html">About Us</a></li>
+                        <li><a href="works_teaching.html">How it Works</a></li>
+                        <li><a href="servicess.html">Services</a></li>
+                        <li><a href="learning_community.html">Community</a></li>
+                    </ul>
+                </div>
 
-  <script src="js/servicess.js"></script>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Safety Guidelines</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Give Feedback</a></li>
+                        <li><a href="#">Report Issue</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms of Services</a></li>
+                        <li><a href="#">Privacy policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Community Guidelines</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section newsletter-section">
+                    <h3>Stay Connected</h3>
+                    <p>Get updates on new skills, community events, and platform features.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 SkillHub. All rights reserved. Made with ❤️ for community builders.</p>
+            </div>
+        </div>
+    </footer>
+  <script src="../public/js/servicess.js"></script>
 </body>
 </html>

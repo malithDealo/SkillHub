@@ -1,31 +1,75 @@
 <DOCUMENT filename="aboutus.html">
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About SkillHub</title>
+    <link rel="stylesheet" href="../public/css/aboutus.css">
+</head>
+<body>
+    
+<header>
+        <!-- Navbar -->
+        <nav class="navbar-top">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <img src="images/SkillHub LOGO 1.png" alt="SkillHub Logo" class="logo">
+                    <span class="brand-text">SkillHub</span>
+                </div>
+                
+                <div class="navbar-menu">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a href="homepage.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="works_teaching.html" class="nav-link">How it Works</a></li>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>About SkillHub</title>
-        <link rel="stylesheet" href="css/aboutus.css">
-        <link rel="stylesheet" href="css/navbar1.css">
-        <link rel="stylesheet" href="css/navbar2.css">
-        <link rel="stylesheet" href="css/navbar-enhancements.css">
+                        <!-- Services Dropdown Start -->
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle">Services</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="skills_teachers.html" class="dropdown-item">Teachers</a></li>
+                                <li><a href="skills_category.html" class="dropdown-item">Subjects</a></li>
+                                <li><a href="servicess.html" class="dropdown-item">Disabled Children Service</a></li>
+                            </ul>
+                        </li>
+                        <!-- Services Dropdown End -->
 
-        <link rel="stylesheet" href="css/footer2.css">
-        <style>
-            .hero{
-                margin-top: 10vh;
-            }
-        </style>
-    </head>
+                        <li class="nav-item"><a href="learning_community.html" class="nav-link">Community</a></li>
+                        <li class="nav-item"><a href="sponsors.html" class="nav-link">Sponsor</a></li>
+                        <li class="nav-item"><a href="aboutus.html" class="nav-link">About Us</a></li>
+                        <li class="nav-item"><a href="profile_settings.html" class="nav-link">Dashboard</a></li>
+                    </ul>
+                </div>
 
-    <body>
+                
+                <div class="navbar-actions">
+                    <div class="user-profile">
+                        <div class="profile-icon">
+                            <img src="images/default-avatar.png" alt="User Profile">
+                        </div>
+                    </div>
+                </div>
 
-        <!-- Header Placeholder -->
-        <div id="navbar-container"></div>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
 
-        <section class="hero">
-            <div class="floating-circle floating-circle-1"></div>
+            <nav class="mobile-nav" id="mobileNav">
+                <a href="#" class="mobile-nav-item">Home</a>
+                <a href="#" class="mobile-nav-item">How it Works</a>
+                <a href="#" class="mobile-nav-item">Services</a>
+                <a href="#" class="mobile-nav-item">Community</a>
+                <a href="#" class="mobile-nav-item">Sponsor</a>
+                <a href="#" class="mobile-nav-item">About Us</a>
+                <a href="#" class="mobile-nav-item">Contact Us</a>
+            </nav>
+        </nav>
+    </header>
+    <section class="hero">
+        <div class="floating-circle floating-circle-1"></div>
             <div class="floating-circle floating-circle-2"></div>
             <div class="floating-circle floating-circle-3"></div>
             <div class="floating-circle floating-circle-4"></div>
@@ -33,122 +77,168 @@
             <div class="floating-circle floating-circle-6"></div>
             <div class="floating-circle floating-circle-7"></div>
             <div class="floating-circle floating-circle-8"></div>
-            <div class="container">
-                <h1 class="about-text">About <span class="skillhub-text">SkillHub</span></h1>
-                <p class="subtitle">Connecting communities through the power of shared knowledge and meaningful
-                    relationships.</p>
-            </div>
-        </section>
+        <div class="container">
+            <h1 class="about-text">About <span class="skillhub-text">SkillHub</span></h1>
+            <p class="subtitle">Connecting communities through the power of shared knowledge and meaningful relationships.</p>
+        </div>
+    </section>
 
-        <section class="story">
-            <div class="container">
-                <h2>Our Story</h2>
-                <p>“SkillHub was born from a simple observation: every neighborhood is filled with talented people eager
-                    to share their knowledge and others wanting to learn. We’re bridging the gap between traditional
-                    education and community connection.”</p>
-            </div>
-        </section>
+    <section class="story">
+        <div class="container">
+            <h2>Our Story</h2>
+            <p>“SkillHub was born from a simple observation: every neighborhood is filled with talented people eager to share their knowledge and others wanting to learn. We’re bridging the gap between traditional education and community connection.”</p>
+        </div>
+    </section>
 
-        <section class="mission">
-            <h2>Our Mission</h2>
-            <div class="mission-content">
-                <div class="icon"><img src="images/mission-icon.png" alt="Mission Icon"></div>
-                <p>To create vibrant learning communities where knowledge flows freely, neighbors connect meaningfully,
-                    and everyone has access to personalized, affordable education.</p>
-            </div>
-        </section>
+    <section class="mission">
+        <h2>Our Mission</h2>
+        <div class="mission-content">
+            <div class="icon"><img src="mission-icon.png" alt="Mission Icon"></div>
+            <p>To create vibrant learning communities where knowledge flows freely, neighbors connect meaningfully, and everyone has access to personalized, affordable education.</p>
+        </div>
+    </section>
 
-        <section class="different">
-            <div class="container">
-                <h2>What Makes Us Different</h2>
-                <p class="different-subtitle">Our unique approach sets us apart in the world of community learning</p>
-                <div class="features">
-                    <div class="feature">
-                        <div class="feature-icon">🏡</div>
-                        <h3>Community-First Approach</h3>
-                        <p>We prioritize neighborhood connections over global reach, fostering genuine local
-                            relationships that strengthen communities and create lasting bonds between learners and
-                            teachers.</p>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-icon">🔄</div>
-                        <h3>Skill Exchange Economy</h3>
-                        <p>Learn through monetary payment or skill trading, creating flexible opportunities for
-                            knowledge exchange that work for every budget and situation.</p>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-icon">✅</div>
-                        <h3>Safety & Verification</h3>
-                        <p>Comprehensive background checks and monitoring systems ensure every interaction is safe and
-                            trustworthy, giving parents and learners complete peace of mind.</p>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-icon">🌐</div>
-                        <h3>Inclusive Design</h3>
-                        <p>Built with accessibility and language diversity in mind, our platform welcomes learners from
-                            all backgrounds and ensures everyone can participate fully in our community.</p>
-                    </div>
+    <section class="different">
+        <div class="container">
+            <h2>What Makes Us Different</h2>
+            <p class="different-subtitle">Our unique approach sets us apart in the world of community learning</p>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🏡</div>
+                    <h3>Community-First Approach</h3>
+                    <p>We prioritize neighborhood connections over global reach, fostering genuine local relationships that strengthen communities and create lasting bonds between learners and teachers.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Skill Exchange Economy</h3>
+                    <p>Learn through monetary payment or skill trading, creating flexible opportunities for knowledge exchange that work for every budget and situation.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">✅</div>
+                    <h3>Safety & Verification</h3>
+                    <p>Comprehensive background checks and monitoring systems ensure every interaction is safe and trustworthy, giving parents and learners complete peace of mind.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Inclusive Design</h3>
+                    <p>Built with accessibility and language diversity in mind, our platform welcomes learners from all backgrounds and ensures everyone can participate fully in our community.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="team">
-            <div class="container">
-                <h2>Meet Our Team</h2>
-                <p>Passionate educators, technologists, and community builders united by our vision for
-                    neighborhood-based learning and meaningful human connections.</p>
-                <div class="team-members">
-                    <div class="member">
-                        <div class="avatar">M</div>
-                        <h3>Co-Founder & CEO</h3>
-                        <p>An educator with 15 years in community development. Believes every neighborhood has untapped
-                            teaching and learning potential.</p>
-                    </div>
-                    <div class="member">
-                        <div class="avatar">C</div>
-                        <h3>Co-Founder & CTO</h3>
-                        <p>Tech innovator focused on building inclusive platforms. Passionate about making technology
-                            accessible to all communities.</p>
-                    </div>
+    <section class="team">
+        <div class="container">
+            <h2>Meet Our Team</h2>
+            <p>Passionate educators, technologists, and community builders united by our vision for neighborhood-based learning and meaningful human connections.</p>
+            <div class="team-members">
+                <div class="member">
+                    <div class="avatar">M</div>
+                    <h3>Co-Founder & CEO</h3>
+                    <p>An educator with 15 years in community development. Believes every neighborhood has untapped teaching and learning potential.</p>
+                </div>
+                <div class="member">
+                    <div class="avatar">C</div>
+                    <h3>Co-Founder & CTO</h3>
+                    <p>Tech innovator focused on building inclusive platforms. Passionate about making technology accessible to all communities.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="cta">
-            <div class="container">
-                <h2>Ready to Start Your SkillHub Journey?</h2>
-                <p>Join thousands of learners and teachers in your neighborhood. Whether you're looking to master a new
-                    skill or share your expertise, your community is waiting.</p>
-                <button class="cta-button get-started">Get Started Today</button>
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Start Your SkillHub Journey?</h2>
+            <p>Join thousands of learners and teachers in your neighborhood. Whether you're looking to master a new skill or share your expertise, your community is waiting.</p>
+            <button class="cta-button get-started">Get Started Today</button>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section brand-section">
+                    <div class="logo">
+                        <img src="images/SkillHub LOGO 1.png" alt="">
+                        <h2>SkillHub</h2>
+                    </div>
+                    <p>Connecting communities through skill sharing. Learn from your neighbors, teach what you love, and build lasting relationships in your local area.</p>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"> <div class="icon-circle"><img src="images/Vector.png" alt="Facebook"> </div></a>
+                        <a href="#" aria-label="Twitter"> <div class="icon-circle"><img src="images\mdi_twitter.png" alt="Twitter"> </div></a>
+                        <a href="#" aria-label="Instagram"> <div class="icon-circle"><img src="images\mdi_instagram.png" alt="Instagram"> </div></a>
+                        <a href="#" aria-label="LinkedIn"> <div class="icon-circle"><img src="images\mdi_linkedin.png" alt="LinkedIn"> </div></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="homepage.html">Home</a></li>
+                        <li><a href="aboutus.html">About Us</a></li>
+                        <li><a href="works_teaching.html">How it Works</a></li>
+                        <li><a href="servicess.html">Services</a></li>
+                        <li><a href="learning_community.html">Community</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Safety Guidelines</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Give Feedback</a></li>
+                        <li><a href="#">Report Issue</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms of Services</a></li>
+                        <li><a href="#">Privacy policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Community Guidelines</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section newsletter-section">
+                    <h3>Stay Connected</h3>
+                    <p>Get updates on new skills, community events, and platform features.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
             </div>
-        </section>
 
-        <!-- Footer Placeholder -->
-        <div id="footer-container"></div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SkillHub. All rights reserved. Made with ❤️ for community builders.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../public/js/aboutus.js"></script>
+    <script>
+        // Load Header
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
 
-        <script src="js/aboutus.js"></script>
-        <script>
-            // Load Header
-            fetch('header.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('header-placeholder').innerHTML = data;
-                })
-                .catch(error => console.error('Error loading header:', error));
-
-            // Load Footer
-            fetch('footer.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('footer-placeholder').innerHTML = data;
-                })
-                .catch(error => console.error('Error loading footer:', error));
-        </script>
-
-
-        <script src="js/footer-loader.js"></script>
-        <script src="js/auth.js"></script>
-    </body>
-
-    </html>
+        // Load Footer
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+    
+</body>
+</html>
 </DOCUMENT>

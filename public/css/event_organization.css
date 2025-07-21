@@ -9,8 +9,8 @@ body {
 /* Sidebar Styles */
 .sidebar {
     width: 240px;
-    background: linear-gradient(180deg, #1e3a8a, #3b82f6);
-    color: #fff;
+    background: linear-gradient(180deg, #f3f1f1, #3b82f6);
+    color: #090909;
     padding: 1.5rem;
     position: fixed;
     height: 100%;

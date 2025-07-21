@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule & Availability - SkillHub</title>
+    <link rel="stylesheet" href="../public/css/dashboard_overview.css">
+    <link rel="stylesheet" href="../public/css/shedule_availability.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar from dashboard_overview.html -->
+    <div class="sidebar bg-white p-4 shadow-md fixed h-full">
+        <h1 class="text-2xl font-bold mb-4">SkillHub</h1>
+        <p class="text-gray-600 mb-4">Level 3 - Pro Instructor</p>
+        <nav>
+            <ul>
+                <li><a href="dashboard_overview.html" class="block p-2 bg-blue-500 text-white rounded">Overview</a></li>
+                <li><a href="../public/class_management.html" class="block p-2 hover:bg-gray-200 rounded">Class Management</a></li>
+                <li><a href="../public/shedule_availability.html" class="block p-2 hover:bg-gray-200 rounded">Schedule & Availability</a></li>
+                <li><a href="../public/earnings_analytics.html" class="block p-2 hover:bg-gray-200 rounded">Earning & Analytics</a></li>
+                <li><a href="../public/profile_setting.html" class="block p-2 hover:bg-gray-200 rounded">Profile Setting</a></li>
+                <li><a href="../public/teachers_community.html" class="block p-2 hover:bg-gray-200 rounded">Teacher Community</a></li>
+                <li><a href="../public/student_community.html" class="block p-2 hover:bg-gray-200 rounded">Student Community</a></li>
+                <li><a href="../public/event_organization.html" class="block p-2 hover:bg-gray-200 rounded">Event Organization</a></li>
+                <li><a href="../public/sponsor_conversations.html" class="block p-2 hover:bg-gray-200 rounded">Sponsor Conversations</a></li>
+            </ul>
+        </nav>
+        <div class="mt-4">
+            <h3 class="font-semibold">Filters</h3>
+            <label class="filter-checkbox"><input type="checkbox" id="filter-active-students"> Active Students</label>
+            <label class="filter-checkbox"><input type="checkbox" id="filter-high-rated"> High Rated Teachers</label>
+            <label class="filter-checkbox"><input type="checkbox" id="filter-upcoming-sessions"> Upcoming Sessions</label>
+            <label class="filter-checkbox"><input type="checkbox" id="filter-sponsored"> Sponsored Classes</label>
+        </div>
+        <a href="#" class="block p-2 text-red-500 hover:bg-gray-200 rounded mt-4">LOG OUT</a>
+    </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="dashboard-header">
+                <h1>Schedule & Availability</h1>
+                <p>Manage your teaching schedule and set availability</p>
+            </div>
+
+            <div class="schedule-section">
+                <h2>Weekly Schedule</h2>
+                <button class="edit-btn" id="editScheduleBtn">Edit schedule</button>
+                <div class="weekly-schedule" id="weeklySchedule">
+                    <div class="day">
+                        <span>Mon</span><br>
+                        <span>June 2</span><br>
+                        <span>Available</span>
+                    </div>
+                    <div class="day current-session">
+                        <span>Tue</span><br>
+                        <span>June 3</span><br>
+                        <span>3 sessions</span>
+                    </div>
+                    <div class="day">
+                        <span>Wed</span><br>
+                        <span>June 4</span><br>
+                        <span>2 sessions</span>
+                    </div>
+                    <div class="day">
+                        <span>Thu</span><br>
+                        <span>June 5</span><br>
+                        <span>Available</span>
+                    </div>
+                    <div class="day">
+                        <span>Fri</span><br>
+                        <span>June 6</span><br>
+                        <span>Available</span>
+                    </div>
+                    <div class="day">
+                        <span>Sat</span><br>
+                        <span>June 7</span><br>
+                        <span>Available</span>
+                    </div>
+                    <div class="day">
+                        <span>Sun</span><br>
+                        <span>June 8</span><br>
+                        <span>Available</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="availability-section">
+                <h2>Availability Settings</h2>
+                <button class="update-btn" id="updateAvailabilityBtn">Update</button>
+                <div class="settings" id="availabilitySettings">
+                    <div class="setting-row">
+                        <span>Monday - Friday</span>
+                        <span>2:00 PM - 8:00 PM</span>
+                    </div>
+                    <div class="setting-row">
+                        <span>Saturday</span>
+                        <span>10:00 AM - 6:00 PM</span>
+                    </div>
+                    <div class="setting-row">
+                        <span>Sunday</span>
+                        <span>Not Available</span>
+                    </div>
+                    <div class="setting-row">
+                        <span>Session Duration</span>
+                        <span>60 minutes</span>
+                    </div>
+                    <div class="setting-row">
+                        <span>Buffer Time</span>
+                        <span>15 minutes</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="updateSection" class="update-section"></div>
+        </div>
+    </div>
+
+    <script src="../public/js/dashboard_overview.js"></script>
+    <script src="../public/js/shedule_availability.js"></script>
+</body>
+</html>
