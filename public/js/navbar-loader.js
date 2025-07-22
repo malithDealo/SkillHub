@@ -1,156 +1,225 @@
-// login-integration.js - Integration functions for login pages
-// Add this code to your existing login-learner.js, login-teacher.js, and login-sponsor.js files
+// navbar-loader.js - Dynamic Navbar Loading System
+// This script automatically loads navbars based on div classes
 
-// Enhanced login success handler - add this function to each login file
-function handleLoginSuccess(data, userType) {
-    console.log(`${userType} login successful:`, data);
-    
-    // Store user data and token
-    const userData = {
-        id: data.user.id || Date.now(),
-        name: data.user.name || `${data.user.firstName || ''} ${data.user.lastName || ''}`.trim(),
-        email: data.user.email,
-        firstName: data.user.firstName,
-        lastName: data.user.lastName,
-        type: userType,
-        profileImage: data.user.profileImage || null,
-        ...data.user
-    };
-    
-    localStorage.setItem('skillhub_user', JSON.stringify(userData));
-    localStorage.setItem('skillhub_authenticated', 'true');
-    
-    if (data.token) {
-        localStorage.setItem('skillhub_token', data.token);
-    }
+// Navbar configuration mapping
+const NAVBAR_CONFIG = {
+    'navbar-container': 'components/navbar1.html',      // Default/Guest navbar
+    'navbar-learner': 'components/navbar2.html',        // Learner navbar
+    'navbar-teacher': 'components/navbar3.html',        // Teacher navbar
+    'navbar-sponsor': 'components/navbar4.html'         // Sponsor navbar
+};
 
-    // Show success message
-    showSuccess('Login successful! Redirecting...');
-
-    // Use SkillHub Auth system if available
-    if (window.SkillHubAuth) {
-        try {
-            window.SkillHubAuth.signIn(userData, userType);
-            return; // SkillHub Auth will handle redirect
-        } catch (authError) {
-            console.error('Auth system error:', authError);
-            // Fall through to manual redirect
-        }
-    }
-    
-    // Manual redirect as fallback
-    setTimeout(() => {
-        const redirectMap = {
-            learner: 'dashboard.html',
-            teacher: 'profile_settings.html',
-            sponsor: 'sponsordashboard1.html'
-        };
+// Main navbar loader function
+async function loadNavbar(containerElement, navbarFile) {
+    try {
+        console.log(`Loading navbar: ${navbarFile}`);
         
-        const redirectUrl = redirectMap[userType] || 'dashboard.html';
-        window.location.href = redirectUrl;
-    }, 1500);
-}
-
-// Enhanced logout handler - add this to pages with logout functionality
-function handleLogout() {
-    console.log('Logout initiated');
-    
-    // Get user type before clearing data
-    const userString = localStorage.getItem('skillhub_user');
-    const userType = userString ? JSON.parse(userString).type : 'learner';
-    
-    // Use SkillHub Auth system if available
-    if (window.SkillHubAuth) {
-        window.SkillHubAuth.signOut();
-        return; // SkillHub Auth will handle redirect
-    }
-    
-    // Manual logout as fallback
-    localStorage.removeItem('skillhub_user');
-    localStorage.removeItem('skillhub_authenticated');
-    localStorage.removeItem('skillhub_session');
-    localStorage.removeItem('skillhub_token');
-    
-    // Clear user-specific data
-    ['learnerEmail', 'teacherEmail', 'sponsorEmail'].forEach(key => {
-        localStorage.removeItem(key);
-    });
-    
-    // Redirect to appropriate home page
-    const redirectMap = {
-        learner: 'home.html',
-        teacher: 'homepage.html', 
-        sponsor: 'sponsorhome.html'
-    };
-
-    const redirectUrl = redirectMap[userType] || 'home.html';
-    console.log('Redirecting to:', redirectUrl);
-    
-    setTimeout(() => {
-        window.location.href = redirectUrl;
-    }, 100);
-}
-
-// Page protection function - add to dashboard pages
-function requireAuthentication(requiredUserType = null) {
-    const isAuthenticated = localStorage.getItem('skillhub_authenticated') === 'true';
-    const userString = localStorage.getItem('skillhub_user');
-    
-    if (!isAuthenticated || !userString) {
-        console.log('Authentication required, redirecting to login');
-        alert('Please log in to access this page.');
-        window.location.href = 'home.html';
-        return false;
-    }
-    
-    if (requiredUserType) {
-        const user = JSON.parse(userString);
-        if (user.type !== requiredUserType) {
-            console.log(`Wrong user type. Required: ${requiredUserType}, Current: ${user.type}`);
-            alert(`This page is only accessible to ${requiredUserType}s.`);
-            
-            // Redirect to appropriate home page
-            const redirectMap = {
-                learner: 'home.html',
-                teacher: 'homepage.html', 
-                sponsor: 'sponsorhome.html'
-            };
-            
-            const redirectUrl = redirectMap[user.type] || 'home.html';
-            window.location.href = redirectUrl;
-            return false;
+        // Fetch the navbar HTML content
+        const response = await fetch(navbarFile);
+        if (!response.ok) {
+            throw new Error(`Failed to load navbar: ${response.status} ${response.statusText}`);
         }
+        
+        const navbarHTML = await response.text();
+        
+        // Parse the HTML and extract only the navbar content
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = navbarHTML;
+        
+        // Find the navbar element (nav.navbar-top)
+        const navbarElement = tempDiv.querySelector('nav.navbar-top');
+        if (!navbarElement) {
+            throw new Error('Navbar element not found in the loaded HTML');
+        }
+        
+        // Insert the navbar into the container
+        containerElement.innerHTML = navbarElement.outerHTML;
+        
+        console.log(`✅ Navbar loaded successfully: ${navbarFile}`);
+        
+        // Initialize navbar functionality after loading
+        initializeNavbar(containerElement);
+        
+    } catch (error) {
+        console.error('❌ Error loading navbar:', error);
+        
+        // Fallback: Show basic navbar structure
+        containerElement.innerHTML = `
+            <nav class="navbar-top">
+                <div class="navbar-container">
+                    <div class="navbar-brand">
+                        <img src="images/SkillHub LOGO 3.png" alt="SkillHub Logo" class="logo">
+                        <span class="brand-text">SkillHub</span>
+                    </div>
+                    <div class="navbar-actions">
+                        <span style="color: red;">Navbar loading error</span>
+                    </div>
+                </div>
+            </nav>
+        `;
     }
-    
-    return true;
 }
 
-// Initialize page protection on dashboard pages
-document.addEventListener('DOMContentLoaded', () => {
-    // Auto-detect page type and apply protection
-    const currentPage = window.location.pathname.split('/').pop();
+// Initialize navbar functionality after loading
+function initializeNavbar(container) {
+    // Setup profile dropdown functionality
+    const userProfile = container.querySelector('.user-profile');
+    const profileDropdown = container.querySelector('.profile-dropdown');
     
-    if (currentPage === 'dashboard.html') {
-        requireAuthentication('learner');
-    } else if (currentPage === 'dashboard_overview.html') {
-        requireAuthentication('teacher');
-    } else if (currentPage.includes('sponsordashboard')) {
-        requireAuthentication('sponsor');
+    if (userProfile && profileDropdown) {
+        userProfile.addEventListener('click', (e) => {
+            e.stopPropagation();
+            profileDropdown.classList.toggle('show');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            profileDropdown.classList.remove('show');
+        });
     }
     
-    // Setup logout handlers for all logout buttons
-    const logoutButtons = document.querySelectorAll('.logout-btn, .logout, #logoutBtn, [data-action="signout"]');
+    // Setup logout functionality
+    const logoutButtons = container.querySelectorAll('.logout, [data-action="signout"]');
     logoutButtons.forEach(button => {
         button.addEventListener('click', (e) => {
             e.preventDefault();
-            handleLogout();
+            if (typeof handleLogout === 'function') {
+                handleLogout();
+            } else {
+                console.warn('handleLogout function not found. Make sure login-integration.js is loaded.');
+                // Fallback logout
+                localStorage.clear();
+                window.location.href = 'home.html';
+            }
         });
     });
+    
+    // Setup sign in/sign up buttons
+    const signInButtons = container.querySelectorAll('[data-action="signin"]');
+    const signUpButtons = container.querySelectorAll('[data-action="signup"]');
+    
+    signInButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = 'home.html'; // Redirect to home with login options
+        });
+    });
+    
+    signUpButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = 'home.html'; // Redirect to home with signup options
+        });
+    });
+    
+    // Update user information if logged in
+    updateUserInfo(container);
+}
+
+// Update user information in the navbar
+function updateUserInfo(container) {
+    const userString = localStorage.getItem('skillhub_user');
+    if (userString) {
+        try {
+            const user = JSON.parse(userString);
+            
+            // Update user name
+            const userNameElement = container.querySelector('.user-name');
+            if (userNameElement) {
+                const displayName = user.name || 
+                                  `${user.firstName || ''} ${user.lastName || ''}`.trim() || 
+                                  user.email || 
+                                  'User';
+                userNameElement.textContent = displayName;
+            }
+            
+            // Update profile image
+            const profileImage = container.querySelector('.profile-icon img');
+            if (profileImage && user.profileImage) {
+                profileImage.src = user.profileImage;
+            }
+            
+        } catch (error) {
+            console.error('Error updating user info:', error);
+        }
+    }
+}
+
+// Auto-detect and load appropriate navbar based on user type and page
+function autoLoadNavbar() {
+    // Find all navbar containers
+    const navbarContainers = document.querySelectorAll('[class*="navbar"]');
+    
+    navbarContainers.forEach(container => {
+        let navbarFile = null;
+        
+        // Check each class to find matching navbar
+        for (const className of container.classList) {
+            if (NAVBAR_CONFIG[className]) {
+                navbarFile = NAVBAR_CONFIG[className];
+                break;
+            }
+        }
+        
+        // If no specific navbar found, try to auto-detect based on user type
+        if (!navbarFile) {
+            const userString = localStorage.getItem('skillhub_user');
+            if (userString) {
+                try {
+                    const user = JSON.parse(userString);
+                    const userTypeNavbar = {
+                        'learner': 'components/navbar2.html',
+                        'teacher': 'components/navbar3.html',
+                        'sponsor': 'components/navbar4.html'
+                    };
+                    navbarFile = userTypeNavbar[user.type] || 'components/navbar1.html';
+                } catch (error) {
+                    navbarFile = 'components/navbar1.html'; // Default to guest navbar
+                }
+            } else {
+                navbarFile = 'components/navbar1.html'; // Default to guest navbar
+            }
+        }
+        
+        // Load the appropriate navbar
+        if (navbarFile) {
+            loadNavbar(container, navbarFile);
+        }
+    });
+}
+
+// Manual loading function for specific cases
+window.loadSpecificNavbar = function(containerSelector, navbarType) {
+    const container = document.querySelector(containerSelector);
+    if (!container) {
+        console.error(`Container not found: ${containerSelector}`);
+        return;
+    }
+    
+    const navbarFile = NAVBAR_CONFIG[navbarType];
+    if (!navbarFile) {
+        console.error(`Unknown navbar type: ${navbarType}`);
+        return;
+    }
+    
+    loadNavbar(container, navbarFile);
+};
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('🚀 Navbar Loader initialized');
+    
+    // Small delay to ensure other scripts are loaded
+    setTimeout(() => {
+        autoLoadNavbar();
+    }, 100);
 });
 
-// Export functions for global use
-window.handleLoginSuccess = handleLoginSuccess;
-window.handleLogout = handleLogout;
-window.requireAuth = requireAuthentication;
+// Export for global use
+window.NavbarLoader = {
+    loadNavbar,
+    autoLoadNavbar,
+    loadSpecificNavbar: window.loadSpecificNavbar
+};
 
-console.log('✅ Login Integration System Loaded');
+console.log('✅ Navbar Loader System Ready');
