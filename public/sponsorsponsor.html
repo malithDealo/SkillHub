@@ -360,6 +360,933 @@
             </div>
         </div>
     </section>
+
+    <!-- STEP 1: Add this div tag to any HTML page where you want the chatbot -->
+    <div id="skillhub-chatbot-container"></div>
+
+    <!-- STEP 2: Add this script tag once per page (preferably before closing body tag) -->
+    <script>
+        // Auto-load SkillHub chatbot when div is found
+        document.addEventListener('DOMContentLoaded', function () {
+            const container = document.getElementById('skillhub-chatbot-container');
+            if (!container) return;
+
+            // Inject CSS styles
+            const styles = `
+        <style id="skillhub-chatbot-styles">
+        .skillhub-chat-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #dc3545;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(76, 175, 80, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 1001;
+            border: none;
+        }
+
+        .skillhub-chat-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(76, 175, 80, 0.5);
+        }
+
+        .skillhub-chat-icon.pulsing {
+            animation: skillhub-pulse 2s infinite;
+        }
+
+        @keyframes skillhub-pulse {
+            0% { box-shadow: 0 4px 20px rgba(76, 175, 80, 0.4); }
+            50% { box-shadow: 0 4px 30px rgba(76, 175, 80, 0.8); }
+            100% { box-shadow: 0 4px 20px rgba(76, 175, 80, 0.4); }
+        }
+
+        .skillhub-chat-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+        }
+
+        .skillhub-chat-container {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 400px;
+            max-width: calc(100vw - 40px);
+            height: 600px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+            animation: skillhub-slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes skillhub-slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .skillhub-chat-header {
+            background: #dc3545;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .skillhub-chat-header h3 {
+            font-family: 'Arial', sans-serif;
+            font-size: 18px;
+            margin-bottom: 5px;
+            margin: 0;
+        }
+
+        .skillhub-chat-header p {
+            font-size: 14px;
+            opacity: 0.9;
+            margin: 5px 0 0 0;
+        }
+
+        .skillhub-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+
+        .skillhub-close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .skillhub-voice-status {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 8px;
+            border-radius: 12px;
+            display: none;
+        }
+
+        .skillhub-voice-status.active {
+            display: block;
+            animation: skillhub-fadeIn 0.3s ease;
+        }
+
+        @keyframes skillhub-fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .skillhub-chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+
+        .skillhub-message {
+            margin-bottom: 16px;
+            animation: skillhub-messageSlide 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes skillhub-messageSlide {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px) scale(0.95);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .skillhub-message.bot {
+            text-align: left;
+        }
+
+        .skillhub-message.user {
+            text-align: right;
+        }
+
+        .skillhub-message-content {
+            display: inline-block;
+            max-width: 85%;
+            padding: 14px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            line-height: 1.5;
+            word-wrap: break-word;
+            position: relative;
+        }
+
+        .skillhub-message.bot .skillhub-message-content {
+            background: white;
+            color: #333;
+            border-bottom-left-radius: 8px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e8e8e8;
+        }
+
+        .skillhub-message.user .skillhub-message-content {
+            background: #dc3545;
+            color: white;
+            border-bottom-right-radius: 8px;
+            box-shadow: 0 3px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .skillhub-message.voice .skillhub-message-content::before {
+            content: "🎤 ";
+            font-size: 12px;
+        }
+
+        .skillhub-typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .skillhub-typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .skillhub-typing-dots span {
+            width: 8px;
+            height: 8px;
+            background: #4CAF50;
+            border-radius: 50%;
+            animation: skillhub-typing 1.4s infinite;
+        }
+
+        .skillhub-typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .skillhub-typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes skillhub-typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+
+        .skillhub-voice-controls {
+            display: flex;
+            justify-content: center;
+            padding: 10px 20px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            gap: 15px;
+        }
+
+        .skillhub-voice-btn {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .skillhub-voice-btn.record {
+            background: linear-gradient(135deg, #ff4757, #ff3742);
+            color: white;
+        }
+
+        .skillhub-voice-btn.record:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(255, 71, 87, 0.4);
+        }
+
+        .skillhub-voice-btn.record.recording {
+            animation: skillhub-recordPulse 1s infinite;
+        }
+
+        @keyframes skillhub-recordPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7); }
+            50% { box-shadow: 0 0 0 10px rgba(255, 71, 87, 0); }
+        }
+
+        .skillhub-voice-btn.stop {
+            background: linear-gradient(135deg, #ffa502, #ff6348);
+            color: white;
+        }
+
+        .skillhub-voice-btn.play {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+        }
+
+        .skillhub-voice-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .skillhub-chat-input {
+            display: flex;
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            gap: 10px;
+        }
+
+        .skillhub-chat-input input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 2px solid #dc3545;
+            border-radius: 25px;
+            outline: none;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            background: #dc3545 ;
+        }
+
+        .skillhub-chat-input input:focus {
+            border-color: #dc3545;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .skillhub-send-btn {
+            width: 50px;
+            height: 50px;
+            background: #dc3545;
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .skillhub-send-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        .skillhub-send-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .skillhub-audio-visualizer {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            height: 40px;
+            margin: 10px 0;
+        }
+
+        .skillhub-audio-visualizer.active {
+            display: flex;
+        }
+
+        .skillhub-audio-bar {
+            width: 3px;
+            height: 10px;
+            background: #dc3545;
+            margin: 0 2px;
+            border-radius: 2px;
+            animation: skillhub-audioWave 1s infinite;
+        }
+
+        .skillhub-audio-bar:nth-child(2) { animation-delay: 0.1s; }
+        .skillhub-audio-bar:nth-child(3) { animation-delay: 0.2s; }
+        .skillhub-audio-bar:nth-child(4) { animation-delay: 0.3s; }
+        .skillhub-audio-bar:nth-child(5) { animation-delay: 0.4s; }
+
+        @keyframes skillhub-audioWave {
+            0%, 100% { height: 10px; }
+            50% { height: 30px; }
+        }
+
+        .skillhub-chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .skillhub-chat-messages::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .skillhub-chat-messages::-webkit-scrollbar-thumb {
+            background: #4CAF50;
+            border-radius: 10px;
+        }
+
+        .skillhub-chat-messages::-webkit-scrollbar-thumb:hover {
+            background: #45a049;
+        }
+
+        .skillhub-error-message {
+            background: #ffe6e6;
+            color: #d8000c;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 20px;
+            font-size: 12px;
+            border-left: 4px solid #d8000c;
+        }
+
+        @media (max-width: 480px) {
+            .skillhub-chat-container {
+                width: calc(100vw - 20px);
+                height: calc(100vh - 120px);
+                right: 10px;
+                bottom: 90px;
+            }
+            
+            .skillhub-chat-icon {
+                right: 15px;
+                bottom: 15px;
+            }
+        }
+        </style>
+    `;
+
+            // Inject HTML structure
+            const chatbotHTML = `
+        <button class="skillhub-chat-icon" id="skillhub-chat-icon">
+            <svg viewBox="0 0 24 24">
+                <path d="M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4A2,2 0 0,0 20,2M6,9V7H18V9H6M14,11V13H6V11H14M18,15H6V17H18V15Z"/>
+            </svg>
+        </button>
+
+        <div class="skillhub-chat-container" id="skillhub-chat-container">
+            <div class="skillhub-chat-header">
+                <div class="skillhub-voice-status" id="skillhub-voice-status">🎤 Listening...</div>
+                <button class="skillhub-close-btn" id="skillhub-close-btn">&times;</button>
+                <h3>SkillHub AI Assistant</h3>
+                <p>Voice & Text Support Available</p>
+            </div>
+
+            <div class="skillhub-chat-messages" id="skillhub-chat-messages">
+                <div class="skillhub-message bot">
+                    <div class="skillhub-message-content">
+                        Hello! Welcome to SkillHub. I'm your AI assistant with voice support. You can type or speak to me about our platform features and get help with any technical difficulties. How can I assist you today?
+                    </div>
+                </div>
+            </div>
+
+            <div class="skillhub-audio-visualizer" id="skillhub-audio-visualizer">
+                <div class="skillhub-audio-bar"></div>
+                <div class="skillhub-audio-bar"></div>
+                <div class="skillhub-audio-bar"></div>
+                <div class="skillhub-audio-bar"></div>
+                <div class="skillhub-audio-bar"></div>
+            </div>
+
+            <div class="skillhub-typing-indicator" id="skillhub-typing-indicator">
+                <span>SkillHub AI is thinking</span>
+                <div class="skillhub-typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <div class="skillhub-voice-controls">
+                <button class="skillhub-voice-btn record" id="skillhub-record-btn" title="Start Recording">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z"/>
+                    </svg>
+                </button>
+                <button class="skillhub-voice-btn stop" id="skillhub-stop-btn" style="display:none;" title="Stop Recording">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18,18H6V6H18V18Z"/>
+                    </svg>
+                </button>
+                <button class="skillhub-voice-btn play" id="skillhub-play-btn" style="display:none;" title="Play Last Response">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8,5.14V19.14L19,12.14L8,5.14Z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="skillhub-chat-input">
+                <input type="text" id="skillhub-message-input" placeholder="Type your message or use voice..." />
+                <button class="skillhub-send-btn" id="skillhub-send-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M2.01,21L23,12L2.01,3L2,10L17,12L2,14L2.01,21Z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    `;
+
+            // Check if styles already exist
+            if (!document.getElementById('skillhub-chatbot-styles')) {
+                document.head.insertAdjacentHTML('beforeend', styles);
+            }
+
+            // Insert chatbot HTML
+            container.innerHTML = chatbotHTML;
+
+            // Initialize chatbot functionality
+            let skillhubChatOpen = false;
+            let skillhubIsRecording = false;
+            let skillhubMediaRecorder = null;
+            let skillhubAudioChunks = [];
+            let skillhubLastBotResponse = null;
+            let skillhubIsProcessing = false;
+            const skillhubSynth = window.speechSynthesis;
+
+            function skillhubToggleChat() {
+                const chatContainer = document.getElementById('skillhub-chat-container');
+                const chatIcon = document.getElementById('skillhub-chat-icon');
+                skillhubChatOpen = !skillhubChatOpen;
+                chatContainer.style.display = skillhubChatOpen ? 'flex' : 'none';
+
+                if (skillhubChatOpen) {
+                    chatIcon.classList.add('pulsing');
+                    document.getElementById('skillhub-message-input').focus();
+                } else {
+                    chatIcon.classList.remove('pulsing');
+                    if (skillhubIsRecording) {
+                        skillhubStopRecording();
+                    }
+                }
+            }
+
+            function skillhubAddMessage(content, isUser = false, isVoice = false) {
+                const chatMessages = document.getElementById('skillhub-chat-messages');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `skillhub-message ${isUser ? 'user' : 'bot'}${isVoice ? ' voice' : ''}`;
+
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'skillhub-message-content';
+                contentDiv.innerHTML = content;
+
+                messageDiv.appendChild(contentDiv);
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                if (!isUser) {
+                    skillhubLastBotResponse = content;
+                    document.getElementById('skillhub-play-btn').style.display = 'flex';
+                }
+            }
+
+            function skillhubShowTypingIndicator() {
+                document.getElementById('skillhub-typing-indicator').style.display = 'flex';
+                document.getElementById('skillhub-chat-messages').scrollTop = document.getElementById('skillhub-chat-messages').scrollHeight;
+            }
+
+            function skillhubHideTypingIndicator() {
+                document.getElementById('skillhub-typing-indicator').style.display = 'none';
+            }
+
+            function skillhubShowVoiceStatus(text) {
+                const status = document.getElementById('skillhub-voice-status');
+                status.textContent = text;
+                status.classList.add('active');
+            }
+
+            function skillhubHideVoiceStatus() {
+                document.getElementById('skillhub-voice-status').classList.remove('active');
+            }
+
+            async function skillhubGetBotResponse(userMessage, isVoiceInput = false) {
+                const API_KEY = 'AIzaSyCsNiZthfSE-0R-kyqeoonXqEzEiJyu4cg';
+
+                const systemPrompt = `You are a helpful customer support chatbot for SkillHub, a neighborhood-based skill exchange platform. Your role is to:
+
+1. ONLY provide information about SkillHub platform features and help with technical difficulties
+2. DO NOT reveal any business strategies, financial projections, marketing plans, or internal company information  
+3. Keep responses concise, professional, and conversational (especially for voice interactions)
+4. For voice inputs, respond in a natural, spoken style
+
+About SkillHub:
+- A web application platform for community-based learning
+- Connects people who want to learn skills with those who can teach in their local area
+- Features include:
+  * Dual user roles (teachers and students)
+  * Location-based matching algorithms
+  * Multi-tiered verification system for safety
+  * Comprehensive review and rating system with level advancement
+  * Secure in-app messaging with content monitoring
+  * Team formation for collaborative learning groups
+  * Multi-language support with filtering options
+  * Accessibility features including sign language support
+  * Community building tools, forums, and event organization
+  * Local business sponsorship opportunities
+  * Non-monetary skill-for-skill exchanges
+
+Common help topics:
+- Account creation and profile setup
+- Finding and connecting with teachers/students nearby
+- Understanding the verification process
+- Using the review and rating system
+- In-app messaging and communication
+- Forming and joining learning groups
+- Language preferences and accessibility settings
+- Technical troubleshooting and platform issues
+
+${isVoiceInput ? 'This was a voice input, so respond conversationally.' : 'This was a text input.'}
+
+If asked about business information, politely redirect to platform features or suggest contacting official channels.`;
+
+                try {
+                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${API_KEY}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            contents: [{
+                                parts: [{
+                                    text: `${systemPrompt}\n\nUser ${isVoiceInput ? '(voice)' : '(text)'}: ${userMessage}`
+                                }]
+                            }],
+                            generationConfig: {
+                                temperature: 0.7,
+                                topK: 40,
+                                topP: 0.95,
+                                maxOutputTokens: 2048,
+                            }
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`API request failed: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    return data.candidates[0].content.parts[0].text;
+                } catch (error) {
+                    console.error('Error:', error);
+                    return "I'm sorry, I'm experiencing technical difficulties right now. Please try again later or contact our support team directly for assistance.";
+                }
+            }
+
+            function skillhubSpeakResponse(text) {
+                if (skillhubSynth.speaking) {
+                    skillhubSynth.cancel();
+                }
+
+                const cleanText = text.replace(/[*#_`]/g, '').replace(/\n+/g, '. ');
+                const utterance = new SpeechSynthesisUtterance(cleanText);
+                utterance.rate = 0.9;
+                utterance.pitch = 1.0;
+                utterance.volume = 0.8;
+
+                const voices = skillhubSynth.getVoices();
+                const preferredVoice = voices.find(voice =>
+                    voice.lang.includes('en') && (voice.name.includes('Neural') || voice.name.includes('Premium'))
+                ) || voices.find(voice => voice.lang.includes('en'));
+
+                if (preferredVoice) {
+                    utterance.voice = preferredVoice;
+                }
+
+                skillhubSynth.speak(utterance);
+            }
+
+            async function skillhubStartRecording() {
+                if (skillhubIsProcessing) return;
+
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({
+                        audio: {
+                            echoCancellation: true,
+                            noiseSuppression: true,
+                            sampleRate: 44100
+                        }
+                    });
+
+                    skillhubMediaRecorder = new MediaRecorder(stream, {
+                        mimeType: 'audio/webm;codecs=opus'
+                    });
+
+                    skillhubAudioChunks = [];
+
+                    skillhubMediaRecorder.ondataavailable = (event) => {
+                        if (event.data.size > 0) {
+                            skillhubAudioChunks.push(event.data);
+                        }
+                    };
+
+                    skillhubMediaRecorder.onstop = async () => {
+                        const audioBlob = new Blob(skillhubAudioChunks, { type: 'audio/webm' });
+                        await skillhubProcessVoiceInput(audioBlob);
+                        stream.getTracks().forEach(track => track.stop());
+                    };
+
+                    skillhubMediaRecorder.start();
+                    skillhubIsRecording = true;
+
+                    document.getElementById('skillhub-record-btn').style.display = 'none';
+                    document.getElementById('skillhub-stop-btn').style.display = 'flex';
+                    document.getElementById('skillhub-record-btn').classList.add('recording');
+                    document.getElementById('skillhub-audio-visualizer').classList.add('active');
+
+                    skillhubShowVoiceStatus('🎤 Recording... Click stop when done');
+
+                } catch (error) {
+                    console.error('Error starting recording:', error);
+                }
+            }
+
+            function skillhubStopRecording() {
+                if (skillhubMediaRecorder && skillhubIsRecording) {
+                    skillhubMediaRecorder.stop();
+                    skillhubIsRecording = false;
+
+                    document.getElementById('skillhub-record-btn').style.display = 'flex';
+                    document.getElementById('skillhub-stop-btn').style.display = 'none';
+                    document.getElementById('skillhub-record-btn').classList.remove('recording');
+                    document.getElementById('skillhub-audio-visualizer').classList.remove('active');
+
+                    skillhubShowVoiceStatus('🔄 Processing audio...');
+                }
+            }
+
+            async function skillhubProcessVoiceInput(audioBlob) {
+                if (skillhubIsProcessing) return;
+                skillhubIsProcessing = true;
+
+                try {
+                    const arrayBuffer = await audioBlob.arrayBuffer();
+                    const base64Audio = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
+
+                    skillhubShowTypingIndicator();
+                    skillhubShowVoiceStatus('🤖 Transcribing and processing...');
+
+                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=AIzaSyCsNiZthfSE-0R-kyqeoonXqEzEiJyu4cg`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            contents: [{
+                                parts: [
+                                    {
+                                        text: "Please transcribe this audio and then provide a helpful response about SkillHub platform features or technical support. Focus only on platform information, not business strategies."
+                                    },
+                                    {
+                                        inline_data: {
+                                            mime_type: "audio/webm",
+                                            data: base64Audio
+                                        }
+                                    }
+                                ]
+                            }],
+                            generationConfig: {
+                                temperature: 0.7,
+                                topK: 40,
+                                topP: 0.95,
+                                maxOutputTokens: 2048,
+                            }
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`API request failed: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    const botResponse = data.candidates[0].content.parts[0].text;
+
+                    const lines = botResponse.split('\n');
+                    const transcription = lines.find(line => line.includes('transcription') || line.includes('said') || line.includes('asked')) || 'Voice message received';
+
+                    skillhubHideTypingIndicator();
+                    skillhubHideVoiceStatus();
+
+                    skillhubAddMessage(transcription.replace(/.*?[:]\s*/, ''), true, true);
+
+                    setTimeout(() => {
+                        skillhubAddMessage(botResponse);
+                        skillhubSpeakResponse(botResponse);
+                    }, 500);
+
+                } catch (error) {
+                    console.error('Error processing voice:', error);
+                    skillhubHideTypingIndicator();
+                    skillhubHideVoiceStatus();
+                } finally {
+                    skillhubIsProcessing = false;
+                }
+            }
+
+            async function skillhubSendMessage() {
+                const messageInput = document.getElementById('skillhub-message-input');
+                const sendButton = document.getElementById('skillhub-send-btn');
+                const message = messageInput.value.trim();
+
+                if (!message || skillhubIsProcessing) return;
+
+                skillhubIsProcessing = true;
+
+                skillhubAddMessage(message, true);
+                messageInput.value = '';
+
+                messageInput.disabled = true;
+                sendButton.disabled = true;
+
+                skillhubShowTypingIndicator();
+
+                try {
+                    const botResponse = await skillhubGetBotResponse(message, false);
+
+                    skillhubHideTypingIndicator();
+                    skillhubAddMessage(botResponse);
+
+                    if (document.getElementById('skillhub-play-btn').style.display === 'flex') {
+                        setTimeout(() => skillhubSpeakResponse(botResponse), 300);
+                    }
+
+                } catch (error) {
+                    skillhubHideTypingIndicator();
+                    skillhubAddMessage("I apologize, but I'm having trouble processing your request right now. Please try again in a moment.");
+                    console.error('Send message error:', error);
+                } finally {
+                    messageInput.disabled = false;
+                    sendButton.disabled = false;
+                    messageInput.focus();
+                    skillhubIsProcessing = false;
+                }
+            }
+
+            function skillhubTogglePlayback() {
+                if (skillhubSynth.speaking) {
+                    skillhubSynth.cancel();
+                } else if (skillhubLastBotResponse) {
+                    skillhubSpeakResponse(skillhubLastBotResponse);
+                }
+            }
+
+            function skillhubHandleKeyPress(event) {
+                if (event.key === 'Enter' && !skillhubIsProcessing) {
+                    skillhubSendMessage();
+                }
+            }
+
+            // Event Listeners
+            document.getElementById('skillhub-chat-icon').addEventListener('click', skillhubToggleChat);
+            document.getElementById('skillhub-close-btn').addEventListener('click', skillhubToggleChat);
+            document.getElementById('skillhub-record-btn').addEventListener('click', skillhubStartRecording);
+            document.getElementById('skillhub-stop-btn').addEventListener('click', skillhubStopRecording);
+            document.getElementById('skillhub-play-btn').addEventListener('click', skillhubTogglePlayback);
+            document.getElementById('skillhub-send-btn').addEventListener('click', skillhubSendMessage);
+            document.getElementById('skillhub-message-input').addEventListener('keypress', skillhubHandleKeyPress);
+
+            // Initialize voices
+            if (skillhubSynth.onvoiceschanged !== undefined) {
+                skillhubSynth.onvoiceschanged = () => {
+                    const voices = skillhubSynth.getVoices();
+                    console.log('SkillHub Chatbot: Available voices loaded');
+                };
+            }
+
+            // Auto-focus input when chat opens
+            document.getElementById('skillhub-message-input').addEventListener('focus', function () {
+                setTimeout(() => {
+                    document.getElementById('skillhub-chat-messages').scrollTop = document.getElementById('skillhub-chat-messages').scrollHeight;
+                }, 100);
+            });
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function (e) {
+                // Only work when chatbot is active
+                if (!skillhubChatOpen) return;
+
+                // Space to start/stop recording (when not typing)
+                if (e.code === 'Space' && e.target !== document.getElementById('skillhub-message-input')) {
+                    e.preventDefault();
+                    if (skillhubIsRecording) {
+                        skillhubStopRecording();
+                    } else {
+                        skillhubStartRecording();
+                    }
+                }
+
+                // Escape to stop recording or close chat
+                if (e.key === 'Escape') {
+                    if (skillhubIsRecording) {
+                        skillhubStopRecording();
+                    } else {
+                        skillhubToggleChat();
+                    }
+                }
+            });
+
+            // Handle page visibility changes
+            document.addEventListener('visibilitychange', function () {
+                if (document.hidden && skillhubIsRecording) {
+                    skillhubStopRecording();
+                }
+            });
+
+            // Connection monitoring
+            window.addEventListener('online', function () {
+                if (skillhubChatOpen) {
+                    skillhubAddMessage("✅ Connection restored. Voice and text features are available.", false);
+                }
+            });
+
+            window.addEventListener('offline', function () {
+                if (skillhubChatOpen) {
+                    skillhubAddMessage("⚠️ Connection lost. Voice features may be limited until connection is restored.", false);
+                }
+            });
+
+            console.log('SkillHub Chatbot initialized successfully');
+        });
+    </script>
+    <script src="js/learning_community.js"></script>
+    <script>
+        // Load Header
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+
+        // Load Footer
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
     
 </body>
 </html>
