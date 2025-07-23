@@ -6,6 +6,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillHub - Navbar 3 Component (Teacher)</title>
     <link rel="stylesheet" href="../css/navbar3.css">
+</head>
+
+<body>
+    <!-- Navbar 3 - Top Navigation (Teacher) -->
+    <nav class="navbar-top">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <img src="../images/SkillHub LOGO 3.png" alt="SkillHub Logo" class="logo">
+                <span class="brand-text">SkillHub</span>
+            </div>
+
+            <div class="navbar-menu">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a href="homepage.html" class="nav-link">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">Network</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="forums.html" class="dropdown-link">Find Teachers</a></li>
+                            <li><a href="events-workshops.html" class="dropdown-link">Advertisements</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a href="../profile_settings.html" class="nav-link">Dashboard</a></li>
+                    <!-- Community Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a href="community.html" class="nav-link dropdown-toggle">Community</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="forums.html" class="dropdown-link">Forums</a></li>
+                            <li><a href="events-workshops.html" class="dropdown-link">Events & Workshops</a></li>
+                            <li><a href="success-stories.html" class="dropdown-link">Success Stories</a></li>
+                            <li><a href="learning-groups.html" class="dropdown-link">Learning Groups</a></li>
+                            <li><a href="local-partnerships.html" class="dropdown-link">Local Partnerships</a></li>
+                            <li><a href="community-guidelines.html" class="dropdown-link">Community Guidelines</a></li>
+                            <li><a href="neighborhood-spotlights.html" class="dropdown-link">Neighborhood Spotlights</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a href="../servicess.html" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="../aboutus.html" class="nav-link">About Us</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="navbar-actions">
+                <div class="user-profile">
+                    <span class="user-name">Teacher</span>
+                    <div class="profile-icon">
+                        <img src="../images/default-avatar-teacher.png" alt="User Profile">
+                    </div>
+                    <!-- FIXED: Added the missing profile-dropdown element -->
+                    <div class="profile-dropdown">
+                        <a href="../profile_settings.html" class="profile-dropdown-link">Profile Settings</a>
+                        <a href="../profile_settings.html" class="profile-dropdown-link">Dashboard</a>
+                        <a href="#" class="profile-dropdown-link logout" data-action="signout">Sign Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
     <script>
         // unified-dropdown.js - Unified Dropdown System for Navbar 3 (Teacher)
         // This script handles both community and profile dropdown functionality
@@ -117,6 +175,9 @@
             
             if (!userProfile || !profileDropdown || !profileIcon) {
                 console.log('⚠️ Profile dropdown elements not found');
+                console.log('userProfile:', userProfile);
+                console.log('profileDropdown:', profileDropdown);
+                console.log('profileIcon:', profileIcon);
                 return;
             }
             
@@ -483,59 +544,6 @@
 
         console.log('✅ Unified Dropdown System Loaded for Teacher Navbar');
     </script>
-</head>
-
-<body>
-    <!-- Navbar 3 - Top Navigation (Teacher) -->
-    <nav class="navbar-top">
-        <div class="navbar-container">
-            <div class="navbar-brand">
-                <img src="../images/SkillHub LOGO 3.png" alt="SkillHub Logo" class="logo">
-                <span class="brand-text">SkillHub</span>
-            </div>
-
-            <div class="navbar-menu">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a href="home-logged.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
-                    <li class="nav-item"><a href="../howitworkslearner.html" class="nav-link">How it works</a></li>
-                    <li class="nav-item"><a href="../browse-teachers.html" class="nav-link">Find Teachers</a></li>
-                    <li class="nav-item"><a href="my-learning.html" class="nav-link">My Learning</a></li>
-
-                    <!-- Community Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a href="community.html" class="nav-link dropdown-toggle">Community</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="forums.html" class="dropdown-link">Forums</a></li>
-                            <li><a href="events-workshops.html" class="dropdown-link">Events & Workshops</a></li>
-                            <li><a href="success-stories.html" class="dropdown-link">Success Stories</a></li>
-                            <li><a href="learning-groups.html" class="dropdown-link">Learning Groups</a></li>
-                            <li><a href="local-partnerships.html" class="dropdown-link">Local Partnerships</a></li>
-                            <li><a href="community-guidelines.html" class="dropdown-link">Community Guidelines</a></li>
-                            <li><a href="neighborhood-spotlights.html" class="dropdown-link">Neighborhood Spotlights</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item"><a href="#" class="nav-link">Advertising</a></li>
-                </ul>
-            </div>
-
-            <div class="navbar-actions">
-                <div class="user-profile">
-                    <span class="user-name">Teacher</span>
-                    <div class="profile-icon">
-                        <img src="../images/default-avatar-teacher.png" alt="User Profile">
-                    </div>
-                    <div class="profile-dropdown">
-                        <a href="dashboard.html#profile-setting" class="profile-dropdown-link">Profile Settings</a>
-                        <a href="dashboard.html" class="profile-dropdown-link">Dashboard</a>
-                        <a href="#" class="profile-dropdown-link logout" data-action="signout">Sign Out</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
 </body>
 
 </html>
