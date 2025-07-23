@@ -1,0 +1,492 @@
+// unified-navbar-dropdowns.js - Unified Dropdown System for All Navbars
+// This script handles both community and profile dropdown functionality
+
+// Global function to initialize all dropdowns
+function initializeAllDropdowns(container = document) {
+    console.log('🚀 Initializing all dropdowns...');
+    
+    // Initialize community dropdown
+    initializeCommunityDropdown(container);
+    
+    // Initialize profile dropdown
+    initializeProfileDropdown(container);
+    
+    // Add all necessary CSS styles
+    addAllDropdownStyles();
+}
+
+// Community Dropdown Functions
+function initializeCommunityDropdown(container = document) {
+    console.log('🏘️ Initializing community dropdown...');
+
+    // Find the community dropdown elements
+    const dropdown = container.querySelector('.dropdown');
+    const dropdownMenu = container.querySelector('.dropdown-menu');
+    const dropdownToggle = container.querySelector('.dropdown-toggle');
+
+    if (!dropdown || !dropdownMenu || !dropdownToggle) {
+        console.log('⚠️ Community dropdown elements not found');
+        return;
+    }
+
+    // Check if already initialized
+    if (dropdown.getAttribute('data-community-dropdown-initialized') === 'true') {
+        console.log('✅ Community dropdown already initialized');
+        return;
+    }
+
+    // Mark as initialized
+    dropdown.setAttribute('data-community-dropdown-initialized', 'true');
+
+    let hoverTimeout;
+    let isDropdownVisible = false;
+
+    // Show dropdown on hover
+    function showDropdown() {
+        clearTimeout(hoverTimeout);
+        dropdownMenu.style.opacity = '1';
+        dropdownMenu.style.visibility = 'visible';
+        dropdownMenu.style.transform = 'translateY(0)';
+        isDropdownVisible = true;
+        console.log('📂 Community dropdown shown');
+    }
+
+    // Hide dropdown
+    function hideDropdown() {
+        hoverTimeout = setTimeout(() => {
+            dropdownMenu.style.opacity = '0';
+            dropdownMenu.style.visibility = 'hidden';
+            dropdownMenu.style.transform = 'translateY(-10px)';
+            isDropdownVisible = false;
+            console.log('📁 Community dropdown hidden');
+        }, 200);
+    }
+
+    // Event listeners for dropdown hover
+    dropdown.addEventListener('mouseenter', showDropdown);
+    dropdown.addEventListener('mouseleave', hideDropdown);
+
+    // Handle dropdown link clicks
+    const dropdownLinks = dropdownMenu.querySelectorAll('.dropdown-link');
+    dropdownLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            console.log(`🔗 Community dropdown link clicked: ${this.textContent}`);
+            hideDropdown();
+        });
+    });
+
+    // Handle main community link click
+    dropdownToggle.addEventListener('click', function (e) {
+        console.log('🏠 Main Community link clicked');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function (e) {
+        if (!dropdown.contains(e.target) && isDropdownVisible) {
+            hideDropdown();
+        }
+    });
+
+    // Close dropdown with Escape key
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && isDropdownVisible) {
+            hideDropdown();
+        }
+    });
+
+    console.log('✅ Community dropdown initialized successfully');
+}
+
+// Profile Dropdown Functions
+function initializeProfileDropdown(container = document) {
+    console.log('🔧 Initializing profile dropdown...');
+    
+    // Find the user profile element
+    const userProfile = container.querySelector('.user-profile');
+    const profileDropdown = container.querySelector('.profile-dropdown');
+    const profileIcon = container.querySelector('.profile-icon');
+    
+    if (!userProfile || !profileDropdown || !profileIcon) {
+        console.log('⚠️ Profile dropdown elements not found');
+        return;
+    }
+    
+    // Check if already initialized
+    if (userProfile.getAttribute('data-profile-dropdown-initialized') === 'true') {
+        console.log('✅ Profile dropdown already initialized');
+        return;
+    }
+    
+    // Mark as initialized
+    userProfile.setAttribute('data-profile-dropdown-initialized', 'true');
+    
+    let isProfileDropdownVisible = false;
+    let profileHoverTimeout;
+    
+    // Show profile dropdown on hover
+    function showProfileDropdown() {
+        clearTimeout(profileHoverTimeout);
+        profileDropdown.classList.add('show');
+        isProfileDropdownVisible = true;
+        console.log('📂 Profile dropdown shown');
+    }
+    
+    // Hide profile dropdown
+    function hideProfileDropdown() {
+        profileHoverTimeout = setTimeout(() => {
+            profileDropdown.classList.remove('show');
+            isProfileDropdownVisible = false;
+            console.log('📁 Profile dropdown hidden');
+        }, 200);
+    }
+    
+    // Event listeners for profile icon hover
+    profileIcon.addEventListener('mouseenter', showProfileDropdown);
+    userProfile.addEventListener('mouseenter', showProfileDropdown);
+    userProfile.addEventListener('mouseleave', hideProfileDropdown);
+    
+    // Keep dropdown open when hovering over dropdown itself
+    profileDropdown.addEventListener('mouseenter', () => {
+        clearTimeout(profileHoverTimeout);
+    });
+    
+    profileDropdown.addEventListener('mouseleave', hideProfileDropdown);
+    
+    // Handle dropdown link clicks
+    const profileDropdownLinks = profileDropdown.querySelectorAll('.profile-dropdown-link');
+    profileDropdownLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            console.log(`🔗 Profile dropdown link clicked: ${link.textContent}`);
+            
+            // Handle sign out specifically
+            if (link.classList.contains('logout') || link.getAttribute('data-action') === 'signout') {
+                e.preventDefault();
+                handleSignOut();
+                return;
+            }
+            
+            hideProfileDropdown();
+        });
+    });
+    
+    // Close profile dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!userProfile.contains(e.target) && isProfileDropdownVisible) {
+            hideProfileDropdown();
+        }
+    });
+    
+    // Close profile dropdown with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isProfileDropdownVisible) {
+            hideProfileDropdown();
+        }
+    });
+    
+    console.log('✅ Profile dropdown initialized successfully');
+}
+
+// Handle sign out functionality
+function handleSignOut() {
+    console.log('🚪 Handling sign out...');
+    
+    if (confirm('Are you sure you want to sign out?')) {
+        // Clear user data
+        localStorage.removeItem('skillhub_user');
+        localStorage.removeItem('skillhub_auth_token');
+        
+        // Clear any other stored data
+        sessionStorage.clear();
+        
+        console.log('✅ User signed out successfully');
+        
+        // Redirect to home page
+        window.location.href = 'home.html';
+    }
+}
+
+// Add all CSS styles for both dropdowns
+function addAllDropdownStyles() {
+    // Check if styles already added
+    if (document.getElementById('unified-dropdown-styles')) {
+        return;
+    }
+
+    const styles = document.createElement('style');
+    styles.id = 'unified-dropdown-styles';
+    styles.textContent = `
+        /* Community Dropdown Styles */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-toggle::after {
+            content: "▼";
+            font-size: 0.7rem;
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .dropdown:hover .dropdown-toggle::after {
+            transform: rotate(180deg);
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            list-style: none;
+            margin: 0;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-menu li {
+            list-style: none;
+        }
+        
+        .dropdown-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #495057;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #f8f9fa;
+        }
+        
+        .dropdown-link:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-link:hover {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+        }
+        
+        /* Arrow pointing up for community dropdown */
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 20px;
+            width: 12px;
+            height: 12px;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-bottom: none;
+            border-right: none;
+            transform: rotate(45deg);
+        }
+
+        /* Profile Dropdown Styles */
+        .user-profile {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .user-name {
+            font-weight: 500;
+            color: #495057;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .profile-icon {
+            position: relative;
+        }
+        
+        .profile-dropdown {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            min-width: 180px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1002;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .profile-dropdown.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .profile-dropdown-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #495057;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border-bottom: 1px solid #f8f9fa;
+        }
+        
+        .profile-dropdown-link:last-child {
+            border-bottom: none;
+        }
+        
+        .profile-dropdown-link:hover {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+        }
+        
+        .profile-dropdown-link.logout:hover {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+        }
+        
+        /* Small arrow pointing up for profile dropdown */
+        .profile-dropdown::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            right: 15px;
+            width: 12px;
+            height: 12px;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-bottom: none;
+            border-right: none;
+            transform: rotate(45deg);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .dropdown-menu {
+                left: -50px;
+                min-width: 200px;
+            }
+            
+            .dropdown-menu::before {
+                left: 70px;
+            }
+
+            .profile-dropdown {
+                right: -10px;
+                min-width: 160px;
+            }
+            
+            .user-name {
+                display: none;
+            }
+        }
+        
+        /* Additional mobile adjustments */
+        @media (max-width: 480px) {
+            .dropdown-menu {
+                left: -80px;
+                min-width: 180px;
+            }
+            
+            .dropdown-menu::before {
+                left: 90px;
+            }
+            
+            .profile-dropdown {
+                right: -20px;
+                min-width: 150px;
+            }
+        }
+    `;
+
+    document.head.appendChild(styles);
+}
+
+// Enhanced navbar initialization
+const originalInitializeNavbar = window.initializeNavbar;
+
+function enhancedNavbarInitialization(container) {
+    console.log('🔧 Enhanced navbar initialization with unified dropdowns...');
+
+    // Call original function if it exists
+    if (typeof originalInitializeNavbar === 'function') {
+        originalInitializeNavbar(container);
+    }
+
+    // Initialize all dropdowns
+    setTimeout(() => {
+        initializeAllDropdowns(container);
+    }, 100);
+}
+
+// Replace the global initializeNavbar function
+window.initializeNavbar = enhancedNavbarInitialization;
+
+// Auto-initialize on DOM load
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('🚀 Unified dropdown system ready');
+
+    // Initialize for any existing navbars
+    setTimeout(() => {
+        initializeAllDropdowns();
+    }, 500);
+});
+
+// Listen for navbar loading events
+document.addEventListener('navbarLoaded', (e) => {
+    console.log('📡 Navbar loaded event detected - initializing unified dropdowns');
+    initializeAllDropdowns(e.detail.container);
+});
+
+// Mutation observer to catch dynamically added navbars
+const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+            if (node.nodeType === 1) {
+                // Check if the added node contains a navbar with dropdowns
+                const navbar = node.querySelector ? node.querySelector('.navbar-top') : null;
+                const dropdown = node.querySelector ? node.querySelector('.dropdown, .profile-dropdown') : null;
+                
+                if (navbar || dropdown || node.classList?.contains('navbar-top')) {
+                    console.log('🔍 New navbar with dropdowns detected via mutation observer');
+                    setTimeout(() => {
+                        initializeAllDropdowns(node);
+                    }, 100);
+                }
+            }
+        });
+    });
+});
+
+// Start observing
+observer.observe(document.body, {
+    childList: true,
+    subtree: true
+});
+
+// Export for global access
+window.UnifiedDropdowns = {
+    initAll: initializeAllDropdowns,
+    initCommunity: initializeCommunityDropdown,
+    initProfile: initializeProfileDropdown,
+    handleSignOut: handleSignOut
+};
+
+console.log('✅ Unified Dropdown System Loaded');

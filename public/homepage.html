@@ -1,194 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillHub</title>
     <link rel="stylesheet" href="css/homepage.css">
-    <link rel="stylesheet" href="css/navbar2.css">
+    <link rel="stylesheet" href="css/footer2.css" />
+    <link rel="stylesheet" href="css/navbar3.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        /* Navbar Styles */
-        .navbar-top {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 12px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .navbar-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .navbar-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-
-        .navbar-brand .logo {
-            height: 40px;
-            width: auto;
-        }
-
-        .brand-text {
-            font-size: 24px;
-            font-weight: bold;
-            color: #7c3aed;
-        }
-
-        .navbar-menu {
-            display: flex;
-            align-items: center;
-        }
-
-        .navbar-nav {
-            display: flex;
-            list-style: none;
-            gap: 40px;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-item {
-            position: relative;
-        }
-
-        .nav-link {
-            color: #374151;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 16px;
-            padding: 8px 0;
-            transition: color 0.2s ease;
-        }
-
-        .nav-link:hover {
-            color: #7c3aed;
-        }
-
-        .navbar-actions {
-            display: flex;
-            align-items: center;
-        }
-
-        .user-profile {
-            position: relative;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            padding: 8px 12px;
-            border-radius: 25px;
-            transition: background-color 0.2s ease;
-        }
-
-        .profile-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            overflow: hidden;
-            background: linear-gradient(135deg, #7c3aed, #a855f7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .profile-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            flex-direction: column;
-            gap: 4px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 8px;
-        }
-
-        .mobile-menu-btn span {
-            width: 24px;
-            height: 2px;
-            background-color: #374151;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-nav {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: white;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-
-        .mobile-nav-item {
-            display: block;
-            padding: 12px 0;
-            color: #374151;
-            text-decoration: none;
-            font-weight: 500;
-            border-bottom: 1px solid #e5e7eb;
-        }
-        /* Dropdown container */
-.navbar-nav .dropdown {
-    position: relative;
-}
-
-/* Hide dropdown content by default */
-.navbar-nav .dropdown-menu {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 200px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-    z-index: 1000;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-
-/* Show on hover */
-.navbar-nav .dropdown:hover .dropdown-menu {
-    display: block;
-}
-
-/* Style dropdown items */
-.navbar-nav .dropdown-menu li a {
-    display: block;
-    padding: 10px 16px;
-    color: #333;
-    text-decoration: none;
-}
-
-.navbar-nav .dropdown-menu li a:hover {
-    background-color: #f2f2f2;
-}
         /* Hero Section */
         .hero {
             position: relative;
@@ -448,340 +268,56 @@
             margin-right: auto;
         }
 
-        /* Footer */
-        .footer {
-            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
-            color: white;
-            padding: 60px 0 30px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            pointer-events: none;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 20px;
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 12px;
-        }
-
-        .footer-section ul li a {
-            color: #cbd5e0;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 14px;
-        }
-
-        .footer-section ul li a:hover {
-            color: #9ae6b4;
-            transform: translateX(5px);
-        }
-
-        .brand-section {
-            padding-right: 20px;
-        }
-
-        .brand-section .logo {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .brand-section .logo i {
-            font-size: 28px;
-            color: #9ae6b4;
-            margin-right: 10px;
-        }
-
-        .brand-section .logo h2 {
-            font-size: 24px;
-            font-weight: 700;
-            color: white;
-        }
-
-        .brand-section p {
-            color: #cbd5e0;
-            line-height: 1.6;
-            margin-bottom: 25px;
-            font-size: 14px;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-icons a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .social-icons a:hover {
-            background: #9ae6b4;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(154, 230, 180, 0.3);
-        }
-
-        .newsletter-section {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 30px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .newsletter-section h3 {
-            margin-bottom: 15px;
-            color: white;
-        }
-
-        .newsletter-section p {
-            color: #cbd5e0;
-            margin-bottom: 20px;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .newsletter-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .newsletter-form input {
-            padding: 12px 15px;
-            border: none;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 14px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .newsletter-form input::placeholder {
-            color: #a0aec0;
-        }
-
-        .newsletter-form input:focus {
-            outline: none;
-            border-color: #9ae6b4;
-            box-shadow: 0 0 0 3px rgba(154, 230, 180, 0.2);
-        }
-
-        .newsletter-form button {
-            padding: 12px 20px;
-            background: linear-gradient(135deg, #9ae6b4 0%, #68d391 100%);
-            color: #2d3748;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 14px;
-        }
-
-        .newsletter-form button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(154, 230, 180, 0.4);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 30px;
-            text-align: center;
-            color: #a0aec0;
-            font-size: 14px;
-        }
-
-        @media (max-width: 768px) {
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .brand-section {
-                text-align: center;
-                padding-right: 0;
-            }
-
-            .newsletter-section {
-                text-align: center;
-            }
-
-            .social-icons {
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 1024px) {
-            .footer-content {
-                grid-template-columns: 2fr 1fr 1fr 1.5fr;
-                gap: 30px;
-            }
-        }
 
         /* Responsive Design */
-        @media (max-width: 768px) {
-            .navbar-menu {
-                display: none;
-            }
 
-            .mobile-menu-btn {
-                display: flex;
-            }
+        .mobile-menu-btn {
+            display: flex;
+        }
 
-            .mobile-nav.active {
-                display: block;
-            }
+        .mobile-nav.active {
+            display: block;
+        }
 
-            .hero h1 {
-                font-size: 2.5rem;
-            }
+        .hero h1 {
+            font-size: 2.5rem;
+        }
 
-            .hero p {
-                font-size: 1.1rem;
-            }
+        .hero p {
+            font-size: 1.1rem;
+        }
 
-            .section-title {
-                font-size: 2rem;
-            }
+        .section-title {
+            font-size: 2rem;
+        }
 
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
 
-            .steps-container {
-                grid-template-columns: 1fr;
-            }
+        .steps-container {
+            grid-template-columns: 1fr;
+        }
 
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
 
-            .step {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .newsletter-form {
-                flex-direction: column;
-            }
+        .step {
+            flex-direction: column;
+            text-align: center;
         }
     </style>
 </head>
+
 <body>
-    <header>
-        <!-- Navbar -->
-        <nav class="navbar-top">
-            <div class="navbar-container">
-                <div class="navbar-brand">
-                    <img src="images/SkillHub LOGO 1.png" alt="SkillHub Logo" class="logo">
-                    <span class="brand-text">SkillHub</span>
-                </div>
-                
-                <div class="navbar-menu">
-                    <ul class="navbar-nav">
-                        <li class="nav-item"><a href="homepage.html" class="nav-link">Home</a></li>
-                        <li class="nav-item"><a href="works_teaching.html" class="nav-link">How it Works</a></li>
-
-                        <!-- Services Dropdown Start -->
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle">Services</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="skills_teachers.html" class="dropdown-item">Teachers</a></li>
-                                <li><a href="skills_category.html" class="dropdown-item">Subjects</a></li>
-                                <li><a href="servicess.html" class="dropdown-item">Disabled Children Service</a></li>
-                            </ul>
-                        </li>
-                        <!-- Services Dropdown End -->
-
-                        <li class="nav-item"><a href="learning_community.html" class="nav-link">Community</a></li>
-                        <li class="nav-item"><a href="sponsors.html" class="nav-link">Sponsor</a></li>
-                        <li class="nav-item"><a href="aboutus.html" class="nav-link">About Us</a></li>
-                        <li class="nav-item"><a href="profile_settings.html" class="nav-link">Dashboard</a></li>
-                    </ul>
-                </div>
-
-                
-                <div class="navbar-actions">
-                    <div class="user-profile">
-                        <div class="profile-icon">
-                            <img src="../public/images/default-avatar.png.png" alt="User Profile">
-                        </div>
-                    </div>
-                </div>
-
-                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-
-            <nav class="mobile-nav" id="mobileNav">
-                <a href="#" class="mobile-nav-item">Home</a>
-                <a href="#" class="mobile-nav-item">How it Works</a>
-                <a href="#" class="mobile-nav-item">Services</a>
-                <a href="#" class="mobile-nav-item">Community</a>
-                <a href="#" class="mobile-nav-item">Sponsor</a>
-                <a href="#" class="mobile-nav-item">About Us</a>
-                <a href="#" class="mobile-nav-item">Contact Us</a>
-            </nav>
-        </nav>
-    </header>
+    <div class="navbar-teacher"></div>
 
     <section class="hero">
         <div class="hero-content">
             <h1>Learn.<br>Connect.<br>Grow Together.</h1>
-            <p>Join your neighborhood's skill-sharing community. Find expert teachers in your area, or share your expertise with others.</p>
+            <p>Join your neighborhood's skill-sharing community. Find expert teachers in your area, or share your
+                expertise with others.</p>
             <a href="skills_teachers.html" class="cta-button">Find Teachers Near Me →</a>
         </div>
     </section>
@@ -793,22 +329,26 @@
             <div class="feature-card">
                 <div class="feature-icon local">🏠</div>
                 <h3 class="feature-title">Hyper-Local Learning</h3>
-                <p class="feature-description">Connect with skilled teachers in your neighborhood. Learn from people who understand your local context and culture.</p>
+                <p class="feature-description">Connect with skilled teachers in your neighborhood. Learn from people who
+                    understand your local context and culture.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon exchange">🔄</div>
                 <h3 class="feature-title">Two-Way Exchange</h3>
-                <p class="feature-description">Teach what you know, learn what you need. Build meaningful relationships through mutual knowledge sharing.</p>
+                <p class="feature-description">Teach what you know, learn what you need. Build meaningful relationships
+                    through mutual knowledge sharing.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon verified">✓</div>
                 <h3 class="feature-title">Verified & Safe</h3>
-                <p class="feature-description">Multi-level verification process ensures every teacher is qualified and trustworthy for your peace of mind.</p>
+                <p class="feature-description">Multi-level verification process ensures every teacher is qualified and
+                    trustworthy for your peace of mind.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon inclusive">🌍</div>
                 <h3 class="feature-title">Inclusive Platform</h3>
-                <p class="feature-description">Multi-language support and accessibility features ensure everyone can participate in our learning community.</p>
+                <p class="feature-description">Multi-language support and accessibility features ensure everyone can
+                    participate in our learning community.</p>
             </div>
         </div>
     </section>
@@ -821,14 +361,16 @@
                 <div class="step-number">1</div>
                 <div class="step-content">
                     <h3>Discover & Connect</h3>
-                    <p>Find nearby skills or learners using our location-based matching system. Browse profiles, read reviews, and connect with the perfect match for your learning goals.</p>
+                    <p>Find nearby skills or learners using our location-based matching system. Browse profiles, read
+                        reviews, and connect with the perfect match for your learning goals.</p>
                 </div>
             </div>
             <div class="step">
                 <div class="step-number">2</div>
                 <div class="step-content">
                     <h3>Learn Together</h3>
-                    <p>Meet safely in your community and build lasting connections. Whether it's a coffee shop, library, or community center, learn in comfortable, familiar environments.</p>
+                    <p>Meet safely in your community and build lasting connections. Whether it's a coffee shop, library,
+                        or community center, learn in comfortable, familiar environments.</p>
                 </div>
             </div>
         </div>
@@ -854,96 +396,13 @@
 
     <section class="final-cta">
         <h2>Ready to Start Your <span class="highlight">SkillHub</span> Journey?</h2>
-        <p>Join thousands of learners and teachers in your neighborhood. Whether you're looking to master a new skill or share your expertise, your community is waiting.</p>
+        <p>Join thousands of learners and teachers in your neighborhood. Whether you're looking to master a new skill or
+            share your expertise, your community is waiting.</p>
         <a href="profile_settings.html" class="cta-button">Get Started Today</a>
     </section>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section brand-section">
-                    <div class="logo">
-                        <img src="images/SkillHub LOGO 1.png" alt="">
-                        <h2>SkillHub</h2>
-                    </div>
-                    <p>Connecting communities through skill sharing. Learn from your neighbors, teach what you love, and build lasting relationships in your local area.</p>
-                    <div class="social-icons">
-                        <a href="#" aria-label="Facebook"> <div class="icon-circle"><img src="images/Vector.png" alt="Facebook"> </div></a>
-                        <a href="#" aria-label="Twitter"> <div class="icon-circle"><img src="images\mdi_twitter.png" alt="Twitter"> </div></a>
-                        <a href="#" aria-label="Instagram"> <div class="icon-circle"><img src="images\mdi_instagram.png" alt="Instagram"> </div></a>
-                        <a href="#" aria-label="LinkedIn"> <div class="icon-circle"><img src="images\mdi_linkedin.png" alt="LinkedIn"> </div></a>
-                    </div>
-                </div>
-
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="homepage.html">Home</a></li>
-                        <li><a href="aboutus.html">About Us</a></li>
-                        <li><a href="works_teaching.html">How it Works</a></li>
-                        <li><a href="servicess.html">Services</a></li>
-                        <li><a href="learning_community.html">Community</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-section">
-                    <h3>Support</h3>
-                    <ul>
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Safety Guidelines</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">FAQs</a></li>
-                        <li><a href="#">Give Feedback</a></li>
-                        <li><a href="#">Report Issue</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-section">
-                    <h3>Legal</h3>
-                    <ul>
-                        <li><a href="#">Terms of Services</a></li>
-                        <li><a href="#">Privacy policy</a></li>
-                        <li><a href="#">Cookie Policy</a></li>
-                        <li><a href="#">Community Guidelines</a></li>
-                        <li><a href="#">Accessibility</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-section newsletter-section">
-                    <h3>Stay Connected</h3>
-                    <p>Get updates on new skills, community events, and platform features.</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Enter your email address" required>
-                        <button type="submit">Subscribe</button>
-                    </form>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2025 SkillHub. All rights reserved. Made with ❤️ for community builders.</p>
-            </div>
-        </div>
-    </footer>
+    <div id="footer-container"></div>
 
     <script>
-        function toggleMobileMenu() {
-            const mobileNav = document.getElementById('mobileNav');
-            const menuBtn = document.querySelector('.mobile-menu-btn');
-            
-            mobileNav.classList.toggle('active');
-            menuBtn.classList.toggle('active');
-        }
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(e) {
-            const mobileNav = document.getElementById('mobileNav');
-            const menuBtn = document.querySelector('.mobile-menu-btn');
-            
-            if (!menuBtn.contains(e.target) && !mobileNav.contains(e.target)) {
-                mobileNav.classList.remove('active');
-                menuBtn.classList.remove('active');
-            }
-        });
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -982,7 +441,7 @@
         });
 
         // Newsletter form handling
-        document.querySelector('.newsletter-btn').addEventListener('click', function() {
+        document.querySelector('.newsletter-btn').addEventListener('click', function () {
             const email = document.querySelector('.newsletter-input').value;
             if (email) {
                 alert('Thank you for subscribing!');
@@ -990,5 +449,10 @@
             }
         });
     </script>
+    <script src="js/footer2.js"></script>
+    <script src="js/navbar3.js"></script>
+    <script src="js/footer-loader.js"></script>
+    <script src="js/navbar-loader.js"></script>
 </body>
+
 </html>
