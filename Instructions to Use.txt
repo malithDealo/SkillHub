@@ -1,0 +1,12 @@
+Instructions to Use:
+
+1. Browse to server folder by typing "cd server" in the terminal
+2. Start the server by "npm start"
+3. Access the logins:
+     "http://localhost:3002/login-learner.html" - Learner(Username:learner@exmple.com Password:password)
+     "http://localhost:3002/login-teacher.html" - Learner(Username:teacher@exmple.com Password:password)
+     "http://localhost:3002/login-sponsor.html" - Learner(Username:sponsor@exmple.com Password:password)
+
+
+
+Note: Always use the 3002 port.
