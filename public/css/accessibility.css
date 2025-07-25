@@ -1,41 +1,48 @@
-/* Accessibility Toolbar Styles - FIXED VERSION */
+/* Accessibility Toolbar Styles - FIXED VERSION WITH PROPER TEXT SCALING */
 .accessibility-toggle {
     position: fixed;
-    top: 50vh;
+    bottom: 20px;
     left: 20px;
-    transform: translateY(-50%);
-    width: 50px;
-    height: 50px;
-    background: #007bff;
+    width: 45px;
+    height: 45px;
+    background: rgba(108, 117, 125, 0.8);
     color: white;
     border: none;
-    border-radius: 50%;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 18px;
+    font-weight: bold;
     z-index: 10001;
-    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    opacity: 0.7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .accessibility-toggle:hover {
-    background: #0056b3;
-    transform: scale(1.1);
+    background: rgba(52, 58, 64, 0.9);
+    opacity: 1;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 .accessibility-panel {
     position: fixed;
-    top: 50vh;
-    left: 80px;
-    transform: translateY(-50%);
+    bottom: 75px;
+    left: 20px;
     width: 280px;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(221, 221, 221, 0.8);
+    border-radius: 12px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
     z-index: 10000;
     display: none;
-    max-height: calc(100vh - 100px);
+    max-height: calc(100vh - 120px);
     overflow-y: auto;
+    backdrop-filter: blur(10px);
 }
 
 .accessibility-panel.show {
@@ -46,20 +53,21 @@
 @keyframes slideIn {
     from {
         opacity: 0;
-        transform: translateY(-50%) translateX(-20px);
+        transform: translateY(20px);
     }
     to {
         opacity: 1;
-        transform: translateY(-50%) translateX(0);
+        transform: translateY(0);
     }
 }
 
 .panel-header {
-    background: #f8f9fa;
+    background: rgba(248, 249, 250, 0.9);
     padding: 15px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid rgba(238, 238, 238, 0.8);
     font-weight: bold;
     font-size: 16px;
+    border-radius: 12px 12px 0 0;
 }
 
 .panel-content {
@@ -238,18 +246,17 @@ body.links-underline .accessibility-toggle,
 body.readable-font .accessibility-toggle,
 body[class*="text-"] .accessibility-toggle {
     position: fixed !important;
-    top: 50vh !important;
+    bottom: 20px !important;
     left: 20px !important;
-    transform: translateY(-50%) !important;
-    width: 50px !important;
-    height: 50px !important;
+    width: 45px !important;
+    height: 45px !important;
     z-index: 10001 !important;
-    font-size: 20px !important;
+    font-size: 18px !important;
 }
 
 /* Ensure accessibility button is visible in high contrast */
 body.high-contrast .accessibility-toggle {
-    background-color: #007bff !important;
+    background-color: rgba(52, 58, 64, 0.9) !important;
     color: #ffffff !important;
     border: 2px solid #ffffff !important;
 }
@@ -263,12 +270,11 @@ body.links-underline .accessibility-panel,
 body.readable-font .accessibility-panel,
 body[class*="text-"] .accessibility-panel {
     position: fixed !important;
-    top: 50vh !important;
-    left: 80px !important;
-    transform: translateY(-50%) !important;
+    bottom: 75px !important;
+    left: 20px !important;
     width: 280px !important;
     z-index: 10000 !important;
-    max-height: calc(100vh - 100px) !important;
+    max-height: calc(100vh - 120px) !important;
 }
 
 body.high-contrast .accessibility-panel {
@@ -325,63 +331,253 @@ body.readable-font * {
     font-family: 'Times New Roman', serif !important;
 }
 
-/* FIXED Text size classes - using font-size on html element for better scaling */
-html.text-increase-1 { font-size: 110%; }
-html.text-increase-2 { font-size: 120%; }
-html.text-increase-3 { font-size: 130%; }
-html.text-increase-4 { font-size: 140%; }
-html.text-increase-5 { font-size: 150%; }
+/* IMPROVED Text size classes - Smart scaling that preserves hierarchy */
 
-html.text-decrease-1 { font-size: 90%; }
-html.text-decrease-2 { font-size: 80%; }
-html.text-decrease-3 { font-size: 70%; }
+/* Text Increase Levels - Progressive scaling with hierarchy preservation */
+body.text-increase-1 {
+    /* Base content text gets 10% increase */
+}
 
-/* Alternative approach - apply to body but exclude accessibility elements */
-body.text-increase-1 *:not(.accessibility-toggle):not(.accessibility-panel):not(.accessibility-panel *):not(.text-size-indicator) { 
-    font-size: 110% !important; 
+body.text-increase-1 p,
+body.text-increase-1 div,
+body.text-increase-1 span,
+body.text-increase-1 li,
+body.text-increase-1 td,
+body.text-increase-1 th,
+body.text-increase-1 label,
+body.text-increase-1 input,
+body.text-increase-1 textarea,
+body.text-increase-1 select {
+    font-size: calc(1em * 1.1) !important;
     line-height: 1.6 !important;
 }
 
-body.text-increase-2 *:not(.accessibility-toggle):not(.accessibility-panel):not(.accessibility-panel *):not(.text-size-indicator) { 
-    font-size: 120% !important; 
+/* Navigation gets smaller increase to prevent oversizing */
+body.text-increase-1 nav,
+body.text-increase-1 nav *,
+body.text-increase-1 .navbar,
+body.text-increase-1 .navbar * {
+    font-size: calc(1em * 1.05) !important;
+}
+
+/* Headings get proportional increases to maintain hierarchy */
+body.text-increase-1 h1 { font-size: calc(2.5rem * 1.1) !important; }
+body.text-increase-1 h2 { font-size: calc(2rem * 1.1) !important; }
+body.text-increase-1 h3 { font-size: calc(1.75rem * 1.1) !important; }
+body.text-increase-1 h4 { font-size: calc(1.5rem * 1.1) !important; }
+body.text-increase-1 h5 { font-size: calc(1.25rem * 1.1) !important; }
+body.text-increase-1 h6 { font-size: calc(1rem * 1.1) !important; }
+
+body.text-increase-2 p,
+body.text-increase-2 div,
+body.text-increase-2 span,
+body.text-increase-2 li,
+body.text-increase-2 td,
+body.text-increase-2 th,
+body.text-increase-2 label,
+body.text-increase-2 input,
+body.text-increase-2 textarea,
+body.text-increase-2 select {
+    font-size: calc(1em * 1.2) !important;
     line-height: 1.6 !important;
 }
 
-body.text-increase-3 *:not(.accessibility-toggle):not(.accessibility-panel):not(.accessibility-panel *):not(.text-size-indicator) { 
-    font-size: 130% !important; 
+body.text-increase-2 nav,
+body.text-increase-2 nav *,
+body.text-increase-2 .navbar,
+body.text-increase-2 .navbar * {
+    font-size: calc(1em * 1.1) !important;
+}
+
+body.text-increase-2 h1 { font-size: calc(2.5rem * 1.2) !important; }
+body.text-increase-2 h2 { font-size: calc(2rem * 1.2) !important; }
+body.text-increase-2 h3 { font-size: calc(1.75rem * 1.2) !important; }
+body.text-increase-2 h4 { font-size: calc(1.5rem * 1.2) !important; }
+body.text-increase-2 h5 { font-size: calc(1.25rem * 1.2) !important; }
+body.text-increase-2 h6 { font-size: calc(1rem * 1.2) !important; }
+
+body.text-increase-3 p,
+body.text-increase-3 div,
+body.text-increase-3 span,
+body.text-increase-3 li,
+body.text-increase-3 td,
+body.text-increase-3 th,
+body.text-increase-3 label,
+body.text-increase-3 input,
+body.text-increase-3 textarea,
+body.text-increase-3 select {
+    font-size: calc(1em * 1.3) !important;
     line-height: 1.6 !important;
 }
 
-body.text-increase-4 *:not(.accessibility-toggle):not(.accessibility-panel):not(.accessibility-panel *):not(.text-size-indicator) { 
-    font-size: 140% !important; 
+body.text-increase-3 nav,
+body.text-increase-3 nav *,
+body.text-increase-3 .navbar,
+body.text-increase-3 .navbar * {
+    font-size: calc(1em * 1.15) !important;
+}
+
+body.text-increase-3 h1 { font-size: calc(2.5rem * 1.3) !important; }
+body.text-increase-3 h2 { font-size: calc(2rem * 1.3) !important; }
+body.text-increase-3 h3 { font-size: calc(1.75rem * 1.3) !important; }
+body.text-increase-3 h4 { font-size: calc(1.5rem * 1.3) !important; }
+body.text-increase-3 h5 { font-size: calc(1.25rem * 1.3) !important; }
+body.text-increase-3 h6 { font-size: calc(1rem * 1.3) !important; }
+
+body.text-increase-4 p,
+body.text-increase-4 div,
+body.text-increase-4 span,
+body.text-increase-4 li,
+body.text-increase-4 td,
+body.text-increase-4 th,
+body.text-increase-4 label,
+body.text-increase-4 input,
+body.text-increase-4 textarea,
+body.text-increase-4 select {
+    font-size: calc(1em * 1.4) !important;
     line-height: 1.6 !important;
 }
 
-body.text-increase-5 *:not(.accessibility-toggle):not(.accessibility-panel):not(.accessibility-panel *):not(.text-size-indicator) { 
-    font-size: 150% !important; 
+body.text-increase-4 nav,
+body.text-increase-4 nav *,
+body.text-increase-4 .navbar,
+body.text-increase-4 .navbar * {
+    font-size: calc(1em * 1.2) !important;
+}
+
+body.text-increase-4 h1 { font-size: calc(2.5rem * 1.4) !important; }
+body.text-increase-4 h2 { font-size: calc(2rem * 1.4) !important; }
+body.text-increase-4 h3 { font-size: calc(1.75rem * 1.4) !important; }
+body.text-increase-4 h4 { font-size: calc(1.5rem * 1.4) !important; }
+body.text-increase-4 h5 { font-size: calc(1.25rem * 1.4) !important; }
+body.text-increase-4 h6 { font-size: calc(1rem * 1.4) !important; }
+
+body.text-increase-5 p,
+body.text-increase-5 div,
+body.text-increase-5 span,
+body.text-increase-5 li,
+body.text-increase-5 td,
+body.text-increase-5 th,
+body.text-increase-5 label,
+body.text-increase-5 input,
+body.text-increase-5 textarea,
+body.text-increase-5 select {
+    font-size: calc(1em * 1.5) !important;
     line-height: 1.6 !important;
 }
 
-body.text-decrease-1 *:not(.accessibility-toggle):not(.accessibility-panel):not(.accessibility-panel *):not(.text-size-indicator) { 
-    font-size: 90% !important; 
+body.text-increase-5 nav,
+body.text-increase-5 nav *,
+body.text-increase-5 .navbar,
+body.text-increase-5 .navbar * {
+    font-size: calc(1em * 1.25) !important;
+}
+
+body.text-increase-5 h1 { font-size: calc(2.5rem * 1.5) !important; }
+body.text-increase-5 h2 { font-size: calc(2rem * 1.5) !important; }
+body.text-increase-5 h3 { font-size: calc(1.75rem * 1.5) !important; }
+body.text-increase-5 h4 { font-size: calc(1.5rem * 1.5) !important; }
+body.text-increase-5 h5 { font-size: calc(1.25rem * 1.5) !important; }
+body.text-increase-5 h6 { font-size: calc(1rem * 1.5) !important; }
+
+/* Text Decrease Levels */
+body.text-decrease-1 p,
+body.text-decrease-1 div,
+body.text-decrease-1 span,
+body.text-decrease-1 li,
+body.text-decrease-1 td,
+body.text-decrease-1 th,
+body.text-decrease-1 label,
+body.text-decrease-1 input,
+body.text-decrease-1 textarea,
+body.text-decrease-1 select {
+    font-size: calc(1em * 0.9) !important;
     line-height: 1.4 !important;
 }
 
-body.text-decrease-2 *:not(.accessibility-toggle):not(.accessibility-panel):not(.accessibility-panel *):not(.text-size-indicator) { 
-    font-size: 80% !important; 
+body.text-decrease-1 nav,
+body.text-decrease-1 nav *,
+body.text-decrease-1 .navbar,
+body.text-decrease-1 .navbar * {
+    font-size: calc(1em * 0.95) !important;
+}
+
+body.text-decrease-1 h1 { font-size: calc(2.5rem * 0.9) !important; }
+body.text-decrease-1 h2 { font-size: calc(2rem * 0.9) !important; }
+body.text-decrease-1 h3 { font-size: calc(1.75rem * 0.9) !important; }
+body.text-decrease-1 h4 { font-size: calc(1.5rem * 0.9) !important; }
+body.text-decrease-1 h5 { font-size: calc(1.25rem * 0.9) !important; }
+body.text-decrease-1 h6 { font-size: calc(1rem * 0.9) !important; }
+
+body.text-decrease-2 p,
+body.text-decrease-2 div,
+body.text-decrease-2 span,
+body.text-decrease-2 li,
+body.text-decrease-2 td,
+body.text-decrease-2 th,
+body.text-decrease-2 label,
+body.text-decrease-2 input,
+body.text-decrease-2 textarea,
+body.text-decrease-2 select {
+    font-size: calc(1em * 0.8) !important;
     line-height: 1.4 !important;
 }
 
-body.text-decrease-3 *:not(.accessibility-toggle):not(.accessibility-panel):not(.accessibility-panel *):not(.text-size-indicator) { 
-    font-size: 70% !important; 
+body.text-decrease-2 nav,
+body.text-decrease-2 nav *,
+body.text-decrease-2 .navbar,
+body.text-decrease-2 .navbar * {
+    font-size: calc(1em * 0.9) !important;
+}
+
+body.text-decrease-2 h1 { font-size: calc(2.5rem * 0.8) !important; }
+body.text-decrease-2 h2 { font-size: calc(2rem * 0.8) !important; }
+body.text-decrease-2 h3 { font-size: calc(1.75rem * 0.8) !important; }
+body.text-decrease-2 h4 { font-size: calc(1.5rem * 0.8) !important; }
+body.text-decrease-2 h5 { font-size: calc(1.25rem * 0.8) !important; }
+body.text-decrease-2 h6 { font-size: calc(1rem * 0.8) !important; }
+
+body.text-decrease-3 p,
+body.text-decrease-3 div,
+body.text-decrease-3 span,
+body.text-decrease-3 li,
+body.text-decrease-3 td,
+body.text-decrease-3 th,
+body.text-decrease-3 label,
+body.text-decrease-3 input,
+body.text-decrease-3 textarea,
+body.text-decrease-3 select {
+    font-size: calc(1em * 0.7) !important;
     line-height: 1.3 !important;
+}
+
+body.text-decrease-3 nav,
+body.text-decrease-3 nav *,
+body.text-decrease-3 .navbar,
+body.text-decrease-3 .navbar * {
+    font-size: calc(1em * 0.85) !important;
+}
+
+body.text-decrease-3 h1 { font-size: calc(2.5rem * 0.7) !important; }
+body.text-decrease-3 h2 { font-size: calc(2rem * 0.7) !important; }
+body.text-decrease-3 h3 { font-size: calc(1.75rem * 0.7) !important; }
+body.text-decrease-3 h4 { font-size: calc(1.5rem * 0.7) !important; }
+body.text-decrease-3 h5 { font-size: calc(1.25rem * 0.7) !important; }
+body.text-decrease-3 h6 { font-size: calc(1rem * 0.7) !important; }
+
+/* Exclude accessibility toolbar from ALL text size changes */
+body[class*="text-"] .accessibility-toggle,
+body[class*="text-"] .accessibility-panel *,
+body[class*="text-"] .text-size-indicator {
+    font-size: revert !important;
+    line-height: revert !important;
 }
 
 /* Ensure accessibility toolbar maintains consistent sizing */
 .accessibility-toggle {
-    font-size: 20px !important;
-    width: 50px !important;
-    height: 50px !important;
+    font-size: 18px !important;
+    width: 45px !important;
+    height: 45px !important;
 }
 
 .accessibility-panel {
@@ -427,13 +623,11 @@ body.text-decrease-3 *:not(.accessibility-toggle):not(.accessibility-panel):not(
         left: 10px;
         right: 10px;
         width: auto;
-        top: 50vh;
-        transform: translateY(-50%);
+        bottom: 75px;
     }
     
     .accessibility-toggle {
         left: 15px;
-        top: 50vh;
-        transform: translateY(-50%);
+        bottom: 20px;
     }
 }

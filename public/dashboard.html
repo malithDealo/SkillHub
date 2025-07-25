@@ -1,662 +1,684 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Student Dashboard - SkillHub</title>
-    <link rel="stylesheet" href="css/dashboard.css" />
-    <link rel="stylesheet" href="css/footer2.css" />
-    <link rel="stylesheet" href="css/navbar2.css" />
-  </head>
 
-  <body>
-    <div class="navbar-learner"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Dashboard - SkillHub</title>
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/footer2.css" />
+  <link rel="stylesheet" href="css/navbar2.css" />
+  <link rel="stylesheet" href="css/accessibility.css">
+  <script src="js/accessibility.js"></script>
+</head>
 
-    <div class="dashboard-container">
-      <!-- Sidebar -->
-      <aside class="sidebar">
-        <div class="dashboard-header">
-          <h2>Student Dashboard</h2>
-          <span class="status-badge">Active Learner</span>
+<body>
+  <div class="navbar-learner"></div>
+
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="dashboard-header">
+        <h2>Student Dashboard</h2>
+        <span class="status-badge">Active Learner</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul>
+          <li>
+            <a href="#overview" class="sidebar-link active" data-page="overview">
+              <span class="sidebar-icon">📊</span>
+              Overview
+            </a>
+          </li>
+          <li>
+            <a href="#my-learning" class="sidebar-link" data-page="my-learning">
+              <span class="sidebar-icon">🎓</span>
+              My Learning
+            </a>
+          </li>
+          <li>
+            <a href="#booking" class="sidebar-link" data-page="booking">
+              <span class="sidebar-icon">📋</span>
+              Booking
+            </a>
+          </li>
+          <li>
+            <a href="#recordings" class="sidebar-link" data-page="recordings">
+              <span class="sidebar-icon">📹</span>
+              Missed Sessions
+            </a>
+          </li>
+          <li>
+            <a href="#learning-group" class="sidebar-link" data-page="learning-group">
+              <span class="sidebar-icon">👥</span>
+              Clubs
+            </a>
+          </li>
+          <li>
+            <a href="#profile-setting" class="sidebar-link" data-page="profile-setting">
+              <span class="sidebar-icon">⚙️</span>
+              Profile Setting
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <button class="logout-btn">LOG OUT</button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Overview Page -->
+      <div id="overview" class="page-content active">
+        <div class="page-header">
+          <h1>Dashboard Overview</h1>
+          <p class="page-subtitle">
+            Track your learning progress and manage your activities
+          </p>
         </div>
 
-        <nav class="sidebar-nav">
-          <ul>
-            <li>
-              <a
-                href="#overview"
-                class="sidebar-link active"
-                data-page="overview"
-              >
-                <span class="sidebar-icon">📊</span>
-                Overview
-              </a>
-            </li>
-            <li>
-              <a
-                href="#my-learning"
-                class="sidebar-link"
-                data-page="my-learning"
-              >
-                <span class="sidebar-icon">🎓</span>
-                My Learning
-              </a>
-            </li>
-            <li>
-              <a href="#booking" class="sidebar-link" data-page="booking">
-                <span class="sidebar-icon">📋</span>
-                Booking
-              </a>
-            </li>
-            <li>
-              <a href="#recordings" class="sidebar-link" data-page="recordings">
-                <span class="sidebar-icon">📹</span>
-                Missed Sessions
-              </a>
-            </li>
-            <li>
-              <a
-                href="#learning-group"
-                class="sidebar-link"
-                data-page="learning-group"
-              >
-                <span class="sidebar-icon">👥</span>
-                Clubs
-              </a>
-            </li>
-            <li>
-              <a
-                href="#profile-setting"
-                class="sidebar-link"
-                data-page="profile-setting"
-              >
-                <span class="sidebar-icon">⚙️</span>
-                Profile Setting
-              </a>
-            </li>
-          </ul>
-        </nav>
-
-        <button class="logout-btn">LOG OUT</button>
-      </aside>
-
-      <!-- Main Content -->
-      <main class="main-content">
-        <!-- Overview Page -->
-        <div id="overview" class="page-content active">
-          <div class="page-header">
-            <h1>Dashboard Overview</h1>
-            <p class="page-subtitle">
-              Track your learning progress and manage your activities
-            </p>
+        <!-- Stats Grid -->
+        <div class="overview-stats">
+          <div class="stat-card">
+            <div class="stat-number" id="activeCourses">5</div>
+            <h3>Active courses</h3>
           </div>
-
-          <!-- Stats Grid -->
-          <div class="overview-stats">
-            <div class="stat-card">
-              <div class="stat-number" id="activeCourses">5</div>
-              <h3>Active courses</h3>
-            </div>
-            <div class="stat-card">
-              <div class="stat-number" id="hoursLearned">24</div>
-              <h3>Hours Learned</h3>
-            </div>
-          </div>
-
-          <!-- Upcoming Sessions -->
-          <div class="upcoming-sessions">
-            <div class="upcoming-header">
-              <h3>Upcoming Sessions</h3>
-            </div>
-
-            <div class="session-card">
-              <div class="session-main-content">
-                <h4>Guitar Practice Session</h4>
-                <div class="session-time">Tomorrow at 2:00 PM</div>
-                <div class="session-location">• Community Center</div>
-                <span class="session-status pending">Pending</span>
-              </div>
-              <div class="session-actions">
-                <button
-                  class="join-zoom-btn"
-                  data-session="guitar-practice"
-                  data-zoom-id="123-456-789"
-                >
-                  <span class="zoom-icon">🎥</span>
-                  Join Zoom
-                </button>
-              </div>
-            </div>
-
-            <div class="session-card">
-              <div class="session-main-content">
-                <h4>Cooking Class: Pasta Making</h4>
-                <div class="session-time">Friday at 6:00 PM</div>
-                <div class="session-location">• Kitchen Studio</div>
-                <span class="session-status pending">Pending</span>
-              </div>
-              <div class="session-actions">
-                <button
-                  class="join-zoom-btn"
-                  data-session="cooking-pasta"
-                  data-zoom-id="987-654-321"
-                >
-                  <span class="zoom-icon">🎥</span>
-                  Join Zoom
-                </button>
-              </div>
-            </div>
-
-            <div class="session-card">
-              <div class="session-main-content">
-                <h4>Code Review Session</h4>
-                <div class="session-time">Saturday at 10:00 AM</div>
-                <div class="session-location">• Online</div>
-                <span class="session-status pending">Pending</span>
-              </div>
-              <div class="session-actions">
-                <button
-                  class="join-zoom-btn"
-                  data-session="code-review"
-                  data-zoom-id="456-789-123"
-                >
-                  <span class="zoom-icon">🎥</span>
-                  Join Zoom
-                </button>
-              </div>
-            </div>
+          <div class="stat-card">
+            <div class="stat-number" id="hoursLearned">24</div>
+            <h3>Hours Learned</h3>
           </div>
         </div>
 
-        <!-- My Learning Page -->
-        <div id="my-learning" class="page-content">
-          <div class="page-header">
-            <h1>My Learning</h1>
-            <p class="page-subtitle">
-              Manage your courses, progress, and learning preferences
-            </p>
+        <!-- Upcoming Sessions -->
+        <div class="upcoming-sessions">
+          <div class="upcoming-header">
+            <h3>Upcoming Sessions</h3>
           </div>
 
-          <!-- Current Courses -->
-          <section class="content-section">
-            <div class="section-header">
-              <div class="section-title">
-                <span class="section-icon">🎓</span>
-                <h2>Current Courses</h2>
-              </div>
+          <div class="session-card">
+            <div class="session-main-content">
+              <h4>Guitar Practice Session</h4>
+              <div class="session-time">Tomorrow at 2:00 PM</div>
+              <div class="session-location">• Community Center</div>
+              <span class="session-status pending">Pending</span>
             </div>
-
-            <div id="currentCoursesList">
-              <div class="course-item">
-                <div class="course-icon">🎸</div>
-                <div class="course-info">
-                  <h3>Guitar Basics</h3>
-                  <p class="course-progress">
-                    Progress: 60% • 12 sessions completed
-                  </p>
-                </div>
-                <span class="status-badge active">Active</span>
-              </div>
-
-              <div class="course-item">
-                <div class="course-icon">🍳</div>
-                <div class="course-info">
-                  <h3>Italian Cooking</h3>
-                  <p class="course-progress">
-                    Progress: 40% • 6 sessions completed
-                  </p>
-                </div>
-                <span class="status-badge active">Active</span>
-              </div>
+            <div class="session-actions">
+              <button class="join-zoom-btn" data-session="guitar-practice" data-zoom-id="123-456-789">
+                <span class="zoom-icon">🎥</span>
+                Join Zoom
+              </button>
             </div>
-          </section>
-
-          <!-- Wishlist -->
-          <section class="content-section">
-            <div class="section-header">
-              <div class="section-title">
-                <span class="section-icon">💚</span>
-                <h2>Wishlist</h2>
-              </div>
-            </div>
-
-            <div class="course-item">
-              <div class="course-icon">🎨</div>
-              <div class="course-info">
-                <h3>Digital Art Fundamentals</h3>
-                <p class="course-progress">
-                  Saved for later • 3 teachers available
-                </p>
-              </div>
-              <button class="btn-primary">Explore</button>
-            </div>
-          </section>
-        </div>
-
-        <!-- Booking Page -->
-        <div id="booking" class="page-content">
-          <div class="page-header">
-            <h1>Booking</h1>
-            <p class="page-subtitle">
-              Manage your courses, progress, and learning preferences
-            </p>
           </div>
 
-          <!-- Upcoming Sessions -->
-          <section class="content-section">
-            <div class="section-header">
-              <div class="section-title">
-                <span class="section-icon">📅</span>
-                <h2>Upcoming Sessions</h2>
-              </div>
+          <div class="session-card">
+            <div class="session-main-content">
+              <h4>Cooking Class: Pasta Making</h4>
+              <div class="session-time">Friday at 6:00 PM</div>
+              <div class="session-location">• Kitchen Studio</div>
+              <span class="session-status pending">Pending</span>
             </div>
-
-            <div class="session-item">
-              <div class="session-info">
-                <h3>Guitar Practice Session</h3>
-                <p class="session-details">
-                  Tomorrow at 2:00 PM • Community Center
-                </p>
-              </div>
-              <div class="session-actions">
-                <button class="btn-outline">Reschedule</button>
-                <button class="btn-outline">Cancel</button>
-              </div>
+            <div class="session-actions">
+              <button class="join-zoom-btn" data-session="cooking-pasta" data-zoom-id="987-654-321">
+                <span class="zoom-icon">🎥</span>
+                Join Zoom
+              </button>
             </div>
-
-            <div class="session-item">
-              <div class="session-info">
-                <h3>Cooking Class: Pasta Making</h3>
-                <p class="session-details">
-                  Friday at 6:00 PM • Kitchen Studio
-                </p>
-              </div>
-              <div class="session-actions">
-                <button class="btn-outline">Reschedule</button>
-                <button class="btn-outline">Cancel</button>
-              </div>
-            </div>
-          </section>
-
-          <!-- Payment History -->
-          <section class="content-section">
-            <div class="section-header">
-              <div class="section-title">
-                <span class="section-icon">💳</span>
-                <h2>Payment History</h2>
-              </div>
-            </div>
-
-            <div class="session-item">
-              <div class="session-info">
-                <h3>Guitar Lessons Package</h3>
-                <p class="session-details">Dec 15, 2024 • Rs.120.00</p>
-              </div>
-              <span class="status-badge paid">Paid</span>
-            </div>
-
-            <div class="session-item">
-              <div class="session-info">
-                <h3>Cooking Class Session</h3>
-                <p class="session-details">Dec 10, 2024 • Rs.45.00</p>
-              </div>
-              <span class="status-badge paid">Paid</span>
-            </div>
-          </section>
-        </div>
-
-        <!-- Missed Sessions Page -->
-        <div id="recordings" class="page-content">
-          <div class="page-header">
-            <h1>Missed Sessions</h1>
-            <p class="page-subtitle">
-              Access recordings of your missed classes (available for 4 days
-              after the session)
-            </p>
           </div>
 
-          <!-- Available Recordings -->
-          <section class="content-section">
-            <div class="section-header">
-              <div class="section-title">
-                <span class="section-icon">🎥</span>
-                <h2>Available Recordings</h2>
-              </div>
-              <div class="recordings-filter">
-                <select class="filter-dropdown" id="courseFilter">
-                  <option value="all">All Courses</option>
-                  <option value="guitar">Guitar Basics</option>
-                  <option value="cooking">Italian Cooking</option>
-                  <option value="code">Code Review</option>
-                </select>
-              </div>
+          <div class="session-card">
+            <div class="session-main-content">
+              <h4>Code Review Session</h4>
+              <div class="session-time">Saturday at 10:00 AM</div>
+              <div class="session-location">• Online</div>
+              <span class="session-status pending">Pending</span>
             </div>
-
-            <div id="recordingsContainer">
-              <!-- Recording items will be dynamically loaded here -->
-              <div class="recording-item">
-                <div class="recording-thumbnail">
-                  <div class="play-icon">▶️</div>
-                  <div class="recording-duration">45:30</div>
-                </div>
-                <div class="recording-info">
-                  <h3>Guitar Basics - Session 8</h3>
-                  <p class="recording-details">
-                    Fingerpicking Techniques • Dec 18, 2024 • 2:00 PM
-                  </p>
-                  <div class="recording-expiry">
-                    <span class="expiry-badge">Expires in 3 days</span>
-                  </div>
-                  <div class="recording-progress">
-                    <div class="progress-bar">
-                      <div class="progress-fill" style="width: 0%"></div>
-                    </div>
-                    <span class="progress-text">Not watched</span>
-                  </div>
-                </div>
-                <div class="recording-actions">
-                  <button
-                    class="btn-primary play-btn"
-                    data-recording="guitar-session-8"
-                  >
-                    <span class="btn-icon">▶️</span>
-                    Play
-                  </button>
-                  <button
-                    class="btn-outline download-btn disabled"
-                    data-recording="guitar-session-8"
-                    disabled
-                  >
-                    <span class="btn-icon">📥</span>
-                    Download Disabled
-                  </button>
-                </div>
-              </div>
-
-              <div class="recording-item">
-                <div class="recording-thumbnail">
-                  <div class="play-icon">▶️</div>
-                  <div class="recording-duration">38:15</div>
-                </div>
-                <div class="recording-info">
-                  <h3>Italian Cooking - Pasta Making</h3>
-                  <p class="recording-details">
-                    Basic Pasta Techniques • Dec 15, 2024 • 6:00 PM
-                  </p>
-                  <div class="recording-expiry">
-                    <span class="expiry-badge urgent">Expires in 1 day</span>
-                  </div>
-                  <div class="recording-progress">
-                    <div class="progress-bar">
-                      <div class="progress-fill" style="width: 65%"></div>
-                    </div>
-                    <span class="progress-text">65% watched</span>
-                  </div>
-                </div>
-                <div class="recording-actions">
-                  <button
-                    class="btn-primary play-btn"
-                    data-recording="cooking-session-5"
-                  >
-                    <span class="btn-icon">▶️</span>
-                    Continue
-                  </button>
-                  <button
-                    class="btn-outline download-btn disabled"
-                    data-recording="cooking-session-5"
-                    disabled
-                  >
-                    <span class="btn-icon">📥</span>
-                    Download Disabled
-                  </button>
-                </div>
-              </div>
-
-              <div class="recording-item">
-                <div class="recording-thumbnail">
-                  <div class="play-icon">▶️</div>
-                  <div class="recording-duration">52:45</div>
-                </div>
-                <div class="recording-info">
-                  <h3>Code Review Session</h3>
-                  <p class="recording-details">
-                    JavaScript Best Practices • Dec 12, 2024 • 10:00 AM
-                  </p>
-                  <div class="recording-expiry">
-                    <span class="expiry-badge urgent">Expires in 6 hours</span>
-                  </div>
-                  <div class="recording-progress">
-                    <div class="progress-bar">
-                      <div class="progress-fill" style="width: 100%"></div>
-                    </div>
-                    <span class="progress-text">Completed</span>
-                  </div>
-                </div>
-                <div class="recording-actions">
-                  <button
-                    class="btn-primary play-btn"
-                    data-recording="code-session-3"
-                  >
-                    <span class="btn-icon">🔄</span>
-                    Rewatch
-                  </button>
-                  <button
-                    class="btn-outline download-btn disabled"
-                    data-recording="code-session-3"
-                    disabled
-                  >
-                    <span class="btn-icon">📥</span>
-                    Download Disabled
-                  </button>
-                </div>
-              </div>
+            <div class="session-actions">
+              <button class="join-zoom-btn" data-session="code-review" data-zoom-id="456-789-123">
+                <span class="zoom-icon">🎥</span>
+                Join Zoom
+              </button>
             </div>
-
-            <!-- Information Notice -->
-            <div class="recordings-notice">
-              <div class="notice-icon">⚠️</div>
-              <div class="notice-content">
-                <h4>Important Notice</h4>
-                <p>
-                  Session recordings are only available for
-                  <strong>4 days</strong> after the missed session. Downloads
-                  are not available for privacy and security reasons. Please
-                  watch recordings online within the available time frame.
-                </p>
-              </div>
-            </div>
-          </section>
-        </div>
-
-        <!-- Learning Groups Page -->
-        <div id="learning-group" class="page-content">
-          <div class="page-header">
-            <h1>Clubs</h1>
-            <p class="page-subtitle">Connect with peers and join clubs</p>
-          </div>
-
-          <!-- My Groups Section -->
-          <section class="content-section">
-            <div class="section-header">
-              <div class="section-title">
-                <span class="section-icon">👥</span>
-                <h2>My Clubs</h2>
-              </div>
-            </div>
-
-            <div id="myClubsContainer"></div>
-          </section>
-
-          <!-- Discover Groups Section -->
-          <section class="content-section">
-            <div class="section-header">
-              <div class="section-title">
-                <span class="section-icon">🔍</span>
-                <h2>Discover Clubs</h2>
-              </div>
-            </div>
-
-            <div class="group-item discover-club-item">
-              <div class="group-info">
-                <h3>Maths club</h3>
-                <p class="group-details">
-                  42 members • Weekly problem solving sessions
-                </p>
-              </div>
-            </div>
-
-            <div class="group-item discover-club-item">
-              <div class="group-info">
-                <h3>Commerce club</h3>
-                <p class="group-details">
-                  89 members • Business case discussions
-                </p>
-              </div>
-            </div>
-          </section>
-        </div>
-
-        <!-- Profile Settings Page -->
-        <div id="profile-setting" class="page-content">
-          <div class="page-header">
-            <h1>Profile Settings</h1>
-            <p class="page-subtitle">
-              Manage your personal information and preferences
-            </p>
-          </div>
-
-          <!-- Personal Information -->
-          <section class="content-section">
-            <div class="section-header">
-              <div class="section-title">
-                <span class="section-icon">👤</span>
-                <h2>Personal Information</h2>
-              </div>
-              <button class="btn-primary">Edit</button>
-            </div>
-
-            <div class="profile-form">
-              <!-- Profile Picture Section -->
-              <div class="form-group profile-picture-group">
-                <label>Profile Picture</label>
-                <div class="profile-picture-container">
-                  <div class="profile-picture" id="profilePicture">
-                    <img
-                      id="profileImage"
-                      src=""
-                      alt="Profile"
-                      style="display: none"
-                    />
-                    <div class="profile-placeholder" id="profilePlaceholder">
-                      <span class="profile-initials">SJ</span>
-                    </div>
-                  </div>
-                  <div class="profile-picture-actions">
-                    <button class="upload-btn" id="uploadBtn">
-                      <span>📷</span>
-                      Upload Photo
-                    </button>
-                    <button
-                      class="remove-btn"
-                      id="removeBtn"
-                      style="display: none"
-                    >
-                      <span>🗑️</span>
-                      Remove
-                    </button>
-                    <input
-                      type="file"
-                      id="fileInput"
-                      accept="image/*"
-                      style="display: none"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label>Name</label>
-                <div class="form-value">Sarah Johnson</div>
-              </div>
-              <div class="form-group">
-                <label>Email</label>
-                <div class="form-value">sarah.johnson@email.com</div>
-              </div>
-              <div class="form-group">
-                <label>Location</label>
-                <div class="form-value">Downtown District, Central City</div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Learning Preferences -->
-          <section class="content-section">
-            <div class="section-header">
-              <div class="section-title">
-                <span class="section-icon">⭐</span>
-                <h2>Learning Preferences</h2>
-              </div>
-              <button class="btn-primary">Update</button>
-            </div>
-
-            <div class="profile-form">
-              <div class="form-group">
-                <label>Preferred Learning Style</label>
-                <div class="form-value">Visual & Hands-on</div>
-              </div>
-              <div class="form-group">
-                <label>Availability</label>
-                <div class="form-value">Weekday evenings, Weekend mornings</div>
-              </div>
-              <div class="form-group">
-                <label>Budget Range</label>
-                <div class="form-value">Rs.25 - Rs.60 per session</div>
-              </div>
-            </div>
-          </section>
-        </div>
-      </main>
-    </div>
-
-    <!-- Video Modal -->
-    <div id="videoModal" class="video-modal">
-      <div class="video-modal-content">
-        <div class="video-modal-header">
-          <h3 id="videoTitle">Recording Title</h3>
-          <button class="video-close-btn" id="closeVideoModal">&times;</button>
-        </div>
-        <div class="video-container">
-          <video id="recordingVideo" controls>
-            <source src="" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="video-modal-footer">
-          <div class="video-info">
-            <span id="videoDetails">Session details</span>
-          </div>
-          <div class="video-actions">
-            <button class="btn-outline" id="downloadVideo">
-              <span class="btn-icon">📥</span>
-              Download
-            </button>
-            <button class="btn-primary" id="markComplete">
-              <span class="btn-icon">✅</span>
-              Mark as Watched
-            </button>
           </div>
         </div>
       </div>
+
+      <!-- My Learning Page -->
+      <div id="my-learning" class="page-content">
+        <div class="page-header">
+          <h1>My Learning</h1>
+          <p class="page-subtitle">
+            Manage your courses, progress, and learning preferences
+          </p>
+        </div>
+
+        <!-- Current Courses -->
+        <section class="content-section">
+          <div class="section-header">
+            <div class="section-title">
+              <span class="section-icon">🎓</span>
+              <h2>Current Courses</h2>
+            </div>
+          </div>
+
+          <div id="currentCoursesList">
+            <div class="course-item">
+              <div class="course-icon">🎸</div>
+              <div class="course-info">
+                <h3>Guitar Basics</h3>
+                <p class="course-progress">
+                  Progress: 60% • 12 sessions completed
+                </p>
+              </div>
+              <span class="status-badge active">Active</span>
+            </div>
+
+            <div class="course-item">
+              <div class="course-icon">🍳</div>
+              <div class="course-info">
+                <h3>Italian Cooking</h3>
+                <p class="course-progress">
+                  Progress: 40% • 6 sessions completed
+                </p>
+              </div>
+              <span class="status-badge active">Active</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Wishlist -->
+        <section class="content-section">
+          <div class="section-header">
+            <div class="section-title">
+              <span class="section-icon">💚</span>
+              <h2>Wishlist</h2>
+            </div>
+          </div>
+
+          <div class="course-item">
+            <div class="course-icon">🎨</div>
+            <div class="course-info">
+              <h3>Digital Art Fundamentals</h3>
+              <p class="course-progress">
+                Saved for later • 3 teachers available
+              </p>
+            </div>
+            <button class="btn-primary">Explore</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- Booking Page -->
+      <div id="booking" class="page-content">
+        <div class="page-header">
+          <h1>Booking</h1>
+          <p class="page-subtitle">
+            Manage your courses, progress, and learning preferences
+          </p>
+        </div>
+
+        <!-- Upcoming Sessions -->
+        <section class="content-section">
+          <div class="section-header">
+            <div class="section-title">
+              <span class="section-icon">📅</span>
+              <h2>Upcoming Sessions</h2>
+            </div>
+          </div>
+
+          <div class="session-item">
+            <div class="session-info">
+              <h3>Guitar Practice Session</h3>
+              <p class="session-details">
+                Tomorrow at 2:00 PM • Community Center
+              </p>
+            </div>
+            <div class="session-actions">
+              <button class="btn-outline">Reschedule</button>
+              <button class="btn-outline">Cancel</button>
+            </div>
+          </div>
+
+          <div class="session-item">
+            <div class="session-info">
+              <h3>Cooking Class: Pasta Making</h3>
+              <p class="session-details">
+                Friday at 6:00 PM • Kitchen Studio
+              </p>
+            </div>
+            <div class="session-actions">
+              <button class="btn-outline">Reschedule</button>
+              <button class="btn-outline">Cancel</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Payment History -->
+        <section class="content-section">
+          <div class="section-header">
+            <div class="section-title">
+              <span class="section-icon">💳</span>
+              <h2>Payment History</h2>
+            </div>
+          </div>
+
+          <div class="session-item">
+            <div class="session-info">
+              <h3>Guitar Lessons Package</h3>
+              <p class="session-details">Dec 15, 2024 • Rs.120.00</p>
+            </div>
+            <span class="status-badge paid">Paid</span>
+          </div>
+
+          <div class="session-item">
+            <div class="session-info">
+              <h3>Cooking Class Session</h3>
+              <p class="session-details">Dec 10, 2024 • Rs.45.00</p>
+            </div>
+            <span class="status-badge paid">Paid</span>
+          </div>
+        </section>
+      </div>
+
+      <!-- Missed Sessions Page -->
+      <div id="recordings" class="page-content">
+        <div class="page-header">
+          <h1>Missed Sessions</h1>
+          <p class="page-subtitle">
+            Access recordings of your missed classes (available for 4 days
+            after the session)
+          </p>
+        </div>
+
+        <!-- Available Recordings -->
+        <section class="content-section">
+          <div class="section-header">
+            <div class="section-title">
+              <span class="section-icon">🎥</span>
+              <h2>Available Recordings</h2>
+            </div>
+            <div class="recordings-filter">
+              <select class="filter-dropdown" id="courseFilter">
+                <option value="all">All Courses</option>
+                <option value="guitar">Guitar Basics</option>
+                <option value="cooking">Italian Cooking</option>
+                <option value="code">Code Review</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="recordingsContainer">
+            <!-- Recording items will be dynamically loaded here -->
+            <div class="recording-item">
+              <div class="recording-thumbnail">
+                <div class="play-icon">▶️</div>
+                <div class="recording-duration">45:30</div>
+              </div>
+              <div class="recording-info">
+                <h3>Guitar Basics - Session 8</h3>
+                <p class="recording-details">
+                  Fingerpicking Techniques • Dec 18, 2024 • 2:00 PM
+                </p>
+                <div class="recording-expiry">
+                  <span class="expiry-badge">Expires in 3 days</span>
+                </div>
+                <div class="recording-progress">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                  </div>
+                  <span class="progress-text">Not watched</span>
+                </div>
+              </div>
+              <div class="recording-actions">
+                <button class="btn-primary play-btn" data-recording="guitar-session-8">
+                  <span class="btn-icon">▶️</span>
+                  Play
+                </button>
+                <button class="btn-outline download-btn disabled" data-recording="guitar-session-8" disabled>
+                  <span class="btn-icon">📥</span>
+                  Download Disabled
+                </button>
+              </div>
+            </div>
+
+            <div class="recording-item">
+              <div class="recording-thumbnail">
+                <div class="play-icon">▶️</div>
+                <div class="recording-duration">38:15</div>
+              </div>
+              <div class="recording-info">
+                <h3>Italian Cooking - Pasta Making</h3>
+                <p class="recording-details">
+                  Basic Pasta Techniques • Dec 15, 2024 • 6:00 PM
+                </p>
+                <div class="recording-expiry">
+                  <span class="expiry-badge urgent">Expires in 1 day</span>
+                </div>
+                <div class="recording-progress">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 65%"></div>
+                  </div>
+                  <span class="progress-text">65% watched</span>
+                </div>
+              </div>
+              <div class="recording-actions">
+                <button class="btn-primary play-btn" data-recording="cooking-session-5">
+                  <span class="btn-icon">▶️</span>
+                  Continue
+                </button>
+                <button class="btn-outline download-btn disabled" data-recording="cooking-session-5" disabled>
+                  <span class="btn-icon">📥</span>
+                  Download Disabled
+                </button>
+              </div>
+            </div>
+
+            <div class="recording-item">
+              <div class="recording-thumbnail">
+                <div class="play-icon">▶️</div>
+                <div class="recording-duration">52:45</div>
+              </div>
+              <div class="recording-info">
+                <h3>Code Review Session</h3>
+                <p class="recording-details">
+                  JavaScript Best Practices • Dec 12, 2024 • 10:00 AM
+                </p>
+                <div class="recording-expiry">
+                  <span class="expiry-badge urgent">Expires in 6 hours</span>
+                </div>
+                <div class="recording-progress">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%"></div>
+                  </div>
+                  <span class="progress-text">Completed</span>
+                </div>
+              </div>
+              <div class="recording-actions">
+                <button class="btn-primary play-btn" data-recording="code-session-3">
+                  <span class="btn-icon">🔄</span>
+                  Rewatch
+                </button>
+                <button class="btn-outline download-btn disabled" data-recording="code-session-3" disabled>
+                  <span class="btn-icon">📥</span>
+                  Download Disabled
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Information Notice -->
+          <div class="recordings-notice">
+            <div class="notice-icon">⚠️</div>
+            <div class="notice-content">
+              <h4>Important Notice</h4>
+              <p>
+                Session recordings are only available for
+                <strong>4 days</strong> after the missed session. Downloads
+                are not available for privacy and security reasons. Please
+                watch recordings online within the available time frame.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Learning Groups Page -->
+      <div id="learning-group" class="page-content">
+        <div class="page-header">
+          <h1>Clubs</h1>
+          <p class="page-subtitle">Connect with peers and join clubs</p>
+        </div>
+
+        <!-- My Groups Section -->
+        <section class="content-section">
+          <div class="section-header">
+            <div class="section-title">
+              <span class="section-icon">👥</span>
+              <h2>My Clubs</h2>
+            </div>
+          </div>
+
+          <div id="myClubsContainer"></div>
+        </section>
+
+        <!-- Discover Groups Section -->
+        <section class="content-section">
+          <div class="section-header">
+            <div class="section-title">
+              <span class="section-icon">🔍</span>
+              <h2>Discover Clubs</h2>
+            </div>
+          </div>
+
+          <div class="group-item discover-club-item">
+            <div class="group-info">
+              <h3>Maths club</h3>
+              <p class="group-details">
+                42 members • Weekly problem solving sessions
+              </p>
+            </div>
+          </div>
+
+          <div class="group-item discover-club-item">
+            <div class="group-info">
+              <h3>Commerce club</h3>
+              <p class="group-details">
+                89 members • Business case discussions
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Profile Settings Page -->
+      <div id="profile-setting" class="page-content">
+        <div class="page-header">
+          <h1>Profile Settings</h1>
+          <p class="page-subtitle">
+            Manage your personal information and preferences
+          </p>
+        </div>
+
+        <!-- Personal Information -->
+        <section class="content-section">
+          <div class="section-header">
+            <div class="section-title">
+              <span class="section-icon">👤</span>
+              <h2>Personal Information</h2>
+            </div>
+            <button class="btn-primary">Edit</button>
+          </div>
+
+          <div class="profile-form">
+            <!-- Profile Picture Section -->
+            <div class="form-group profile-picture-group">
+              <label>Profile Picture</label>
+              <div class="profile-picture-container">
+                <div class="profile-picture" id="profilePicture">
+                  <img id="profileImage" src="" alt="Profile" style="display: none" />
+                  <div class="profile-placeholder" id="profilePlaceholder">
+                    <span class="profile-initials">SJ</span>
+                  </div>
+                </div>
+                <div class="profile-picture-actions">
+                  <button class="upload-btn" id="uploadBtn">
+                    <span>📷</span>
+                    Upload Photo
+                  </button>
+                  <button class="remove-btn" id="removeBtn" style="display: none">
+                    <span>🗑️</span>
+                    Remove
+                  </button>
+                  <input type="file" id="fileInput" accept="image/*" style="display: none" />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Name</label>
+              <div class="form-value">Sarah Johnson</div>
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <div class="form-value">sarah.johnson@email.com</div>
+            </div>
+            <div class="form-group">
+              <label>Location</label>
+              <div class="form-value">Downtown District, Central City</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Learning Preferences -->
+        <section class="content-section">
+          <div class="section-header">
+            <div class="section-title">
+              <span class="section-icon">⭐</span>
+              <h2>Learning Preferences</h2>
+            </div>
+            <button class="btn-primary">Update</button>
+          </div>
+
+          <div class="profile-form">
+            <div class="form-group">
+              <label>Preferred Learning Style</label>
+              <div class="form-value">Visual & Hands-on</div>
+            </div>
+            <div class="form-group">
+              <label>Availability</label>
+              <div class="form-value">Weekday evenings, Weekend mornings</div>
+            </div>
+            <div class="form-group">
+              <label>Budget Range</label>
+              <div class="form-value">Rs.25 - Rs.60 per session</div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Video Modal -->
+  <div id="videoModal" class="video-modal">
+    <div class="video-modal-content">
+      <div class="video-modal-header">
+        <h3 id="videoTitle">Recording Title</h3>
+        <button class="video-close-btn" id="closeVideoModal">&times;</button>
+      </div>
+      <div class="video-container">
+        <video id="recordingVideo" controls>
+          <source src="" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="video-modal-footer">
+        <div class="video-info">
+          <span id="videoDetails">Session details</span>
+        </div>
+        <div class="video-actions">
+          <button class="btn-outline" id="downloadVideo">
+            <span class="btn-icon">📥</span>
+            Download
+          </button>
+          <button class="btn-primary" id="markComplete">
+            <span class="btn-icon">✅</span>
+            Mark as Watched
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Footer Container -->
-    <div id="footer-container"></div>
+  <!-- Accessibility Toolbar HTML - Add this to every page -->
+  <button class="accessibility-toggle" onclick="toggleAccessibilityPanel()" aria-label="Toggle accessibility options">
+    ♿
+  </button>
 
-    <!-- Scripts -->
-    <script src="js/dashboard.js"></script>
-    <script src="js/footer2.js"></script>
-    <script src="js/navbar2.js"></script>
-    <script src="js/footer-loader.js"></script>
-    <script src="js/navbar-loader.js"></script>
-  </body>
+  <div class="accessibility-panel" id="accessibilityPanel">
+    <div class="panel-header">
+      Accessibility Tools
+    </div>
+    <div class="panel-content">
+      <div class="accessibility-option" onclick="increaseText()">
+        <div class="option-label">
+          <span class="option-icon">🔍</span>
+          Increase Text
+        </div>
+      </div>
+
+      <div class="accessibility-option" onclick="decreaseText()">
+        <div class="option-label">
+          <span class="option-icon">🔍</span>
+          Decrease Text
+        </div>
+      </div>
+
+      <div class="accessibility-option" onclick="toggleFeature('grayscale')">
+        <div class="option-label">
+          <span class="option-icon">⬜</span>
+          Grayscale
+        </div>
+        <div class="option-toggle" id="toggle-grayscale"></div>
+      </div>
+
+      <div class="accessibility-option" onclick="toggleFeature('high-contrast')">
+        <div class="option-label">
+          <span class="option-icon">🌓</span>
+          High Contrast
+        </div>
+        <div class="option-toggle" id="toggle-high-contrast"></div>
+      </div>
+
+      <div class="accessibility-option" onclick="toggleFeature('negative-contrast')">
+        <div class="option-label">
+          <span class="option-icon">👁</span>
+          Negative Contrast
+        </div>
+        <div class="option-toggle" id="toggle-negative-contrast"></div>
+      </div>
+
+      <div class="accessibility-option" onclick="toggleFeature('light-background')">
+        <div class="option-label">
+          <span class="option-icon">💡</span>
+          Light Background
+        </div>
+        <div class="option-toggle" id="toggle-light-background"></div>
+      </div>
+
+      <div class="accessibility-option" onclick="toggleFeature('links-underline')">
+        <div class="option-label">
+          <span class="option-icon">🔗</span>
+          Links Underline
+        </div>
+        <div class="option-toggle" id="toggle-links-underline"></div>
+      </div>
+
+      <div class="accessibility-option" onclick="toggleFeature('readable-font')">
+        <div class="option-label">
+          <span class="option-icon">📖</span>
+          Readable Font
+        </div>
+        <div class="option-toggle" id="toggle-readable-font"></div>
+      </div>
+
+      <div class="accessibility-option" onclick="resetAccessibility()">
+        <div class="option-label">
+          <span class="option-icon">↻</span>
+          Reset
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Container -->
+  <div id="footer-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/dashboard.js"></script>
+  <script src="js/footer2.js"></script>
+  <script src="js/navbar2.js"></script>
+  <script src="js/footer-loader.js"></script>
+  <script src="js/navbar-loader.js"></script>
+</body>
+
 </html>
