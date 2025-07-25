@@ -1,162 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How SkillHub Works</title>
     <link rel="stylesheet" href="css/works_teaching.css">
     <link rel="stylesheet" href="css/navbar3.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <script src="js/accessibility.js"></script>
 </head>
+
 <body>
     <div class="navbar-teacher"></div>
     <!-- Main Content Section -->
     <div class="header-content">
 
-    <section class="hero">
-        <div class="floating-circle floating-circle-1"></div>
-        <div class="floating-circle floating-circle-2"></div>
-        <div class="floating-circle floating-circle-3"></div>
-        <div class="floating-circle floating-circle-4"></div>
-        <div class="floating-circle floating-circle-5"></div>
-        <div class="floating-circle floating-circle-6"></div>
-        <div class="floating-circle floating-circle-7"></div>
-        <div class="floating-circle floating-circle-8"></div>
-        <h1>How <span class="skillhub">SkillHub</span> Works</h1>
-        <p>Bridge the gap between learners and teachers in your neighborhood community.</p>
-    </section>
+        <section class="hero">
+            <div class="floating-circle floating-circle-1"></div>
+            <div class="floating-circle floating-circle-2"></div>
+            <div class="floating-circle floating-circle-3"></div>
+            <div class="floating-circle floating-circle-4"></div>
+            <div class="floating-circle floating-circle-5"></div>
+            <div class="floating-circle floating-circle-6"></div>
+            <div class="floating-circle floating-circle-7"></div>
+            <div class="floating-circle floating-circle-8"></div>
+            <h1>How <span class="skillhub">SkillHub</span> Works</h1>
+            <p>Bridge the gap between learners and teachers in your neighborhood community.</p>
+        </section>
 
-    <section class="role-selection">
-        <p class="label">I want to learn about:</p>
-        <div class="role-select">
-            <div class="option" data-value="learning">Learning</div>
-            <div class="option active" data-value="teaching">Teaching</div>
+        <section class="role-selection">
+            <p class="label">I want to learn about:</p>
+            <div class="role-select">
+                <div class="option" data-value="learning">Learning</div>
+                <div class="option active" data-value="teaching">Teaching</div>
+            </div>
+        </section>
+
+        <section class="content">
+            <!-- Teaching Content (Initially Visible) -->
+            <section class="for-teachers-wrapper">
+                <div class="for-teachers">
+                    <h2>For Teachers</h2>
+                    <p>You can create your profile that's how to succeed at SkillTeach!</p>
+                    <div class="steps-grid">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <h3>Optimize Your Profile</h3>
+                            <p>Complete your profile details to showcase your skills and experience to the community.
+                            </p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <h3>Set Your Terms</h3>
+                            <p>Choose your preferred teaching rates and specify your preferred learning locations.</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <h3>Connect with Learners</h3>
+                            <p>Build connections with students, parents, and fellow educators in your community.</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <h3>Teach & Grow</h3>
+                            <p>Start teaching and use helpful resources to enhance your teaching journey.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Learning Content (Initially Hidden) -->
+            <section class="for-learners-wrapper" style="display: none;">
+                <div class="for-learners">
+                    <h2>For Learners</h2>
+                    <p>Explore a world of knowledge with SkillHub's learning opportunities!</p>
+                    <div class="steps-grid">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <h3>Find a Teacher</h3>
+                            <p>Search for teachers based on your interests and location.</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <h3>Schedule a Session</h3>
+                            <p>Book a session that fits your schedule with your chosen teacher.</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <h3>Learn & Progress</h3>
+                            <p>Engage in lessons and track your learning progress with feedback.</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <h3>Join the Community</h3>
+                            <p>Connect with other learners and share your learning journey.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="safety">
+                <div class="safety-container">
+                    <h2>Your Safety Is Our Priority</h2>
+                    <p>Comprehensive security measures ensure every learning interaction is safe and trustworthy</p>
+                    <div class="safety-measures">
+                        <div class="measure">
+                            <div class="measure-icon">ID</div>
+                            <h4>Identity Verification Process</h4>
+                            <p>Multi-step identity verification ensures every user is who they claim to be, creating a
+                                trusted community environment.</p>
+                        </div>
+                        <div class="measure">
+                            <div class="measure-icon">🛡️</div>
+                            <h4>Background Checks for Teachers</h4>
+                            <p>Comprehensive background screening for all teachers provides peace of mind for students
+                                and parents.</p>
+                        </div>
+                        <div class="measure">
+                            <div class="measure-icon">💬</div>
+                            <h4>Secure In-App Messaging</h4>
+                            <p>All communication happens through our secure platform, protecting your personal
+                                information while facilitating connection.</p>
+                        </div>
+                        <div class="measure">
+                            <div class="measure-icon">📍</div>
+                            <h4>Safe Meeting Location Recommendation</h4>
+                            <p>Curated list of safe, public meeting locations in your neighborhood, including libraries,
+                                coffee shops, and community centers.</p>
+                        </div>
+                        <div class="measure">
+                            <div class="measure-icon">SOS</div>
+                            <h4>24/7 Community Support</h4>
+                            <p>Round-the-clock support team ready to assist with any concerns or issues that may arise
+                                during your learning journey.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section class="cta">
+            <h2>Ready to Start Your SkillHub Journey?</h2>
+            <p>Join thousands of learners and teachers in your neighborhood. Whether you're looking to master a new
+                skill or share your expertise, your community is waiting.</p>
+            <button class="get-started">Get Started Today</button>
+        </section>
+
+        <!-- Accessibility Toolbar HTML - Add this to every page -->
+        <button class="accessibility-toggle" onclick="toggleAccessibilityPanel()"
+            aria-label="Toggle accessibility options">
+            ♿
+        </button>
+
+        <div class="accessibility-panel" id="accessibilityPanel">
+            <div class="panel-header">
+                Accessibility Tools
+            </div>
+            <div class="panel-content">
+                <div class="accessibility-option" onclick="increaseText()">
+                    <div class="option-label">
+                        <span class="option-icon">🔍</span>
+                        Increase Text
+                    </div>
+                </div>
+
+                <div class="accessibility-option" onclick="decreaseText()">
+                    <div class="option-label">
+                        <span class="option-icon">🔍</span>
+                        Decrease Text
+                    </div>
+                </div>
+
+                <div class="accessibility-option" onclick="toggleFeature('grayscale')">
+                    <div class="option-label">
+                        <span class="option-icon">⬜</span>
+                        Grayscale
+                    </div>
+                    <div class="option-toggle" id="toggle-grayscale"></div>
+                </div>
+
+                <div class="accessibility-option" onclick="toggleFeature('high-contrast')">
+                    <div class="option-label">
+                        <span class="option-icon">🌓</span>
+                        High Contrast
+                    </div>
+                    <div class="option-toggle" id="toggle-high-contrast"></div>
+                </div>
+
+                <div class="accessibility-option" onclick="toggleFeature('negative-contrast')">
+                    <div class="option-label">
+                        <span class="option-icon">👁</span>
+                        Negative Contrast
+                    </div>
+                    <div class="option-toggle" id="toggle-negative-contrast"></div>
+                </div>
+
+                <div class="accessibility-option" onclick="toggleFeature('light-background')">
+                    <div class="option-label">
+                        <span class="option-icon">💡</span>
+                        Light Background
+                    </div>
+                    <div class="option-toggle" id="toggle-light-background"></div>
+                </div>
+
+                <div class="accessibility-option" onclick="toggleFeature('links-underline')">
+                    <div class="option-label">
+                        <span class="option-icon">🔗</span>
+                        Links Underline
+                    </div>
+                    <div class="option-toggle" id="toggle-links-underline"></div>
+                </div>
+
+                <div class="accessibility-option" onclick="toggleFeature('readable-font')">
+                    <div class="option-label">
+                        <span class="option-icon">📖</span>
+                        Readable Font
+                    </div>
+                    <div class="option-toggle" id="toggle-readable-font"></div>
+                </div>
+
+                <div class="accessibility-option" onclick="resetAccessibility()">
+                    <div class="option-label">
+                        <span class="option-icon">↻</span>
+                        Reset
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
 
-    <section class="content">
-        <!-- Teaching Content (Initially Visible) -->
-        <section class="for-teachers-wrapper">
-            <div class="for-teachers">
-                <h2>For Teachers</h2>
-                <p>You can create your profile that's how to succeed at SkillTeach!</p>
-                <div class="steps-grid">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <h3>Optimize Your Profile</h3>
-                        <p>Complete your profile details to showcase your skills and experience to the community.</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <h3>Set Your Terms</h3>
-                        <p>Choose your preferred teaching rates and specify your preferred learning locations.</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <h3>Connect with Learners</h3>
-                        <p>Build connections with students, parents, and fellow educators in your community.</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">4</div>
-                        <h3>Teach & Grow</h3>
-                        <p>Start teaching and use helpful resources to enhance your teaching journey.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- Footer Placeholder -->
+        <div id="footer-placeholder"></div>
 
-        <!-- Learning Content (Initially Hidden) -->
-        <section class="for-learners-wrapper" style="display: none;">
-            <div class="for-learners">
-                <h2>For Learners</h2>
-                <p>Explore a world of knowledge with SkillHub's learning opportunities!</p>
-                <div class="steps-grid">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <h3>Find a Teacher</h3>
-                        <p>Search for teachers based on your interests and location.</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <h3>Schedule a Session</h3>
-                        <p>Book a session that fits your schedule with your chosen teacher.</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <h3>Learn & Progress</h3>
-                        <p>Engage in lessons and track your learning progress with feedback.</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">4</div>
-                        <h3>Join the Community</h3>
-                        <p>Connect with other learners and share your learning journey.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <script src="js/works_teaching.js"></script>
+        <script src="js/navbar-loader.js"></script>
+        <script src="js/auth.js"></script>
+        <script>
+            // Load Header
+            fetch('../header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-placeholder').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading header:', error));
 
-        <section class="safety">
-            <div class="safety-container">
-                <h2>Your Safety Is Our Priority</h2>
-                <p>Comprehensive security measures ensure every learning interaction is safe and trustworthy</p>
-                <div class="safety-measures">
-                    <div class="measure">
-                        <div class="measure-icon">ID</div>
-                        <h4>Identity Verification Process</h4>
-                        <p>Multi-step identity verification ensures every user is who they claim to be, creating a trusted community environment.</p>
-                    </div>
-                    <div class="measure">
-                        <div class="measure-icon">🛡️</div>
-                        <h4>Background Checks for Teachers</h4>
-                        <p>Comprehensive background screening for all teachers provides peace of mind for students and parents.</p>
-                    </div>
-                    <div class="measure">
-                        <div class="measure-icon">💬</div>
-                        <h4>Secure In-App Messaging</h4>
-                        <p>All communication happens through our secure platform, protecting your personal information while facilitating connection.</p>
-                    </div>
-                    <div class="measure">
-                        <div class="measure-icon">📍</div>
-                        <h4>Safe Meeting Location Recommendation</h4>
-                        <p>Curated list of safe, public meeting locations in your neighborhood, including libraries, coffee shops, and community centers.</p>
-                    </div>
-                    <div class="measure">
-                        <div class="measure-icon">SOS</div>
-                        <h4>24/7 Community Support</h4>
-                        <p>Round-the-clock support team ready to assist with any concerns or issues that may arise during your learning journey.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </section>
-
-    <section class="cta">
-        <h2>Ready to Start Your SkillHub Journey?</h2>
-        <p>Join thousands of learners and teachers in your neighborhood. Whether you're looking to master a new skill or share your expertise, your community is waiting.</p>
-        <button class="get-started">Get Started Today</button>
-    </section>
-
-    <!-- Footer Placeholder -->
-    <div id="footer-placeholder"></div>
-
-    <script src="js/works_teaching.js"></script>
-    <script src="js/navbar-loader.js"></script>
-    <script src="js/auth.js"></script>
-    <script>
-        // Load Header
-        fetch('../header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header-placeholder').innerHTML = data;
-            })
-            .catch(error => console.error('Error loading header:', error));
-
-        // Load Footer
-        fetch('../footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-placeholder').innerHTML = data;
-            })
-            .catch(error => console.error('Error loading footer:', error));
-    </script>
+            // Load Footer
+            fetch('../footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-placeholder').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading footer:', error));
+        </script>
 </body>
+
 </html>

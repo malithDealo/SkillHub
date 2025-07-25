@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,10 +9,13 @@
     <link rel="stylesheet" href="css/navbar4.css">
     <link rel="stylesheet" href="css/navbar-enhancements.css">
     <link rel="stylesheet" href="css/footer2.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <script src="js/accessibility.js"></script>
     <script src="js/sponsorhome.js"></script>
     <script src="js/auth.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
 
     <div class="navbar-sponsor"></div>
@@ -34,7 +38,7 @@
         <div class="container">
             <h2>Why Choose <span class="highlight">SkillHub</span>?</h2>
             <p class="section-subtitle">Choose what makes our community the perfect place to learn and teach</p>
-            
+
             <div class="features-grid">
                 <!-- Feature 1 -->
                 <div class="feature-card" data-feature="1">
@@ -42,7 +46,8 @@
                         <i class="fas fa-graduation-cap"></i>
                     </div>
                     <h3>Hyper-Local Learning</h3>
-                    <p>Connect with skilled neighbors in your immediate area. Learn practical skills from people who understand your local context and community needs.</p>
+                    <p>Connect with skilled neighbors in your immediate area. Learn practical skills from people who
+                        understand your local context and community needs.</p>
                 </div>
 
                 <!-- Feature 2 -->
@@ -51,7 +56,8 @@
                         <i class="fas fa-exchange-alt"></i>
                     </div>
                     <h3>Two-Way Exchange</h3>
-                    <p>Not just a marketplace - it's a skill-sharing ecosystem. Today's student becomes tomorrow's teacher, creating a vibrant cycle of continuous learning.</p>
+                    <p>Not just a marketplace - it's a skill-sharing ecosystem. Today's student becomes tomorrow's
+                        teacher, creating a vibrant cycle of continuous learning.</p>
                 </div>
 
                 <!-- Feature 3 -->
@@ -60,7 +66,8 @@
                         <i class="fas fa-shield-check"></i>
                     </div>
                     <h3>Verified & Safe</h3>
-                    <p>Comprehensive background checks and identity verification ensure every interaction is secure. Your safety and peace of mind are our top priorities.</p>
+                    <p>Comprehensive background checks and identity verification ensure every interaction is secure.
+                        Your safety and peace of mind are our top priorities.</p>
                 </div>
 
                 <!-- Feature 4 -->
@@ -69,7 +76,8 @@
                         <i class="fas fa-users"></i>
                     </div>
                     <h3>Inclusive Platform</h3>
-                    <p>Welcome to all backgrounds, ages, and skill levels. We celebrate diversity and believe everyone has something valuable to teach and learn.</p>
+                    <p>Welcome to all backgrounds, ages, and skill levels. We celebrate diversity and believe everyone
+                        has something valuable to teach and learn.</p>
                 </div>
             </div>
         </div>
@@ -80,7 +88,7 @@
         <div class="container">
             <h2>How <span class="highlight">SkillHub</span> Works</h2>
             <p class="section-subtitle">Getting started is simple and straightforward</p>
-            
+
             <div class="steps-container">
                 <!-- Step 1 -->
                 <div class="step-item" data-step="1">
@@ -89,7 +97,8 @@
                     </div>
                     <div class="step-content">
                         <h3>Discover & Connect</h3>
-                        <p>Find nearby skills or learners based on your location. Browse through our community of skilled neighbors and connect with those who match your interests and goals.</p>
+                        <p>Find nearby skills or learners based on your location. Browse through our community of
+                            skilled neighbors and connect with those who match your interests and goals.</p>
                     </div>
                 </div>
 
@@ -100,7 +109,8 @@
                     </div>
                     <div class="step-content">
                         <h3>Learn Together</h3>
-                        <p>Participate in community skill-building connections. Whether it's one-on-one tutoring, group classes, or informal coffee chats, learning happens in comfortable local settings.</p>
+                        <p>Participate in community skill-building connections. Whether it's one-on-one tutoring, group
+                            classes, or informal coffee chats, learning happens in comfortable local settings.</p>
                     </div>
                 </div>
             </div>
@@ -111,18 +121,18 @@
     <section class="community-stats-section">
         <div class="container">
             <h2>Our Growing Community</h2>
-            
+
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-number" data-target="2847">0</div>
                     <div class="stat-label">Active Learners</div>
                 </div>
-                
+
                 <div class="stat-card">
                     <div class="stat-number" data-target="156">0</div>
                     <div class="stat-label">Expert Teachers</div>
                 </div>
-                
+
                 <div class="stat-card">
                     <div class="stat-number" data-target="89">0</div>
                     <div class="stat-label">Skills Categories</div>
@@ -131,19 +141,101 @@
         </div>
     </section>
 
-  
+
 
     <!-- CTA Section -->
     <section class="cta-section">
         <div class="container">
             <h2>Ready to Start Your <span class="highlight">SkillHub</span> Journey?</h2>
-            <p>Join thousands of learners and teachers in your neighborhood. Whether you're looking to master a new skill or share your expertise, your community is waiting.</p>
+            <p>Join thousands of learners and teachers in your neighborhood. Whether you're looking to master a new
+                skill or share your expertise, your community is waiting.</p>
             <button class="cta-button" id="getStartedBtn">
                 <span>Get Started Today</span>
                 <i class="fas fa-arrow-right"></i>
             </button>
         </div>
     </section>
+
+    <!-- Accessibility Toolbar HTML - Add this to every page -->
+    <button class="accessibility-toggle" onclick="toggleAccessibilityPanel()" aria-label="Toggle accessibility options">
+        ♿
+    </button>
+
+    <div class="accessibility-panel" id="accessibilityPanel">
+        <div class="panel-header">
+            Accessibility Tools
+        </div>
+        <div class="panel-content">
+            <div class="accessibility-option" onclick="increaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Increase Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="decreaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Decrease Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('grayscale')">
+                <div class="option-label">
+                    <span class="option-icon">⬜</span>
+                    Grayscale
+                </div>
+                <div class="option-toggle" id="toggle-grayscale"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('high-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">🌓</span>
+                    High Contrast
+                </div>
+                <div class="option-toggle" id="toggle-high-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('negative-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">👁</span>
+                    Negative Contrast
+                </div>
+                <div class="option-toggle" id="toggle-negative-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('light-background')">
+                <div class="option-label">
+                    <span class="option-icon">💡</span>
+                    Light Background
+                </div>
+                <div class="option-toggle" id="toggle-light-background"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('links-underline')">
+                <div class="option-label">
+                    <span class="option-icon">🔗</span>
+                    Links Underline
+                </div>
+                <div class="option-toggle" id="toggle-links-underline"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('readable-font')">
+                <div class="option-label">
+                    <span class="option-icon">📖</span>
+                    Readable Font
+                </div>
+                <div class="option-toggle" id="toggle-readable-font"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="resetAccessibility()">
+                <div class="option-label">
+                    <span class="option-icon">↻</span>
+                    Reset
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div id="footer-container"></div>
 
@@ -152,4 +244,5 @@
     <script src="js/navbar-loader.js"></script>
     <script src="js/navbar2.js"></script>
 </body>
+
 </html>

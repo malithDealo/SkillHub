@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TeacherPro - Functional Quick Actions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <script src="js/accessibility.js"></script>
     <style>
         * {
             margin: 0;
@@ -289,6 +292,7 @@
                 opacity: 0;
                 transform: translateY(-20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -361,7 +365,8 @@
             margin-top: 2rem;
         }
 
-        .btn-primary, .btn-secondary {
+        .btn-primary,
+        .btn-secondary {
             padding: 0.75rem 1.5rem;
             border: none;
             border-radius: 8px;
@@ -690,6 +695,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="quick-actions-container">
         <!-- Page Header -->
@@ -715,7 +721,8 @@
                 </div>
                 <div class="action-content">
                     <h3>Create Assignment</h3>
-                    <p>Design and distribute new assignments to your students with custom deadlines and requirements.</p>
+                    <p>Design and distribute new assignments to your students with custom deadlines and requirements.
+                    </p>
                     <div class="action-stats">
                         <div class="stat-item">
                             <span class="stat-value" id="activeAssignments">24</span>
@@ -815,7 +822,8 @@
                 </div>
                 <div class="action-content">
                     <h3>Generate Reports</h3>
-                    <p>Create detailed performance reports, attendance summaries, and progress analytics for your classes.</p>
+                    <p>Create detailed performance reports, attendance summaries, and progress analytics for your
+                        classes.</p>
                     <div class="action-stats">
                         <div class="stat-item">
                             <span class="stat-value" id="totalClasses">5</span>
@@ -840,7 +848,8 @@
                 </div>
                 <div class="action-content">
                     <h3>Manage Payments</h3>
-                    <p>Track student payments, send invoices, and manage your earnings with detailed financial reports.</p>
+                    <p>Track student payments, send invoices, and manage your earnings with detailed financial reports.
+                    </p>
                     <div class="action-stats">
                         <div class="stat-item">
                             <span class="stat-value" id="monthlyEarnings">$2,340</span>
@@ -885,7 +894,8 @@
                 </div>
                 <div class="form-group">
                     <label for="assignmentDescription">Description</label>
-                    <textarea id="assignmentDescription" rows="4" required placeholder="Describe the assignment requirements"></textarea>
+                    <textarea id="assignmentDescription" rows="4" required
+                        placeholder="Describe the assignment requirements"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="assignmentDueDate">Due Date</label>
@@ -1048,7 +1058,8 @@
                 </div>
                 <div class="form-group">
                     <label for="sessionNotes">Session Notes</label>
-                    <textarea id="sessionNotes" rows="3" placeholder="Add any special notes or topics to cover"></textarea>
+                    <textarea id="sessionNotes" rows="3"
+                        placeholder="Add any special notes or topics to cover"></textarea>
                 </div>
                 <div class="form-actions">
                     <button type="button" class="btn-secondary" onclick="closeModal('scheduleModal')">Cancel</button>
@@ -1142,7 +1153,7 @@
                         <option value="overdue">Overdue Payments</option>
                     </select>
                 </div>
-                
+
                 <div id="paymentOverview">
                     <div class="action-stats" style="margin-bottom: 1.5rem;">
                         <div class="stat-item">
@@ -1158,7 +1169,7 @@
                             <span class="stat-label">Overdue</span>
                         </div>
                     </div>
-                    
+
                     <table class="payment-table">
                         <thead>
                             <tr>
@@ -1194,10 +1205,11 @@
                         </tbody>
                     </table>
                 </div>
-                
+
                 <div class="form-actions">
                     <button type="button" class="btn-secondary" onclick="closeModal('paymentModal')">Close</button>
-                    <button type="button" class="btn-primary" onclick="sendPaymentReminders()">Send All Reminders</button>
+                    <button type="button" class="btn-primary" onclick="sendPaymentReminders()">Send All
+                        Reminders</button>
                 </div>
             </div>
         </div>
@@ -1207,6 +1219,87 @@
     <div class="toast" id="toast">
         <i class="fas fa-check-circle icon"></i>
         <span class="message">Action completed successfully!</span>
+    </div>
+
+    <!-- Accessibility Toolbar HTML - Add this to every page -->
+    <button class="accessibility-toggle" onclick="toggleAccessibilityPanel()" aria-label="Toggle accessibility options">
+        ♿
+    </button>
+
+    <div class="accessibility-panel" id="accessibilityPanel">
+        <div class="panel-header">
+            Accessibility Tools
+        </div>
+        <div class="panel-content">
+            <div class="accessibility-option" onclick="increaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Increase Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="decreaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Decrease Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('grayscale')">
+                <div class="option-label">
+                    <span class="option-icon">⬜</span>
+                    Grayscale
+                </div>
+                <div class="option-toggle" id="toggle-grayscale"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('high-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">🌓</span>
+                    High Contrast
+                </div>
+                <div class="option-toggle" id="toggle-high-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('negative-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">👁</span>
+                    Negative Contrast
+                </div>
+                <div class="option-toggle" id="toggle-negative-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('light-background')">
+                <div class="option-label">
+                    <span class="option-icon">💡</span>
+                    Light Background
+                </div>
+                <div class="option-toggle" id="toggle-light-background"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('links-underline')">
+                <div class="option-label">
+                    <span class="option-icon">🔗</span>
+                    Links Underline
+                </div>
+                <div class="option-toggle" id="toggle-links-underline"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('readable-font')">
+                <div class="option-label">
+                    <span class="option-icon">📖</span>
+                    Readable Font
+                </div>
+                <div class="option-toggle" id="toggle-readable-font"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="resetAccessibility()">
+                <div class="option-label">
+                    <span class="option-icon">↻</span>
+                    Reset
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -1276,10 +1369,10 @@
             const toast = document.getElementById('toast');
             const messageElement = toast.querySelector('.message');
             const iconElement = toast.querySelector('.icon');
-            
+
             messageElement.textContent = message;
             toast.className = `toast ${type} show`;
-            
+
             // Update icon based on type
             if (type === 'success') {
                 iconElement.className = 'fas fa-check-circle icon';
@@ -1288,16 +1381,16 @@
             } else if (type === 'warning') {
                 iconElement.className = 'fas fa-exclamation-triangle icon';
             }
-            
+
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 4000);
         }
 
         // Assignment Creation
-        document.getElementById('assignmentForm').addEventListener('submit', function(e) {
+        document.getElementById('assignmentForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             const formData = new FormData(this);
             const assignment = {
                 id: Date.now(),
@@ -1320,7 +1413,7 @@
         function populateStudentList() {
             const studentList = document.getElementById('studentList');
             studentList.innerHTML = '';
-            
+
             students.forEach(student => {
                 const studentItem = document.createElement('div');
                 studentItem.className = 'student-item';
@@ -1336,9 +1429,9 @@
         }
 
         // Message Sending
-        document.getElementById('messageForm').addEventListener('submit', function(e) {
+        document.getElementById('messageForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             const selectedStudents = [];
             const checkboxes = document.querySelectorAll('#studentList input[type="checkbox"]:checked');
             checkboxes.forEach(cb => {
@@ -1364,7 +1457,7 @@
             const assignment = document.getElementById('gradingAssignment').value;
             const table = document.getElementById('submissionsTable');
             const tbody = document.getElementById('submissionsBody');
-            
+
             if (!assignment) {
                 table.style.display = 'none';
                 return;
@@ -1372,7 +1465,7 @@
 
             const assignmentSubmissions = submissions.filter(s => s.assignment === assignment);
             tbody.innerHTML = '';
-            
+
             assignmentSubmissions.forEach(submission => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -1384,7 +1477,7 @@
                 `;
                 tbody.appendChild(row);
             });
-            
+
             table.style.display = 'block';
         }
 
@@ -1412,9 +1505,9 @@
         }
 
         // Session Scheduling
-        document.getElementById('scheduleForm').addEventListener('submit', function(e) {
+        document.getElementById('scheduleForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             const student = document.getElementById('sessionStudent').value;
             const subject = document.getElementById('sessionSubject').value;
             const date = document.getElementById('sessionDate').value;
@@ -1430,33 +1523,33 @@
         });
 
         // Report Generation
-        document.getElementById('reportForm').addEventListener('submit', function(e) {
+        document.getElementById('reportForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             const reportType = document.getElementById('reportType').value;
             const reportClass = document.getElementById('reportClass').value;
             const reportPeriod = document.getElementById('reportPeriod').value;
 
             closeModal('reportModal');
-            
+
             // Simulate report generation
             setTimeout(() => {
                 showToast(`${reportType} report generated for ${reportClass} (${reportPeriod})`, 'success');
-                
+
                 // Simulate download
                 const link = document.createElement('a');
                 link.href = 'data:text/plain;charset=utf-8,Report generated successfully!';
                 link.download = `${reportType}-${reportClass}-${reportPeriod}.txt`;
                 link.click();
             }, 2000);
-            
+
             showToast('Generating report... Please wait.', 'warning');
         });
 
         function updateReportOptions() {
             const reportType = document.getElementById('reportType').value;
             const customRange = document.getElementById('customDateRange');
-            
+
             // Show/hide custom date range
             if (document.getElementById('reportPeriod').value === 'custom') {
                 customRange.style.display = 'block';
@@ -1478,7 +1571,7 @@
 
         // Statistics Updates
         function updateStats(type) {
-            switch(type) {
+            switch (type) {
                 case 'assignments':
                     document.getElementById('activeAssignments').textContent = assignments.length;
                     document.getElementById('totalAssignments').textContent = parseInt(document.getElementById('totalAssignments').textContent) + 1;
@@ -1504,22 +1597,22 @@
                 window.parent.dashboard.switchSection('overview');
                 return;
             }
-            
+
             // Method 2: If this is a separate page
             if (document.referrer.includes('dashboard_overview.html')) {
                 window.history.back();
                 return;
             }
-            
+
             // Method 3: Direct navigation to dashboard
             window.location.href = 'dashboard_overview.html';
-            
+
             // Method 4: If using single page application
             if (window.dashboard) {
                 window.dashboard.switchSection('overview');
                 return;
             }
-            
+
             // Fallback: Show message if no dashboard found
             showToast('Returning to dashboard...', 'success');
             setTimeout(() => {
@@ -1575,7 +1668,7 @@
                         break;
                 }
             }
-            
+
             // Close modals with Escape key
             if (e.key === 'Escape') {
                 const activeModal = document.querySelector('.modal.active');
@@ -1586,24 +1679,24 @@
         });
 
         // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Initialize breadcrumb navigation
             initializeBreadcrumb();
-            
+
             // Set default date to today for session scheduling
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('sessionDate').value = today;
-            
+
             // Set default due date to next week for assignments
             const nextWeek = new Date();
             nextWeek.setDate(nextWeek.getDate() + 7);
             document.getElementById('assignmentDueDate').value = nextWeek.toISOString().slice(0, 16);
-            
+
             // Welcome message
             setTimeout(() => {
                 showToast('Welcome! All functions are now active. Use Ctrl+A for assignments, Ctrl+M for messages, etc.', 'success');
             }, 1000);
-            
+
             // Add keyboard shortcut for back navigation
             document.addEventListener('keydown', (e) => {
                 if (e.altKey && e.key === 'ArrowLeft') {
@@ -1617,4 +1710,5 @@
         document.getElementById('reportPeriod').addEventListener('change', updateReportOptions);
     </script>
 </body>
+
 </html>

@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillHub - Analytics & Reports</title>
     <link rel="stylesheet" href="css/sponsordashboard3.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <script src="js/accessibility.js"></script>
     <script src="js/sponsordashboard3.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/navbar4.css">
     <link rel="stylesheet" href="css/navbar-enhancements.css">
     <link rel="stylesheet" href="css/footer2.css">
 </head>
+
 <body>
     <div class="navbar-sponsor"></div>
     <div class="container">
@@ -82,7 +86,7 @@
                         </button>
                     </div>
                 </div>
-                
+
                 <div class="table-container">
                     <table class="analysis-table">
                         <thead>
@@ -129,7 +133,7 @@
                         </select>
                     </div>
                 </div>
-                
+
                 <div class="chart-container">
                     <div class="chart-wrapper">
                         <div class="chart-month">
@@ -183,7 +187,7 @@
                         </button>
                     </div>
                 </div>
-                
+
                 <div class="budget-analytics">
                     <div class="budget-summary">
                         <div class="budget-item">
@@ -195,7 +199,7 @@
                             <span class="budget-sublabel">Used</span>
                         </div>
                     </div>
-                    
+
                     <div class="budget-progress">
                         <div class="progress-bar">
                             <div class="progress-fill" data-progress="69"></div>
@@ -204,20 +208,20 @@
                             <span>69% Used</span>
                         </div>
                     </div>
-                    
+
                     <div class="budget-remaining">
                         <span>Remaining: $13,750</span>
                     </div>
                 </div>
             </div>
 
-            
+
             <!-- Performance Insights -->
             <div class="section">
                 <div class="section-header">
                     <h2>Performance Insights</h2>
                 </div>
-                
+
                 <div class="insights-grid">
                     <div class="insight-card">
                         <div class="insight-icon success">
@@ -250,6 +254,87 @@
             </div>
         </main>
     </div>
+
+    <!-- Accessibility Toolbar HTML - Add this to every page -->
+    <button class="accessibility-toggle" onclick="toggleAccessibilityPanel()" aria-label="Toggle accessibility options">
+        ♿
+    </button>
+
+    <div class="accessibility-panel" id="accessibilityPanel">
+        <div class="panel-header">
+            Accessibility Tools
+        </div>
+        <div class="panel-content">
+            <div class="accessibility-option" onclick="increaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Increase Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="decreaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Decrease Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('grayscale')">
+                <div class="option-label">
+                    <span class="option-icon">⬜</span>
+                    Grayscale
+                </div>
+                <div class="option-toggle" id="toggle-grayscale"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('high-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">🌓</span>
+                    High Contrast
+                </div>
+                <div class="option-toggle" id="toggle-high-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('negative-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">👁</span>
+                    Negative Contrast
+                </div>
+                <div class="option-toggle" id="toggle-negative-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('light-background')">
+                <div class="option-label">
+                    <span class="option-icon">💡</span>
+                    Light Background
+                </div>
+                <div class="option-toggle" id="toggle-light-background"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('links-underline')">
+                <div class="option-label">
+                    <span class="option-icon">🔗</span>
+                    Links Underline
+                </div>
+                <div class="option-toggle" id="toggle-links-underline"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('readable-font')">
+                <div class="option-label">
+                    <span class="option-icon">📖</span>
+                    Readable Font
+                </div>
+                <div class="option-toggle" id="toggle-readable-font"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="resetAccessibility()">
+                <div class="option-label">
+                    <span class="option-icon">↻</span>
+                    Reset
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="footer-container"></div>
 
     <script src="js/auth.js"></script>
@@ -257,4 +342,5 @@
     <script src="js/navbar-loader.js"></script>
     <script src="js/navbar2.js"></script>
 </body>
+
 </html>

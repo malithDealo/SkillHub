@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +9,14 @@
     <link rel="stylesheet" href="css/navbar4.css">
     <link rel="stylesheet" href="css/navbar-enhancements.css">
     <link rel="stylesheet" href="css/footer2.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <script src="js/accessibility.js"></script>
     <script src="js/sponsordashboard2.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
-  
+
     <div class="navbar-sponsor"></div>
     <div class="container">
         <!-- Sidebar -->
@@ -53,19 +57,21 @@
                 <div class="section-header">
                     <h2>Create New Campaign</h2>
                 </div>
-                
+
                 <form class="campaign-form" id="campaignForm">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="campaignName">Campaign Name</label>
-                            <input type="text" id="campaignName" name="campaignName" placeholder="Enter campaign name" required>
+                            <input type="text" id="campaignName" name="campaignName" placeholder="Enter campaign name"
+                                required>
                         </div>
                         <div class="form-group">
                             <label for="targetStudents">Target Students</label>
-                            <input type="number" id="targetStudents" name="targetStudents" placeholder="Number of students" required>
+                            <input type="number" id="targetStudents" name="targetStudents"
+                                placeholder="Number of students" required>
                         </div>
                     </div>
-                    
+
                     <div class="form-row">
                         <div class="form-group">
                             <label for="budget">Budget</label>
@@ -82,12 +88,13 @@
                             </select>
                         </div>
                     </div>
-                    
+
                     <div class="form-group full-width">
                         <label for="description">Description</label>
-                        <textarea id="description" name="description" placeholder="Campaign description and objectives" rows="4"></textarea>
+                        <textarea id="description" name="description" placeholder="Campaign description and objectives"
+                            rows="4"></textarea>
                     </div>
-                    
+
                     <div class="form-actions">
                         <button type="submit" class="launch-btn">Launch Campaign</button>
                     </div>
@@ -124,7 +131,7 @@
                         <button class="clear-filter-btn" id="clearFilter">Clear</button>
                     </div>
                 </div>
-                
+
                 <div class="table-container">
                     <table class="campaigns-table">
                         <thead>
@@ -240,6 +247,87 @@
             </form>
         </div>
     </div>
+
+    <!-- Accessibility Toolbar HTML - Add this to every page -->
+    <button class="accessibility-toggle" onclick="toggleAccessibilityPanel()" aria-label="Toggle accessibility options">
+        ♿
+    </button>
+
+    <div class="accessibility-panel" id="accessibilityPanel">
+        <div class="panel-header">
+            Accessibility Tools
+        </div>
+        <div class="panel-content">
+            <div class="accessibility-option" onclick="increaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Increase Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="decreaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Decrease Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('grayscale')">
+                <div class="option-label">
+                    <span class="option-icon">⬜</span>
+                    Grayscale
+                </div>
+                <div class="option-toggle" id="toggle-grayscale"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('high-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">🌓</span>
+                    High Contrast
+                </div>
+                <div class="option-toggle" id="toggle-high-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('negative-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">👁</span>
+                    Negative Contrast
+                </div>
+                <div class="option-toggle" id="toggle-negative-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('light-background')">
+                <div class="option-label">
+                    <span class="option-icon">💡</span>
+                    Light Background
+                </div>
+                <div class="option-toggle" id="toggle-light-background"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('links-underline')">
+                <div class="option-label">
+                    <span class="option-icon">🔗</span>
+                    Links Underline
+                </div>
+                <div class="option-toggle" id="toggle-links-underline"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('readable-font')">
+                <div class="option-label">
+                    <span class="option-icon">📖</span>
+                    Readable Font
+                </div>
+                <div class="option-toggle" id="toggle-readable-font"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="resetAccessibility()">
+                <div class="option-label">
+                    <span class="option-icon">↻</span>
+                    Reset
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="footer-container"></div>
 
     <script src="js/auth.js"></script>
@@ -247,4 +335,5 @@
     <script src="js/navbar-loader.js"></script>
     <script src="js/navbar2.js"></script>
 </body>
+
 </html>

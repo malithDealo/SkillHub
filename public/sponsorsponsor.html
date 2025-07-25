@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillHub - Our Sponsors</title>
     <link rel="stylesheet" href="css/sponsorsponsor.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <script src="js/accessibility.js"></script>
     <script src="js/sponsorsponsor.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
-    
+
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="hero-content">
@@ -39,7 +43,8 @@
             <div class="search-filter-section">
                 <div class="search-container">
                     <div class="search-box">
-                        <input type="text" id="searchInput" placeholder="Search Sponsor by Name, Category or Location..." onkeyup="performSearch()">
+                        <input type="text" id="searchInput"
+                            placeholder="Search Sponsor by Name, Category or Location..." onkeyup="performSearch()">
                         <button class="search-btn" onclick="performSearch()">
                             <i class="fas fa-search"></i>
                         </button>
@@ -59,7 +64,8 @@
             <!-- Sponsors Grid -->
             <div class="sponsors-grid" id="sponsorsGrid">
                 <!-- Sponsor Card 1 -->
-                <div class="sponsor-card" data-category="technology" data-name="techcorp solutions" data-location="san francisco usa">
+                <div class="sponsor-card" data-category="technology" data-name="techcorp solutions"
+                    data-location="san francisco usa">
                     <div class="sponsor-header">
                         <div class="sponsor-avatar">
                             <span>T</span>
@@ -74,13 +80,15 @@
                             <p class="location"><i class="fas fa-map-marker-alt"></i> San Francisco, USA</p>
                             <p class="contact"><i class="fas fa-envelope"></i> info@techcorp.com</p>
                             <p class="website"><i class="fas fa-globe"></i> www.techcorp.com</p>
-                            <p class="interests"><i class="fas fa-heart"></i> Tech conferences, startup events, innovation summits</p>
+                            <p class="interests"><i class="fas fa-heart"></i> Tech conferences, startup events,
+                                innovation summits</p>
                         </div>
                         <div class="sponsor-budget">
                             <span class="budget-label">Budget:</span>
                             <span class="budget-amount">$5,000 - $25,000</span>
                         </div>
-                        <button class="contact-sponsor-btn" onclick="contactSponsor('TechCorp Solutions', 'info@techcorp.com')">
+                        <button class="contact-sponsor-btn"
+                            onclick="contactSponsor('TechCorp Solutions', 'info@techcorp.com')">
                             <i class="fas fa-handshake"></i>
                             Contact Sponsor
                         </button>
@@ -88,7 +96,8 @@
                 </div>
 
                 <!-- Sponsor Card 2 -->
-                <div class="sponsor-card" data-category="finance" data-name="greenbank financial" data-location="new york usa">
+                <div class="sponsor-card" data-category="finance" data-name="greenbank financial"
+                    data-location="new york usa">
                     <div class="sponsor-header">
                         <div class="sponsor-avatar green">
                             <span>G</span>
@@ -103,13 +112,15 @@
                             <p class="location"><i class="fas fa-map-marker-alt"></i> New York, USA</p>
                             <p class="contact"><i class="fas fa-envelope"></i> sponsors@greenbank.com</p>
                             <p class="website"><i class="fas fa-globe"></i> www.greenbank.com</p>
-                            <p class="interests"><i class="fas fa-heart"></i> Financial conferences, sustainability events</p>
+                            <p class="interests"><i class="fas fa-heart"></i> Financial conferences, sustainability
+                                events</p>
                         </div>
                         <div class="sponsor-budget">
                             <span class="budget-label">Budget:</span>
                             <span class="budget-amount">$10,000 - $50,000</span>
                         </div>
-                        <button class="contact-sponsor-btn" onclick="contactSponsor('GreenBank Financial', 'sponsors@greenbank.com')">
+                        <button class="contact-sponsor-btn"
+                            onclick="contactSponsor('GreenBank Financial', 'sponsors@greenbank.com')">
                             <i class="fas fa-handshake"></i>
                             Contact Sponsor
                         </button>
@@ -117,7 +128,8 @@
                 </div>
 
                 <!-- Sponsor Card 3 -->
-                <div class="sponsor-card" data-category="healthcare" data-name="medicare plus" data-location="chicago usa">
+                <div class="sponsor-card" data-category="healthcare" data-name="medicare plus"
+                    data-location="chicago usa">
                     <div class="sponsor-header">
                         <div class="sponsor-avatar blue">
                             <span>M</span>
@@ -132,13 +144,15 @@
                             <p class="location"><i class="fas fa-map-marker-alt"></i> Chicago, USA</p>
                             <p class="contact"><i class="fas fa-envelope"></i> partnerships@medicareplus.com</p>
                             <p class="website"><i class="fas fa-globe"></i> www.medicareplus.com</p>
-                            <p class="interests"><i class="fas fa-heart"></i> Health conferences, medical seminars, wellness events</p>
+                            <p class="interests"><i class="fas fa-heart"></i> Health conferences, medical seminars,
+                                wellness events</p>
                         </div>
                         <div class="sponsor-budget">
                             <span class="budget-label">Budget:</span>
                             <span class="budget-amount">$7,500 - $30,000</span>
                         </div>
-                        <button class="contact-sponsor-btn" onclick="contactSponsor('MediCare Plus', 'partnerships@medicareplus.com')">
+                        <button class="contact-sponsor-btn"
+                            onclick="contactSponsor('MediCare Plus', 'partnerships@medicareplus.com')">
                             <i class="fas fa-handshake"></i>
                             Contact Sponsor
                         </button>
@@ -146,7 +160,8 @@
                 </div>
 
                 <!-- Sponsor Card 4 -->
-                <div class="sponsor-card" data-category="education" data-name="edutech innovations" data-location="boston usa">
+                <div class="sponsor-card" data-category="education" data-name="edutech innovations"
+                    data-location="boston usa">
                     <div class="sponsor-header">
                         <div class="sponsor-avatar orange">
                             <span>E</span>
@@ -161,13 +176,15 @@
                             <p class="location"><i class="fas fa-map-marker-alt"></i> Boston, USA</p>
                             <p class="contact"><i class="fas fa-envelope"></i> hello@edutech.com</p>
                             <p class="website"><i class="fas fa-globe"></i> www.edutech.com</p>
-                            <p class="interests"><i class="fas fa-heart"></i> Educational events, workshops, student competitions</p>
+                            <p class="interests"><i class="fas fa-heart"></i> Educational events, workshops, student
+                                competitions</p>
                         </div>
                         <div class="sponsor-budget">
                             <span class="budget-label">Budget:</span>
                             <span class="budget-amount">$3,000 - $15,000</span>
                         </div>
-                        <button class="contact-sponsor-btn" onclick="contactSponsor('EduTech Innovations', 'hello@edutech.com')">
+                        <button class="contact-sponsor-btn"
+                            onclick="contactSponsor('EduTech Innovations', 'hello@edutech.com')">
                             <i class="fas fa-handshake"></i>
                             Contact Sponsor
                         </button>
@@ -175,7 +192,8 @@
                 </div>
 
                 <!-- Sponsor Card 5 -->
-                <div class="sponsor-card" data-category="retail" data-name="globalmart corp" data-location="seattle usa">
+                <div class="sponsor-card" data-category="retail" data-name="globalmart corp"
+                    data-location="seattle usa">
                     <div class="sponsor-header">
                         <div class="sponsor-avatar purple">
                             <span>G</span>
@@ -190,13 +208,15 @@
                             <p class="location"><i class="fas fa-map-marker-alt"></i> Seattle, USA</p>
                             <p class="contact"><i class="fas fa-envelope"></i> sponsors@globalmart.com</p>
                             <p class="website"><i class="fas fa-globe"></i> www.globalmart.com</p>
-                            <p class="interests"><i class="fas fa-heart"></i> Community events, retail shows, consumer expos</p>
+                            <p class="interests"><i class="fas fa-heart"></i> Community events, retail shows, consumer
+                                expos</p>
                         </div>
                         <div class="sponsor-budget">
                             <span class="budget-label">Budget:</span>
                             <span class="budget-amount">$5,000 - $20,000</span>
                         </div>
-                        <button class="contact-sponsor-btn" onclick="contactSponsor('GlobalMart Corp', 'sponsors@globalmart.com')">
+                        <button class="contact-sponsor-btn"
+                            onclick="contactSponsor('GlobalMart Corp', 'sponsors@globalmart.com')">
                             <i class="fas fa-handshake"></i>
                             Contact Sponsor
                         </button>
@@ -219,13 +239,15 @@
                             <p class="location"><i class="fas fa-map-marker-alt"></i> Austin, USA</p>
                             <p class="contact"><i class="fas fa-envelope"></i> contact@innovatelab.com</p>
                             <p class="website"><i class="fas fa-globe"></i> www.innovatelab.com</p>
-                            <p class="interests"><i class="fas fa-heart"></i> Innovation workshops, tech meetups, hackathons</p>
+                            <p class="interests"><i class="fas fa-heart"></i> Innovation workshops, tech meetups,
+                                hackathons</p>
                         </div>
                         <div class="sponsor-budget">
                             <span class="budget-label">Budget:</span>
                             <span class="budget-amount">$2,000 - $12,000</span>
                         </div>
-                        <button class="contact-sponsor-btn" onclick="contactSponsor('InnovateLab', 'contact@innovatelab.com')">
+                        <button class="contact-sponsor-btn"
+                            onclick="contactSponsor('InnovateLab', 'contact@innovatelab.com')">
                             <i class="fas fa-handshake"></i>
                             Contact Sponsor
                         </button>
@@ -253,8 +275,9 @@
                 <button class="modal-close" onclick="closeAddSponsorModal()">&times;</button>
             </div>
             <div class="modal-body">
-                <p class="modal-subtitle">Join our network of sponsors and discover amazing partnership opportunities</p>
-                
+                <p class="modal-subtitle">Join our network of sponsors and discover amazing partnership opportunities
+                </p>
+
                 <form class="sponsor-form" id="sponsorForm" onsubmit="submitSponsorForm(event)">
                     <div class="form-row">
                         <div class="form-group">
@@ -280,7 +303,8 @@
 
                     <div class="form-group">
                         <label for="companyWebsite">Company Website</label>
-                        <input type="url" id="companyWebsite" name="companyWebsite" placeholder="https://www.yourcompany.com">
+                        <input type="url" id="companyWebsite" name="companyWebsite"
+                            placeholder="https://www.yourcompany.com">
                     </div>
 
                     <div class="form-row">
@@ -317,18 +341,21 @@
                         </div>
                         <div class="form-group">
                             <label for="sponsorshipInterests">Sponsorship Interests *</label>
-                            <input type="text" id="sponsorshipInterests" name="sponsorshipInterests" placeholder="e.g., tech conferences, workshops, community events" required>
+                            <input type="text" id="sponsorshipInterests" name="sponsorshipInterests"
+                                placeholder="e.g., tech conferences, workshops, community events" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="companyDescription">Company Description</label>
-                        <textarea id="companyDescription" name="companyDescription" rows="3" placeholder="Brief description of your company and what you do..."></textarea>
+                        <textarea id="companyDescription" name="companyDescription" rows="3"
+                            placeholder="Brief description of your company and what you do..."></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="whatYouOffer">What You Offer to Events</label>
-                        <textarea id="whatYouOffer" name="whatYouOffer" rows="3" placeholder="Describe what you can offer to events (funding, products, services, expertise, etc.)..."></textarea>
+                        <textarea id="whatYouOffer" name="whatYouOffer" rows="3"
+                            placeholder="Describe what you can offer to events (funding, products, services, expertise, etc.)..."></textarea>
                     </div>
 
                     <div class="form-group checkbox-group">
@@ -347,12 +374,13 @@
         </div>
     </div>
 
-      <!-- CTA Section -->
+    <!-- CTA Section -->
     <section class="cta-section">
         <div class="container">
             <div class="cta-content">
                 <h2>Ready to Start Your <span class="highlight">SkillHub</span> Journey?</h2>
-                <p>Join thousands of learners and teachers in your neighborhood. Whether you're looking to master a new skill or share your expertise, your community is waiting.</p>
+                <p>Join thousands of learners and teachers in your neighborhood. Whether you're looking to master a new
+                    skill or share your expertise, your community is waiting.</p>
                 <button class="cta-button" id="getStartedBtn">
                     <span>Get Started Today</span>
                     <i class="fas fa-arrow-right"></i>
@@ -360,6 +388,87 @@
             </div>
         </div>
     </section>
+
+    <!-- Accessibility Toolbar HTML - Add this to every page -->
+    <button class="accessibility-toggle" onclick="toggleAccessibilityPanel()" aria-label="Toggle accessibility options">
+        ♿
+    </button>
+
+    <div class="accessibility-panel" id="accessibilityPanel">
+        <div class="panel-header">
+            Accessibility Tools
+        </div>
+        <div class="panel-content">
+            <div class="accessibility-option" onclick="increaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Increase Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="decreaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Decrease Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('grayscale')">
+                <div class="option-label">
+                    <span class="option-icon">⬜</span>
+                    Grayscale
+                </div>
+                <div class="option-toggle" id="toggle-grayscale"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('high-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">🌓</span>
+                    High Contrast
+                </div>
+                <div class="option-toggle" id="toggle-high-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('negative-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">👁</span>
+                    Negative Contrast
+                </div>
+                <div class="option-toggle" id="toggle-negative-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('light-background')">
+                <div class="option-label">
+                    <span class="option-icon">💡</span>
+                    Light Background
+                </div>
+                <div class="option-toggle" id="toggle-light-background"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('links-underline')">
+                <div class="option-label">
+                    <span class="option-icon">🔗</span>
+                    Links Underline
+                </div>
+                <div class="option-toggle" id="toggle-links-underline"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('readable-font')">
+                <div class="option-label">
+                    <span class="option-icon">📖</span>
+                    Readable Font
+                </div>
+                <div class="option-toggle" id="toggle-readable-font"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="resetAccessibility()">
+                <div class="option-label">
+                    <span class="option-icon">↻</span>
+                    Reset
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- STEP 1: Add this div tag to any HTML page where you want the chatbot -->
     <div id="skillhub-chatbot-container"></div>
@@ -1287,6 +1396,7 @@ If asked about business information, politely redirect to platform features or s
             })
             .catch(error => console.error('Error loading footer:', error));
     </script>
-    
+
 </body>
+
 </html>

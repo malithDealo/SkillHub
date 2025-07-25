@@ -1,34 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TeacherPro - Assignment Center</title>
     <link rel="stylesheet" href="css/dashboard_overview.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <script src="js/accessibility.js"></script>
 </head>
+
 <body>
     <div class="sidebar">
         <h1>TeacherPro</h1>
         <p>Welcome back, Dr. Smith!</p>
         <nav>
             <ul>
-                <li><a href="dashboard_overview.html" id="dashboardLink" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="dashboard_overview.html" id="dashboardLink" class="active"><i
+                            class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                 <li><a href="schedule.html" id="scheduleLink"><i class="fas fa-calendar-alt"></i> Schedule</a></li>
-                <li><a href="class_management.html" class="block p-2 hover:bg-gray-200 rounded">Class Management</a></li>
+                <li><a href="class_management.html" class="block p-2 hover:bg-gray-200 rounded">Class Management</a>
+                </li>
                 <li><a href="students.html" id="studentsLink"><i class="fas fa-users"></i> Students</a></li>
                 <li><a href="assignments.html" id="assignmentsLink"><i class="fas fa-book"></i> Assignments</a></li>
-                <li><a href="teachers_community.html" class="block p-2 hover:bg-gray-200 rounded">Teacher Community</a></li>
-                <li><a href="earnings_analytics.html" class="block p-2 hover:bg-gray-200 rounded">Earning & Analytics</a></li>
-                <li><a href="sponsor_conversations.html" id="sponsorConnectLink"><i class="fas fa-handshake"></i> Connect Sponsor</a></li>
+                <li><a href="teachers_community.html" class="block p-2 hover:bg-gray-200 rounded">Teacher Community</a>
+                </li>
+                <li><a href="earnings_analytics.html" class="block p-2 hover:bg-gray-200 rounded">Earning &
+                        Analytics</a></li>
+                <li><a href="sponsor_conversations.html" id="sponsorConnectLink"><i class="fas fa-handshake"></i>
+                        Connect Sponsor</a></li>
                 <li><a href="profile_setting.html" class="block p-2 hover:bg-gray-200 rounded">Profile Setting</a></li>
-                <li><a href="event_organization.html" class="block p-2 hover:bg-gray-200 rounded">Event Organization</a></li>
+                <li><a href="event_organization.html" class="block p-2 hover:bg-gray-200 rounded">Event Organization</a>
+                </li>
             </ul>
         </nav>
         <div class="filter-section">
             <h3><i class="fas fa-filter"></i> Quick Filters</h3>
-            <div class="filter-checkbox"><input type="checkbox" id="filter-pending" checked><label for="filter-pending">Pending</label></div>
-            <div class="filter-checkbox"><input type="checkbox" id="filter-submitted" checked><label for="filter-submitted">Submitted</label></div>
+            <div class="filter-checkbox"><input type="checkbox" id="filter-pending" checked><label
+                    for="filter-pending">Pending</label></div>
+            <div class="filter-checkbox"><input type="checkbox" id="filter-submitted" checked><label
+                    for="filter-submitted">Submitted</label></div>
         </div>
         <a href="#" id="logoutBtn" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
@@ -77,7 +89,8 @@
                     <input type="date" id="assignmentDueDate" required>
                     <input type="time" id="assignmentDueTime" required>
                     <div class="flex justify-end space-x-2">
-                        <button type="button" class="secondary" onclick="closeModal('createAssignmentModal')">Cancel</button>
+                        <button type="button" class="secondary"
+                            onclick="closeModal('createAssignmentModal')">Cancel</button>
                         <button type="submit" class="primary">Create Assignment</button>
                     </div>
                 </form>
@@ -92,7 +105,8 @@
                 </div>
                 <div id="assignmentDetailsContent"></div>
                 <div class="flex justify-end space-x-2">
-                    <button type="button" class="secondary" onclick="closeModal('assignmentDetailsModal')">Close</button>
+                    <button type="button" class="secondary"
+                        onclick="closeModal('assignmentDetailsModal')">Close</button>
                 </div>
             </div>
         </div>
@@ -100,6 +114,88 @@
 
     <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
 
+    <!-- Accessibility Toolbar HTML - Add this to every page -->
+    <button class="accessibility-toggle" onclick="toggleAccessibilityPanel()" aria-label="Toggle accessibility options">
+        ♿
+    </button>
+
+    <div class="accessibility-panel" id="accessibilityPanel">
+        <div class="panel-header">
+            Accessibility Tools
+        </div>
+        <div class="panel-content">
+            <div class="accessibility-option" onclick="increaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Increase Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="decreaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Decrease Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('grayscale')">
+                <div class="option-label">
+                    <span class="option-icon">⬜</span>
+                    Grayscale
+                </div>
+                <div class="option-toggle" id="toggle-grayscale"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('high-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">🌓</span>
+                    High Contrast
+                </div>
+                <div class="option-toggle" id="toggle-high-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('negative-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">👁</span>
+                    Negative Contrast
+                </div>
+                <div class="option-toggle" id="toggle-negative-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('light-background')">
+                <div class="option-label">
+                    <span class="option-icon">💡</span>
+                    Light Background
+                </div>
+                <div class="option-toggle" id="toggle-light-background"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('links-underline')">
+                <div class="option-label">
+                    <span class="option-icon">🔗</span>
+                    Links Underline
+                </div>
+                <div class="option-toggle" id="toggle-links-underline"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('readable-font')">
+                <div class="option-label">
+                    <span class="option-icon">📖</span>
+                    Readable Font
+                </div>
+                <div class="option-toggle" id="toggle-readable-font"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="resetAccessibility()">
+                <div class="option-label">
+                    <span class="option-icon">↻</span>
+                    Reset
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="js/assignments.js"></script>
 </body>
+
 </html>

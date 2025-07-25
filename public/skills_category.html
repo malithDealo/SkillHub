@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillHub</title>
     <link rel="stylesheet" href="css/skills_category.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <script src="js/accessibility.js"></script>
 </head>
+
 <body>
-<header>
+    <header>
         <!-- Navbar -->
         <nav class="navbar-top">
             <div class="navbar-container">
@@ -15,7 +19,7 @@
                     <img src="images/SkillHub LOGO 1.png" alt="SkillHub Logo" class="logo">
                     <span class="brand-text">SkillHub</span>
                 </div>
-                
+
                 <div class="navbar-menu">
                     <ul class="navbar-nav">
                         <li class="nav-item"><a href="homepage.html" class="nav-link">Home</a></li>
@@ -39,7 +43,7 @@
                     </ul>
                 </div>
 
-                
+
                 <div class="navbar-actions">
                     <div class="user-profile">
                         <div class="profile-icon">
@@ -177,7 +181,9 @@
             </div>
             <h3>Skill Categories</h3>
             <div class="category-grid" id="categoryGrid">
-                <div class="category-card" data-name="Arts & Crafts" data-location="city" data-price="1000" data-availability="weekdays,weekends,morning,afternoon" data-level="beginner,intermediate,advanced" data-lesson="individual,group,workshops" data-teachers="156">
+                <div class="category-card" data-name="Arts & Crafts" data-location="city" data-price="1000"
+                    data-availability="weekdays,weekends,morning,afternoon" data-level="beginner,intermediate,advanced"
+                    data-lesson="individual,group,workshops" data-teachers="156">
                     <img src="../public/images/arts.png" alt="Arts & Crafts">
                     <h4>Arts & Crafts</h4>
                     <p>156 teachers available</p>
@@ -186,7 +192,10 @@
                     </div>
                     <button class="view-teachers-btn" onclick="viewTeachers('Arts & Crafts')">View Teachers</button>
                 </div>
-                <div class="category-card" data-name="Music & Performance" data-location="5miles" data-price="1500" data-availability="weekends,afternoon,evening" data-level="beginner,intermediate,advanced,professional" data-lesson="individual,group" data-teachers="203">
+                <div class="category-card" data-name="Music & Performance" data-location="5miles" data-price="1500"
+                    data-availability="weekends,afternoon,evening"
+                    data-level="beginner,intermediate,advanced,professional" data-lesson="individual,group"
+                    data-teachers="203">
                     <img src="../public/images/music.png" alt="Music & Performance">
                     <h4>Music & Performance</h4>
                     <p>203 teachers available</p>
@@ -194,9 +203,12 @@
                         <p>Guitar, Piano, Dance, Singing, Violin, Dramaordre
 
                     </div>
-                    <button class="view-teachers-btn" onclick="viewTeachers('Music & Performance')">View Teachers</button>
+                    <button class="view-teachers-btn" onclick="viewTeachers('Music & Performance')">View
+                        Teachers</button>
                 </div>
-                <div class="category-card" data-name="Languages" data-location="10miles" data-price="800" data-availability="weekdays,morning,afternoon" data-level="beginner,intermediate" data-lesson="individual,group" data-teachers="189">
+                <div class="category-card" data-name="Languages" data-location="10miles" data-price="800"
+                    data-availability="weekdays,morning,afternoon" data-level="beginner,intermediate"
+                    data-lesson="individual,group" data-teachers="189">
                     <img src="../public/images/languages.png" alt="Languages">
                     <h4>Languages</h4>
                     <p>189 teachers available</p>
@@ -205,7 +217,9 @@
                     </div>
                     <button class="view-teachers-btn" onclick="viewTeachers('Languages')">View Teachers</button>
                 </div>
-                <div class="category-card" data-name="Technology" data-location="city" data-price="1200" data-availability="weekdays,evening" data-level="beginner,intermediate" data-lesson="group,workshops" data-teachers="134">
+                <div class="category-card" data-name="Technology" data-location="city" data-price="1200"
+                    data-availability="weekdays,evening" data-level="beginner,intermediate"
+                    data-lesson="group,workshops" data-teachers="134">
                     <img src="../public/images/technology.png" alt="Technology">
                     <h4>Technology</h4>
                     <p>134 teachers available</p>
@@ -214,16 +228,21 @@
                     </div>
                     <button class="view-teachers-btn" onclick="viewTeachers('Technology')">View Teachers</button>
                 </div>
-                <div class="category-card" data-name="Cooking & Culinary" data-location="3miles" data-price="900" data-availability="weekends,morning" data-level="beginner,intermediate,advanced" data-lesson="group,workshops" data-teachers="167">
+                <div class="category-card" data-name="Cooking & Culinary" data-location="3miles" data-price="900"
+                    data-availability="weekends,morning" data-level="beginner,intermediate,advanced"
+                    data-lesson="group,workshops" data-teachers="167">
                     <img src="../public/images/cooking.png" alt="Cooking & Culinary">
                     <h4>Cooking & Culinary</h4>
                     <p>167 teachers available</p>
                     <div class="sub-subjects">
                         <p>Traditional Cuisines, Baking, Nutrition, Food Safety, Wine Pairing</p>
                     </div>
-                    <button class="view-teachers-btn" onclick="viewTeachers('Cooking & Culinary')">View Teachers</button>
+                    <button class="view-teachers-btn" onclick="viewTeachers('Cooking & Culinary')">View
+                        Teachers</button>
                 </div>
-                <div class="category-card" data-name="Home & Garden" data-location="5miles" data-price="700" data-availability="weekdays,afternoon" data-level="beginner,intermediate" data-lesson="individual,workshops" data-teachers="98">
+                <div class="category-card" data-name="Home & Garden" data-location="5miles" data-price="700"
+                    data-availability="weekdays,afternoon" data-level="beginner,intermediate"
+                    data-lesson="individual,workshops" data-teachers="98">
                     <img src="../public/images/home.png" alt="Home & Garden">
                     <h4>Home & Garden</h4>
                     <p>98 teachers available</p>
@@ -232,7 +251,9 @@
                     </div>
                     <button class="view-teachers-btn" onclick="viewTeachers('Home & Garden')">View Teachers</button>
                 </div>
-                <div class="category-card" data-name="Health & Wellness" data-location="city" data-price="1100" data-availability="weekdays,weekends,morning" data-level="beginner,intermediate,advanced" data-lesson="group,workshops" data-teachers="142">
+                <div class="category-card" data-name="Health & Wellness" data-location="city" data-price="1100"
+                    data-availability="weekdays,weekends,morning" data-level="beginner,intermediate,advanced"
+                    data-lesson="group,workshops" data-teachers="142">
                     <img src="../public/images/health.png" alt="Health & Wellness">
                     <h4>Health & Wellness</h4>
                     <p>142 teachers available</p>
@@ -241,23 +262,110 @@
                     </div>
                     <button class="view-teachers-btn" onclick="viewTeachers('Health & Wellness')">View Teachers</button>
                 </div>
-                <div class="category-card" data-name="Professional Skills" data-location="10miles" data-price="1300" data-availability="weekdays,evening" data-level="intermediate,advanced,professional" data-lesson="individual,group" data-teachers="87">
+                <div class="category-card" data-name="Professional Skills" data-location="10miles" data-price="1300"
+                    data-availability="weekdays,evening" data-level="intermediate,advanced,professional"
+                    data-lesson="individual,group" data-teachers="87">
                     <img src="../public/images/professional.png" alt="Professional Skills">
                     <h4>Professional Skills</h4>
                     <p>87 teachers available</p>
                     <div class="sub-subjects">
                         <p>Resume Writing, Interview Prep, Business Skills, Leadership</p>
                     </div>
-                    <button class="view-teachers-btn" onclick="viewTeachers('Professional Skills')">View Teachers</button>
+                    <button class="view-teachers-btn" onclick="viewTeachers('Professional Skills')">View
+                        Teachers</button>
                 </div>
-                <div class="category-card" data-name="Traditional Crafts" data-location="1mile" data-price="600" data-availability="weekends,afternoon" data-level="beginner,intermediate" data-lesson="workshops" data-teachers="71">
+                <div class="category-card" data-name="Traditional Crafts" data-location="1mile" data-price="600"
+                    data-availability="weekends,afternoon" data-level="beginner,intermediate" data-lesson="workshops"
+                    data-teachers="71">
                     <img src="../public/images/traditional.png" alt="Traditional Crafts">
                     <h4>Traditional Crafts</h4>
                     <p>71 teachers available</p>
                     <div class="sub-subjects">
                         <p>Weaving, Carpentry, Traditional Medicine, Folk Arts</p>
                     </div>
-                    <button class="view-teachers-btn" onclick="viewTeachers('Traditional Crafts')">View Teachers</button>
+                    <button class="view-teachers-btn" onclick="viewTeachers('Traditional Crafts')">View
+                        Teachers</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility Toolbar HTML - Add this to every page -->
+    <button class="accessibility-toggle" onclick="toggleAccessibilityPanel()" aria-label="Toggle accessibility options">
+        ♿
+    </button>
+
+    <div class="accessibility-panel" id="accessibilityPanel">
+        <div class="panel-header">
+            Accessibility Tools
+        </div>
+        <div class="panel-content">
+            <div class="accessibility-option" onclick="increaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Increase Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="decreaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Decrease Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('grayscale')">
+                <div class="option-label">
+                    <span class="option-icon">⬜</span>
+                    Grayscale
+                </div>
+                <div class="option-toggle" id="toggle-grayscale"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('high-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">🌓</span>
+                    High Contrast
+                </div>
+                <div class="option-toggle" id="toggle-high-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('negative-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">👁</span>
+                    Negative Contrast
+                </div>
+                <div class="option-toggle" id="toggle-negative-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('light-background')">
+                <div class="option-label">
+                    <span class="option-icon">💡</span>
+                    Light Background
+                </div>
+                <div class="option-toggle" id="toggle-light-background"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('links-underline')">
+                <div class="option-label">
+                    <span class="option-icon">🔗</span>
+                    Links Underline
+                </div>
+                <div class="option-toggle" id="toggle-links-underline"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('readable-font')">
+                <div class="option-label">
+                    <span class="option-icon">📖</span>
+                    Readable Font
+                </div>
+                <div class="option-toggle" id="toggle-readable-font"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="resetAccessibility()">
+                <div class="option-label">
+                    <span class="option-icon">↻</span>
+                    Reset
                 </div>
             </div>
         </div>
@@ -270,12 +378,21 @@
                         <img src="images/SkillHub LOGO 1.png" alt="">
                         <h2>SkillHub</h2>
                     </div>
-                    <p>Connecting communities through skill sharing. Learn from your neighbors, teach what you love, and build lasting relationships in your local area.</p>
+                    <p>Connecting communities through skill sharing. Learn from your neighbors, teach what you love, and
+                        build lasting relationships in your local area.</p>
                     <div class="social-icons">
-                        <a href="#" aria-label="Facebook"> <div class="icon-circle"><img src="images/Vector.png" alt="Facebook"> </div></a>
-                        <a href="#" aria-label="Twitter"> <div class="icon-circle"><img src="images\mdi_twitter.png" alt="Twitter"> </div></a>
-                        <a href="#" aria-label="Instagram"> <div class="icon-circle"><img src="images\mdi_instagram.png" alt="Instagram"> </div></a>
-                        <a href="#" aria-label="LinkedIn"> <div class="icon-circle"><img src="images\mdi_linkedin.png" alt="LinkedIn"> </div></a>
+                        <a href="#" aria-label="Facebook">
+                            <div class="icon-circle"><img src="images/Vector.png" alt="Facebook"> </div>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <div class="icon-circle"><img src="images\mdi_twitter.png" alt="Twitter"> </div>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <div class="icon-circle"><img src="images\mdi_instagram.png" alt="Instagram"> </div>
+                        </a>
+                        <a href="#" aria-label="LinkedIn">
+                            <div class="icon-circle"><img src="images\mdi_linkedin.png" alt="LinkedIn"> </div>
+                        </a>
                     </div>
                 </div>
 
@@ -1256,4 +1373,5 @@ If asked about business information, politely redirect to platform features or s
     </script>
     <script src="js/skills_category.js"></script>
 </body>
+
 </html>

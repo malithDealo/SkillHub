@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Event</title>
     <link rel="stylesheet" href="css/add_event.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <script src="js/accessibility.js"></script>
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -14,10 +18,11 @@
                     <h1>Create Community Event</h1>
                     <p class="subtitle">Bring your community together through shared learning experiences</p>
                 </div>
-                <button class="close-icon" onclick="window.location.href='../learning_community/learning_community.html'">×</button>
+                <button class="close-icon"
+                    onclick="window.location.href='../learning_community/learning_community.html'">×</button>
             </div>
         </header>
-        
+
         <section class="tips-section">
             <h3>★ Tips for Successful Events</h3>
             <ul>
@@ -60,7 +65,8 @@
                         <img src="images/class.png" alt="Class Icon" class="btn-icon"> Class
                     </button>
                     <button class="event-type-btn" data-type="Practice Session">
-                        <img src="images/practice_session.png" alt="Practice Session Icon" class="btn-icon"> Practice Session
+                        <img src="images/practice_session.png" alt="Practice Session Icon" class="btn-icon"> Practice
+                        Session
                     </button>
                     <button class="event-type-btn" data-type="Social Event">
                         <img src="images/social.png" alt="Social Event Icon" class="btn-icon"> Social Event
@@ -70,7 +76,8 @@
 
             <div class="form-group">
                 <label for="event-description">Event Description:</label>
-                <textarea id="event-description" name="event-description" placeholder="Describe what participants will learn, what to expect, what to bring, and any prerequisites…"></textarea>
+                <textarea id="event-description" name="event-description"
+                    placeholder="Describe what participants will learn, what to expect, what to bring, and any prerequisites…"></textarea>
                 <p class="helper-text">Include learning objectives, materials needed, and skill level requirements</p>
             </div>
 
@@ -91,7 +98,8 @@
 
             <div class="form-group">
                 <label for="location">Location:</label>
-                <input type="text" id="location" name="location" placeholder="e.g., Community Center, Library or online via Zoom">
+                <input type="text" id="location" name="location"
+                    placeholder="e.g., Community Center, Library or online via Zoom">
                 <p class="helper-text">Provide specific address or meeting details</p>
             </div>
 
@@ -121,7 +129,8 @@
 
             <div class="form-group">
                 <label for="event-tags">Event Tags:</label>
-                <input type="text" id="event-tags" name="event-tags" placeholder="Add tags like 'guitar', 'beginner', 'weekend' and press Enter">
+                <input type="text" id="event-tags" name="event-tags"
+                    placeholder="Add tags like 'guitar', 'beginner', 'weekend' and press Enter">
                 <p class="helper-text">Add relevant tags to help people find your event (press Enter to add)</p>
             </div>
 
@@ -150,7 +159,8 @@
             <div class="form-row">
                 <div class="form-group">
                     <label for="contact-email">Contact Email:</label>
-                    <input type="email" id="contact-email" name="contact-email" placeholder="e.g., organizer@example.com">
+                    <input type="email" id="contact-email" name="contact-email"
+                        placeholder="e.g., organizer@example.com">
                     <p class="helper-text">Where participants can reach you for questions</p>
                 </div>
                 <div class="form-group">
@@ -166,6 +176,88 @@
             </div>
         </form>
     </div>
+
+    <!-- Accessibility Toolbar HTML - Add this to every page -->
+    <button class="accessibility-toggle" onclick="toggleAccessibilityPanel()" aria-label="Toggle accessibility options">
+        ♿
+    </button>
+
+    <div class="accessibility-panel" id="accessibilityPanel">
+        <div class="panel-header">
+            Accessibility Tools
+        </div>
+        <div class="panel-content">
+            <div class="accessibility-option" onclick="increaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Increase Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="decreaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Decrease Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('grayscale')">
+                <div class="option-label">
+                    <span class="option-icon">⬜</span>
+                    Grayscale
+                </div>
+                <div class="option-toggle" id="toggle-grayscale"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('high-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">🌓</span>
+                    High Contrast
+                </div>
+                <div class="option-toggle" id="toggle-high-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('negative-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">👁</span>
+                    Negative Contrast
+                </div>
+                <div class="option-toggle" id="toggle-negative-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('light-background')">
+                <div class="option-label">
+                    <span class="option-icon">💡</span>
+                    Light Background
+                </div>
+                <div class="option-toggle" id="toggle-light-background"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('links-underline')">
+                <div class="option-label">
+                    <span class="option-icon">🔗</span>
+                    Links Underline
+                </div>
+                <div class="option-toggle" id="toggle-links-underline"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('readable-font')">
+                <div class="option-label">
+                    <span class="option-icon">📖</span>
+                    Readable Font
+                </div>
+                <div class="option-toggle" id="toggle-readable-font"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="resetAccessibility()">
+                <div class="option-label">
+                    <span class="option-icon">↻</span>
+                    Reset
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="js/add_event.js"></script>
 </body>
+
 </html>

@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live Session Management - TeacherPro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <script src="js/accessibility.js"></script>
     <style>
         * {
             margin: 0;
@@ -208,7 +211,9 @@
             color: #333;
         }
 
-        .duration-select, .session-title-input, #customDuration {
+        .duration-select,
+        .session-title-input,
+        #customDuration {
             flex: 1;
             padding: 0.75rem;
             border: 2px solid rgba(102, 126, 234, 0.2);
@@ -218,7 +223,9 @@
             transition: all 0.3s ease;
         }
 
-        .duration-select:focus, .session-title-input:focus, #customDuration:focus {
+        .duration-select:focus,
+        .session-title-input:focus,
+        #customDuration:focus {
             border-color: #667eea;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
@@ -491,30 +498,30 @@
             .header h1 {
                 font-size: 2rem;
             }
-            
+
             .session-controls {
                 grid-template-columns: 1fr;
             }
-            
+
             .setup-row {
                 flex-direction: column;
                 align-items: flex-start;
             }
-            
+
             .setup-row label {
                 width: 100%;
                 margin-bottom: 0.5rem;
             }
-            
+
             .session-link-container {
                 flex-direction: column;
             }
-            
+
             .nav-bar {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             .nav-bar a {
                 width: 100%;
                 text-align: center;
@@ -527,9 +534,17 @@
         }
 
         @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
         }
 
         .notification {
@@ -553,6 +568,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header class="header">
@@ -575,7 +591,7 @@
                     </div>
                     <div class="section-title">Select Students</div>
                 </div>
-                
+
                 <div class="student-list">
                     <div class="student-item" onclick="toggleStudent(this)">
                         <div class="student-avatar">JS</div>
@@ -585,7 +601,7 @@
                         </div>
                         <span class="student-status status-online">Online</span>
                     </div>
-                    
+
                     <div class="student-item" onclick="toggleStudent(this)">
                         <div class="student-avatar">EM</div>
                         <div class="student-info">
@@ -594,7 +610,7 @@
                         </div>
                         <span class="student-status status-online">Online</span>
                     </div>
-                    
+
                     <div class="student-item" onclick="toggleStudent(this)">
                         <div class="student-avatar">MJ</div>
                         <div class="student-info">
@@ -603,7 +619,7 @@
                         </div>
                         <span class="student-status status-offline">Offline</span>
                     </div>
-                    
+
                     <div class="student-item" onclick="toggleStudent(this)">
                         <div class="student-avatar">SB</div>
                         <div class="student-info">
@@ -612,7 +628,7 @@
                         </div>
                         <span class="student-status status-online">Online</span>
                     </div>
-                    
+
                     <div class="student-item" onclick="toggleStudent(this)">
                         <div class="student-avatar">DW</div>
                         <div class="student-info">
@@ -621,7 +637,7 @@
                         </div>
                         <span class="student-status status-online">Online</span>
                     </div>
-                    
+
                     <div class="student-item" onclick="toggleStudent(this)">
                         <div class="student-avatar">LT</div>
                         <div class="student-info">
@@ -662,7 +678,8 @@
                     </div>
                     <div class="setup-row">
                         <label for="sessionTitle">Session Title:</label>
-                        <input type="text" id="sessionTitle" placeholder="e.g., Mathematics - Algebra Basics" class="session-title-input">
+                        <input type="text" id="sessionTitle" placeholder="e.g., Mathematics - Algebra Basics"
+                            class="session-title-input">
                     </div>
                 </div>
 
@@ -689,9 +706,10 @@
                     <p><strong>Elapsed Time:</strong> <span id="sessionDuration">00:00:00</span></p>
                     <p><strong>Remaining Time:</strong> <span id="remainingTime">--:--:--</span></p>
                     <p><strong>Participants:</strong> <span id="participantCount">0</span> students selected</p>
-                    
+
                     <div class="session-link-container">
-                        <input type="text" class="session-link" id="sessionLinkInput" value="No session created yet..." readonly>
+                        <input type="text" class="session-link" id="sessionLinkInput" value="No session created yet..."
+                            readonly>
                         <button class="copy-btn" onclick="copySessionLink()" disabled id="copyBtn">
                             <i class="fas fa-copy"></i> Copy
                         </button>
@@ -743,11 +761,93 @@
                     </div>
 
                     <div class="chat-input-container">
-                        <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..." onkeypress="handleChatKeyPress(event)">
+                        <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..."
+                            onkeypress="handleChatKeyPress(event)">
                         <button class="send-btn" onclick="sendMessage()">
                             <i class="fas fa-paper-plane"></i>
                         </button>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility Toolbar HTML - Add this to every page -->
+    <button class="accessibility-toggle" onclick="toggleAccessibilityPanel()" aria-label="Toggle accessibility options">
+        ♿
+    </button>
+
+    <div class="accessibility-panel" id="accessibilityPanel">
+        <div class="panel-header">
+            Accessibility Tools
+        </div>
+        <div class="panel-content">
+            <div class="accessibility-option" onclick="increaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Increase Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="decreaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Decrease Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('grayscale')">
+                <div class="option-label">
+                    <span class="option-icon">⬜</span>
+                    Grayscale
+                </div>
+                <div class="option-toggle" id="toggle-grayscale"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('high-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">🌓</span>
+                    High Contrast
+                </div>
+                <div class="option-toggle" id="toggle-high-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('negative-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">👁</span>
+                    Negative Contrast
+                </div>
+                <div class="option-toggle" id="toggle-negative-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('light-background')">
+                <div class="option-label">
+                    <span class="option-icon">💡</span>
+                    Light Background
+                </div>
+                <div class="option-toggle" id="toggle-light-background"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('links-underline')">
+                <div class="option-label">
+                    <span class="option-icon">🔗</span>
+                    Links Underline
+                </div>
+                <div class="option-toggle" id="toggle-links-underline"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('readable-font')">
+                <div class="option-label">
+                    <span class="option-icon">📖</span>
+                    Readable Font
+                </div>
+                <div class="option-toggle" id="toggle-readable-font"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="resetAccessibility()">
+                <div class="option-label">
+                    <span class="option-icon">↻</span>
+                    Reset
                 </div>
             </div>
         </div>
@@ -764,12 +864,12 @@
         let zoomPassword = null;
 
         // Initialize page
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Handle duration selection
-            document.getElementById('sessionDurationSelect').addEventListener('change', function() {
+            document.getElementById('sessionDurationSelect').addEventListener('change', function () {
                 const value = this.value;
                 const customRow = document.getElementById('customDurationRow');
-                
+
                 if (value === 'custom') {
                     customRow.style.display = 'flex';
                 } else {
@@ -780,7 +880,7 @@
             });
 
             // Handle custom duration input
-            document.getElementById('customDuration').addEventListener('input', function() {
+            document.getElementById('customDuration').addEventListener('input', function () {
                 const value = parseInt(this.value);
                 if (value >= 15 && value <= 300) {
                     sessionDurationMinutes = value;
@@ -792,7 +892,7 @@
             setTimeout(() => {
                 addChatMessage('student', 'Good morning Dr. Smith!', 'Sarah Brown');
             }, 2000);
-            
+
             setTimeout(() => {
                 addChatMessage('student', 'Ready for today\'s lesson!', 'David Wilson');
             }, 4000);
@@ -802,7 +902,7 @@
         function toggleStudent(element) {
             element.classList.toggle('selected');
             const studentName = element.querySelector('h4').textContent;
-            
+
             if (element.classList.contains('selected')) {
                 selectedStudents.push(studentName);
                 showNotification(`${studentName} selected for session`);
@@ -810,7 +910,7 @@
                 selectedStudents = selectedStudents.filter(name => name !== studentName);
                 showNotification(`${studentName} removed from session`);
             }
-            
+
             updateParticipantCount();
         }
 
@@ -824,27 +924,27 @@
             }
 
             const sessionTitle = document.getElementById('sessionTitle').value.trim() || 'Live Teaching Session';
-            
+
             // Generate Zoom-like meeting details
             zoomMeetingId = Math.floor(Math.random() * 900000000) + 100000000; // 9-digit meeting ID
             zoomPassword = Math.random().toString(36).substr(2, 6); // 6-character password
-            
+
             const zoomLink = `https://zoom.us/j/${zoomMeetingId}?pwd=${btoa(zoomPassword)}`;
-            
+
             // Update UI
             document.getElementById('displaySessionTitle').textContent = sessionTitle;
             document.getElementById('sessionId').textContent = zoomMeetingId;
             document.getElementById('sessionLinkInput').value = zoomLink;
-            
+
             // Enable buttons
             document.querySelector('.create-session').disabled = true;
             document.querySelector('.start-session').disabled = false;
             document.querySelector('.open-zoom').disabled = false;
             document.getElementById('copyBtn').disabled = false;
             document.getElementById('shareBtn').disabled = false;
-            
+
             sessionCreated = true;
-            
+
             showNotification(`Zoom session created: ${sessionTitle}`);
             addChatMessage('system', `Zoom session "${sessionTitle}" created for ${sessionDurationMinutes} minutes`);
         }
@@ -858,17 +958,17 @@
 
             sessionActive = true;
             sessionStartTime = new Date();
-            
+
             // Enable/disable buttons
             document.querySelector('.start-session').disabled = true;
             document.querySelector('.end-session').disabled = false;
-            
+
             // Start timer
             sessionTimer = setInterval(updateSessionDuration, 1000);
-            
+
             showNotification('Session started! Students are joining Zoom...');
             addChatMessage('system', 'Session has started. Zoom meeting is now live!');
-            
+
             // Simulate students joining
             setTimeout(() => {
                 selectedStudents.forEach((student, index) => {
@@ -882,13 +982,13 @@
         function endSession() {
             sessionActive = false;
             sessionCreated = false;
-            
+
             // Stop timer
             if (sessionTimer) {
                 clearInterval(sessionTimer);
                 sessionTimer = null;
             }
-            
+
             // Reset UI
             document.getElementById('displaySessionTitle').textContent = 'Not Created';
             document.getElementById('sessionId').textContent = 'Not Created';
@@ -896,7 +996,7 @@
             document.getElementById('remainingTime').textContent = '--:--:--';
             document.getElementById('sessionLinkInput').value = 'No session created yet...';
             document.getElementById('sessionTitle').value = '';
-            
+
             // Reset buttons
             document.querySelector('.create-session').disabled = false;
             document.querySelector('.start-session').disabled = true;
@@ -904,13 +1004,13 @@
             document.querySelector('.open-zoom').disabled = true;
             document.getElementById('copyBtn').disabled = true;
             document.getElementById('shareBtn').disabled = true;
-            
+
             // Remove time warnings
             const existingWarning = document.querySelector('.time-warning');
             if (existingWarning) {
                 existingWarning.remove();
             }
-            
+
             showNotification('Session ended successfully');
             addChatMessage('system', 'Session has ended. Thank you for participating!');
         }
@@ -920,13 +1020,13 @@
                 showNotification('No session created yet', 'error');
                 return;
             }
-            
+
             const zoomLink = document.getElementById('sessionLinkInput').value;
-            
+
             // Open Zoom in new window/tab
             window.open(zoomLink, '_blank');
             showNotification('Opening Zoom meeting...');
-            
+
             if (!sessionActive) {
                 // Auto-start session when opening Zoom
                 setTimeout(() => {
@@ -937,30 +1037,30 @@
 
         function updateSessionDuration() {
             if (!sessionStartTime) return;
-            
+
             const now = new Date();
             const elapsedSeconds = Math.floor((now - sessionStartTime) / 1000);
             const totalSessionSeconds = sessionDurationMinutes * 60;
             const remainingSeconds = Math.max(0, totalSessionSeconds - elapsedSeconds);
-            
+
             // Update elapsed time
             const elapsedHours = Math.floor(elapsedSeconds / 3600);
             const elapsedMins = Math.floor((elapsedSeconds % 3600) / 60);
             const elapsedSecs = elapsedSeconds % 60;
             const elapsedTimeString = `${elapsedHours.toString().padStart(2, '0')}:${elapsedMins.toString().padStart(2, '0')}:${elapsedSecs.toString().padStart(2, '0')}`;
             document.getElementById('sessionDuration').textContent = elapsedTimeString;
-            
+
             // Update remaining time
             const remainingHours = Math.floor(remainingSeconds / 3600);
             const remainingMins = Math.floor((remainingSeconds % 3600) / 60);
             const remSecs = remainingSeconds % 60;
             const remainingTimeString = `${remainingHours.toString().padStart(2, '0')}:${remainingMins.toString().padStart(2, '0')}:${remSecs.toString().padStart(2, '0')}`;
             document.getElementById('remainingTime').textContent = remainingTimeString;
-            
+
             // Time warnings
             const sessionInfo = document.querySelector('.session-info');
             let existingWarning = document.querySelector('.time-warning');
-            
+
             if (remainingSeconds <= 0) {
                 // Time expired
                 if (!existingWarning || !existingWarning.classList.contains('time-expired')) {
@@ -969,7 +1069,7 @@
                     warning.className = 'time-warning time-expired';
                     warning.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Session time has expired! Please end the session.';
                     sessionInfo.appendChild(warning);
-                    
+
                     addChatMessage('system', 'Session time has expired. Please wrap up and end the session.');
                     showNotification('Session time expired!', 'error');
                 }
@@ -979,7 +1079,7 @@
                     warning.className = 'time-warning';
                     warning.innerHTML = '<i class="fas fa-clock"></i> 5 minutes remaining in this session';
                     sessionInfo.appendChild(warning);
-                    
+
                     addChatMessage('system', '5 minutes remaining in this session.');
                     showNotification('5 minutes remaining', 'warning');
                 }
@@ -994,14 +1094,14 @@
 
             const sessionTitle = document.getElementById('displaySessionTitle').textContent;
             const zoomLink = document.getElementById('sessionLinkInput').value;
-            
+
             showNotification('Sending Zoom links to selected students...');
-            
+
             // Simulate sending to selected students
             selectedStudents.forEach((student, index) => {
                 setTimeout(() => {
                     addChatMessage('system', `Zoom link sent to ${student}`);
-                    
+
                     // Simulate student responses
                     setTimeout(() => {
                         const responses = [
@@ -1015,7 +1115,7 @@
                     }, Math.random() * 3000 + 1000);
                 }, index * 500);
             });
-            
+
             // Also copy to clipboard
             copySessionLink();
         }
@@ -1031,11 +1131,11 @@
         function sendMessage() {
             const chatInput = document.getElementById('chatInput');
             const message = chatInput.value.trim();
-            
+
             if (message) {
                 addChatMessage('teacher', message);
                 chatInput.value = '';
-                
+
                 // Simulate student responses
                 setTimeout(() => {
                     const responses = [
@@ -1062,7 +1162,7 @@
             const chatMessages = document.getElementById('chatMessages');
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${type}`;
-            
+
             let senderName = '';
             if (type === 'teacher') {
                 senderName = 'You (Teacher)';
@@ -1071,12 +1171,12 @@
             } else if (type === 'system') {
                 senderName = 'System';
             }
-            
+
             messageDiv.innerHTML = `
                 <div class="message-sender">${senderName}</div>
                 ${message}
             `;
-            
+
             chatMessages.appendChild(messageDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
@@ -1086,19 +1186,19 @@
             const notification = document.createElement('div');
             notification.className = 'notification';
             notification.textContent = message;
-            
+
             if (type === 'error') {
                 notification.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
             } else if (type === 'warning') {
                 notification.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
             }
-            
+
             document.body.appendChild(notification);
-            
+
             setTimeout(() => {
                 notification.classList.add('show');
             }, 100);
-            
+
             setTimeout(() => {
                 notification.classList.remove('show');
                 setTimeout(() => {
@@ -1117,4 +1217,5 @@
         }, 30000);
     </script>
 </body>
+
 </html>

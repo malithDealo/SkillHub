@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TeacherPro - Navigation Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <script src="js/accessibility.js"></script>
     <style>
         * {
             margin: 0;
@@ -253,6 +256,7 @@
         .demo-notice p {
             color: #666;
         }
+
         /* Footer */
         .footer {
             background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
@@ -440,30 +444,37 @@
             color: #a0aec0;
             font-size: 14px;
         }
+
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
             }
+
             .nav-bar {
                 flex-direction: column;
                 align-items: center;
             }
+
             .nav-bar a {
                 width: 100%;
                 text-align: center;
             }
+
             .navigation-grid {
                 grid-template-columns: 1fr;
             }
+
             .header h1 {
                 font-size: 2rem;
             }
+
             .links-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header class="header">
@@ -498,7 +509,8 @@
                         </div>
                     </div>
                     <p class="nav-description">
-                        Your central command center with weekly schedules, upcoming sessions, advertisements, and quick actions. Get a bird's eye view of your teaching activities.
+                        Your central command center with weekly schedules, upcoming sessions, advertisements, and quick
+                        actions. Get a bird's eye view of your teaching activities.
                     </p>
                     <div class="nav-features">
                         <span class="feature-tag">Weekly Schedule</span>
@@ -520,7 +532,8 @@
                         </div>
                     </div>
                     <p class="nav-description">
-                        Manage all your classes, students, and course content. Create new classes, view class statistics, and handle student enrollments efficiently.
+                        Manage all your classes, students, and course content. Create new classes, view class
+                        statistics, and handle student enrollments efficiently.
                     </p>
                     <div class="nav-features">
                         <span class="feature-tag">Class Creation</span>
@@ -542,7 +555,8 @@
                         </div>
                     </div>
                     <p class="nav-description">
-                        Select students for live sessions, organize virtual classrooms, share session links, and engage with students through real-time chat during classes.
+                        Select students for live sessions, organize virtual classrooms, share session links, and engage
+                        with students through real-time chat during classes.
                     </p>
                     <div class="nav-features">
                         <span class="feature-tag live">Student Selection</span>
@@ -564,7 +578,8 @@
                         </div>
                     </div>
                     <p class="nav-description">
-                        Set your teaching schedule, manage availability slots, and view your weekly calendar. Perfect for organizing your teaching time effectively.
+                        Set your teaching schedule, manage availability slots, and view your weekly calendar. Perfect
+                        for organizing your teaching time effectively.
                     </p>
                     <div class="nav-features">
                         <span class="feature-tag">Calendar View</span>
@@ -586,7 +601,8 @@
                         </div>
                     </div>
                     <p class="nav-description">
-                        Track your income, analyze performance metrics, and view detailed financial reports. Monitor your teaching business growth with comprehensive analytics.
+                        Track your income, analyze performance metrics, and view detailed financial reports. Monitor
+                        your teaching business growth with comprehensive analytics.
                     </p>
                     <div class="nav-features">
                         <span class="feature-tag">Revenue Tracking</span>
@@ -608,7 +624,8 @@
                         </div>
                     </div>
                     <p class="nav-description">
-                        Manage your personal information, professional credentials, notification preferences, and security settings. Keep your profile up to date.
+                        Manage your personal information, professional credentials, notification preferences, and
+                        security settings. Keep your profile up to date.
                     </p>
                     <div class="nav-features">
                         <span class="feature-tag">Personal Info</span>
@@ -630,7 +647,8 @@
                         </div>
                     </div>
                     <p class="nav-description">
-                        Connect with fellow educators, share experiences, ask questions, and participate in professional discussions. Build your teaching network.
+                        Connect with fellow educators, share experiences, ask questions, and participate in professional
+                        discussions. Build your teaching network.
                     </p>
                     <div class="nav-features">
                         <span class="feature-tag">Discussion Forums</span>
@@ -652,7 +670,8 @@
                         </div>
                     </div>
                     <p class="nav-description">
-                        Create and manage educational events, workshops, seminars, and study groups. Organize special learning opportunities for your students.
+                        Create and manage educational events, workshops, seminars, and study groups. Organize special
+                        learning opportunities for your students.
                     </p>
                     <div class="nav-features">
                         <span class="feature-tag">Event Creation</span>
@@ -674,7 +693,8 @@
                         </div>
                     </div>
                     <p class="nav-description">
-                        Manage sponsor relationships, track partnerships, and handle sponsor communications. Build valuable connections for educational funding.
+                        Manage sponsor relationships, track partnerships, and handle sponsor communications. Build
+                        valuable connections for educational funding.
                     </p>
                     <div class="nav-features">
                         <span class="feature-tag">Sponsor Relations</span>
@@ -745,7 +765,91 @@
             <!-- Demo Notice -->
             <div class="demo-notice">
                 <h3>📋 Demo Platform Notice</h3>
-                <p>This is a demonstration of the TeacherPro platform. All navigation links are functional and will take you to the respective modules. The platform showcases a complete teaching management system with modern UI/UX design.</p>
+                <p>This is a demonstration of the TeacherPro platform. All navigation links are functional and will take
+                    you to the respective modules. The platform showcases a complete teaching management system with
+                    modern UI/UX design.</p>
+            </div>
+
+            <!-- Accessibility Toolbar HTML - Add this to every page -->
+            <button class="accessibility-toggle" onclick="toggleAccessibilityPanel()"
+                aria-label="Toggle accessibility options">
+                ♿
+            </button>
+
+            <div class="accessibility-panel" id="accessibilityPanel">
+                <div class="panel-header">
+                    Accessibility Tools
+                </div>
+                <div class="panel-content">
+                    <div class="accessibility-option" onclick="increaseText()">
+                        <div class="option-label">
+                            <span class="option-icon">🔍</span>
+                            Increase Text
+                        </div>
+                    </div>
+
+                    <div class="accessibility-option" onclick="decreaseText()">
+                        <div class="option-label">
+                            <span class="option-icon">🔍</span>
+                            Decrease Text
+                        </div>
+                    </div>
+
+                    <div class="accessibility-option" onclick="toggleFeature('grayscale')">
+                        <div class="option-label">
+                            <span class="option-icon">⬜</span>
+                            Grayscale
+                        </div>
+                        <div class="option-toggle" id="toggle-grayscale"></div>
+                    </div>
+
+                    <div class="accessibility-option" onclick="toggleFeature('high-contrast')">
+                        <div class="option-label">
+                            <span class="option-icon">🌓</span>
+                            High Contrast
+                        </div>
+                        <div class="option-toggle" id="toggle-high-contrast"></div>
+                    </div>
+
+                    <div class="accessibility-option" onclick="toggleFeature('negative-contrast')">
+                        <div class="option-label">
+                            <span class="option-icon">👁</span>
+                            Negative Contrast
+                        </div>
+                        <div class="option-toggle" id="toggle-negative-contrast"></div>
+                    </div>
+
+                    <div class="accessibility-option" onclick="toggleFeature('light-background')">
+                        <div class="option-label">
+                            <span class="option-icon">💡</span>
+                            Light Background
+                        </div>
+                        <div class="option-toggle" id="toggle-light-background"></div>
+                    </div>
+
+                    <div class="accessibility-option" onclick="toggleFeature('links-underline')">
+                        <div class="option-label">
+                            <span class="option-icon">🔗</span>
+                            Links Underline
+                        </div>
+                        <div class="option-toggle" id="toggle-links-underline"></div>
+                    </div>
+
+                    <div class="accessibility-option" onclick="toggleFeature('readable-font')">
+                        <div class="option-label">
+                            <span class="option-icon">📖</span>
+                            Readable Font
+                        </div>
+                        <div class="option-toggle" id="toggle-readable-font"></div>
+                    </div>
+
+                    <div class="accessibility-option" onclick="resetAccessibility()">
+                        <div class="option-label">
+                            <span class="option-icon">↻</span>
+                            Reset
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <footer class="footer">
@@ -756,12 +860,21 @@
                                 <img src="images/SkillHub LOGO 1.png" alt="">
                                 <h2>SkillHub</h2>
                             </div>
-                            <p>Connecting communities through skill sharing. Learn from your neighbors, teach what you love, and build lasting relationships in your local area.</p>
+                            <p>Connecting communities through skill sharing. Learn from your neighbors, teach what you
+                                love, and build lasting relationships in your local area.</p>
                             <div class="social-icons">
-                                <a href="#" aria-label="Facebook"> <div class="icon-circle"><img src="images/Vector.png" alt="Facebook"> </div></a>
-                                <a href="#" aria-label="Twitter"> <div class="icon-circle"><img src="images\mdi_twitter.png" alt="Twitter"> </div></a>
-                                <a href="#" aria-label="Instagram"> <div class="icon-circle"><img src="images\mdi_instagram.png" alt="Instagram"> </div></a>
-                                <a href="#" aria-label="LinkedIn"> <div class="icon-circle"><img src="images\mdi_linkedin.png" alt="LinkedIn"> </div></a>
+                                <a href="#" aria-label="Facebook">
+                                    <div class="icon-circle"><img src="images/Vector.png" alt="Facebook"> </div>
+                                </a>
+                                <a href="#" aria-label="Twitter">
+                                    <div class="icon-circle"><img src="images\mdi_twitter.png" alt="Twitter"> </div>
+                                </a>
+                                <a href="#" aria-label="Instagram">
+                                    <div class="icon-circle"><img src="images\mdi_instagram.png" alt="Instagram"> </div>
+                                </a>
+                                <a href="#" aria-label="LinkedIn">
+                                    <div class="icon-circle"><img src="images\mdi_linkedin.png" alt="LinkedIn"> </div>
+                                </a>
                             </div>
                         </div>
 
@@ -820,19 +933,19 @@
     <script>
         // Add smooth hover animations for nav cards and header nav links
         document.querySelectorAll('.nav-card, .nav-bar a').forEach(element => {
-            element.addEventListener('mouseenter', function() {
-                this.style.transform = this.classList.contains('nav-card') ? 
-                    'translateY(-10px) scale(1.02)' : 
+            element.addEventListener('mouseenter', function () {
+                this.style.transform = this.classList.contains('nav-card') ?
+                    'translateY(-10px) scale(1.02)' :
                     'translateY(-3px)';
             });
-            element.addEventListener('mouseleave', function() {
+            element.addEventListener('mouseleave', function () {
                 this.style.transform = 'translateY(0) scale(1)';
             });
         });
 
         // Add click tracking
         document.querySelectorAll('a[href$=".html"]').forEach(link => {
-            link.addEventListener('click', function(e) {
+            link.addEventListener('click', function (e) {
                 const pageName = this.getAttribute('href');
                 console.log(`Navigating to: ${pageName}`);
                 this.style.opacity = '0.7';
@@ -843,7 +956,7 @@
         });
 
         // Welcome animation
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             document.querySelector('.header').style.animation = 'fadeInDown 1s ease-out';
             const cards = document.querySelectorAll('.nav-card');
             cards.forEach((card, index) => {
@@ -878,4 +991,5 @@
         document.head.appendChild(style);
     </script>
 </body>
+
 </html>

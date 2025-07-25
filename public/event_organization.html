@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TeacherPro - Event Organization</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/event_organization.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <script src="js/accessibility.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js"></script>
 </head>
+
 <body>
     <div class="dashboard-container">
         <!-- Sidebar -->
@@ -48,101 +52,134 @@
                     </div>
                 </div>
                 <a href="#" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
-            </div>
+        </div>
 
-            <!-- Main Content -->
-            <div class="main-content">
-                <header>
-                    <h2>Event Organization</h2>
-                    <p>Create and manage educational events, workshops, and seminars</p>
-                    <button class="btn primary" onclick="openModal('createEventModal')">
-                        <i class="fas fa-plus"></i> Create Event
-                    </button>
-                </header>
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <h2>Event Organization</h2>
+                <p>Create and manage educational events, workshops, and seminars</p>
+                <button class="btn primary" onclick="openModal('createEventModal')">
+                    <i class="fas fa-plus"></i> Create Event
+                </button>
+            </header>
 
-                <div class="events-layout">
-                    <!-- Main Events Area -->
-                    <div class="events-main">
-                        <div class="events-filters">
-                            <button class="filter-tab active">All Events</button>
-                            <button class="filter-tab">Upcoming</button>
-                            <button class="filter-tab">Ongoing</button>
-                            <button class="filter-tab">Completed</button>
-                            <select class="filter-tab">
-                                <option>All Categories</option>
-                                <option>Workshop</option>
-                                <option>Seminar</option>
-                                <option>Conference</option>
-                                <option>Study Group</option>
-                            </select>
-                        </div>
+            <div class="events-layout">
+                <!-- Main Events Area -->
+                <div class="events-main">
+                    <div class="events-filters">
+                        <button class="filter-tab active">All Events</button>
+                        <button class="filter-tab">Upcoming</button>
+                        <button class="filter-tab">Ongoing</button>
+                        <button class="filter-tab">Completed</button>
+                        <select class="filter-tab">
+                            <option>All Categories</option>
+                            <option>Workshop</option>
+                            <option>Seminar</option>
+                            <option>Conference</option>
+                            <option>Study Group</option>
+                        </select>
+                    </div>
 
-                        <div id="event-list">
-                            <!-- Event 1 - Upcoming Workshop -->
-                            <div class="event-card">
-                                <div class="event-content">
-                                    <div class="event-header">
-                                        <div>
-                                            <h3 class="event-title">Advanced Chemistry Workshop</h3>
-                                            <span class="event-status status-upcoming">Upcoming</span>
-                                        </div>
-                                        <div class="event-date">
-                                            <div>Jul</div>
-                                            <div>15</div>
-                                        </div>
+                    <div id="event-list">
+                        <!-- Event 1 - Upcoming Workshop -->
+                        <div class="event-card">
+                            <div class="event-content">
+                                <div class="event-header">
+                                    <div>
+                                        <h3 class="event-title">Advanced Chemistry Workshop</h3>
+                                        <span class="event-status status-upcoming">Upcoming</span>
                                     </div>
-                                    <div class="event-details">
-                                        <div class="event-detail-item"><i class="fas fa-clock"></i> 2:00 PM - 5:00 PM</div>
-                                        <div class="event-detail-item"><i class="fas fa-map-marker-alt"></i> Science Lab Building, Room 301</div>
-                                        <div class="event-detail-item"><i class="fas fa-users"></i> Max 25 participants</div>
-                                        <div class="event-detail-item"><i class="fas fa-tag"></i> Workshop • Grade 12 & 13</div>
-                                    </div>
-                                    <p class="event-description">
-                                        An intensive hands-on workshop covering advanced organic chemistry concepts, including reaction mechanisms, spectroscopy, and laboratory techniques. Perfect preparation for university-level chemistry.
-                                    </p>
-                                    <div class="event-stats">
-                                        <div class="event-stat"><div class="stat-number">18</div><div class="stat-label">Registered</div></div>
-                                        <div class="event-stat"><div class="stat-number">7</div><div class="stat-label">Available</div></div>
-                                        <div class="event-stat"><div class="stat-number">$25</div><div class="stat-label">Fee</div></div>
-                                    </div>
-                                    <div class="event-actions">
-                                        <button class="btn primary"><i class="fas fa-edit"></i> Edit Event</button>
-                                        <button class="btn btn-secondary"><i class="fas fa-users"></i> View Attendees</button>
-                                        <button class="btn btn-success"><i class="fas fa-envelope"></i> Send Update</button>
+                                    <div class="event-date">
+                                        <div>Jul</div>
+                                        <div>15</div>
                                     </div>
                                 </div>
+                                <div class="event-details">
+                                    <div class="event-detail-item"><i class="fas fa-clock"></i> 2:00 PM - 5:00 PM</div>
+                                    <div class="event-detail-item"><i class="fas fa-map-marker-alt"></i> Science Lab
+                                        Building, Room 301</div>
+                                    <div class="event-detail-item"><i class="fas fa-users"></i> Max 25 participants
+                                    </div>
+                                    <div class="event-detail-item"><i class="fas fa-tag"></i> Workshop • Grade 12 & 13
+                                    </div>
+                                </div>
+                                <p class="event-description">
+                                    An intensive hands-on workshop covering advanced organic chemistry concepts,
+                                    including reaction mechanisms, spectroscopy, and laboratory techniques. Perfect
+                                    preparation for university-level chemistry.
+                                </p>
+                                <div class="event-stats">
+                                    <div class="event-stat">
+                                        <div class="stat-number">18</div>
+                                        <div class="stat-label">Registered</div>
+                                    </div>
+                                    <div class="event-stat">
+                                        <div class="stat-number">7</div>
+                                        <div class="stat-label">Available</div>
+                                    </div>
+                                    <div class="event-stat">
+                                        <div class="stat-number">$25</div>
+                                        <div class="stat-label">Fee</div>
+                                    </div>
+                                </div>
+                                <div class="event-actions">
+                                    <button class="btn primary"><i class="fas fa-edit"></i> Edit Event</button>
+                                    <button class="btn btn-secondary"><i class="fas fa-users"></i> View
+                                        Attendees</button>
+                                    <button class="btn btn-success"><i class="fas fa-envelope"></i> Send Update</button>
+                                </div>
                             </div>
+                        </div>
 
-                            <!-- Event 2 - Ongoing Seminar -->
-                            <div class="event-card">
-                                <div class="event-content">
-                                    <div class="event-header">
-                                        <div>
-                                            <h3 class="event-title">Mathematics Olympiad Preparation</h3>
-                                            <span class="event-status status-ongoing">Ongoing</span>
-                                        </div>
-                                        <div class="event-date">
-                                            <div>Jul</div>
-                                            <div>6-20</div>
-                                            </div>
+                        <!-- Event 2 - Ongoing Seminar -->
+                        <div class="event-card">
+                            <div class="event-content">
+                                <div class="event-header">
+                                    <div>
+                                        <h3 class="event-title">Mathematics Olympiad Preparation</h3>
+                                        <span class="event-status status-ongoing">Ongoing</span>
                                     </div>
-                                    <div class="event-details">
-                                        <div class="event-detail-item"><i class="fas fa-clock"></i> Daily 4:00 PM - 6:00 PM</div>
-                                        <div class="event-detail-item"><i class="fas fa-map-marker-alt"></i> Online via Zoom</div>
-                                        <div class="event-detail-item"><i class="fas fa-users"></i> 15 participants</div>
-                                        <div class="event-detail-item"><i class="fas fa-tag"></i> Intensive Course • Advanced Level</div>
+                                    <div class="event-date">
+                                        <div>Jul</div>
+                                        <div>6-20</div>
                                     </div>
-                                    <p class="event-description">
-                                        A comprehensive 2-week intensive course designed to prepare talented students for mathematics competitions. Covers problem-solving strategies, advanced topics, and practice tests.
-                                    </p>
-                                    <div class="event-stats">
-                                        <div class="event-stat"><div class="stat-number">15</div><div class="stat-label">Enrolled</div></div>
-                                        <div class="event-stat"><div class="stat-number">8</div><div class="stat-label">Days Left</div></div>
-                                        <div class="event-stat"><div class="stat-number">$150</div><div class="stat-label">Total Fee</div></divOpenArtifact> </div>
+                                </div>
+                                <div class="event-details">
+                                    <div class="event-detail-item"><i class="fas fa-clock"></i> Daily 4:00 PM - 6:00 PM
+                                    </div>
+                                    <div class="event-detail-item"><i class="fas fa-map-marker-alt"></i> Online via Zoom
+                                    </div>
+                                    <div class="event-detail-item"><i class="fas fa-users"></i> 15 participants</div>
+                                    <div class="event-detail-item"><i class="fas fa-tag"></i> Intensive Course •
+                                        Advanced Level</div>
+                                </div>
+                                <p class="event-description">
+                                    A comprehensive 2-week intensive course designed to prepare talented students for
+                                    mathematics competitions. Covers problem-solving strategies, advanced topics, and
+                                    practice tests.
+                                </p>
+                                <div class="event-stats">
+                                    <div class="event-stat">
+                                        <div class="stat-number">15</div>
+                                        <div class="stat-label">Enrolled</div>
+                                    </div>
+                                    <div class="event-stat">
+                                        <div class="stat-number">8</div>
+                                        <div class="stat-label">Days Left</div>
+                                    </div>
+                                    <div class="event-stat">
+                                        <div class="stat-number">$150</div>
+                                        <div class="stat-label">Total Fee</div>
+                                        </divOpenArtifact>
+                                    </div>
                                     <div class="event-actions">
-                                        <button class="btn btn-success"><i class="fas fa-video"></i> Join Session</button>
-                                        <button class="btn btn-secondary"><i class="fas fa-users"></i> Manage Students</button>
-                                        <button class="btn btn-warning"><i class="fas fa-chart-line"></i> Progress Report</button>
+                                        <button class="btn btn-success"><i class="fas fa-video"></i> Join
+                                            Session</button>
+                                        <button class="btn btn-secondary"><i class="fas fa-users"></i> Manage
+                                            Students</button>
+                                        <button class="btn btn-warning"><i class="fas fa-chart-line"></i> Progress
+                                            Report</button>
                                     </div>
                                 </div>
                             </div>
@@ -161,23 +198,38 @@
                                         </div>
                                     </div>
                                     <div class="event-details">
-                                        <div class="event-detail-item"><i class="fas fa-clock"></i> 9:00 AM - 5:00 PM</div>
-                                        <div class="event-detail-item"><i class="fas fa-map-marker-alt"></i> Convention Center, Main Hall</div>
+                                        <div class="event-detail-item"><i class="fas fa-clock"></i> 9:00 AM - 5:00 PM
+                                        </div>
+                                        <div class="event-detail-item"><i class="fas fa-map-marker-alt"></i> Convention
+                                            Center, Main Hall</div>
                                         <div class="event-detail-item"><i class="fas fa-users"></i> 120 attendees</div>
-                                        <div class="event-detail-item"><i class="fas fa-tag"></i> Conference • Professional Development</div>
+                                        <div class="event-detail-item"><i class="fas fa-tag"></i> Conference •
+                                            Professional Development</div>
                                     </div>
                                     <p class="event-description">
-                                        A full-day conference bringing together educators, researchers, and industry professionals to discuss the latest trends and innovations in STEM education.
+                                        A full-day conference bringing together educators, researchers, and industry
+                                        professionals to discuss the latest trends and innovations in STEM education.
                                     </p>
                                     <div class="event-stats">
-                                        <div class="event-stat"><div class="stat-number">120</div><div class="stat-label">Attended</div></div>
-                                        <div class="event-stat"><div class="stat-number">4.8</div><div class="stat-label">Rating</div></div>
-                                        <div class="event-stat"><div class="stat-number">85%</div><div class="stat-label">Satisfaction</div></div>
+                                        <div class="event-stat">
+                                            <div class="stat-number">120</div>
+                                            <div class="stat-label">Attended</div>
+                                        </div>
+                                        <div class="event-stat">
+                                            <div class="stat-number">4.8</div>
+                                            <div class="stat-label">Rating</div>
+                                        </div>
+                                        <div class="event-stat">
+                                            <div class="stat-number">85%</div>
+                                            <div class="stat-label">Satisfaction</div>
+                                        </div>
                                     </div>
                                     <div class="event-actions">
-                                        <button class="btn btn-secondary"><i class="fas fa-chart-bar"></i> View Report</button>
+                                        <button class="btn btn-secondary"><i class="fas fa-chart-bar"></i> View
+                                            Report</button>
                                         <button class="btn btn-secondary"><i class="fas fa-star"></i> Reviews</button>
-                                        <button class="btn btn-success"><i class="fas fa-copy"></i> Duplicate Event</button>
+                                        <button class="btn btn-success"><i class="fas fa-copy"></i> Duplicate
+                                            Event</button>
                                     </div>
                                 </div>
                             </div>
@@ -203,28 +255,68 @@
                         <div class="sidebar-widget">
                             <h3 class="widget-title">Event Statistics</h3>
                             <div class="quick-stats">
-                                <div class="quick-stat"><div class="stat-number">12</div><div class="stat-label">Total Events</div></div>
-                                <div class="quick-stat"><div class="stat-number">4</div><div class="stat-label">Upcoming</div></div>
-                                <div class="quick-stat"><div class="stat-number">2</div><div class="stat-label">Ongoing</div></div>
-                                <div class="quick-stat"><div class="stat-number">186</div><div class="stat-label">Total Attendees</div></div>
+                                <div class="quick-stat">
+                                    <div class="stat-number">12</div>
+                                    <div class="stat-label">Total Events</div>
+                                </div>
+                                <div class="quick-stat">
+                                    <div class="stat-number">4</div>
+                                    <div class="stat-label">Upcoming</div>
+                                </div>
+                                <div class="quick-stat">
+                                    <div class="stat-number">2</div>
+                                    <div class="stat-label">Ongoing</div>
+                                </div>
+                                <div class="quick-stat">
+                                    <div class="stat-number">186</div>
+                                    <div class="stat-label">Total Attendees</div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="sidebar-widget">
                             <h3 class="widget-title">July 2025</h3>
                             <div class="calendar-mini">
-                                <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
-                                <div></div><div></div><div class="calendar-day">1</div><div class="calendar-day">2</div>
-                                <div class="calendar-day">3</div><div class="calendar-day">4</div><div class="calendar-day">5</div>
-                                <div class="calendar-day today">6</div><div class="calendar-day">7</div><div class="calendar-day">8</div>
-                                <div class="calendar-day">9</div><div class="calendar-day">10</div><div class="calendar-day">11</div>
-                                <div class="calendar-day">12</div><div class="calendar-day">13</div><div class="calendar-day">14</div>
-                                <div class="calendar-day has-event">15</div><div class="calendar-day">16</div><div class="calendar-day">17</div>
-                                <div class="calendar-day">18</div><div class="calendar-day">19</div><div class="calendar-day has-event">20</div>
-                                <div class="calendar-day">21</div><div class="calendar-day has-event">22</div><div class="calendar-day">23</div>
-                                <div class="calendar-day">24</div><div class="calendar-day">25</div><div class="calendar-day">26</div>
-                                <div class="calendar-day">27</div><div class="calendar-day has-event">28</div><div class="calendar-day">29</div>
-                                <div class="calendar-day">30</div><div class="calendar-day">31</div>
+                                <div>S</div>
+                                <div>M</div>
+                                <div>T</div>
+                                <div>W</div>
+                                <div>T</div>
+                                <div>F</div>
+                                <div>S</div>
+                                <div></div>
+                                <div></div>
+                                <div class="calendar-day">1</div>
+                                <div class="calendar-day">2</div>
+                                <div class="calendar-day">3</div>
+                                <div class="calendar-day">4</div>
+                                <div class="calendar-day">5</div>
+                                <div class="calendar-day today">6</div>
+                                <div class="calendar-day">7</div>
+                                <div class="calendar-day">8</div>
+                                <div class="calendar-day">9</div>
+                                <div class="calendar-day">10</div>
+                                <div class="calendar-day">11</div>
+                                <div class="calendar-day">12</div>
+                                <div class="calendar-day">13</div>
+                                <div class="calendar-day">14</div>
+                                <div class="calendar-day has-event">15</div>
+                                <div class="calendar-day">16</div>
+                                <div class="calendar-day">17</div>
+                                <div class="calendar-day">18</div>
+                                <div class="calendar-day">19</div>
+                                <div class="calendar-day has-event">20</div>
+                                <div class="calendar-day">21</div>
+                                <div class="calendar-day has-event">22</div>
+                                <div class="calendar-day">23</div>
+                                <div class="calendar-day">24</div>
+                                <div class="calendar-day">25</div>
+                                <div class="calendar-day">26</div>
+                                <div class="calendar-day">27</div>
+                                <div class="calendar-day has-event">28</div>
+                                <div class="calendar-day">29</div>
+                                <div class="calendar-day">30</div>
+                                <div class="calendar-day">31</div>
                             </div>
                         </div>
 
@@ -251,21 +343,24 @@
                         <div class="sidebar-widget">
                             <h3 class="widget-title">Recent Registrations</h3>
                             <div class="attendee-item">
-                                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b547?w=50&h=50&fit=crop&crop=face" alt="Emma" class="attendee-avatar">
+                                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b547?w=50&h=50&fit=crop&crop=face"
+                                    alt="Emma" class="attendee-avatar">
                                 <div class="attendee-info">
                                     <div class="attendee-name">Emma Johnson</div>
                                     <div class="attendee-email">Chemistry Workshop</div>
                                 </div>
                             </div>
                             <div class="attendee-item">
-                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face" alt="Michael" class="attendee-avatar">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face"
+                                    alt="Michael" class="attendee-avatar">
                                 <div class="attendee-info">
                                     <div class="attendee-name">Michael Chen</div>
                                     <div class="attendee-email">Math Olympiad Prep</div>
                                 </div>
                             </div>
                             <div class="attendee-item">
-                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop&crop=face" alt="Sarah" class="attendee-avatar">
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop&crop=face"
+                                    alt="Sarah" class="attendee-avatar">
                                 <div class="attendee-info">
                                     <div class="attendee-name">Sarah Williams</div>
                                     <div class="attendee-email">Chemistry Workshop</div>
@@ -370,13 +465,97 @@
                         <small style="color: #666;">Hold Ctrl/Cmd to select multiple grades</small>
                     </div>
                     <div class="form-actions">
-                        <button type="button" class="btn btn-secondary" onclick="closeModal('createEventModal')">Cancel</button>
+                        <button type="button" class="btn btn-secondary"
+                            onclick="closeModal('createEventModal')">Cancel</button>
                         <button type="submit" class="btn primary">Create Event</button>
                     </div>
                 </form>
             </div>
         </div>
 
-        <script src="../public/js/event_organization.js"></script>
-    </body>
+        <!-- Accessibility Toolbar HTML - Add this to every page -->
+        <button class="accessibility-toggle" onclick="toggleAccessibilityPanel()"
+            aria-label="Toggle accessibility options">
+            ♿
+        </button>
+
+        <div class="accessibility-panel" id="accessibilityPanel">
+            <div class="panel-header">
+                Accessibility Tools
+            </div>
+            <div class="panel-content">
+                <div class="accessibility-option" onclick="increaseText()">
+                    <div class="option-label">
+                        <span class="option-icon">🔍</span>
+                        Increase Text
+                    </div>
+                </div>
+
+                <div class="accessibility-option" onclick="decreaseText()">
+                    <div class="option-label">
+                        <span class="option-icon">🔍</span>
+                        Decrease Text
+                    </div>
+                </div>
+
+                <div class="accessibility-option" onclick="toggleFeature('grayscale')">
+                    <div class="option-label">
+                        <span class="option-icon">⬜</span>
+                        Grayscale
+                    </div>
+                    <div class="option-toggle" id="toggle-grayscale"></div>
+                </div>
+
+                <div class="accessibility-option" onclick="toggleFeature('high-contrast')">
+                    <div class="option-label">
+                        <span class="option-icon">🌓</span>
+                        High Contrast
+                    </div>
+                    <div class="option-toggle" id="toggle-high-contrast"></div>
+                </div>
+
+                <div class="accessibility-option" onclick="toggleFeature('negative-contrast')">
+                    <div class="option-label">
+                        <span class="option-icon">👁</span>
+                        Negative Contrast
+                    </div>
+                    <div class="option-toggle" id="toggle-negative-contrast"></div>
+                </div>
+
+                <div class="accessibility-option" onclick="toggleFeature('light-background')">
+                    <div class="option-label">
+                        <span class="option-icon">💡</span>
+                        Light Background
+                    </div>
+                    <div class="option-toggle" id="toggle-light-background"></div>
+                </div>
+
+                <div class="accessibility-option" onclick="toggleFeature('links-underline')">
+                    <div class="option-label">
+                        <span class="option-icon">🔗</span>
+                        Links Underline
+                    </div>
+                    <div class="option-toggle" id="toggle-links-underline"></div>
+                </div>
+
+                <div class="accessibility-option" onclick="toggleFeature('readable-font')">
+                    <div class="option-label">
+                        <span class="option-icon">📖</span>
+                        Readable Font
+                    </div>
+                    <div class="option-toggle" id="toggle-readable-font"></div>
+                </div>
+
+                <div class="accessibility-option" onclick="resetAccessibility()">
+                    <div class="option-label">
+                        <span class="option-icon">↻</span>
+                        Reset
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/event_organization.js"></script>
+</body>
+
 </html>

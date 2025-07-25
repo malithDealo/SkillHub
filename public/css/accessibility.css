@@ -1,0 +1,439 @@
+/* Accessibility Toolbar Styles - FIXED VERSION */
+.accessibility-toggle {
+    position: fixed;
+    top: 50vh;
+    left: 20px;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 10001;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.accessibility-toggle:hover {
+    background: #0056b3;
+    transform: scale(1.1);
+}
+
+.accessibility-panel {
+    position: fixed;
+    top: 50vh;
+    left: 80px;
+    transform: translateY(-50%);
+    width: 280px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    z-index: 10000;
+    display: none;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+
+.accessibility-panel.show {
+    display: block;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50%) translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+    }
+}
+
+.panel-header {
+    background: #f8f9fa;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.panel-content {
+    padding: 15px;
+}
+
+.accessibility-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.accessibility-option:hover {
+    background-color: #f8f9fa;
+    margin: 0 -15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.accessibility-option:last-child {
+    border-bottom: none;
+}
+
+.option-label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.option-icon {
+    margin-right: 10px;
+    font-size: 16px;
+    width: 20px;
+}
+
+.option-toggle {
+    width: 40px;
+    height: 20px;
+    background: #ccc;
+    border-radius: 10px;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+.option-toggle.active {
+    background: #007bff;
+}
+
+.option-toggle::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s ease;
+}
+
+.option-toggle.active::after {
+    transform: translateX(20px);
+}
+
+/* Accessibility States */
+body.grayscale {
+    filter: grayscale(100%);
+}
+
+body.high-contrast {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+}
+
+body.high-contrast * {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-color: #ffffff !important;
+}
+
+/* High contrast links */
+body.high-contrast a,
+body.high-contrast a:visited {
+    color: #00ffff !important;
+    text-decoration: underline !important;
+}
+
+body.high-contrast a:hover,
+body.high-contrast a:focus {
+    color: #ffff00 !important;
+    background-color: #333333 !important;
+}
+
+/* High contrast buttons */
+body.high-contrast button,
+body.high-contrast input[type="button"],
+body.high-contrast input[type="submit"] {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #ffffff !important;
+}
+
+body.high-contrast button:hover,
+body.high-contrast input[type="button"]:hover,
+body.high-contrast input[type="submit"]:hover {
+    background-color: #ffff00 !important;
+    color: #000000 !important;
+    border-color: #ffff00 !important;
+}
+
+/* High contrast form elements */
+body.high-contrast input,
+body.high-contrast textarea,
+body.high-contrast select {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #ffffff !important;
+}
+
+body.high-contrast input:focus,
+body.high-contrast textarea:focus,
+body.high-contrast select:focus {
+    background-color: #ffff00 !important;
+    color: #000000 !important;
+    border-color: #ffff00 !important;
+    outline: 3px solid #00ffff !important;
+}
+
+/* High contrast headings */
+body.high-contrast h1,
+body.high-contrast h2,
+body.high-contrast h3,
+body.high-contrast h4,
+body.high-contrast h5,
+body.high-contrast h6 {
+    color: #ffffff !important;
+    background-color: #000000 !important;
+}
+
+/* High contrast navigation */
+body.high-contrast nav,
+body.high-contrast nav * {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+}
+
+/* High contrast images */
+body.high-contrast img {
+    filter: contrast(150%) brightness(1.1) !important;
+    border: 1px solid #ffffff !important;
+}
+
+/* High contrast tables */
+body.high-contrast table,
+body.high-contrast th,
+body.high-contrast td {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 1px solid #ffffff !important;
+}
+
+body.high-contrast th {
+    background-color: #333333 !important;
+}
+
+/* Ensure accessibility button position is never affected by any accessibility states */
+body.grayscale .accessibility-toggle,
+body.high-contrast .accessibility-toggle,
+body.negative-contrast .accessibility-toggle,
+body.light-background .accessibility-toggle,
+body.links-underline .accessibility-toggle,
+body.readable-font .accessibility-toggle,
+body[class*="text-"] .accessibility-toggle {
+    position: fixed !important;
+    top: 50vh !important;
+    left: 20px !important;
+    transform: translateY(-50%) !important;
+    width: 50px !important;
+    height: 50px !important;
+    z-index: 10001 !important;
+    font-size: 20px !important;
+}
+
+/* Ensure accessibility button is visible in high contrast */
+body.high-contrast .accessibility-toggle {
+    background-color: #007bff !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+}
+
+/* Ensure accessibility panel position is never affected by any accessibility states */
+body.grayscale .accessibility-panel,
+body.high-contrast .accessibility-panel,
+body.negative-contrast .accessibility-panel,
+body.light-background .accessibility-panel,
+body.links-underline .accessibility-panel,
+body.readable-font .accessibility-panel,
+body[class*="text-"] .accessibility-panel {
+    position: fixed !important;
+    top: 50vh !important;
+    left: 80px !important;
+    transform: translateY(-50%) !important;
+    width: 280px !important;
+    z-index: 10000 !important;
+    max-height: calc(100vh - 100px) !important;
+}
+
+body.high-contrast .accessibility-panel {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .accessibility-panel .panel-header {
+    background-color: #333333 !important;
+    color: #ffffff !important;
+    border-bottom: 1px solid #ffffff !important;
+}
+
+body.high-contrast .accessibility-option:hover {
+    background-color: #333333 !important;
+}
+
+body.high-contrast .option-toggle {
+    background-color: #666666 !important;
+    border: 1px solid #ffffff !important;
+}
+
+body.high-contrast .option-toggle.active {
+    background-color: #007bff !important;
+}
+
+body.high-contrast .text-size-indicator {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+}
+
+body.negative-contrast {
+    filter: invert(1) hue-rotate(180deg);
+}
+
+body.light-background {
+    background-color: #f8f9fa !important;
+    color: #333 !important;
+}
+
+body.light-background * {
+    background-color: inherit !important;
+    color: inherit !important;
+}
+
+body.links-underline a {
+    text-decoration: underline !important;
+}
+
+body.readable-font,
+body.readable-font * {
+    font-family: 'Times New Roman', serif !important;
+}
+
+/* FIXED Text size classes - using font-size on html element for better scaling */
+html.text-increase-1 { font-size: 110%; }
+html.text-increase-2 { font-size: 120%; }
+html.text-increase-3 { font-size: 130%; }
+html.text-increase-4 { font-size: 140%; }
+html.text-increase-5 { font-size: 150%; }
+
+html.text-decrease-1 { font-size: 90%; }
+html.text-decrease-2 { font-size: 80%; }
+html.text-decrease-3 { font-size: 70%; }
+
+/* Alternative approach - apply to body but exclude accessibility elements */
+body.text-increase-1 *:not(.accessibility-toggle):not(.accessibility-panel):not(.accessibility-panel *):not(.text-size-indicator) { 
+    font-size: 110% !important; 
+    line-height: 1.6 !important;
+}
+
+body.text-increase-2 *:not(.accessibility-toggle):not(.accessibility-panel):not(.accessibility-panel *):not(.text-size-indicator) { 
+    font-size: 120% !important; 
+    line-height: 1.6 !important;
+}
+
+body.text-increase-3 *:not(.accessibility-toggle):not(.accessibility-panel):not(.accessibility-panel *):not(.text-size-indicator) { 
+    font-size: 130% !important; 
+    line-height: 1.6 !important;
+}
+
+body.text-increase-4 *:not(.accessibility-toggle):not(.accessibility-panel):not(.accessibility-panel *):not(.text-size-indicator) { 
+    font-size: 140% !important; 
+    line-height: 1.6 !important;
+}
+
+body.text-increase-5 *:not(.accessibility-toggle):not(.accessibility-panel):not(.accessibility-panel *):not(.text-size-indicator) { 
+    font-size: 150% !important; 
+    line-height: 1.6 !important;
+}
+
+body.text-decrease-1 *:not(.accessibility-toggle):not(.accessibility-panel):not(.accessibility-panel *):not(.text-size-indicator) { 
+    font-size: 90% !important; 
+    line-height: 1.4 !important;
+}
+
+body.text-decrease-2 *:not(.accessibility-toggle):not(.accessibility-panel):not(.accessibility-panel *):not(.text-size-indicator) { 
+    font-size: 80% !important; 
+    line-height: 1.4 !important;
+}
+
+body.text-decrease-3 *:not(.accessibility-toggle):not(.accessibility-panel):not(.accessibility-panel *):not(.text-size-indicator) { 
+    font-size: 70% !important; 
+    line-height: 1.3 !important;
+}
+
+/* Ensure accessibility toolbar maintains consistent sizing */
+.accessibility-toggle {
+    font-size: 20px !important;
+    width: 50px !important;
+    height: 50px !important;
+}
+
+.accessibility-panel {
+    width: 280px !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+}
+
+.accessibility-panel * {
+    font-size: inherit !important;
+    line-height: inherit !important;
+}
+
+.panel-header {
+    font-size: 16px !important;
+    font-weight: bold !important;
+}
+
+.option-icon {
+    font-size: 16px !important;
+    width: 20px !important;
+}
+
+.option-toggle {
+    width: 40px !important;
+    height: 20px !important;
+}
+
+.option-toggle::after {
+    width: 16px !important;
+    height: 16px !important;
+}
+
+/* Ensure text size indicator is not affected */
+.text-size-indicator {
+    font-size: 16px !important;
+    line-height: 1.4 !important;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .accessibility-panel {
+        left: 10px;
+        right: 10px;
+        width: auto;
+        top: 50vh;
+        transform: translateY(-50%);
+    }
+    
+    .accessibility-toggle {
+        left: 15px;
+        top: 50vh;
+        transform: translateY(-50%);
+    }
+}

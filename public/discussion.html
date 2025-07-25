@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>X Post Interface</title>
     <link rel="stylesheet" href="css/discussion.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <script src="js/accessibility.js"></script>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -18,8 +22,12 @@
             <div class="user-icon">S</div>
             <div class="post-content">
                 <p><strong>Sarah Johnson</strong> • 2 hrs ago</p>
-                <p>Looking for quiet, peaceful spots where I can practice guitar without disturbing others. Any suggestions from fellow musicians? I’m particularly interested in places that might have good acoustics but are also respectful to the community.</p>
-                <p>I’ve been learning for about 6 months now and need somewhere I can practice my chord progressions and finger exercises without worrying about noise complaints. Ideally somewhere that’s accessible in the evenings after work.</p>
+                <p>Looking for quiet, peaceful spots where I can practice guitar without disturbing others. Any
+                    suggestions from fellow musicians? I’m particularly interested in places that might have good
+                    acoustics but are also respectful to the community.</p>
+                <p>I’ve been learning for about 6 months now and need somewhere I can practice my chord progressions and
+                    finger exercises without worrying about noise complaints. Ideally somewhere that’s accessible in the
+                    evenings after work.</p>
                 <div class="actions">
                     <button class="like-btn">❤️ <span class="like-count">0</span></button>
                     <button class="share-btn">↩ <span class="share-count">0</span></button>
@@ -35,34 +43,122 @@
                     <div class="user-icon">M</div>
                     <div class="reply-content">
                         <p><strong>Mike Torres</strong> • 1 hr ago</p>
-                        <p>I’ve found the Botanical Gardens have some great quiet spots, especially early morning around 7 AM. The acoustics near the pavilion are amazing! Just be mindful of the opening hours and bring a small mat to sit on.</p>
+                        <p>I’ve found the Botanical Gardens have some great quiet spots, especially early morning around
+                            7 AM. The acoustics near the pavilion are amazing! Just be mindful of the opening hours and
+                            bring a small mat to sit on.</p>
                     </div>
                 </div>
                 <div class="reply">
                     <div class="user-icon">M</div>
                     <div class="reply-content">
                         <p><strong>Mike Torres</strong> • 1 hr ago</p>
-                        <p>I’ve found the Botanical Gardens have some great quiet spots, especially early morning around 7 AM. The acoustics near the pavilion are amazing! Just be mindful of the opening hours and bring a small mat to sit on.</p>
+                        <p>I’ve found the Botanical Gardens have some great quiet spots, especially early morning around
+                            7 AM. The acoustics near the pavilion are amazing! Just be mindful of the opening hours and
+                            bring a small mat to sit on.</p>
                     </div>
                 </div>
                 <div class="reply">
                     <div class="user-icon">M</div>
                     <div class="reply-content">
                         <p><strong>Mike Torres</strong> • 1 hr ago</p>
-                        <p>I’ve found the Botanical Gardens have some great quiet spots, especially early morning around 7 AM. The acoustics near the pavilion are amazing! Just be mindful of the opening hours and bring a small mat to sit on.</p>
+                        <p>I’ve found the Botanical Gardens have some great quiet spots, especially early morning around
+                            7 AM. The acoustics near the pavilion are amazing! Just be mindful of the opening hours and
+                            bring a small mat to sit on.</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="reply-box">
-            <textarea placeholder="Share your thoughts, suggestions, or experiences. Be helpful and respectful to build a strong community."></textarea>
+            <textarea
+                placeholder="Share your thoughts, suggestions, or experiences. Be helpful and respectful to build a strong community."></textarea>
             <div class="reply-buttons">
                 <button class="cancel">Cancel</button>
                 <button class="post-reply">Post Reply</button>
             </div>
         </div>
     </div>
+    <!-- Accessibility Toolbar HTML - Add this to every page -->
+    <button class="accessibility-toggle" onclick="toggleAccessibilityPanel()" aria-label="Toggle accessibility options">
+        ♿
+    </button>
+
+    <div class="accessibility-panel" id="accessibilityPanel">
+        <div class="panel-header">
+            Accessibility Tools
+        </div>
+        <div class="panel-content">
+            <div class="accessibility-option" onclick="increaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Increase Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="decreaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Decrease Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('grayscale')">
+                <div class="option-label">
+                    <span class="option-icon">⬜</span>
+                    Grayscale
+                </div>
+                <div class="option-toggle" id="toggle-grayscale"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('high-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">🌓</span>
+                    High Contrast
+                </div>
+                <div class="option-toggle" id="toggle-high-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('negative-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">👁</span>
+                    Negative Contrast
+                </div>
+                <div class="option-toggle" id="toggle-negative-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('light-background')">
+                <div class="option-label">
+                    <span class="option-icon">💡</span>
+                    Light Background
+                </div>
+                <div class="option-toggle" id="toggle-light-background"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('links-underline')">
+                <div class="option-label">
+                    <span class="option-icon">🔗</span>
+                    Links Underline
+                </div>
+                <div class="option-toggle" id="toggle-links-underline"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('readable-font')">
+                <div class="option-label">
+                    <span class="option-icon">📖</span>
+                    Readable Font
+                </div>
+                <div class="option-toggle" id="toggle-readable-font"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="resetAccessibility()">
+                <div class="option-label">
+                    <span class="option-icon">↻</span>
+                    Reset
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="js/discussion.js"></script>
 </body>
+
 </html>

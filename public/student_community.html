@@ -1,26 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillHub - Student Community</title>
     <link href="css/dashboard_overview.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <script src="js/accessibility.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
+
 <body class="flex bg-gray-100">
     <div class="sidebar bg-white p-4 shadow-md fixed h-full">
         <h1 class="text-2xl font-bold mb-4">SkillHub</h1>
         <p class="text-gray-600 mb-4">Level 3 - Pro Instructor</p>
         <nav>
             <ul>
-                <li><a href="../public/dashboard_overview.html" id="dashboardLink" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                <li><a href="../public/schedule.html" id="scheduleLink"><i class="fas fa-calendar-alt"></i> Schedule</a></li>
-                <li><a href="../public/student_community.html" id="studentsLink"><i class="fas fa-users"></i> Students</a></li>
-                <li><a href="../public/assignments.html" id="assignmentsLink"><i class="fas fa-book"></i> Assignments</a></li>
-                <li><a href="../public/earnings_analytics.html" class="block p-2 hover:bg-gray-200 rounded">Earning & Analytics</a></li>
-                <li><a href="../public/sponsor_conversations.html" id="sponsorConnectLink"><i class="fas fa-handshake"></i> Connect Sponsor</a></li>
-                <li><a href="../public/profile_setting.html" class="block p-2 hover:bg-gray-200 rounded">Profile Setting</a></li>
-                <li><a href="../public/event_organization.html" class="block p-2 hover:bg-gray-200 rounded">Event Organization</a></li>
+                <li><a href="../public/dashboard_overview.html" id="dashboardLink" class="active"><i
+                            class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="../public/schedule.html" id="scheduleLink"><i class="fas fa-calendar-alt"></i> Schedule</a>
+                </li>
+                <li><a href="../public/student_community.html" id="studentsLink"><i class="fas fa-users"></i>
+                        Students</a></li>
+                <li><a href="../public/assignments.html" id="assignmentsLink"><i class="fas fa-book"></i>
+                        Assignments</a></li>
+                <li><a href="../public/earnings_analytics.html" class="block p-2 hover:bg-gray-200 rounded">Earning &
+                        Analytics</a></li>
+                <li><a href="../public/sponsor_conversations.html" id="sponsorConnectLink"><i
+                            class="fas fa-handshake"></i> Connect Sponsor</a></li>
+                <li><a href="../public/profile_setting.html" class="block p-2 hover:bg-gray-200 rounded">Profile
+                        Setting</a></li>
+                <li><a href="../public/event_organization.html" class="block p-2 hover:bg-gray-200 rounded">Event
+                        Organization</a></li>
             </ul>
         </nav>
         <a href="#" class="block p-2 text-red-500 hover:bg-gray-200 rounded mt-4">LOG OUT</a>
@@ -43,5 +55,87 @@
             </div>
         </div>
     </div>
+
+    <!-- Accessibility Toolbar HTML - Add this to every page -->
+    <button class="accessibility-toggle" onclick="toggleAccessibilityPanel()" aria-label="Toggle accessibility options">
+        ♿
+    </button>
+
+    <div class="accessibility-panel" id="accessibilityPanel">
+        <div class="panel-header">
+            Accessibility Tools
+        </div>
+        <div class="panel-content">
+            <div class="accessibility-option" onclick="increaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Increase Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="decreaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Decrease Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('grayscale')">
+                <div class="option-label">
+                    <span class="option-icon">⬜</span>
+                    Grayscale
+                </div>
+                <div class="option-toggle" id="toggle-grayscale"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('high-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">🌓</span>
+                    High Contrast
+                </div>
+                <div class="option-toggle" id="toggle-high-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('negative-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">👁</span>
+                    Negative Contrast
+                </div>
+                <div class="option-toggle" id="toggle-negative-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('light-background')">
+                <div class="option-label">
+                    <span class="option-icon">💡</span>
+                    Light Background
+                </div>
+                <div class="option-toggle" id="toggle-light-background"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('links-underline')">
+                <div class="option-label">
+                    <span class="option-icon">🔗</span>
+                    Links Underline
+                </div>
+                <div class="option-toggle" id="toggle-links-underline"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('readable-font')">
+                <div class="option-label">
+                    <span class="option-icon">📖</span>
+                    Readable Font
+                </div>
+                <div class="option-toggle" id="toggle-readable-font"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="resetAccessibility()">
+                <div class="option-label">
+                    <span class="option-icon">↻</span>
+                    Reset
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

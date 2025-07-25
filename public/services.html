@@ -1,553 +1,635 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SkillHub - Discover Skills Near You</title>
-    <link rel="stylesheet" href="css/services.css" />
-    <link rel="stylesheet" href="components/footer1.css" />
-    <link rel="stylesheet" href="css/navbar2.css">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillHub - Discover Skills Near You</title>
+  <link rel="stylesheet" href="css/services.css" />
+  <link rel="stylesheet" href="components/footer1.css" />
+  <link rel="stylesheet" href="css/navbar2.css">
   <link rel="stylesheet" href="css/navbar-enhancements.css">
   <link rel="stylesheet" href="css/footer2.css">
-    <style>
+  <link rel="stylesheet" href="css/accessibility.css">
+  <script src="js/accessibility.js"></script>
+  <style>
+    /* Update hero section to account for new navbar height */
+    .hero,
+    .teachers-hero {
+      padding-top: 120px;
+      /* Increased to account for navbar */
+    }
 
-      /* Update hero section to account for new navbar height */
-      .hero,
-      .teachers-hero {
-        padding-top: 120px; /* Increased to account for navbar */
+    /* Wishlist Button Styles */
+    .wishlist-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .wishlist-btn {
+      background: #e8f5e8;
+      color: #4caf50;
+      border: 2px solid #4caf50;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .wishlist-btn:hover {
+      background: #4caf50;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+    }
+
+    .wishlist-btn.added {
+      background: #4caf50;
+      color: white;
+      cursor: default;
+    }
+
+    .wishlist-btn.added:hover {
+      transform: none;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .wishlist-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .skill-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .skill-description {
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+    }
+
+    /* Back buttons styling */
+    .back-buttons {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .dashboard-btn {
+      background: #45a049;
+      border-color: #45a049;
+    }
+
+    .dashboard-btn:hover {
+      background: #3d8b40;
+    }
+
+    /* Responsive navbar */
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
       }
 
-      /* Wishlist Button Styles */
-      .wishlist-section {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      .navbar {
+        padding: 0 1rem;
+      }
+
+      .nav-container {
         gap: 1rem;
-        margin-bottom: 2rem;
-        padding: 1rem;
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
       }
 
-      .wishlist-btn {
-        background: #e8f5e8;
-        color: #4caf50;
-        border: 2px solid #4caf50;
-        padding: 0.75rem 1.5rem;
-        border-radius: 25px;
-        cursor: pointer;
-        font-size: 1rem;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
+      .nav-profile {
+        gap: 8px;
       }
 
-      .wishlist-btn:hover {
-        background: #4caf50;
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
-      }
-
-      .wishlist-btn.added {
-        background: #4caf50;
-        color: white;
-        cursor: default;
-      }
-
-      .wishlist-btn.added:hover {
-        transform: none;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      }
-
-      .wishlist-info {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      .skill-name {
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: #333;
-      }
-
-      .skill-description {
+      .nav-user {
         font-size: 0.9rem;
-        color: #666;
+      }
+
+      .profile-avatar {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+      }
+
+      .wishlist-section {
+        flex-direction: column;
         text-align: center;
       }
+    }
 
-      /* Back buttons styling */
-      .back-buttons {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
+    @media (max-width: 480px) {
+      .nav-brand .brand-text {
+        font-size: 1.1rem;
       }
 
-      .dashboard-btn {
-        background: #45a049;
-        border-color: #45a049;
+      .logo {
+        font-size: 1.3rem;
       }
+    }
+  </style>
+</head>
 
-      .dashboard-btn:hover {
-        background: #3d8b40;
-      }
+<body>
+  <div class="navbar-learner"></div>
 
-      /* Responsive navbar */
-      @media (max-width: 768px) {
-        .nav-menu {
-          display: none;
-        }
-
-        .navbar {
-          padding: 0 1rem;
-        }
-
-        .nav-container {
-          gap: 1rem;
-        }
-
-        .nav-profile {
-          gap: 8px;
-        }
-
-        .nav-user {
-          font-size: 0.9rem;
-        }
-
-        .profile-avatar {
-          width: 35px;
-          height: 35px;
-          font-size: 1rem;
-        }
-
-        .wishlist-section {
-          flex-direction: column;
-          text-align: center;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .nav-brand .brand-text {
-          font-size: 1.1rem;
-        }
-
-        .logo {
-          font-size: 1.3rem;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="navbar-learner"></div>
-
-    <!-- Skill Categories View -->
-    <div id="skill-categories-view">
-      <!-- Hero Section -->
-      <section class="hero">
-        <div class="hero-background-circles">
-          <div class="hero-circle circle-1"></div>
-          <div class="hero-circle circle-2"></div>
-          <div class="hero-circle circle-3"></div>
-          <div class="hero-circle circle-4"></div>
-          <div class="hero-circle circle-5"></div>
-          <div class="hero-circle circle-6"></div>
-          <div class="hero-circle circle-7"></div>
-          <div class="hero-circle circle-8"></div>
-          <div class="hero-circle circle-9"></div>
-          <div class="hero-circle circle-10"></div>
-          <div class="hero-circle circle-11"></div>
-          <div class="hero-circle circle-12"></div>
-        </div>
-        <div class="container">
-          <div class="hero-content">
-            <h1>Discover Skills Near You</h1>
-            <p>
-              Find the perfect teacher for any skill you want to learn in your
-              neighborhood
-            </p>
-            <div class="search-container">
-              <input
-                type="text"
-                class="search-input"
-                placeholder="What skill do you want to learn?"
-              />
-              <button class="search-btn">🔍</button>
-            </div>
+  <!-- Skill Categories View -->
+  <div id="skill-categories-view">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-background-circles">
+        <div class="hero-circle circle-1"></div>
+        <div class="hero-circle circle-2"></div>
+        <div class="hero-circle circle-3"></div>
+        <div class="hero-circle circle-4"></div>
+        <div class="hero-circle circle-5"></div>
+        <div class="hero-circle circle-6"></div>
+        <div class="hero-circle circle-7"></div>
+        <div class="hero-circle circle-8"></div>
+        <div class="hero-circle circle-9"></div>
+        <div class="hero-circle circle-10"></div>
+        <div class="hero-circle circle-11"></div>
+        <div class="hero-circle circle-12"></div>
+      </div>
+      <div class="container">
+        <div class="hero-content">
+          <h1>Discover Skills Near You</h1>
+          <p>
+            Find the perfect teacher for any skill you want to learn in your
+            neighborhood
+          </p>
+          <div class="search-container">
+            <input type="text" class="search-input" placeholder="What skill do you want to learn?" />
+            <button class="search-btn">🔍</button>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Main Content -->
-      <section class="main-content">
-        <div class="container">
-          <div class="section-title">
-            <h2>Skill Categories</h2>
-          </div>
-
-          <div class="skills-categories">
-            <!-- Arts & Crafts -->
-            <div class="category-section">
-              <div class="category-header">
-                <h3>Arts & Crafts</h3>
-              </div>
-              <ul class="category-skills">
-                <li data-skill="Painting">Painting</li>
-                <li data-skill="Pottery">Pottery</li>
-                <li data-skill="Jewelry Making">Jewelry Making</li>
-                <li data-skill="Drawing">Drawing</li>
-                <li data-skill="Sculpture">Sculpture</li>
-                <li data-skill="Photography">Photography</li>
-              </ul>
-            </div>
-
-            <!-- Music & Performance -->
-            <div class="category-section">
-              <div class="category-header">
-                <h3>Music & Performance</h3>
-              </div>
-              <ul class="category-skills">
-                <li data-skill="Guitar">Guitar</li>
-                <li data-skill="Piano">Piano</li>
-                <li data-skill="Drums">Drums</li>
-                <li data-skill="Singing">Singing</li>
-                <li data-skill="Violin">Violin</li>
-                <li data-skill="Public Speaking">Public Speaking</li>
-              </ul>
-            </div>
-
-            <!-- Languages -->
-            <div class="category-section">
-              <div class="category-header">
-                <h3>Languages</h3>
-              </div>
-              <ul class="category-skills">
-                <li data-skill="Conversational Practice">
-                  Conversational Practice
-                </li>
-                <li data-skill="Writing Grammar">Writing Grammar</li>
-                <li data-skill="Business Language">Business Language</li>
-              </ul>
-            </div>
-
-            <!-- Technology -->
-            <div class="category-section">
-              <div class="category-header">
-                <h3>Technology</h3>
-              </div>
-              <ul class="category-skills">
-                <li data-skill="Computer Basics">Computer Basics</li>
-                <li data-skill="Social Media">Social Media</li>
-                <li data-skill="Mobile Apps">Mobile Apps</li>
-                <li data-skill="Digital Literacy">Digital Literacy</li>
-              </ul>
-            </div>
-
-            <!-- Cooking & Culinary -->
-            <div class="category-section">
-              <div class="category-header">
-                <h3>Cooking & Culinary</h3>
-              </div>
-              <ul class="category-skills">
-                <li data-skill="Traditional Cuisines">Traditional Cuisines</li>
-                <li data-skill="Baking">Baking</li>
-                <li data-skill="Nutrition">Nutrition</li>
-                <li data-skill="Food Safety">Food Safety</li>
-                <li data-skill="Wine Pairing">Wine Pairing</li>
-              </ul>
-            </div>
-
-            <!-- Home & Garden -->
-            <div class="category-section">
-              <div class="category-header">
-                <h3>Home & Garden</h3>
-              </div>
-              <ul class="category-skills">
-                <li data-skill="Gardening">Gardening</li>
-                <li data-skill="Home Repair">Home Repair</li>
-                <li data-skill="Organization">Organization</li>
-                <li data-skill="Interior Design">Interior Design</li>
-              </ul>
-            </div>
-
-            <!-- Health & Wellness -->
-            <div class="category-section">
-              <div class="category-header">
-                <h3>Health & Wellness</h3>
-              </div>
-              <ul class="category-skills">
-                <li data-skill="Yoga Meditation">Yoga Meditation</li>
-                <li data-skill="Fitness">Fitness</li>
-                <li data-skill="Nutrition">Nutrition</li>
-                <li data-skill="Mental Health">Mental Health</li>
-              </ul>
-            </div>
-
-            <!-- Professional Skills -->
-            <div class="category-section">
-              <div class="category-header">
-                <h3>Professional Skills</h3>
-              </div>
-              <ul class="category-skills">
-                <li data-skill="Resume Writing">Resume Writing</li>
-                <li data-skill="Interview Prep">Interview Prep</li>
-                <li data-skill="Business Skills">Business Skills</li>
-                <li data-skill="Leadership">Leadership</li>
-              </ul>
-            </div>
-
-            <!-- Traditional Crafts -->
-            <div class="category-section">
-              <div class="category-header">
-                <h3>Traditional Crafts</h3>
-              </div>
-              <ul class="category-skills">
-                <li data-skill="Weaving Carpentry">Weaving Carpentry</li>
-                <li data-skill="Traditional Medicine">Traditional Medicine</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- Teachers View -->
-    <div id="teachers-view" style="display: none">
-      <!-- Teachers Hero Section -->
-      <section class="teachers-hero">
-        <div class="hero-background-circles">
-          <div class="hero-circle circle-1"></div>
-          <div class="hero-circle circle-2"></div>
-          <div class="hero-circle circle-3"></div>
-          <div class="hero-circle circle-4"></div>
-          <div class="hero-circle circle-5"></div>
-          <div class="hero-circle circle-6"></div>
-          <div class="hero-circle circle-7"></div>
-          <div class="hero-circle circle-8"></div>
-          <div class="hero-circle circle-9"></div>
-          <div class="hero-circle circle-10"></div>
-          <div class="hero-circle circle-11"></div>
-          <div class="hero-circle circle-12"></div>
-        </div>
-        <div class="container">
-          <div class="hero-content">
-            <h1>Find Expert Teachers</h1>
-            <p id="skill-subtitle">
-              Connect with skilled instructors in your neighborhood ready to
-              share their knowledge
-            </p>
-            <div class="search-container">
-              <input
-                type="text"
-                class="search-input"
-                placeholder="Search for teachers..."
-              />
-              <button class="search-btn">🔍</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Teachers Content -->
-      <section class="teachers-content">
-        <div class="container">
-          <!-- Add to Wishlist Section -->
-          <div class="wishlist-section">
-            <div class="wishlist-info">
-              <div class="skill-name" id="current-skill-name">Guitar</div>
-              <div class="skill-description">
-                Save this skill to learn later
-              </div>
-            </div>
-            <button
-              class="wishlist-btn"
-              id="wishlist-btn"
-              onclick="addToWishlist()"
-            >
-              <span>💚</span>
-              <span id="wishlist-btn-text">Add to Wishlist</span>
-            </button>
-          </div>
-
-          <div class="teachers-header">
-            <button class="back-btn" onclick="showSkillCategories()">
-              ← Back to Categories
-            </button>
-            <div class="teachers-info">
-              <span id="teacher-count">247 teachers found</span>
-              <span>in your area</span>
-            </div>
-            <div class="sort-options">
-              <label>Sort by:</label>
-              <select id="sort-select">
-                <option value="rating">Most Popular</option>
-                <option value="price">Price: Low to High</option>
-                <option value="distance">Distance</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="teachers-grid" id="teachers-grid">
-            <!-- Teacher cards will be dynamically inserted here -->
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- Teacher Detail Popup -->
-    <div id="teacher-popup" class="popup-overlay" style="display: none">
-      <div class="popup-content">
-        <button class="popup-close" onclick="closeTeacherPopup()">×</button>
-        <div class="teacher-detail">
-          <div class="teacher-avatar">
-            <span id="popup-avatar"></span>
-          </div>
-          <div class="teacher-info">
-            <h2 id="popup-name"></h2>
-            <div class="teacher-rating">
-              <span id="popup-rating"></span>
-              <span id="popup-reviews"></span>
-            </div>
-            <div class="teacher-distance">
-              <span id="popup-distance"></span>
-            </div>
-          </div>
+    <!-- Main Content -->
+    <section class="main-content">
+      <div class="container">
+        <div class="section-title">
+          <h2>Skill Categories</h2>
         </div>
 
-        <div class="teacher-description">
-          <p id="popup-description"></p>
-        </div>
+        <div class="skills-categories">
+          <!-- Arts & Crafts -->
+          <div class="category-section">
+            <div class="category-header">
+              <h3>Arts & Crafts</h3>
+            </div>
+            <ul class="category-skills">
+              <li data-skill="Painting">Painting</li>
+              <li data-skill="Pottery">Pottery</li>
+              <li data-skill="Jewelry Making">Jewelry Making</li>
+              <li data-skill="Drawing">Drawing</li>
+              <li data-skill="Sculpture">Sculpture</li>
+              <li data-skill="Photography">Photography</li>
+            </ul>
+          </div>
 
-        <div class="skills-section">
-          <h3>Skills Offered:</h3>
-          <div id="popup-skills" class="skills-tags"></div>
-        </div>
+          <!-- Music & Performance -->
+          <div class="category-section">
+            <div class="category-header">
+              <h3>Music & Performance</h3>
+            </div>
+            <ul class="category-skills">
+              <li data-skill="Guitar">Guitar</li>
+              <li data-skill="Piano">Piano</li>
+              <li data-skill="Drums">Drums</li>
+              <li data-skill="Singing">Singing</li>
+              <li data-skill="Violin">Violin</li>
+              <li data-skill="Public Speaking">Public Speaking</li>
+            </ul>
+          </div>
 
-        <div class="pricing-section">
-          <div class="price-info">
-            <span class="price" id="popup-price"></span>
-            <span class="availability" id="popup-availability"></span>
+          <!-- Languages -->
+          <div class="category-section">
+            <div class="category-header">
+              <h3>Languages</h3>
+            </div>
+            <ul class="category-skills">
+              <li data-skill="Conversational Practice">
+                Conversational Practice
+              </li>
+              <li data-skill="Writing Grammar">Writing Grammar</li>
+              <li data-skill="Business Language">Business Language</li>
+            </ul>
+          </div>
+
+          <!-- Technology -->
+          <div class="category-section">
+            <div class="category-header">
+              <h3>Technology</h3>
+            </div>
+            <ul class="category-skills">
+              <li data-skill="Computer Basics">Computer Basics</li>
+              <li data-skill="Social Media">Social Media</li>
+              <li data-skill="Mobile Apps">Mobile Apps</li>
+              <li data-skill="Digital Literacy">Digital Literacy</li>
+            </ul>
+          </div>
+
+          <!-- Cooking & Culinary -->
+          <div class="category-section">
+            <div class="category-header">
+              <h3>Cooking & Culinary</h3>
+            </div>
+            <ul class="category-skills">
+              <li data-skill="Traditional Cuisines">Traditional Cuisines</li>
+              <li data-skill="Baking">Baking</li>
+              <li data-skill="Nutrition">Nutrition</li>
+              <li data-skill="Food Safety">Food Safety</li>
+              <li data-skill="Wine Pairing">Wine Pairing</li>
+            </ul>
+          </div>
+
+          <!-- Home & Garden -->
+          <div class="category-section">
+            <div class="category-header">
+              <h3>Home & Garden</h3>
+            </div>
+            <ul class="category-skills">
+              <li data-skill="Gardening">Gardening</li>
+              <li data-skill="Home Repair">Home Repair</li>
+              <li data-skill="Organization">Organization</li>
+              <li data-skill="Interior Design">Interior Design</li>
+            </ul>
+          </div>
+
+          <!-- Health & Wellness -->
+          <div class="category-section">
+            <div class="category-header">
+              <h3>Health & Wellness</h3>
+            </div>
+            <ul class="category-skills">
+              <li data-skill="Yoga Meditation">Yoga Meditation</li>
+              <li data-skill="Fitness">Fitness</li>
+              <li data-skill="Nutrition">Nutrition</li>
+              <li data-skill="Mental Health">Mental Health</li>
+            </ul>
+          </div>
+
+          <!-- Professional Skills -->
+          <div class="category-section">
+            <div class="category-header">
+              <h3>Professional Skills</h3>
+            </div>
+            <ul class="category-skills">
+              <li data-skill="Resume Writing">Resume Writing</li>
+              <li data-skill="Interview Prep">Interview Prep</li>
+              <li data-skill="Business Skills">Business Skills</li>
+              <li data-skill="Leadership">Leadership</li>
+            </ul>
+          </div>
+
+          <!-- Traditional Crafts -->
+          <div class="category-section">
+            <div class="category-header">
+              <h3>Traditional Crafts</h3>
+            </div>
+            <ul class="category-skills">
+              <li data-skill="Weaving Carpentry">Weaving Carpentry</li>
+              <li data-skill="Traditional Medicine">Traditional Medicine</li>
+            </ul>
           </div>
         </div>
+      </div>
+    </section>
+  </div>
 
-        <div class="popup-actions">
-          <button class="btn-secondary" onclick="closeTeacherPopup()">
-            Go back
+  <!-- Teachers View -->
+  <div id="teachers-view" style="display: none">
+    <!-- Teachers Hero Section -->
+    <section class="teachers-hero">
+      <div class="hero-background-circles">
+        <div class="hero-circle circle-1"></div>
+        <div class="hero-circle circle-2"></div>
+        <div class="hero-circle circle-3"></div>
+        <div class="hero-circle circle-4"></div>
+        <div class="hero-circle circle-5"></div>
+        <div class="hero-circle circle-6"></div>
+        <div class="hero-circle circle-7"></div>
+        <div class="hero-circle circle-8"></div>
+        <div class="hero-circle circle-9"></div>
+        <div class="hero-circle circle-10"></div>
+        <div class="hero-circle circle-11"></div>
+        <div class="hero-circle circle-12"></div>
+      </div>
+      <div class="container">
+        <div class="hero-content">
+          <h1>Find Expert Teachers</h1>
+          <p id="skill-subtitle">
+            Connect with skilled instructors in your neighborhood ready to
+            share their knowledge
+          </p>
+          <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search for teachers..." />
+            <button class="search-btn">🔍</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Teachers Content -->
+    <section class="teachers-content">
+      <div class="container">
+        <!-- Add to Wishlist Section -->
+        <div class="wishlist-section">
+          <div class="wishlist-info">
+            <div class="skill-name" id="current-skill-name">Guitar</div>
+            <div class="skill-description">
+              Save this skill to learn later
+            </div>
+          </div>
+          <button class="wishlist-btn" id="wishlist-btn" onclick="addToWishlist()">
+            <span>💚</span>
+            <span id="wishlist-btn-text">Add to Wishlist</span>
           </button>
-          <button class="btn-primary" onclick="connectWithTeacher()">
-            Connect
+        </div>
+
+        <div class="teachers-header">
+          <button class="back-btn" onclick="showSkillCategories()">
+            ← Back to Categories
           </button>
+          <div class="teachers-info">
+            <span id="teacher-count">247 teachers found</span>
+            <span>in your area</span>
+          </div>
+          <div class="sort-options">
+            <label>Sort by:</label>
+            <select id="sort-select">
+              <option value="rating">Most Popular</option>
+              <option value="price">Price: Low to High</option>
+              <option value="distance">Distance</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="teachers-grid" id="teachers-grid">
+          <!-- Teacher cards will be dynamically inserted here -->
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Teacher Detail Popup -->
+  <div id="teacher-popup" class="popup-overlay" style="display: none">
+    <div class="popup-content">
+      <button class="popup-close" onclick="closeTeacherPopup()">×</button>
+      <div class="teacher-detail">
+        <div class="teacher-avatar">
+          <span id="popup-avatar"></span>
+        </div>
+        <div class="teacher-info">
+          <h2 id="popup-name"></h2>
+          <div class="teacher-rating">
+            <span id="popup-rating"></span>
+            <span id="popup-reviews"></span>
+          </div>
+          <div class="teacher-distance">
+            <span id="popup-distance"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="teacher-description">
+        <p id="popup-description"></p>
+      </div>
+
+      <div class="skills-section">
+        <h3>Skills Offered:</h3>
+        <div id="popup-skills" class="skills-tags"></div>
+      </div>
+
+      <div class="pricing-section">
+        <div class="price-info">
+          <span class="price" id="popup-price"></span>
+          <span class="availability" id="popup-availability"></span>
+        </div>
+      </div>
+
+      <div class="popup-actions">
+        <button class="btn-secondary" onclick="closeTeacherPopup()">
+          Go back
+        </button>
+        <button class="btn-primary" onclick="connectWithTeacher()">
+          Connect
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div id="connect-modal" class="modal-overlay" style="display: none">
+    <div class="modal-content">
+      <h3>Connect with Teacher</h3>
+      <p>
+        Are you sure you want to connect with
+        <span id="connect-teacher-name"></span>?
+      </p>
+      <div class="modal-actions">
+        <button class="btn-secondary" onclick="closeConnectModal()">
+          Cancel
+        </button>
+        <button class="btn-primary" onclick="confirmConnection()">
+          Yes, Connect
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Accessibility Toolbar HTML - Add this to every page -->
+  <button class="accessibility-toggle" onclick="toggleAccessibilityPanel()" aria-label="Toggle accessibility options">
+    ♿
+  </button>
+
+  <div class="accessibility-panel" id="accessibilityPanel">
+    <div class="panel-header">
+      Accessibility Tools
+    </div>
+    <div class="panel-content">
+      <div class="accessibility-option" onclick="increaseText()">
+        <div class="option-label">
+          <span class="option-icon">🔍</span>
+          Increase Text
+        </div>
+      </div>
+
+      <div class="accessibility-option" onclick="decreaseText()">
+        <div class="option-label">
+          <span class="option-icon">🔍</span>
+          Decrease Text
+        </div>
+      </div>
+
+      <div class="accessibility-option" onclick="toggleFeature('grayscale')">
+        <div class="option-label">
+          <span class="option-icon">⬜</span>
+          Grayscale
+        </div>
+        <div class="option-toggle" id="toggle-grayscale"></div>
+      </div>
+
+      <div class="accessibility-option" onclick="toggleFeature('high-contrast')">
+        <div class="option-label">
+          <span class="option-icon">🌓</span>
+          High Contrast
+        </div>
+        <div class="option-toggle" id="toggle-high-contrast"></div>
+      </div>
+
+      <div class="accessibility-option" onclick="toggleFeature('negative-contrast')">
+        <div class="option-label">
+          <span class="option-icon">👁</span>
+          Negative Contrast
+        </div>
+        <div class="option-toggle" id="toggle-negative-contrast"></div>
+      </div>
+
+      <div class="accessibility-option" onclick="toggleFeature('light-background')">
+        <div class="option-label">
+          <span class="option-icon">💡</span>
+          Light Background
+        </div>
+        <div class="option-toggle" id="toggle-light-background"></div>
+      </div>
+
+      <div class="accessibility-option" onclick="toggleFeature('links-underline')">
+        <div class="option-label">
+          <span class="option-icon">🔗</span>
+          Links Underline
+        </div>
+        <div class="option-toggle" id="toggle-links-underline"></div>
+      </div>
+
+      <div class="accessibility-option" onclick="toggleFeature('readable-font')">
+        <div class="option-label">
+          <span class="option-icon">📖</span>
+          Readable Font
+        </div>
+        <div class="option-toggle" id="toggle-readable-font"></div>
+      </div>
+
+      <div class="accessibility-option" onclick="resetAccessibility()">
+        <div class="option-label">
+          <span class="option-icon">↻</span>
+          Reset
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Confirmation Modal -->
-    <div id="connect-modal" class="modal-overlay" style="display: none">
-      <div class="modal-content">
-        <h3>Connect with Teacher</h3>
-        <p>
-          Are you sure you want to connect with
-          <span id="connect-teacher-name"></span>?
-        </p>
-        <div class="modal-actions">
-          <button class="btn-secondary" onclick="closeConnectModal()">
-            Cancel
-          </button>
-          <button class="btn-primary" onclick="confirmConnection()">
-            Yes, Connect
-          </button>
-        </div>
-      </div>
+  <!-- Footer -->
+  <footer class="footer">
+    <!-- Header Section -->
+    <div class="footer-header">
+      <h1 class="footer-logo">SkillHub</h1>
+      <p class="footer-tagline">Connect • Learn • Grow • Share</p>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <!-- Header Section -->
-      <div class="footer-header">
-        <h1 class="footer-logo">SkillHub</h1>
-        <p class="footer-tagline">Connect • Learn • Grow • Share</p>
+    <!-- Main Content Section -->
+    <div class="footer-content">
+      <!-- Column 1: Description and Social Media -->
+
+      <div class="footer-column">
+        <h3 class="footer-column-title">
+          <img src="images/SkillHub LOGO 3.png" alt="SkillHub Logo" class="footer-logo-img">
+          <span class="brand-text">SkillHub</span>
+        </h3>
+        <p>Connecting communities through skill sharing. Learn from your neighbors, teach what you love, and build
+          lasting relationships in your local area.</p>
+        <div class="social-icons">
+          <a href="#" aria-label="Facebook">
+            <div class="icon-circle"><img src="images\fb.png" alt="Facebook"> </div>
+          </a>
+          <a href="#" aria-label="Twitter">
+            <div class="icon-circle"><img src="images\mdi_twitter.png" alt="Twitter"> </div>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <div class="icon-circle"><img src="images\mdi_instagram.png" alt="Instagram"> </div>
+          </a>
+          <a href="#" aria-label="LinkedIn">
+            <div class="icon-circle"><img src="images\mdi_linkedin.png" alt="LinkedIn"> </div>
+          </a>
+        </div>
       </div>
-      
-      <!-- Main Content Section -->
-      <div class="footer-content">
-        <!-- Column 1: Description and Social Media -->
-         
+
+      <!-- Column 2: Quick Links -->
+      <div class="footer-columnn">
         <div class="footer-column">
-            <h3 class="footer-column-title">
-                <img src="images/SkillHub LOGO 3.png" alt="SkillHub Logo" class="footer-logo-img">
-                <span class="brand-text">SkillHub</span>
-            </h3>
-            <p>Connecting communities through skill sharing. Learn from your neighbors, teach what you love, and build lasting relationships in your local area.</p>
-            <div class="social-icons">
-                <a href="#" aria-label="Facebook"> <div class="icon-circle"><img src="images\fb.png" alt="Facebook"> </div></a>
-                <a href="#" aria-label="Twitter"> <div class="icon-circle"><img src="images\mdi_twitter.png" alt="Twitter"> </div></a>
-                <a href="#" aria-label="Instagram"> <div class="icon-circle"><img src="images\mdi_instagram.png" alt="Instagram"> </div></a>
-                <a href="#" aria-label="LinkedIn"> <div class="icon-circle"><img src="images\mdi_linkedin.png" alt="LinkedIn"> </div></a>
-            </div>
+          <h3 class="footer-column-title">Quick Links</h3>
+          <ul>
+            <li><a href="dashboard.html">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#how-it-works">How it Works</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="community.html">Community</a></li>
+          </ul>
         </div>
-         
-        <!-- Column 2: Quick Links -->
-         <div class="footer-columnn">
+      </div>
+      <!-- Column 3: Support -->
+      <div class="footer-columnn">
         <div class="footer-column">
-            <h3 class="footer-column-title">Quick Links</h3>
-            <ul>
-                <li><a href="dashboard.html">Home</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#how-it-works">How it Works</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="community.html">Community</a></li>
-            </ul>
+          <h3 class="footer-column-title">Support</h3>
+          <ul>
+            <li><a href="#help">Help Center</a></li>
+            <li><a href="#safety">Safety Guidelines</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="#faq">FAQs</a></li>
+            <li><a href="#feedback">Give Feedback</a></li>
+            <li><a href="#report">Report Issue</a></li>
+            <li><a href="#accessibility">Accessibility</a></li>
+          </ul>
         </div>
-         </div>
-        <!-- Column 3: Support -->
-         <div class="footer-columnn">
+      </div>
+
+      <!-- Column 4: Legal -->
+      <div class="footer-columnn">
         <div class="footer-column">
-            <h3 class="footer-column-title">Support</h3>
-            <ul>
-                <li><a href="#help">Help Center</a></li>
-                <li><a href="#safety">Safety Guidelines</a></li>
-                <li><a href="#contact">Contact Us</a></li>
-                <li><a href="#faq">FAQs</a></li>
-                <li><a href="#feedback">Give Feedback</a></li>
-                <li><a href="#report">Report Issue</a></li>
-                <li><a href="#accessibility">Accessibility</a></li>
-            </ul>
+          <h3 class="footer-column-title">Legal</h3>
+          <ul>
+            <li><a href="#terms">Terms of Services</a></li>
+            <li><a href="#privacy">Privacy policy</a></li>
+            <li><a href="#cookies">Cookie Policy</a></li>
+            <li><a href="#guidelines">Community Guidelines</a></li>
+          </ul>
         </div>
-         </div>
-        
-        <!-- Column 4: Legal -->
-         <div class="footer-columnn">
+      </div>
+      <!-- Column 5: Stay Connected -->
+      <div class="footer-columnn">
         <div class="footer-column">
-            <h3 class="footer-column-title">Legal</h3>
-            <ul>
-                <li><a href="#terms">Terms of Services</a></li>
-                <li><a href="#privacy">Privacy policy</a></li>
-                <li><a href="#cookies">Cookie Policy</a></li>
-                <li><a href="#guidelines">Community Guidelines</a></li>
-            </ul>
-        </div>
-        </div>
-        <!-- Column 5: Stay Connected -->
-         <div class="footer-columnn">
-         <div class="footer-column">
-        <div class="footer-column stay-connected">
+          <div class="footer-column stay-connected">
             <h3 class="footer-column-title">Stay Connected</h3>
             <p>Get updates on new skills, community events, and platform features.</p>
             <form class="subscription-form">
-                <input type="email" placeholder="Enter your email address" aria-label="Email Address">
-                <button type="submit">Subscribe</button>
+              <input type="email" placeholder="Enter your email address" aria-label="Email Address">
+              <button type="submit">Subscribe</button>
             </form>
+          </div>
         </div>
-    </div>
-    </div>
-        
-    </footer>
-    <!-- STEP 1: Add this div tag to any HTML page where you want the chatbot -->
+      </div>
+
+  </footer>
+  <!-- STEP 1: Add this div tag to any HTML page where you want the chatbot -->
   <div id="skillhub-chatbot-container"></div>
 
   <!-- STEP 2: Add this script tag once per page (preferably before closing body tag) -->
@@ -1456,417 +1538,417 @@ If asked about business information, politely redirect to platform features or s
     });
   </script>
 
-    <script>
-      // Sample teacher data
-      const teachersData = {
-        Guitar: [
-          {
-            id: 1,
-            name: "Maria Rodriguez",
-            avatar: "M",
-            rating: 4.9,
-            reviews: 47,
-            distance: "0.8 miles away",
-            description:
-              "Passionate language teacher with 10+ years experience. I specialize in making Spanish fun and accessible for all ages through immersive cultural experiences.",
-            skills: ["Guitar", "Flamenco Dance", "Music Theory"],
-            price: "Rs.1000/hour",
-            availability: "Available today",
-          },
-          {
-            id: 2,
-            name: "David Johnson",
-            avatar: "D",
-            rating: 4.9,
-            reviews: 47,
-            distance: "0.8 miles away",
-            description:
-              "Professional guitarist with experience in rock, jazz, and classical music. Teaching beginners to advanced students for over 8 years.",
-            skills: ["Guitar", "Bass Guitar", "Music Production"],
-            price: "Rs.1200/hour",
-            availability: "Available today",
-          },
-        ],
-        Piano: [
-          {
-            id: 3,
-            name: "Sarah Chen",
-            avatar: "S",
-            rating: 4.8,
-            reviews: 32,
-            distance: "1.2 miles away",
-            description:
-              "Classical pianist with conservatory training. Specializes in teaching proper technique and music theory for all skill levels.",
-            skills: ["Piano", "Music Theory", "Composition"],
-            price: "Rs.1500/hour",
-            availability: "Available tomorrow",
-          },
-          {
-            id: 4,
-            name: "Michael Brown",
-            avatar: "M",
-            rating: 4.7,
-            reviews: 28,
-            distance: "0.5 miles away",
-            description:
-              "Jazz pianist and composer with 15+ years teaching experience. Focus on improvisation and contemporary styles.",
-            skills: ["Piano", "Jazz Theory", "Improvisation"],
-            price: "Rs.1300/hour",
-            availability: "Available today",
-          },
-        ],
-        Painting: [
-          {
-            id: 5,
-            name: "Elena Vasquez",
-            avatar: "E",
-            rating: 4.9,
-            reviews: 53,
-            distance: "0.3 miles away",
-            description:
-              "Professional artist with gallery exhibitions worldwide. Teaching watercolor, oil, and acrylic painting techniques.",
-            skills: ["Watercolor", "Oil Painting", "Acrylic", "Color Theory"],
-            price: "Rs.1400/hour",
-            availability: "Available today",
-          },
-        ],
-        Cooking: [
-          {
-            id: 6,
-            name: "Chef Antonio",
-            avatar: "A",
-            rating: 5.0,
-            reviews: 42,
-            distance: "1.0 miles away",
-            description:
-              "Professional chef with 20+ years experience in Italian cuisine. Teaching authentic recipes and techniques.",
-            skills: ["Italian Cuisine", "Pasta Making", "Wine Pairing"],
-            price: "Rs.1800/hour",
-            availability: "Available tomorrow",
-          },
-        ],
+  <script>
+    // Sample teacher data
+    const teachersData = {
+      Guitar: [
+        {
+          id: 1,
+          name: "Maria Rodriguez",
+          avatar: "M",
+          rating: 4.9,
+          reviews: 47,
+          distance: "0.8 miles away",
+          description:
+            "Passionate language teacher with 10+ years experience. I specialize in making Spanish fun and accessible for all ages through immersive cultural experiences.",
+          skills: ["Guitar", "Flamenco Dance", "Music Theory"],
+          price: "Rs.1000/hour",
+          availability: "Available today",
+        },
+        {
+          id: 2,
+          name: "David Johnson",
+          avatar: "D",
+          rating: 4.9,
+          reviews: 47,
+          distance: "0.8 miles away",
+          description:
+            "Professional guitarist with experience in rock, jazz, and classical music. Teaching beginners to advanced students for over 8 years.",
+          skills: ["Guitar", "Bass Guitar", "Music Production"],
+          price: "Rs.1200/hour",
+          availability: "Available today",
+        },
+      ],
+      Piano: [
+        {
+          id: 3,
+          name: "Sarah Chen",
+          avatar: "S",
+          rating: 4.8,
+          reviews: 32,
+          distance: "1.2 miles away",
+          description:
+            "Classical pianist with conservatory training. Specializes in teaching proper technique and music theory for all skill levels.",
+          skills: ["Piano", "Music Theory", "Composition"],
+          price: "Rs.1500/hour",
+          availability: "Available tomorrow",
+        },
+        {
+          id: 4,
+          name: "Michael Brown",
+          avatar: "M",
+          rating: 4.7,
+          reviews: 28,
+          distance: "0.5 miles away",
+          description:
+            "Jazz pianist and composer with 15+ years teaching experience. Focus on improvisation and contemporary styles.",
+          skills: ["Piano", "Jazz Theory", "Improvisation"],
+          price: "Rs.1300/hour",
+          availability: "Available today",
+        },
+      ],
+      Painting: [
+        {
+          id: 5,
+          name: "Elena Vasquez",
+          avatar: "E",
+          rating: 4.9,
+          reviews: 53,
+          distance: "0.3 miles away",
+          description:
+            "Professional artist with gallery exhibitions worldwide. Teaching watercolor, oil, and acrylic painting techniques.",
+          skills: ["Watercolor", "Oil Painting", "Acrylic", "Color Theory"],
+          price: "Rs.1400/hour",
+          availability: "Available today",
+        },
+      ],
+      Cooking: [
+        {
+          id: 6,
+          name: "Chef Antonio",
+          avatar: "A",
+          rating: 5.0,
+          reviews: 42,
+          distance: "1.0 miles away",
+          description:
+            "Professional chef with 20+ years experience in Italian cuisine. Teaching authentic recipes and techniques.",
+          skills: ["Italian Cuisine", "Pasta Making", "Wine Pairing"],
+          price: "Rs.1800/hour",
+          availability: "Available tomorrow",
+        },
+      ],
+    };
+
+    // Global variables
+    let currentSkill = "";
+    let selectedTeacher = null;
+
+    // Wishlist functionality
+    function getWishlist() {
+      const wishlist = localStorage.getItem("skillWishlist");
+      return wishlist ? JSON.parse(wishlist) : [];
+    }
+
+    function saveWishlist(wishlist) {
+      localStorage.setItem("skillWishlist", JSON.stringify(wishlist));
+    }
+
+    function isInWishlist(skill) {
+      const wishlist = getWishlist();
+      return wishlist.some((item) => item.skillName === skill);
+    }
+
+    function addToWishlist() {
+      if (!currentSkill) return;
+
+      const wishlist = getWishlist();
+
+      // Check if already in wishlist
+      if (isInWishlist(currentSkill)) {
+        showSuccessMessage(`${currentSkill} is already in your wishlist!`);
+        return;
+      }
+
+      // Add to wishlist
+      const wishlistItem = {
+        skillName: currentSkill,
+        courseIcon: getSkillIcon(currentSkill),
+        availableTeachers: getAvailableTeachers(currentSkill),
+        addedDate: new Date().toISOString(),
       };
 
-      // Global variables
-      let currentSkill = "";
-      let selectedTeacher = null;
+      wishlist.push(wishlistItem);
+      saveWishlist(wishlist);
 
-      // Wishlist functionality
-      function getWishlist() {
-        const wishlist = localStorage.getItem("skillWishlist");
-        return wishlist ? JSON.parse(wishlist) : [];
+      // Update button state
+      updateWishlistButton(true);
+
+      showSuccessMessage(
+        `${currentSkill} added to your wishlist! Check it in your Dashboard > My Learning.`
+      );
+    }
+
+    function updateWishlistButton(isAdded) {
+      const btn = document.getElementById("wishlist-btn");
+      const btnText = document.getElementById("wishlist-btn-text");
+
+      if (isAdded) {
+        btn.classList.add("added");
+        btnText.textContent = "Added to Wishlist";
+        btn.onclick = null; // Disable further clicks
+      } else {
+        btn.classList.remove("added");
+        btnText.textContent = "Add to Wishlist";
+        btn.onclick = addToWishlist;
       }
+    }
 
-      function saveWishlist(wishlist) {
-        localStorage.setItem("skillWishlist", JSON.stringify(wishlist));
-      }
+    function getSkillIcon(skill) {
+      const iconMap = {
+        Guitar: "🎸",
+        Piano: "🎹",
+        Painting: "🎨",
+        Cooking: "🍳",
+        "Traditional Cuisines": "🍳",
+        Photography: "📸",
+        Drawing: "✏️",
+        Pottery: "🏺",
+        Singing: "🎤",
+        Violin: "🎻",
+        Drums: "🥁",
+        "Public Speaking": "🎤",
+        "Computer Basics": "💻",
+        "Social Media": "📱",
+        Gardening: "🌱",
+        "Yoga Meditation": "🧘",
+        Fitness: "💪",
+        "Resume Writing": "📝",
+        Leadership: "👨‍💼",
+      };
+      return iconMap[skill] || "📚";
+    }
 
-      function isInWishlist(skill) {
-        const wishlist = getWishlist();
-        return wishlist.some((item) => item.skillName === skill);
-      }
+    function getAvailableTeachers(skill) {
+      const teachers = teachersData[skill] || [];
+      return teachers.length;
+    }
 
-      function addToWishlist() {
-        if (!currentSkill) return;
+    // Wait for DOM to be fully loaded
+    document.addEventListener("DOMContentLoaded", function () {
+      initializeApp();
+    });
 
-        const wishlist = getWishlist();
+    function initializeApp() {
+      setupSearchFunctionality();
+      setupSkillNavigation();
+      setupCategoryInteractions();
+      setupScrollEffects();
+      setupKeyboardNavigation();
+      setupResponsiveHandlers();
 
-        // Check if already in wishlist
-        if (isInWishlist(currentSkill)) {
-          showSuccessMessage(`${currentSkill} is already in your wishlist!`);
-          return;
-        }
+      // Check if we need to auto-navigate to a specific skill from dashboard
+      checkForExploreSkill();
 
-        // Add to wishlist
-        const wishlistItem = {
-          skillName: currentSkill,
-          courseIcon: getSkillIcon(currentSkill),
-          availableTeachers: getAvailableTeachers(currentSkill),
-          addedDate: new Date().toISOString(),
-        };
+      console.log("🎓 SkillHub - Discover Skills Near You! 🚀");
+      console.log("✅ All features initialized successfully!");
+    }
 
-        wishlist.push(wishlistItem);
-        saveWishlist(wishlist);
+    // Check if we should auto-navigate to a specific skill
+    function checkForExploreSkill() {
+      const exploreSkill = localStorage.getItem("exploreSkill");
+      if (exploreSkill) {
+        // Clear the stored skill
+        localStorage.removeItem("exploreSkill");
 
-        // Update button state
-        updateWishlistButton(true);
-
+        // Show a notification that we're exploring the specific skill
         showSuccessMessage(
-          `${currentSkill} added to your wishlist! Check it in your Dashboard > My Learning.`
+          `Exploring ${exploreSkill} teachers from your wishlist!`
         );
+
+        // Auto-navigate to the skill after a short delay to ensure page is fully loaded
+        setTimeout(() => {
+          navigateToTeachers(exploreSkill);
+        }, 800);
       }
+    }
 
-      function updateWishlistButton(isAdded) {
-        const btn = document.getElementById("wishlist-btn");
-        const btnText = document.getElementById("wishlist-btn-text");
+    // Search functionality
+    function setupSearchFunctionality() {
+      const searchInput = document.querySelector(".search-input");
+      const searchBtn = document.querySelector(".search-btn");
 
-        if (isAdded) {
-          btn.classList.add("added");
-          btnText.textContent = "Added to Wishlist";
-          btn.onclick = null; // Disable further clicks
-        } else {
-          btn.classList.remove("added");
-          btnText.textContent = "Add to Wishlist";
-          btn.onclick = addToWishlist;
-        }
-      }
+      function performSearch() {
+        const query = searchInput.value.trim();
+        if (query) {
+          console.log("Searching for:", query);
 
-      function getSkillIcon(skill) {
-        const iconMap = {
-          Guitar: "🎸",
-          Piano: "🎹",
-          Painting: "🎨",
-          Cooking: "🍳",
-          "Traditional Cuisines": "🍳",
-          Photography: "📸",
-          Drawing: "✏️",
-          Pottery: "🏺",
-          Singing: "🎤",
-          Violin: "🎻",
-          Drums: "🥁",
-          "Public Speaking": "🎤",
-          "Computer Basics": "💻",
-          "Social Media": "📱",
-          Gardening: "🌱",
-          "Yoga Meditation": "🧘",
-          Fitness: "💪",
-          "Resume Writing": "📝",
-          Leadership: "👨‍💼",
-        };
-        return iconMap[skill] || "📚";
-      }
-
-      function getAvailableTeachers(skill) {
-        const teachers = teachersData[skill] || [];
-        return teachers.length;
-      }
-
-      // Wait for DOM to be fully loaded
-      document.addEventListener("DOMContentLoaded", function () {
-        initializeApp();
-      });
-
-      function initializeApp() {
-        setupSearchFunctionality();
-        setupSkillNavigation();
-        setupCategoryInteractions();
-        setupScrollEffects();
-        setupKeyboardNavigation();
-        setupResponsiveHandlers();
-
-        // Check if we need to auto-navigate to a specific skill from dashboard
-        checkForExploreSkill();
-
-        console.log("🎓 SkillHub - Discover Skills Near You! 🚀");
-        console.log("✅ All features initialized successfully!");
-      }
-
-      // Check if we should auto-navigate to a specific skill
-      function checkForExploreSkill() {
-        const exploreSkill = localStorage.getItem("exploreSkill");
-        if (exploreSkill) {
-          // Clear the stored skill
-          localStorage.removeItem("exploreSkill");
-
-          // Show a notification that we're exploring the specific skill
-          showSuccessMessage(
-            `Exploring ${exploreSkill} teachers from your wishlist!`
-          );
-
-          // Auto-navigate to the skill after a short delay to ensure page is fully loaded
-          setTimeout(() => {
-            navigateToTeachers(exploreSkill);
-          }, 800);
-        }
-      }
-
-      // Search functionality
-      function setupSearchFunctionality() {
-        const searchInput = document.querySelector(".search-input");
-        const searchBtn = document.querySelector(".search-btn");
-
-        function performSearch() {
-          const query = searchInput.value.trim();
-          if (query) {
-            console.log("Searching for:", query);
-
-            // Check if we're on the skills page
-            if (
-              document.getElementById("skill-categories-view").style.display !==
-              "none"
-            ) {
-              filterCategories(query);
-            } else {
-              filterTeachers(query);
-            }
+          // Check if we're on the skills page
+          if (
+            document.getElementById("skill-categories-view").style.display !==
+            "none"
+          ) {
+            filterCategories(query);
+          } else {
+            filterTeachers(query);
           }
         }
-
-        if (searchBtn) {
-          searchBtn.addEventListener("click", performSearch);
-        }
-
-        if (searchInput) {
-          searchInput.addEventListener("keypress", function (e) {
-            if (e.key === "Enter") {
-              performSearch();
-            }
-          });
-        }
       }
 
-      // Skill navigation setup
-      function setupSkillNavigation() {
-        const skillItems = document.querySelectorAll(
-          ".category-skills li[data-skill]"
-        );
+      if (searchBtn) {
+        searchBtn.addEventListener("click", performSearch);
+      }
 
-        skillItems.forEach((item) => {
-          item.addEventListener("click", function (e) {
-            e.stopPropagation();
-            const skill = this.getAttribute("data-skill");
-            navigateToTeachers(skill);
-          });
-
-          // Make items focusable for keyboard navigation
-          item.setAttribute("tabindex", "0");
-
-          item.addEventListener("keypress", function (e) {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              const skill = this.getAttribute("data-skill");
-              navigateToTeachers(skill);
-            }
-          });
+      if (searchInput) {
+        searchInput.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            performSearch();
+          }
         });
       }
+    }
 
-      // Navigate to teachers view
-      function navigateToTeachers(skill) {
-        currentSkill = skill;
-        console.log("Selected skill:", skill);
+    // Skill navigation setup
+    function setupSkillNavigation() {
+      const skillItems = document.querySelectorAll(
+        ".category-skills li[data-skill]"
+      );
 
-        // Hide skill categories view
-        document.getElementById("skill-categories-view").style.display = "none";
+      skillItems.forEach((item) => {
+        item.addEventListener("click", function (e) {
+          e.stopPropagation();
+          const skill = this.getAttribute("data-skill");
+          navigateToTeachers(skill);
+        });
 
-        // Show teachers view
-        document.getElementById("teachers-view").style.display = "block";
+        // Make items focusable for keyboard navigation
+        item.setAttribute("tabindex", "0");
 
-        // Update the subtitle
-        const subtitle = document.getElementById("skill-subtitle");
-        subtitle.textContent = `Find expert ${skill} teachers in your neighborhood`;
-
-        // Update wishlist section
-        document.getElementById("current-skill-name").textContent = skill;
-        updateWishlistButton(isInWishlist(skill));
-
-        // Load teachers for this skill
-        loadTeachers(skill);
-
-        // Scroll to top
-        window.scrollTo(0, 0);
-      }
-
-      // Show skill categories (back navigation)
-      function showSkillCategories() {
-        document.getElementById("teachers-view").style.display = "none";
-        document.getElementById("skill-categories-view").style.display =
-          "block";
-        currentSkill = "";
-        window.scrollTo(0, 0);
-      }
-
-      // Load teachers for a specific skill
-      function loadTeachers(skill) {
-        const teachersGrid = document.getElementById("teachers-grid");
-        const teacherCount = document.getElementById("teacher-count");
-
-        // Get teachers for this skill, fallback to Guitar teachers as sample
-        let teachers = teachersData[skill] || [];
-
-        // If no exact match, try to find similar skills or use sample data
-        if (teachers.length === 0) {
-          // Try to find teachers for similar skills
-          for (const [key, value] of Object.entries(teachersData)) {
-            if (
-              key.toLowerCase().includes(skill.toLowerCase()) ||
-              skill.toLowerCase().includes(key.toLowerCase())
-            ) {
-              teachers = value;
-              break;
-            }
+        item.addEventListener("keypress", function (e) {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            const skill = this.getAttribute("data-skill");
+            navigateToTeachers(skill);
           }
+        });
+      });
+    }
 
-          // If still no match, create sample teacher data for the skill
-          if (teachers.length === 0) {
-            teachers = createSampleTeachersForSkill(skill);
+    // Navigate to teachers view
+    function navigateToTeachers(skill) {
+      currentSkill = skill;
+      console.log("Selected skill:", skill);
+
+      // Hide skill categories view
+      document.getElementById("skill-categories-view").style.display = "none";
+
+      // Show teachers view
+      document.getElementById("teachers-view").style.display = "block";
+
+      // Update the subtitle
+      const subtitle = document.getElementById("skill-subtitle");
+      subtitle.textContent = `Find expert ${skill} teachers in your neighborhood`;
+
+      // Update wishlist section
+      document.getElementById("current-skill-name").textContent = skill;
+      updateWishlistButton(isInWishlist(skill));
+
+      // Load teachers for this skill
+      loadTeachers(skill);
+
+      // Scroll to top
+      window.scrollTo(0, 0);
+    }
+
+    // Show skill categories (back navigation)
+    function showSkillCategories() {
+      document.getElementById("teachers-view").style.display = "none";
+      document.getElementById("skill-categories-view").style.display =
+        "block";
+      currentSkill = "";
+      window.scrollTo(0, 0);
+    }
+
+    // Load teachers for a specific skill
+    function loadTeachers(skill) {
+      const teachersGrid = document.getElementById("teachers-grid");
+      const teacherCount = document.getElementById("teacher-count");
+
+      // Get teachers for this skill, fallback to Guitar teachers as sample
+      let teachers = teachersData[skill] || [];
+
+      // If no exact match, try to find similar skills or use sample data
+      if (teachers.length === 0) {
+        // Try to find teachers for similar skills
+        for (const [key, value] of Object.entries(teachersData)) {
+          if (
+            key.toLowerCase().includes(skill.toLowerCase()) ||
+            skill.toLowerCase().includes(key.toLowerCase())
+          ) {
+            teachers = value;
+            break;
           }
         }
 
-        // Update teacher count
-        teacherCount.textContent = `${teachers.length} teachers found`;
-
-        // Clear existing content
-        teachersGrid.innerHTML = "";
-
+        // If still no match, create sample teacher data for the skill
         if (teachers.length === 0) {
-          teachersGrid.innerHTML = `
+          teachers = createSampleTeachersForSkill(skill);
+        }
+      }
+
+      // Update teacher count
+      teacherCount.textContent = `${teachers.length} teachers found`;
+
+      // Clear existing content
+      teachersGrid.innerHTML = "";
+
+      if (teachers.length === 0) {
+        teachersGrid.innerHTML = `
             <div class="no-teachers">
               <p>No teachers found for ${skill}. Try searching for other skills!</p>
             </div>
           `;
-          return;
-        }
-
-        // Create teacher cards
-        teachers.forEach((teacher) => {
-          const teacherCard = createTeacherCard(teacher);
-          teachersGrid.appendChild(teacherCard);
-        });
+        return;
       }
 
-      // Create sample teachers for skills that don't have specific data
-      function createSampleTeachersForSkill(skill) {
-        const sampleTeachers = [
-          {
-            id: Date.now() + 1,
-            name: `Expert ${skill} Instructor`,
-            avatar: skill.charAt(0).toUpperCase(),
-            rating: 4.8,
-            reviews: Math.floor(Math.random() * 50) + 20,
-            distance: `${(Math.random() * 2 + 0.3).toFixed(1)} miles away`,
-            description: `Professional ${skill} teacher with years of experience. Specializing in teaching ${skill} to students of all levels.`,
-            skills: [skill, "Teaching", "Mentoring"],
-            price: `Rs.${Math.floor(Math.random() * 1000) + 800}/hour`,
-            availability: "Available today",
-          },
-          {
-            id: Date.now() + 2,
-            name: `${skill} Master`,
-            avatar: skill.charAt(1)?.toUpperCase() || "T",
-            rating: 4.9,
-            reviews: Math.floor(Math.random() * 40) + 15,
-            distance: `${(Math.random() * 1.5 + 0.5).toFixed(1)} miles away`,
-            description: `Passionate ${skill} expert dedicated to helping students master ${skill} through personalized instruction.`,
-            skills: [skill, "Advanced Techniques", "Beginner Friendly"],
-            price: `Rs.${Math.floor(Math.random() * 800) + 1000}/hour`,
-            availability: "Available tomorrow",
-          },
-        ];
+      // Create teacher cards
+      teachers.forEach((teacher) => {
+        const teacherCard = createTeacherCard(teacher);
+        teachersGrid.appendChild(teacherCard);
+      });
+    }
 
-        return sampleTeachers;
-      }
+    // Create sample teachers for skills that don't have specific data
+    function createSampleTeachersForSkill(skill) {
+      const sampleTeachers = [
+        {
+          id: Date.now() + 1,
+          name: `Expert ${skill} Instructor`,
+          avatar: skill.charAt(0).toUpperCase(),
+          rating: 4.8,
+          reviews: Math.floor(Math.random() * 50) + 20,
+          distance: `${(Math.random() * 2 + 0.3).toFixed(1)} miles away`,
+          description: `Professional ${skill} teacher with years of experience. Specializing in teaching ${skill} to students of all levels.`,
+          skills: [skill, "Teaching", "Mentoring"],
+          price: `Rs.${Math.floor(Math.random() * 1000) + 800}/hour`,
+          availability: "Available today",
+        },
+        {
+          id: Date.now() + 2,
+          name: `${skill} Master`,
+          avatar: skill.charAt(1)?.toUpperCase() || "T",
+          rating: 4.9,
+          reviews: Math.floor(Math.random() * 40) + 15,
+          distance: `${(Math.random() * 1.5 + 0.5).toFixed(1)} miles away`,
+          description: `Passionate ${skill} expert dedicated to helping students master ${skill} through personalized instruction.`,
+          skills: [skill, "Advanced Techniques", "Beginner Friendly"],
+          price: `Rs.${Math.floor(Math.random() * 800) + 1000}/hour`,
+          availability: "Available tomorrow",
+        },
+      ];
 
-      // Create a teacher card element
-      function createTeacherCard(teacher) {
-        const card = document.createElement("div");
-        card.className = "teacher-card";
+      return sampleTeachers;
+    }
 
-        const stars =
-          "★".repeat(Math.floor(teacher.rating)) +
-          "☆".repeat(5 - Math.floor(teacher.rating));
+    // Create a teacher card element
+    function createTeacherCard(teacher) {
+      const card = document.createElement("div");
+      card.className = "teacher-card";
 
-        card.innerHTML = `
+      const stars =
+        "★".repeat(Math.floor(teacher.rating)) +
+        "☆".repeat(5 - Math.floor(teacher.rating));
+
+      card.innerHTML = `
           <div class="teacher-header">
             <div class="teacher-avatar">
               <span>${teacher.avatar}</span>
@@ -1875,8 +1957,7 @@ If asked about business information, politely redirect to platform features or s
               <h3>${teacher.name}</h3>
               <div class="teacher-rating">
                 <span class="stars">${stars}</span>
-                <span class="rating-text">${teacher.rating} (${
-          teacher.reviews
+                <span class="rating-text">${teacher.rating} (${teacher.reviews
         } reviews)</span>
               </div>
               <div class="teacher-distance">${teacher.distance}</div>
@@ -1891,399 +1972,397 @@ If asked about business information, politely redirect to platform features or s
             <h4>Skills Offered:</h4>
             <div class="skills-tags">
               ${teacher.skills
-                .map((skill) => `<span class="skill-tag">${skill}</span>`)
-                .join("")}
+          .map((skill) => `<span class="skill-tag">${skill}</span>`)
+          .join("")}
             </div>
           </div>
           
           <div class="teacher-footer">
             <div class="price-info">
               <span class="price">${teacher.price}</span>
-              <span class="availability available">● ${
-                teacher.availability
-              }</span>
+              <span class="availability available">● ${teacher.availability
+        }</span>
             </div>
-            <button class="view-btn" onclick="openTeacherPopup(${
-              teacher.id
-            })">View</button>
+            <button class="view-btn" onclick="openTeacherPopup(${teacher.id
+        })">View</button>
           </div>
         `;
 
-        return card;
-      }
+      return card;
+    }
 
-      // Open teacher detail popup
-      function openTeacherPopup(teacherId) {
-        // Find teacher in current skill data
-        const teachers =
-          teachersData[currentSkill] || teachersData["Guitar"] || [];
-        const teacher = teachers.find((t) => t.id === teacherId);
+    // Open teacher detail popup
+    function openTeacherPopup(teacherId) {
+      // Find teacher in current skill data
+      const teachers =
+        teachersData[currentSkill] || teachersData["Guitar"] || [];
+      const teacher = teachers.find((t) => t.id === teacherId);
 
-        if (!teacher) return;
+      if (!teacher) return;
 
-        selectedTeacher = teacher;
+      selectedTeacher = teacher;
 
-        // Populate popup with teacher data
-        document.getElementById("popup-avatar").textContent = teacher.avatar;
-        document.getElementById("popup-name").textContent = teacher.name;
+      // Populate popup with teacher data
+      document.getElementById("popup-avatar").textContent = teacher.avatar;
+      document.getElementById("popup-name").textContent = teacher.name;
 
-        const stars =
-          "★".repeat(Math.floor(teacher.rating)) +
-          "☆".repeat(5 - Math.floor(teacher.rating));
-        document.getElementById(
-          "popup-rating"
-        ).innerHTML = `<span class="stars">${stars}</span> ${teacher.rating}`;
-        document.getElementById(
-          "popup-reviews"
-        ).textContent = `(${teacher.reviews} reviews)`;
-        document.getElementById("popup-distance").textContent =
-          teacher.distance;
-        document.getElementById("popup-description").textContent =
-          teacher.description;
-        document.getElementById("popup-price").textContent = teacher.price;
-        document.getElementById(
-          "popup-availability"
-        ).innerHTML = `● ${teacher.availability}`;
+      const stars =
+        "★".repeat(Math.floor(teacher.rating)) +
+        "☆".repeat(5 - Math.floor(teacher.rating));
+      document.getElementById(
+        "popup-rating"
+      ).innerHTML = `<span class="stars">${stars}</span> ${teacher.rating}`;
+      document.getElementById(
+        "popup-reviews"
+      ).textContent = `(${teacher.reviews} reviews)`;
+      document.getElementById("popup-distance").textContent =
+        teacher.distance;
+      document.getElementById("popup-description").textContent =
+        teacher.description;
+      document.getElementById("popup-price").textContent = teacher.price;
+      document.getElementById(
+        "popup-availability"
+      ).innerHTML = `● ${teacher.availability}`;
 
-        // Populate skills
-        const skillsContainer = document.getElementById("popup-skills");
-        skillsContainer.innerHTML = teacher.skills
-          .map((skill) => `<span class="skill-tag">${skill}</span>`)
-          .join("");
+      // Populate skills
+      const skillsContainer = document.getElementById("popup-skills");
+      skillsContainer.innerHTML = teacher.skills
+        .map((skill) => `<span class="skill-tag">${skill}</span>`)
+        .join("");
 
-        // Show popup
-        document.getElementById("teacher-popup").style.display = "flex";
-        document.body.style.overflow = "hidden";
-      }
+      // Show popup
+      document.getElementById("teacher-popup").style.display = "flex";
+      document.body.style.overflow = "hidden";
+    }
 
-      // Close teacher popup
-      function closeTeacherPopup() {
-        document.getElementById("teacher-popup").style.display = "none";
-        document.body.style.overflow = "auto";
-        selectedTeacher = null;
-      }
+    // Close teacher popup
+    function closeTeacherPopup() {
+      document.getElementById("teacher-popup").style.display = "none";
+      document.body.style.overflow = "auto";
+      selectedTeacher = null;
+    }
 
-      // Connect with teacher
-      function connectWithTeacher() {
-        if (!selectedTeacher) return;
+    // Connect with teacher
+    function connectWithTeacher() {
+      if (!selectedTeacher) return;
 
-        // Update modal with teacher name
-        document.getElementById("connect-teacher-name").textContent =
-          selectedTeacher.name;
+      // Update modal with teacher name
+      document.getElementById("connect-teacher-name").textContent =
+        selectedTeacher.name;
 
-        // Show confirmation modal
-        document.getElementById("connect-modal").style.display = "flex";
-      }
+      // Show confirmation modal
+      document.getElementById("connect-modal").style.display = "flex";
+    }
 
-      // Close connect modal
-      function closeConnectModal() {
-        document.getElementById("connect-modal").style.display = "none";
-      }
+    // Close connect modal
+    function closeConnectModal() {
+      document.getElementById("connect-modal").style.display = "none";
+    }
 
-      // Confirm connection
-      function confirmConnection() {
-        if (!selectedTeacher) return;
+    // Confirm connection
+    function confirmConnection() {
+      if (!selectedTeacher) return;
 
-        // Close modals
-        closeConnectModal();
-        closeTeacherPopup();
-
-        // Show success message
-        showSuccessMessage(
-          `Successfully connected with ${selectedTeacher.name}! They will contact you soon.`
-        );
-
-        console.log(`Connected with teacher: ${selectedTeacher.name}`);
-      }
+      // Close modals
+      closeConnectModal();
+      closeTeacherPopup();
 
       // Show success message
-      function showSuccessMessage(message) {
-        // Remove existing success message if any
-        const existing = document.querySelector(".success-message");
-        if (existing) {
-          existing.remove();
+      showSuccessMessage(
+        `Successfully connected with ${selectedTeacher.name}! They will contact you soon.`
+      );
+
+      console.log(`Connected with teacher: ${selectedTeacher.name}`);
+    }
+
+    // Show success message
+    function showSuccessMessage(message) {
+      // Remove existing success message if any
+      const existing = document.querySelector(".success-message");
+      if (existing) {
+        existing.remove();
+      }
+
+      // Create new success message
+      const successDiv = document.createElement("div");
+      successDiv.className = "success-message";
+      successDiv.textContent = message;
+
+      document.body.appendChild(successDiv);
+
+      // Show with animation
+      setTimeout(() => {
+        successDiv.classList.add("show");
+      }, 100);
+
+      // Hide after 4 seconds
+      setTimeout(() => {
+        successDiv.classList.remove("show");
+        setTimeout(() => {
+          successDiv.remove();
+        }, 300);
+      }, 4000);
+    }
+
+    // Category interactions
+    function setupCategoryInteractions() {
+      const categoryCards = document.querySelectorAll(".category-section");
+
+      categoryCards.forEach((card) => {
+        // Add hover effect
+        card.addEventListener("mouseenter", function () {
+          this.style.transform = "translateY(-8px)";
+          this.style.cursor = "pointer";
+        });
+
+        card.addEventListener("mouseleave", function () {
+          this.style.transform = "translateY(-5px)";
+        });
+      });
+    }
+
+    // Filter categories based on search query
+    function filterCategories(query) {
+      const categories = document.querySelectorAll(".category-section");
+      query = query.toLowerCase();
+
+      categories.forEach((category) => {
+        const categoryName = category
+          .querySelector("h3")
+          .textContent.toLowerCase();
+        const categorySkills = Array.from(
+          category.querySelectorAll(".category-skills li")
+        )
+          .map((li) => li.textContent.toLowerCase())
+          .join(" ");
+
+        if (categoryName.includes(query) || categorySkills.includes(query)) {
+          category.style.display = "block";
+          category.style.animation = "fadeIn 0.5s ease-out";
+        } else {
+          category.style.display = "none";
         }
+      });
+    }
 
-        // Create new success message
-        const successDiv = document.createElement("div");
-        successDiv.className = "success-message";
-        successDiv.textContent = message;
+    // Filter teachers based on search query
+    function filterTeachers(query) {
+      const teacherCards = document.querySelectorAll(".teacher-card");
+      query = query.toLowerCase();
 
-        document.body.appendChild(successDiv);
+      teacherCards.forEach((card) => {
+        const teacherName = card
+          .querySelector("h3")
+          .textContent.toLowerCase();
+        const teacherSkills = Array.from(card.querySelectorAll(".skill-tag"))
+          .map((tag) => tag.textContent.toLowerCase())
+          .join(" ");
+        const teacherDescription = card
+          .querySelector(".teacher-description p")
+          .textContent.toLowerCase();
 
-        // Show with animation
-        setTimeout(() => {
-          successDiv.classList.add("show");
-        }, 100);
+        if (
+          teacherName.includes(query) ||
+          teacherSkills.includes(query) ||
+          teacherDescription.includes(query)
+        ) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
 
-        // Hide after 4 seconds
-        setTimeout(() => {
-          successDiv.classList.remove("show");
-          setTimeout(() => {
-            successDiv.remove();
-          }, 300);
-        }, 4000);
-      }
-
-      // Category interactions
-      function setupCategoryInteractions() {
-        const categoryCards = document.querySelectorAll(".category-section");
-
-        categoryCards.forEach((card) => {
-          // Add hover effect
-          card.addEventListener("mouseenter", function () {
-            this.style.transform = "translateY(-8px)";
-            this.style.cursor = "pointer";
-          });
-
-          card.addEventListener("mouseleave", function () {
-            this.style.transform = "translateY(-5px)";
-          });
-        });
-      }
-
-      // Filter categories based on search query
-      function filterCategories(query) {
-        const categories = document.querySelectorAll(".category-section");
-        query = query.toLowerCase();
-
-        categories.forEach((category) => {
-          const categoryName = category
-            .querySelector("h3")
-            .textContent.toLowerCase();
-          const categorySkills = Array.from(
-            category.querySelectorAll(".category-skills li")
-          )
-            .map((li) => li.textContent.toLowerCase())
-            .join(" ");
-
-          if (categoryName.includes(query) || categorySkills.includes(query)) {
-            category.style.display = "block";
-            category.style.animation = "fadeIn 0.5s ease-out";
-          } else {
-            category.style.display = "none";
-          }
-        });
-      }
-
-      // Filter teachers based on search query
-      function filterTeachers(query) {
-        const teacherCards = document.querySelectorAll(".teacher-card");
-        query = query.toLowerCase();
-
-        teacherCards.forEach((card) => {
-          const teacherName = card
-            .querySelector("h3")
-            .textContent.toLowerCase();
-          const teacherSkills = Array.from(card.querySelectorAll(".skill-tag"))
-            .map((tag) => tag.textContent.toLowerCase())
-            .join(" ");
-          const teacherDescription = card
-            .querySelector(".teacher-description p")
-            .textContent.toLowerCase();
-
+    // Setup scroll effects
+    function setupScrollEffects() {
+      // Smooth scrolling for navigation links
+      const navLinks = document.querySelectorAll(".nav-link");
+      navLinks.forEach((link) => {
+        link.addEventListener("click", function (e) {
           if (
-            teacherName.includes(query) ||
-            teacherSkills.includes(query) ||
-            teacherDescription.includes(query)
+            this.getAttribute("href") &&
+            this.getAttribute("href").startsWith("#")
           ) {
-            card.style.display = "block";
+            e.preventDefault();
+            const targetId = this.getAttribute("href");
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+              targetSection.scrollIntoView({
+                behavior: "smooth",
+              });
+            }
+          }
+        });
+      });
+
+      // Add scroll effect to navbar
+      window.addEventListener("scroll", function () {
+        const navbar = document.querySelector(".navbar");
+        if (navbar) {
+          if (window.scrollY > 100) {
+            navbar.style.background = "rgba(255, 255, 255, 0.98)";
+            navbar.style.boxShadow = "0 2px 30px rgba(0, 0, 0, 0.15)";
           } else {
-            card.style.display = "none";
+            navbar.style.background = "rgba(255, 255, 255, 0.95)";
+            navbar.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.1)";
           }
-        });
-      }
+        }
+      });
 
-      // Setup scroll effects
-      function setupScrollEffects() {
-        // Smooth scrolling for navigation links
-        const navLinks = document.querySelectorAll(".nav-link");
-        navLinks.forEach((link) => {
-          link.addEventListener("click", function (e) {
-            if (
-              this.getAttribute("href") &&
-              this.getAttribute("href").startsWith("#")
-            ) {
-              e.preventDefault();
-              const targetId = this.getAttribute("href");
-              const targetSection = document.querySelector(targetId);
-              if (targetSection) {
-                targetSection.scrollIntoView({
-                  behavior: "smooth",
-                });
-              }
+      // Animate category cards on scroll
+      const cardObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = "1";
+              entry.target.style.transform = "translateY(0)";
             }
           });
-        });
+        },
+        {
+          threshold: 0.1,
+        }
+      );
 
-        // Add scroll effect to navbar
-        window.addEventListener("scroll", function () {
-          const navbar = document.querySelector(".navbar");
-          if (navbar) {
-            if (window.scrollY > 100) {
-              navbar.style.background = "rgba(255, 255, 255, 0.98)";
-              navbar.style.boxShadow = "0 2px 30px rgba(0, 0, 0, 0.15)";
-            } else {
-              navbar.style.background = "rgba(255, 255, 255, 0.95)";
-              navbar.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.1)";
-            }
-          }
-        });
-
-        // Animate category cards on scroll
-        const cardObserver = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.style.opacity = "1";
-                entry.target.style.transform = "translateY(0)";
-              }
-            });
-          },
-          {
-            threshold: 0.1,
-          }
-        );
-
-        // Observe category cards
-        const categoryCards = document.querySelectorAll(".category-section");
-        categoryCards.forEach((card, index) => {
-          card.style.opacity = "0";
-          card.style.transform = "translateY(30px)";
-          card.style.transition = `opacity 0.6s ease ${
-            index * 0.1
+      // Observe category cards
+      const categoryCards = document.querySelectorAll(".category-section");
+      categoryCards.forEach((card, index) => {
+        card.style.opacity = "0";
+        card.style.transform = "translateY(30px)";
+        card.style.transition = `opacity 0.6s ease ${index * 0.1
           }s, transform 0.6s ease ${index * 0.1}s`;
-          cardObserver.observe(card);
-        });
-
-        // Parallax effect for hero circles
-        window.addEventListener("scroll", function () {
-          const scrolled = window.pageYOffset;
-          const heroCircles = document.querySelectorAll(".hero-circle");
-
-          heroCircles.forEach((circle, index) => {
-            const speed = 0.02 + index * 0.01;
-            const yPos = scrolled * speed;
-            circle.style.transform = `translateY(${yPos}px)`;
-          });
-        });
-      }
-
-      // Setup keyboard navigation
-      function setupKeyboardNavigation() {
-        // Add keyboard navigation support
-        document.addEventListener("keydown", function (e) {
-          if (e.key === "Tab") {
-            document.body.classList.add("keyboard-navigation");
-          }
-
-          // Escape key to close popups
-          if (e.key === "Escape") {
-            if (
-              document.getElementById("teacher-popup").style.display === "flex"
-            ) {
-              closeTeacherPopup();
-            }
-            if (
-              document.getElementById("connect-modal").style.display === "flex"
-            ) {
-              closeConnectModal();
-            }
-          }
-        });
-
-        document.addEventListener("mousedown", function () {
-          document.body.classList.remove("keyboard-navigation");
-        });
-      }
-
-      // Setup responsive handlers
-      function setupResponsiveHandlers() {
-        // Handle window resize for responsive adjustments
-        let resizeTimer;
-        window.addEventListener("resize", function () {
-          clearTimeout(resizeTimer);
-          resizeTimer = setTimeout(function () {
-            console.log("Window resized, adjusting layouts...");
-            // Add any responsive adjustments here
-          }, 250);
-        });
-      }
-
-      // Sort teachers functionality
-      function setupSortFunctionality() {
-        const sortSelect = document.getElementById("sort-select");
-        if (sortSelect) {
-          sortSelect.addEventListener("change", function () {
-            const sortBy = this.value;
-            sortTeachers(sortBy);
-          });
-        }
-      }
-
-      function sortTeachers(sortBy) {
-        const teachersGrid = document.getElementById("teachers-grid");
-        const cards = Array.from(
-          teachersGrid.querySelectorAll(".teacher-card")
-        );
-
-        cards.sort((a, b) => {
-          switch (sortBy) {
-            case "rating":
-              const ratingA = parseFloat(
-                a.querySelector(".rating-text").textContent
-              );
-              const ratingB = parseFloat(
-                b.querySelector(".rating-text").textContent
-              );
-              return ratingB - ratingA;
-
-            case "price":
-              const priceA = parseInt(
-                a.querySelector(".price").textContent.replace(/[^\d]/g, "")
-              );
-              const priceB = parseInt(
-                b.querySelector(".price").textContent.replace(/[^\d]/g, "")
-              );
-              return priceA - priceB;
-
-            case "distance":
-              const distA = parseFloat(
-                a.querySelector(".teacher-distance").textContent
-              );
-              const distB = parseFloat(
-                b.querySelector(".teacher-distance").textContent
-              );
-              return distA - distB;
-
-            default:
-              return 0;
-          }
-        });
-
-        // Re-append sorted cards
-        cards.forEach((card) => teachersGrid.appendChild(card));
-      }
-
-      // Initialize sort functionality when teachers view is shown
-      document.addEventListener("DOMContentLoaded", function () {
-        setupSortFunctionality();
+        cardObserver.observe(card);
       });
 
-      // Handle popup clicks outside content
-      document.addEventListener("click", function (e) {
-        if (e.target.classList.contains("popup-overlay")) {
-          closeTeacherPopup();
+      // Parallax effect for hero circles
+      window.addEventListener("scroll", function () {
+        const scrolled = window.pageYOffset;
+        const heroCircles = document.querySelectorAll(".hero-circle");
+
+        heroCircles.forEach((circle, index) => {
+          const speed = 0.02 + index * 0.01;
+          const yPos = scrolled * speed;
+          circle.style.transform = `translateY(${yPos}px)`;
+        });
+      });
+    }
+
+    // Setup keyboard navigation
+    function setupKeyboardNavigation() {
+      // Add keyboard navigation support
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Tab") {
+          document.body.classList.add("keyboard-navigation");
         }
-        if (e.target.classList.contains("modal-overlay")) {
-          closeConnectModal();
+
+        // Escape key to close popups
+        if (e.key === "Escape") {
+          if (
+            document.getElementById("teacher-popup").style.display === "flex"
+          ) {
+            closeTeacherPopup();
+          }
+          if (
+            document.getElementById("connect-modal").style.display === "flex"
+          ) {
+            closeConnectModal();
+          }
         }
       });
-    </script>
-    <script src="js/footer2.js"></script>
-    <script src="js/auth.js"></script>
+
+      document.addEventListener("mousedown", function () {
+        document.body.classList.remove("keyboard-navigation");
+      });
+    }
+
+    // Setup responsive handlers
+    function setupResponsiveHandlers() {
+      // Handle window resize for responsive adjustments
+      let resizeTimer;
+      window.addEventListener("resize", function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+          console.log("Window resized, adjusting layouts...");
+          // Add any responsive adjustments here
+        }, 250);
+      });
+    }
+
+    // Sort teachers functionality
+    function setupSortFunctionality() {
+      const sortSelect = document.getElementById("sort-select");
+      if (sortSelect) {
+        sortSelect.addEventListener("change", function () {
+          const sortBy = this.value;
+          sortTeachers(sortBy);
+        });
+      }
+    }
+
+    function sortTeachers(sortBy) {
+      const teachersGrid = document.getElementById("teachers-grid");
+      const cards = Array.from(
+        teachersGrid.querySelectorAll(".teacher-card")
+      );
+
+      cards.sort((a, b) => {
+        switch (sortBy) {
+          case "rating":
+            const ratingA = parseFloat(
+              a.querySelector(".rating-text").textContent
+            );
+            const ratingB = parseFloat(
+              b.querySelector(".rating-text").textContent
+            );
+            return ratingB - ratingA;
+
+          case "price":
+            const priceA = parseInt(
+              a.querySelector(".price").textContent.replace(/[^\d]/g, "")
+            );
+            const priceB = parseInt(
+              b.querySelector(".price").textContent.replace(/[^\d]/g, "")
+            );
+            return priceA - priceB;
+
+          case "distance":
+            const distA = parseFloat(
+              a.querySelector(".teacher-distance").textContent
+            );
+            const distB = parseFloat(
+              b.querySelector(".teacher-distance").textContent
+            );
+            return distA - distB;
+
+          default:
+            return 0;
+        }
+      });
+
+      // Re-append sorted cards
+      cards.forEach((card) => teachersGrid.appendChild(card));
+    }
+
+    // Initialize sort functionality when teachers view is shown
+    document.addEventListener("DOMContentLoaded", function () {
+      setupSortFunctionality();
+    });
+
+    // Handle popup clicks outside content
+    document.addEventListener("click", function (e) {
+      if (e.target.classList.contains("popup-overlay")) {
+        closeTeacherPopup();
+      }
+      if (e.target.classList.contains("modal-overlay")) {
+        closeConnectModal();
+      }
+    });
+  </script>
+  <script src="js/footer2.js"></script>
+  <script src="js/auth.js"></script>
   <script src="js/footer-loader.js"></script>
   <script src="js/navbar-loader.js"></script>
   <script src="js/navbar2.js"></script>
-  </body>
+</body>
+
 </html>

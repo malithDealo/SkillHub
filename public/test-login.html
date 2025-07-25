@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillHub - Test Login</title>
+    <link rel="stylesheet" href="css/accessibility.css">
+    <script src="js/accessibility.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,43 +15,51 @@
             padding: 20px;
             background-color: #f5f5f5;
         }
+
         .container {
             background: white;
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
+
         .test-section {
             margin-bottom: 30px;
             padding: 20px;
             border: 1px solid #ddd;
             border-radius: 8px;
         }
+
         .test-section h3 {
             margin-top: 0;
             color: #333;
         }
+
         .credentials {
             background: #f8f9fa;
             padding: 15px;
             border-radius: 5px;
             margin: 10px 0;
         }
+
         .status {
             padding: 10px;
             border-radius: 5px;
             margin: 10px 0;
         }
+
         .status.success {
             background: #d4edda;
             color: #155724;
             border: 1px solid #c3e6cb;
         }
+
         .status.error {
             background: #f8d7da;
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
+
         .btn {
             padding: 10px 20px;
             margin: 5px;
@@ -58,10 +69,26 @@
             text-decoration: none;
             display: inline-block;
         }
-        .btn-primary { background: #007bff; color: white; }
-        .btn-success { background: #28a745; color: white; }
-        .btn-warning { background: #ffc107; color: black; }
-        .btn:hover { opacity: 0.8; }
+
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-warning {
+            background: #ffc107;
+            color: black;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
         #log {
             background: #f8f9fa;
             padding: 15px;
@@ -74,6 +101,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>🔧 SkillHub Login Test Page</h1>
@@ -95,20 +123,21 @@
                 • Teacher: teacher@example.com<br>
                 • Sponsor: sponsor@example.com
             </div>
-            
+
             <label for="testEmail">Email:</label>
-            <input type="email" id="testEmail" value="learner@example.com" style="margin: 5px; padding: 8px; width: 200px;">
-            
+            <input type="email" id="testEmail" value="learner@example.com"
+                style="margin: 5px; padding: 8px; width: 200px;">
+
             <label for="testPassword">Password:</label>
             <input type="password" id="testPassword" value="password" style="margin: 5px; padding: 8px; width: 100px;">
-            
+
             <label for="testUserType">User Type:</label>
             <select id="testUserType" style="margin: 5px; padding: 8px;">
                 <option value="learner">Learner</option>
                 <option value="teacher">Teacher</option>
                 <option value="sponsor">Sponsor</option>
             </select>
-            
+
             <br><br>
             <button class="btn btn-success" onclick="testLogin()">Test Login</button>
             <div id="login-status"></div>
@@ -130,6 +159,87 @@
         </div>
     </div>
 
+    <!-- Accessibility Toolbar HTML - Add this to every page -->
+    <button class="accessibility-toggle" onclick="toggleAccessibilityPanel()" aria-label="Toggle accessibility options">
+        ♿
+    </button>
+
+    <div class="accessibility-panel" id="accessibilityPanel">
+        <div class="panel-header">
+            Accessibility Tools
+        </div>
+        <div class="panel-content">
+            <div class="accessibility-option" onclick="increaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Increase Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="decreaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Decrease Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('grayscale')">
+                <div class="option-label">
+                    <span class="option-icon">⬜</span>
+                    Grayscale
+                </div>
+                <div class="option-toggle" id="toggle-grayscale"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('high-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">🌓</span>
+                    High Contrast
+                </div>
+                <div class="option-toggle" id="toggle-high-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('negative-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">👁</span>
+                    Negative Contrast
+                </div>
+                <div class="option-toggle" id="toggle-negative-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('light-background')">
+                <div class="option-label">
+                    <span class="option-icon">💡</span>
+                    Light Background
+                </div>
+                <div class="option-toggle" id="toggle-light-background"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('links-underline')">
+                <div class="option-label">
+                    <span class="option-icon">🔗</span>
+                    Links Underline
+                </div>
+                <div class="option-toggle" id="toggle-links-underline"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('readable-font')">
+                <div class="option-label">
+                    <span class="option-icon">📖</span>
+                    Readable Font
+                </div>
+                <div class="option-toggle" id="toggle-readable-font"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="resetAccessibility()">
+                <div class="option-label">
+                    <span class="option-icon">↻</span>
+                    Reset
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Debug logging function
         function log(message) {
@@ -148,12 +258,12 @@
         async function testAPI() {
             const statusDiv = document.getElementById('api-status');
             statusDiv.innerHTML = 'Testing...';
-            
+
             try {
                 log('Testing API connection...');
                 const response = await fetch('/api/test');
                 const data = await response.json();
-                
+
                 if (response.ok) {
                     statusDiv.innerHTML = `<div class="status success">✅ API Connected Successfully<br>Database: ${data.database}<br>Timestamp: ${data.timestamp}</div>`;
                     log('✅ API test successful');
@@ -172,12 +282,12 @@
             const password = document.getElementById('testPassword').value;
             const userType = document.getElementById('testUserType').value;
             const statusDiv = document.getElementById('login-status');
-            
+
             statusDiv.innerHTML = 'Testing login...';
-            
+
             try {
                 log(`Testing login for ${email} as ${userType}...`);
-                
+
                 const response = await fetch('/api/auth/login', {
                     method: 'POST',
                     headers: {
@@ -191,11 +301,11 @@
                 });
 
                 const data = await response.json();
-                
+
                 if (data.success) {
                     statusDiv.innerHTML = `<div class="status success">✅ Login Successful!<br>User: ${data.user.name}<br>Type: ${data.user.type}<br>Email: ${data.user.email}</div>`;
                     log(`✅ Login successful for ${data.user.name}`);
-                    
+
                     // Store the login data for testing
                     localStorage.setItem('skillhub_user', JSON.stringify(data.user));
                     localStorage.setItem('skillhub_authenticated', 'true');
@@ -213,7 +323,7 @@
         }
 
         // Auto-update email when user type changes
-        document.getElementById('testUserType').addEventListener('change', function() {
+        document.getElementById('testUserType').addEventListener('change', function () {
             const userType = this.value;
             document.getElementById('testEmail').value = `${userType}@example.com`;
         });
@@ -224,4 +334,5 @@
         log('Click "Test API Connection" to verify server is running');
     </script>
 </body>
+
 </html>

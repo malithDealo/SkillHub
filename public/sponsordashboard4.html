@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillHub - Settings</title>
     <link rel="stylesheet" href="css/sponsordashboard4.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <script src="js/accessibility.js"></script>
     <script src="js/sponsordashboard4.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/navbar4.css">
     <link rel="stylesheet" href="css/navbar-enhancements.css">
     <link rel="stylesheet" href="css/footer2.css">
 </head>
+
 <body>
     <div class="navbar-sponsor"></div>
     <div class="container">
@@ -52,7 +56,7 @@
                 <div class="section-header">
                     <h2>Profile Settings</h2>
                 </div>
-                
+
                 <form class="settings-form" id="settingsForm">
                     <div class="form-row">
                         <div class="form-group">
@@ -64,7 +68,7 @@
                             <input type="text" id="contactName" name="contactName" value="John Smith" required>
                         </div>
                     </div>
-                    
+
                     <div class="form-row">
                         <div class="form-group">
                             <label for="phoneNumber">Phone Number</label>
@@ -85,21 +89,24 @@
                             </select>
                         </div>
                     </div>
-                    
+
                     <div class="form-row">
                         <div class="form-group">
                             <label for="emailAddress">Email Address</label>
-                            <input type="email" id="emailAddress" name="emailAddress" value="john.smith@techcorp.com" required>
+                            <input type="email" id="emailAddress" name="emailAddress" value="john.smith@techcorp.com"
+                                required>
                         </div>
                         <div class="form-group">
                             <label for="monthlyBudget">Monthly Budget</label>
-                            <input type="number" id="monthlyBudget" name="monthlyBudget" value="45000" min="0" step="100" required>
+                            <input type="number" id="monthlyBudget" name="monthlyBudget" value="45000" min="0"
+                                step="100" required>
                         </div>
                     </div>
-                    
+
                     <div class="form-group full-width">
                         <label for="description">Description</label>
-                        <textarea id="description" name="description" rows="4" placeholder="Brief description about your company and goals">TechCorp Solutions is a leading technology company focused on innovative software development and digital transformation services for enterprise clients.</textarea>
+                        <textarea id="description" name="description" rows="4"
+                            placeholder="Brief description about your company and goals">TechCorp Solutions is a leading technology company focused on innovative software development and digital transformation services for enterprise clients.</textarea>
                     </div>
 
                     <!-- Additional Settings -->
@@ -175,7 +182,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="form-actions">
                         <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
                         <button type="submit" class="save-btn">Save Changes</button>
@@ -188,7 +195,7 @@
                 <div class="section-header">
                     <h2>Account Management</h2>
                 </div>
-                
+
                 <div class="account-actions">
                     <div class="action-item">
                         <div class="action-info">
@@ -200,7 +207,7 @@
                             Change Password
                         </button>
                     </div>
-                    
+
                     <div class="action-item">
                         <div class="action-info">
                             <h4>Two-Factor Authentication</h4>
@@ -211,7 +218,7 @@
                             Setup 2FA
                         </button>
                     </div>
-                    
+
                     <div class="action-item">
                         <div class="action-info">
                             <h4>Download Data</h4>
@@ -222,7 +229,7 @@
                             Download Data
                         </button>
                     </div>
-                    
+
                     <div class="action-item danger">
                         <div class="action-info">
                             <h4>Delete Account</h4>
@@ -265,6 +272,87 @@
             </form>
         </div>
     </div>
+
+    <!-- Accessibility Toolbar HTML - Add this to every page -->
+    <button class="accessibility-toggle" onclick="toggleAccessibilityPanel()" aria-label="Toggle accessibility options">
+        ♿
+    </button>
+
+    <div class="accessibility-panel" id="accessibilityPanel">
+        <div class="panel-header">
+            Accessibility Tools
+        </div>
+        <div class="panel-content">
+            <div class="accessibility-option" onclick="increaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Increase Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="decreaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Decrease Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('grayscale')">
+                <div class="option-label">
+                    <span class="option-icon">⬜</span>
+                    Grayscale
+                </div>
+                <div class="option-toggle" id="toggle-grayscale"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('high-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">🌓</span>
+                    High Contrast
+                </div>
+                <div class="option-toggle" id="toggle-high-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('negative-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">👁</span>
+                    Negative Contrast
+                </div>
+                <div class="option-toggle" id="toggle-negative-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('light-background')">
+                <div class="option-label">
+                    <span class="option-icon">💡</span>
+                    Light Background
+                </div>
+                <div class="option-toggle" id="toggle-light-background"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('links-underline')">
+                <div class="option-label">
+                    <span class="option-icon">🔗</span>
+                    Links Underline
+                </div>
+                <div class="option-toggle" id="toggle-links-underline"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('readable-font')">
+                <div class="option-label">
+                    <span class="option-icon">📖</span>
+                    Readable Font
+                </div>
+                <div class="option-toggle" id="toggle-readable-font"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="resetAccessibility()">
+                <div class="option-label">
+                    <span class="option-icon">↻</span>
+                    Reset
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="footer-container"></div>
 
     <script src="js/auth.js"></script>
@@ -272,4 +360,5 @@
     <script src="js/navbar-loader.js"></script>
     <script src="js/navbar2.js"></script>
 </body>
+
 </html>

@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TeacherPro - Enhanced Dashboard</title>
     <link rel="stylesheet" href="css/dashboard_overview.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <script src="js/accessibility.js"></script>
 </head>
+
 <body>
     <div class="dashboard-container">
         <!-- Sidebar -->
@@ -15,7 +19,7 @@
                 <h1>TeacherPro</h1>
                 <p class="welcome-text">Welcome back, Dr. Smith!</p>
             </div>
-            
+
             <!-- <nav>
                 <ul class="nav-menu">
                     <li class="nav-item">
@@ -173,7 +177,7 @@
                                 <i class="fas fa-chart-bar"></i>
                                 <span>View Reports</span>
                             </button>
-                                <button class="btn-primary" onclick="window.open('quick_actions_modals.html', '_blank')">
+                            <button class="btn-primary" onclick="window.open('quick_actions_modals.html', '_blank')">
                                 <i class="fas fa-credit-card"></i>
                                 <span>Manage Payments</span>
                             </button>
@@ -326,7 +330,8 @@
                     <input type="number" id="sponsorshipAmount" min="0" step="0.01">
                 </div>
                 <div class="form-actions">
-                    <button type="button" class="btn-secondary" onclick="closeModal('connectSponsorModal')">Cancel</button>
+                    <button type="button" class="btn-secondary"
+                        onclick="closeModal('connectSponsorModal')">Cancel</button>
                     <button type="submit" class="btn-primary">Connect</button>
                 </div>
             </form>
@@ -410,6 +415,88 @@
         </div>
     </div>
 
-    <script src="../public/js/dashboard_overview.js"></script>
+    <!-- Accessibility Toolbar HTML - Add this to every page -->
+    <button class="accessibility-toggle" onclick="toggleAccessibilityPanel()" aria-label="Toggle accessibility options">
+        ♿
+    </button>
+
+    <div class="accessibility-panel" id="accessibilityPanel">
+        <div class="panel-header">
+            Accessibility Tools
+        </div>
+        <div class="panel-content">
+            <div class="accessibility-option" onclick="increaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Increase Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="decreaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Decrease Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('grayscale')">
+                <div class="option-label">
+                    <span class="option-icon">⬜</span>
+                    Grayscale
+                </div>
+                <div class="option-toggle" id="toggle-grayscale"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('high-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">🌓</span>
+                    High Contrast
+                </div>
+                <div class="option-toggle" id="toggle-high-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('negative-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">👁</span>
+                    Negative Contrast
+                </div>
+                <div class="option-toggle" id="toggle-negative-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('light-background')">
+                <div class="option-label">
+                    <span class="option-icon">💡</span>
+                    Light Background
+                </div>
+                <div class="option-toggle" id="toggle-light-background"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('links-underline')">
+                <div class="option-label">
+                    <span class="option-icon">🔗</span>
+                    Links Underline
+                </div>
+                <div class="option-toggle" id="toggle-links-underline"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('readable-font')">
+                <div class="option-label">
+                    <span class="option-icon">📖</span>
+                    Readable Font
+                </div>
+                <div class="option-toggle" id="toggle-readable-font"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="resetAccessibility()">
+                <div class="option-label">
+                    <span class="option-icon">↻</span>
+                    Reset
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dashboard_overview.js"></script>
 </body>
+
 </html>

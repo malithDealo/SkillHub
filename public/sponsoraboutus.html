@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillHub - About Us</title>
     <link rel="stylesheet" href="css/sponsoraboutus.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <script src="js/accessibility.js"></script>
     <script src="js/sponsoraboutus.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
     <!-- Hero Section -->
     <section class="hero-section">
@@ -27,7 +31,10 @@
     <section class="story-section">
         <div class="container">
             <h2>Our Story</h2>
-            <p>SkillHub was born from a simple observation: every neighborhood is filled with diverse talent eager to share knowledge and learn from one another. We created a platform where neighbors become teachers and students, fostering genuine connections while building stronger communities through shared learning experiences.</p>
+            <p>SkillHub was born from a simple observation: every neighborhood is filled with diverse talent eager to
+                share knowledge and learn from one another. We created a platform where neighbors become teachers and
+                students, fostering genuine connections while building stronger communities through shared learning
+                experiences.</p>
         </div>
     </section>
 
@@ -39,7 +46,8 @@
                     <i class="fas fa-heart"></i>
                 </div>
                 <h2>Our Mission</h2>
-                <p>To create vibrant learning communities where knowledge flows freely between neighbors, enriching lives through meaningful connections and personalized, affordable education.</p>
+                <p>To create vibrant learning communities where knowledge flows freely between neighbors, enriching
+                    lives through meaningful connections and personalized, affordable education.</p>
             </div>
         </div>
     </section>
@@ -49,7 +57,7 @@
         <div class="container">
             <h2>What Makes Us Different</h2>
             <p class="section-subtitle">Our unique approach sets us apart in the world of community learning</p>
-            
+
             <div class="features-grid">
                 <!-- Feature 1 -->
                 <div class="feature-card" data-feature="1">
@@ -57,7 +65,9 @@
                         <i class="fas fa-users"></i>
                     </div>
                     <h3>Community-First Approach</h3>
-                    <p>We prioritize building genuine connections between neighbors. Learning happens naturally when people feel connected to their community, creating lasting relationships beyond just skill exchange.</p>
+                    <p>We prioritize building genuine connections between neighbors. Learning happens naturally when
+                        people feel connected to their community, creating lasting relationships beyond just skill
+                        exchange.</p>
                 </div>
 
                 <!-- Feature 2 -->
@@ -66,7 +76,8 @@
                         <i class="fas fa-exchange-alt"></i>
                     </div>
                     <h3>Skill Exchange Economy</h3>
-                    <p>Our innovative bartering system allows members to trade skills, making learning accessible regardless of financial situation. Teach what you know, learn what you need.</p>
+                    <p>Our innovative bartering system allows members to trade skills, making learning accessible
+                        regardless of financial situation. Teach what you know, learn what you need.</p>
                 </div>
 
                 <!-- Feature 3 -->
@@ -75,7 +86,8 @@
                         <i class="fas fa-shield-check"></i>
                     </div>
                     <h3>Safety & Verification</h3>
-                    <p>Comprehensive background checks and community verification ensure every member is trustworthy. Safety protocols and local meeting spaces provide peace of mind for all interactions.</p>
+                    <p>Comprehensive background checks and community verification ensure every member is trustworthy.
+                        Safety protocols and local meeting spaces provide peace of mind for all interactions.</p>
                 </div>
 
                 <!-- Feature 4 -->
@@ -84,7 +96,8 @@
                         <i class="fas fa-universal-access"></i>
                     </div>
                     <h3>Inclusive Design</h3>
-                    <p>Built for everyone, regardless of age, background, or ability. Our platform celebrates diversity and ensures equal access to learning opportunities for all community members.</p>
+                    <p>Built for everyone, regardless of age, background, or ability. Our platform celebrates diversity
+                        and ensures equal access to learning opportunities for all community members.</p>
                 </div>
             </div>
         </div>
@@ -94,8 +107,9 @@
     <section class="team-section">
         <div class="container">
             <h2>Meet Our Team</h2>
-            <p class="section-subtitle">Passionate individuals dedicated to transforming communities through learning</p>
-            
+            <p class="section-subtitle">Passionate individuals dedicated to transforming communities through learning
+            </p>
+
             <div class="team-grid">
                 <div class="team-member">
                     <div class="member-avatar">
@@ -106,10 +120,11 @@
                     <div class="member-info">
                         <h3>Sarah Chen</h3>
                         <p class="member-role">Co-Founder & CEO</p>
-                        <p class="member-bio">Former educator with 15+ years experience in community building. Passionate about democratizing education and fostering neighborhood connections.</p>
+                        <p class="member-bio">Former educator with 15+ years experience in community building.
+                            Passionate about democratizing education and fostering neighborhood connections.</p>
                     </div>
                 </div>
-                
+
                 <div class="team-member">
                     <div class="member-avatar">
                         <div class="avatar-placeholder">
@@ -119,7 +134,8 @@
                     <div class="member-info">
                         <h3>Marcus Johnson</h3>
                         <p class="member-role">Co-Founder & CTO</p>
-                        <p class="member-bio">Technology innovator focused on creating platforms that strengthen local communities. Expert in building scalable, user-friendly applications.</p>
+                        <p class="member-bio">Technology innovator focused on creating platforms that strengthen local
+                            communities. Expert in building scalable, user-friendly applications.</p>
                     </div>
                 </div>
             </div>
@@ -130,7 +146,8 @@
     <section class="cta-section">
         <div class="container">
             <h2>Ready to Start Your <span class="highlight">SkillHub</span> Journey?</h2>
-            <p>Join thousands of learners and teachers in your neighborhood. Whether you're looking to master a new skill or share your expertise, your community is waiting.</p>
+            <p>Join thousands of learners and teachers in your neighborhood. Whether you're looking to master a new
+                skill or share your expertise, your community is waiting.</p>
             <button class="cta-button" id="getStartedBtn">
                 <span>Get Started Today</span>
                 <i class="fas fa-arrow-right"></i>
@@ -138,6 +155,88 @@
         </div>
     </section>
 
-    
+    <!-- Accessibility Toolbar HTML - Add this to every page -->
+    <button class="accessibility-toggle" onclick="toggleAccessibilityPanel()" aria-label="Toggle accessibility options">
+        ♿
+    </button>
+
+    <div class="accessibility-panel" id="accessibilityPanel">
+        <div class="panel-header">
+            Accessibility Tools
+        </div>
+        <div class="panel-content">
+            <div class="accessibility-option" onclick="increaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Increase Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="decreaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Decrease Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('grayscale')">
+                <div class="option-label">
+                    <span class="option-icon">⬜</span>
+                    Grayscale
+                </div>
+                <div class="option-toggle" id="toggle-grayscale"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('high-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">🌓</span>
+                    High Contrast
+                </div>
+                <div class="option-toggle" id="toggle-high-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('negative-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">👁</span>
+                    Negative Contrast
+                </div>
+                <div class="option-toggle" id="toggle-negative-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('light-background')">
+                <div class="option-label">
+                    <span class="option-icon">💡</span>
+                    Light Background
+                </div>
+                <div class="option-toggle" id="toggle-light-background"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('links-underline')">
+                <div class="option-label">
+                    <span class="option-icon">🔗</span>
+                    Links Underline
+                </div>
+                <div class="option-toggle" id="toggle-links-underline"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('readable-font')">
+                <div class="option-label">
+                    <span class="option-icon">📖</span>
+                    Readable Font
+                </div>
+                <div class="option-toggle" id="toggle-readable-font"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="resetAccessibility()">
+                <div class="option-label">
+                    <span class="option-icon">↻</span>
+                    Reset
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </body>
+
 </html>

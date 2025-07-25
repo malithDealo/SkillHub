@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Community Event</title>
     <link rel="stylesheet" href="css/add_question.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <script src="js/accessibility.js"></script>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
             <div class="header">
                 <h2>Create Community Event</h2>
-                <span class="close-icon" onclick="window.location.href='../learning_community/learning_community.html'">✖</span>
+                <span class="close-icon"
+                    onclick="window.location.href='../learning_community/learning_community.html'">✖</span>
                 <p>Bring your community together through shared learning experiences</p>
             </div>
         </div>
@@ -40,11 +45,13 @@
             </div>
             <div class="form-group">
                 <label for="description">Description:</label>
-                <textarea id="description" name="description" placeholder="Provide more details about your question. The more context you give, the better answer you'll receive."></textarea>
+                <textarea id="description" name="description"
+                    placeholder="Provide more details about your question. The more context you give, the better answer you'll receive."></textarea>
             </div>
             <div class="form-group">
                 <label for="tags">Tags (optional):</label>
-                <input type="text" id="tags" name="tags" placeholder="Add relevant tags to help people find your event (press Enter to add)">
+                <input type="text" id="tags" name="tags"
+                    placeholder="Add relevant tags to help people find your event (press Enter to add)">
             </div>
             <div class="form-group">
                 <input type="checkbox" id="notify" name="notify">
@@ -60,6 +67,88 @@
             </div>
         </form>
     </div>
+
+    <!-- Accessibility Toolbar HTML - Add this to every page -->
+    <button class="accessibility-toggle" onclick="toggleAccessibilityPanel()" aria-label="Toggle accessibility options">
+        ♿
+    </button>
+
+    <div class="accessibility-panel" id="accessibilityPanel">
+        <div class="panel-header">
+            Accessibility Tools
+        </div>
+        <div class="panel-content">
+            <div class="accessibility-option" onclick="increaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Increase Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="decreaseText()">
+                <div class="option-label">
+                    <span class="option-icon">🔍</span>
+                    Decrease Text
+                </div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('grayscale')">
+                <div class="option-label">
+                    <span class="option-icon">⬜</span>
+                    Grayscale
+                </div>
+                <div class="option-toggle" id="toggle-grayscale"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('high-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">🌓</span>
+                    High Contrast
+                </div>
+                <div class="option-toggle" id="toggle-high-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('negative-contrast')">
+                <div class="option-label">
+                    <span class="option-icon">👁</span>
+                    Negative Contrast
+                </div>
+                <div class="option-toggle" id="toggle-negative-contrast"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('light-background')">
+                <div class="option-label">
+                    <span class="option-icon">💡</span>
+                    Light Background
+                </div>
+                <div class="option-toggle" id="toggle-light-background"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('links-underline')">
+                <div class="option-label">
+                    <span class="option-icon">🔗</span>
+                    Links Underline
+                </div>
+                <div class="option-toggle" id="toggle-links-underline"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="toggleFeature('readable-font')">
+                <div class="option-label">
+                    <span class="option-icon">📖</span>
+                    Readable Font
+                </div>
+                <div class="option-toggle" id="toggle-readable-font"></div>
+            </div>
+
+            <div class="accessibility-option" onclick="resetAccessibility()">
+                <div class="option-label">
+                    <span class="option-icon">↻</span>
+                    Reset
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="js/add_question.js"></script>
 </body>
+
 </html>
