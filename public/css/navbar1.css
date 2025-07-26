@@ -72,20 +72,19 @@
     text-align: center;
     cursor: pointer;
     display: flex;
-    align-items: center; /* Vertical centering */
-    justify-content: center; /* Horizontal centering */
-    gap: 0.5rem; /* Space between icon and text */
-    line-height: 1; /* Ensure text aligns properly with icon */
-    height: 40px; /* Fixed height to make buttons consistent */
-    box-sizing: border-box; /* Ensure padding doesn't affect height */
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    line-height: 1;
+    height: 40px;
+    box-sizing: border-box;
 }
 
 .button-icon {
     width: 20px;
     height: 20px;
     object-fit: contain;
-    vertical-align: middle; /* Center icon vertically with text */
-     /* Fine-tune to center the icon, adjust as needed */
+    vertical-align: middle;
 }
 
 .btn-outline {
@@ -106,7 +105,7 @@
 
 .btn-filled:hover {
     background-color: #4CAF50;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow on hover for feedback */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Mobile Menu Button */
@@ -128,12 +127,199 @@
     transition: all 0.3s ease;
 }
 
-@media (max-width: 768px) {
-    .navbar-actions .nav-button {
-        display: none; /* Hide buttons on mobile, toggle with JavaScript */
-    }
+/* Mobile menu overlay */
+.mobile-menu-overlay {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 60px);
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
 
+.mobile-menu-overlay.active {
+    display: block;
+}
+
+/* Mobile menu content */
+.mobile-menu-content {
+    background: white;
+    padding: 2rem;
+    margin: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.mobile-navbar-actions {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.mobile-navbar-actions.active {
+    display: flex;
+}
+
+/* Responsive breakpoints */
+
+/* Large tablets and small desktops (768px - 1024px) */
+@media (max-width: 1024px) {
+    .navbar-container {
+        max-width: 95%;
+        padding: 0 1rem;
+    }
+    
+    .brand-text {
+        font-size: 1.5rem;
+    }
+    
+    .nav-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Tablets (576px - 768px) */
+@media (max-width: 768px) {
+    .navbar-top {
+        padding: 0.5rem;
+    }
+    
+    .navbar-container {
+        padding: 0 0.5rem;
+    }
+    
+    .logo {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .brand-text {
+        font-size: 1.3rem;
+    }
+    
+    .navbar-actions {
+        display: none;
+    }
+    
     .mobile-menu-btn {
         display: flex;
+    }
+    
+    .mobile-navbar-actions .nav-button {
+        width: 100%;
+        justify-content: center;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+    }
+}
+
+/* Mobile phones (320px - 576px) */
+@media (max-width: 576px) {
+    .navbar-top {
+        padding: 0.4rem;
+    }
+    
+    .navbar-container {
+        padding: 0 0.3rem;
+    }
+    
+    .navbar-brand {
+        gap: 0.5rem;
+    }
+    
+    .logo {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .brand-text {
+        font-size: 1.2rem;
+    }
+    
+    .mobile-menu-btn {
+        padding: 0.3rem;
+    }
+    
+    .mobile-menu-btn span {
+        width: 20px;
+        height: 2px;
+    }
+    
+    .mobile-menu-content {
+        margin: 0.5rem;
+        padding: 1.5rem;
+    }
+    
+    .mobile-navbar-actions .nav-button {
+        padding: 0.8rem 1rem;
+        font-size: 1.1rem;
+    }
+    
+    .button-icon {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* Extra small phones (max 320px) */
+@media (max-width: 320px) {
+    .navbar-brand {
+        gap: 0.3rem;
+    }
+    
+    .logo {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .brand-text {
+        font-size: 1.1rem;
+    }
+    
+    .mobile-menu-btn span {
+        width: 18px;
+    }
+    
+    .mobile-menu-content {
+        margin: 0.3rem;
+        padding: 1rem;
+    }
+}
+
+/* Landscape orientation adjustments for mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .mobile-menu-overlay {
+        top: 50px;
+        height: calc(100vh - 50px);
+    }
+    
+    .mobile-menu-content {
+        margin: 0.5rem;
+        padding: 1rem;
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+    }
+    
+    .mobile-navbar-actions {
+        gap: 0.8rem;
+    }
+    
+    .mobile-navbar-actions .nav-button {
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .logo img {
+        image-rendering: crisp-edges;
+    }
+    
+    .button-icon {
+        image-rendering: crisp-edges;
     }
 }

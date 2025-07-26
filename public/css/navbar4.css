@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -31,7 +30,6 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    
 }
 
 .logo {
@@ -39,8 +37,7 @@
     height: 48px;
     display: flex;
     margin-left: -230px;
-    justify-content:flex-start;
-   
+    justify-content: flex-start;
 }
 
 .brand-text {
@@ -55,9 +52,8 @@
 .navbar-menu {
     display: flex;
     align-items: center;
-    margin-left: 7rem; /* Adjust this value as needed */
+    margin-left: 7rem;
 }
-
 
 .navbar-nav {
     display: flex;
@@ -102,7 +98,6 @@
 .dropdown-toggle::after {
     content: "▼";
     font-size: 0.7rem;
-    
     margin-left: 0.5rem;
     transition: transform 0.3s ease;
 }
@@ -125,7 +120,7 @@
     transform: translateY(-10px);
     transition: all 0.3s ease;
     z-index: 1001;
-     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .dropdown:hover .dropdown-menu {
@@ -161,29 +156,98 @@
 .user-profile {
     display: flex;
     align-items: center;
+    position: relative;
+}
+
+.user-name {
+    font-weight: 500;
+    color: #495057;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-right: 0.5rem;
 }
 
 .profile-icon {
     width: 44px;
     height: 44px;
-   
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    
 }
 
 .profile-icon img {
     width: 40px;
     height: 40px;
-   
+    border-radius: 50%;
 }
 
 .profile-icon:hover {
     transform: scale(1.05);
-    
+}
+
+/* Profile Dropdown */
+.profile-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 0.5rem 0;
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1002;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.profile-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.profile-dropdown-link {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: #495057;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.profile-dropdown-link:last-child {
+    border-bottom: none;
+}
+
+.profile-dropdown-link:hover {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+}
+
+.profile-dropdown-link.logout:hover {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+}
+
+/* Small arrow pointing up for profile dropdown */
+.profile-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: 15px;
+    width: 12px;
+    height: 12px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: none;
+    border-right: none;
+    transform: rotate(45deg);
 }
 
 /* Mobile Menu Button */
@@ -203,4 +267,263 @@
     background: #495057;
     border-radius: 2px;
     transition: all 0.3s ease;
+}
+
+/* Mobile menu overlay */
+.mobile-menu-overlay {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 60px);
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.mobile-menu-overlay.active {
+    display: block;
+}
+
+/* Mobile menu content */
+.mobile-menu-content {
+    background: white;
+    padding: 1.5rem;
+    margin: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+.mobile-navbar-nav {
+    display: none;
+    flex-direction: column;
+    list-style: none;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.mobile-navbar-nav.active {
+    display: flex;
+}
+
+.mobile-nav-item {
+    position: relative;
+}
+
+.mobile-nav-link {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: #495057;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.mobile-nav-link:hover {
+    color: #28a745;
+    background-color: rgba(40, 167, 69, 0.1);
+}
+
+/* Mobile user profile */
+.mobile-user-profile {
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+    margin-top: 1rem;
+}
+
+.mobile-user-profile.active {
+    display: flex;
+}
+
+.mobile-user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+}
+
+.mobile-profile-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+/* Responsive breakpoints */
+
+/* Large tablets and small desktops (768px - 1024px) */
+@media (max-width: 1024px) {
+    .navbar-container {
+        max-width: 95%;
+    }
+    
+    .logo {
+        margin-left: -100px;
+    }
+    
+    .navbar-menu {
+        margin-left: 3rem;
+    }
+    
+    .nav-link {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+        margin-left: -10px;
+    }
+    
+    .brand-text {
+        font-size: 1.5rem;
+    }
+}
+
+/* Tablets (576px - 768px) */
+@media (max-width: 768px) {
+    .navbar-container {
+        padding: 0 0.5rem;
+    }
+    
+    .logo {
+        width: 40px;
+        height: 40px;
+        margin-left: 0;
+    }
+    
+    .brand-text {
+        font-size: 1.3rem;
+    }
+    
+    .navbar-menu {
+        display: none;
+    }
+    
+    .navbar-actions .user-profile {
+        display: none;
+    }
+    
+    .mobile-menu-btn {
+        display: flex;
+    }
+    
+    .user-name {
+        display: none;
+    }
+    
+    /* Adjust dropdown positioning for mobile */
+    .dropdown-menu {
+        left: -50px;
+        min-width: 200px;
+    }
+    
+    .profile-dropdown {
+        right: -10px;
+        min-width: 160px;
+    }
+}
+
+/* Mobile phones (320px - 576px) */
+@media (max-width: 576px) {
+    .navbar-top {
+        padding: 0.4rem 0;
+    }
+    
+    .navbar-container {
+        padding: 0 0.3rem;
+    }
+    
+    .navbar-brand {
+        gap: 0.5rem;
+    }
+    
+    .logo {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .brand-text {
+        font-size: 1.2rem;
+    }
+    
+    .mobile-menu-btn {
+        padding: 0.3rem;
+    }
+    
+    .mobile-menu-btn span {
+        width: 20px;
+        height: 2px;
+    }
+    
+    .mobile-menu-content {
+        margin: 0.5rem;
+        padding: 1rem;
+    }
+    
+    .mobile-nav-link {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* Extra small phones (max 320px) */
+@media (max-width: 320px) {
+    .navbar-brand {
+        gap: 0.3rem;
+    }
+    
+    .logo {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .brand-text {
+        font-size: 1.1rem;
+    }
+    
+    .mobile-menu-btn span {
+        width: 18px;
+    }
+    
+    .mobile-menu-content {
+        margin: 0.3rem;
+        padding: 0.8rem;
+    }
+    
+    .mobile-nav-link {
+        padding: 0.5rem 0.6rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Landscape orientation adjustments for mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .mobile-menu-overlay {
+        top: 50px;
+        height: calc(100vh - 50px);
+    }
+    
+    .mobile-menu-content {
+        margin: 0.5rem;
+        padding: 1rem;
+        max-height: calc(100vh - 100px);
+    }
+    
+    .mobile-nav-link {
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .logo img, .profile-icon img {
+        image-rendering: crisp-edges;
+    }
 }

@@ -1,266 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SkillHub - Dashboard</title>
-    <link rel="stylesheet" href="css/sponsordashboard1.css">
-    <link rel="stylesheet" href="css/navbar3.css">
-    <link rel="stylesheet" href="css/navbar-enhancements.css">
-    <link rel="stylesheet" href="css/footer2.css">
-    <link rel="stylesheet" href="css/accessibility.css">
+    <link rel="stylesheet" href="css/sponsordashboard1.css" />
+    <link rel="stylesheet" href="css/navbar3.css" />
+    <link rel="stylesheet" href="css/navbar-enhancements.css" />
+    <link rel="stylesheet" href="css/footer2.css" />
+    <link rel="stylesheet" href="css/accessibility.css" />
     <script src="js/accessibility.js"></script>
     <script src="js/sponsordashboard1.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
     <script src="js/login-integration.js"></script>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div class="navbar-sponsor"></div>
     <div class="container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h2>Dashboard</h2>
-            </div>
-            <nav class="sidebar-nav">
-                <a href="sponsordashboard1.html" class="sidebar-link active">
-                    <i class="fas fa-chart-bar"></i>
-                    Overview
-                </a>
-                <a href="sponsordashboard2.html" class="sidebar-link">
-                    <i class="fas fa-bullhorn"></i>
-                    Campaigns
-                </a>
-                <a href="sponsordashboard3.html" class="sidebar-link">
-                    <i class="fas fa-chart-line"></i>
-                    Analytics
-                </a>
-                <a href="sponsordashboard4.html" class="sidebar-link">
-                    <i class="fas fa-cog"></i>
-                    Profile Setting
-                </a>
-            </nav>
-            <button class="logout-btn">LOG OUT</button>
-        </aside>
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <h2>Dashboard</h2>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="sponsordashboard1.html" class="sidebar-link active">
+            <i class="fas fa-chart-bar"></i>
+            Overview
+          </a>
+          <a href="sponsordashboard2.html" class="sidebar-link">
+            <i class="fas fa-bullhorn"></i>
+            Campaigns
+          </a>
+          <a href="sponsordashboard3.html" class="sidebar-link">
+            <i class="fas fa-chart-line"></i>
+            Analytics
+          </a>
+          <a href="sponsordashboard4.html" class="sidebar-link">
+            <i class="fas fa-cog"></i>
+            Profile Setting
+          </a>
+        </nav>
+        <button class="logout-btn">LOG OUT</button>
+      </aside>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <div class="dashboard-header">
-                <h1>Dashboard Overview</h1>
-                <p>Manage your sponsorship campaigns and track student engagement</p>
-            </div>
+      <!-- Main Content -->
+      <main class="main-content">
+        <div class="dashboard-header">
+          <h1>Dashboard Overview</h1>
+          <p>Manage your sponsorship campaigns and track student engagement</p>
+        </div>
 
-            <!-- Stats Cards -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-value">$24,850</div>
-                    <div class="stat-label">Total Investment</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">1,247</div>
-                    <div class="stat-label">Students Reached</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">8.5%</div>
-                    <div class="stat-label">Conversion Rate</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">12</div>
-                    <div class="stat-label">Active Campaigns</div>
-                </div>
-            </div>
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value">$248,50</div>
+            <div class="stat-label">Total Investment</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">1,247</div>
+            <div class="stat-label">Students Reached</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">8.5%</div>
+            <div class="stat-label">Conversion Rate</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">12</div>
+            <div class="stat-label">Active Campaigns</div>
+          </div>
+        </div>
 
-            <!-- Active Campaigns -->
-            <div class="section">
-                <div class="section-header">
-                    <div class="section-title">
-                        <i class="fas fa-chart-line"></i>
-                        Active Campaigns
-                    </div>
-                    <button class="create-btn">Create New</button>
-                </div>
-                <div class="campaigns-list">
-                    <div class="campaign-item">
-                        <div class="campaign-icon red"></div>
-                        <div class="campaign-info">
-                            <h3>Web Development Bootcamp</h3>
-                            <p>Target: 500 students • Budget: $12,000</p>
-                        </div>
-                        <span class="status-badge active">Active</span>
-                    </div>
-                    <div class="campaign-item">
-                        <div class="campaign-icon red"></div>
-                        <div class="campaign-info">
-                            <h3>AI/ML Certification</h3>
-                            <p>Target: 300 students • Budget: $8,500</p>
-                        </div>
-                        <span class="status-badge active">Active</span>
-                    </div>
-                    <div class="campaign-item">
-                        <div class="campaign-icon red"></div>
-                        <div class="campaign-info">
-                            <h3>Data Science Program</h3>
-                            <p>Target: 250 students • Budget: $7,200</p>
-                        </div>
-                        <span class="status-badge pending">Pending</span>
-                    </div>
-                </div>
+        <!-- Active Campaigns -->
+        <div class="section">
+          <div class="section-header">
+            <div class="section-title">
+              <i class="fas fa-chart-line"></i>
+              Active Campaigns
             </div>
+            <button class="create-btn">Create New</button>
+          </div>
+          <div class="campaigns-list">
+            <div class="campaign-item">
+              <div class="campaign-icon red"></div>
+              <div class="campaign-info">
+                <h3>Web Development Bootcamp</h3>
+                <p>Target: 500 students • Budget: Rs.12,000</p>
+              </div>
+              <span class="status-badge active">Active</span>
+            </div>
+            <div class="campaign-item">
+              <div class="campaign-icon red"></div>
+              <div class="campaign-info">
+                <h3>AI/ML Certification</h3>
+                <p>Target: 300 students • Budget: Rs.8,500</p>
+              </div>
+              <span class="status-badge active">Active</span>
+            </div>
+            <div class="campaign-item">
+              <div class="campaign-icon red"></div>
+              <div class="campaign-info">
+                <h3>Data Science Program</h3>
+                <p>Target: 250 students • Budget: Rs.7,200</p>
+              </div>
+              <span class="status-badge pending">Pending</span>
+            </div>
+          </div>
+        </div>
 
-            <!-- Budget Overview -->
-            <div class="section">
-                <div class="section-header">
-                    <div class="section-title">Budget Overview</div>
-                </div>
-                <div class="budget-overview">
-                    <div class="budget-amounts">
-                        <div class="budget-total">$45,000</div>
-                        <div class="budget-used">$31,250</div>
-                    </div>
-                    <div class="budget-labels">
-                        <span>Total Budget</span>
-                        <span>69% Used</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 69%"></div>
-                    </div>
-                    <div class="budget-remaining">
-                        <span>Remaining: $13,750</span>
-                    </div>
-                </div>
+        <!-- Budget Overview -->
+        <div class="section">
+          <div class="section-header">
+            <div class="section-title">Budget Overview</div>
+          </div>
+          <div class="budget-overview">
+            <div class="budget-amounts">
+              <div class="budget-total">Rs450,000</div>
+              <div class="budget-used">Rs.312,500</div>
             </div>
+            <div class="budget-labels">
+              <span>Total Budget</span>
+              <span>69% Used</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 69%"></div>
+            </div>
+            <div class="budget-remaining">
+              <span>Remaining: Rs137,500</span>
+            </div>
+          </div>
+        </div>
 
-            <!-- Top Students -->
-            <div class="section">
-                <div class="section-header">
-                    <div class="section-title">
-                        <i class="fas fa-users"></i>
-                        Top Students
-                    </div>
-                </div>
-                <div class="students-list">
-                    <div class="student-item">
-                        <div class="student-avatar">S</div>
-                        <div class="student-info">
-                            <h4>Sarah Johnson</h4>
-                            <p>95% Progress</p>
-                        </div>
-                    </div>
-                    <div class="student-item">
-                        <div class="student-avatar">M</div>
-                        <div class="student-info">
-                            <h4>Mike Thompson</h4>
-                            <p>92% Progress</p>
-                        </div>
-                    </div>
-                    <div class="student-item">
-                        <div class="student-avatar">E</div>
-                        <div class="student-info">
-                            <h4>Emma Brown</h4>
-                            <p>88% Progress</p>
-                        </div>
-                    </div>
-                </div>
+        <!-- Top Students -->
+        <div class="section">
+          <div class="section-header">
+            <div class="section-title">
+              <i class="fas fa-users"></i>
+              Top Students
             </div>
-        </main>
+          </div>
+          <div class="students-list">
+            <div class="student-item">
+              <div class="student-avatar">S</div>
+              <div class="student-info">
+                <h4>Sarah Johnson</h4>
+                <p>95% Progress</p>
+              </div>
+            </div>
+            <div class="student-item">
+              <div class="student-avatar">M</div>
+              <div class="student-info">
+                <h4>Mike Thompson</h4>
+                <p>92% Progress</p>
+              </div>
+            </div>
+            <div class="student-item">
+              <div class="student-avatar">E</div>
+              <div class="student-info">
+                <h4>Emma Brown</h4>
+                <p>88% Progress</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
 
     <!-- Accessibility Toolbar HTML - Add this to every page -->
-    <button class="accessibility-toggle" onclick="toggleAccessibilityPanel()" aria-label="Toggle accessibility options">
-        ♿
+    <button
+      class="accessibility-toggle"
+      onclick="toggleAccessibilityPanel()"
+      aria-label="Toggle accessibility options"
+    >
+      ♿
     </button>
 
     <div class="accessibility-panel" id="accessibilityPanel">
-        <div class="panel-header">
-            Accessibility Tools
+      <div class="panel-header">Accessibility Tools</div>
+      <div class="panel-content">
+        <div class="accessibility-option" onclick="increaseText()">
+          <div class="option-label">
+            <span class="option-icon">🔍</span>
+            Increase Text
+          </div>
         </div>
-        <div class="panel-content">
-            <div class="accessibility-option" onclick="increaseText()">
-                <div class="option-label">
-                    <span class="option-icon">🔍</span>
-                    Increase Text
-                </div>
-            </div>
 
-            <div class="accessibility-option" onclick="decreaseText()">
-                <div class="option-label">
-                    <span class="option-icon">🔍</span>
-                    Decrease Text
-                </div>
-            </div>
-
-            <div class="accessibility-option" onclick="toggleFeature('grayscale')">
-                <div class="option-label">
-                    <span class="option-icon">⬜</span>
-                    Grayscale
-                </div>
-                <div class="option-toggle" id="toggle-grayscale"></div>
-            </div>
-
-            <div class="accessibility-option" onclick="toggleFeature('high-contrast')">
-                <div class="option-label">
-                    <span class="option-icon">🌓</span>
-                    High Contrast
-                </div>
-                <div class="option-toggle" id="toggle-high-contrast"></div>
-            </div>
-
-            <div class="accessibility-option" onclick="toggleFeature('negative-contrast')">
-                <div class="option-label">
-                    <span class="option-icon">👁</span>
-                    Negative Contrast
-                </div>
-                <div class="option-toggle" id="toggle-negative-contrast"></div>
-            </div>
-
-            <div class="accessibility-option" onclick="toggleFeature('light-background')">
-                <div class="option-label">
-                    <span class="option-icon">💡</span>
-                    Light Background
-                </div>
-                <div class="option-toggle" id="toggle-light-background"></div>
-            </div>
-
-            <div class="accessibility-option" onclick="toggleFeature('links-underline')">
-                <div class="option-label">
-                    <span class="option-icon">🔗</span>
-                    Links Underline
-                </div>
-                <div class="option-toggle" id="toggle-links-underline"></div>
-            </div>
-
-            <div class="accessibility-option" onclick="toggleFeature('readable-font')">
-                <div class="option-label">
-                    <span class="option-icon">📖</span>
-                    Readable Font
-                </div>
-                <div class="option-toggle" id="toggle-readable-font"></div>
-            </div>
-
-            <div class="accessibility-option" onclick="resetAccessibility()">
-                <div class="option-label">
-                    <span class="option-icon">↻</span>
-                    Reset
-                </div>
-            </div>
+        <div class="accessibility-option" onclick="decreaseText()">
+          <div class="option-label">
+            <span class="option-icon">🔍</span>
+            Decrease Text
+          </div>
         </div>
+
+        <div class="accessibility-option" onclick="toggleFeature('grayscale')">
+          <div class="option-label">
+            <span class="option-icon">⬜</span>
+            Grayscale
+          </div>
+          <div class="option-toggle" id="toggle-grayscale"></div>
+        </div>
+
+        <div
+          class="accessibility-option"
+          onclick="toggleFeature('high-contrast')"
+        >
+          <div class="option-label">
+            <span class="option-icon">🌓</span>
+            High Contrast
+          </div>
+          <div class="option-toggle" id="toggle-high-contrast"></div>
+        </div>
+
+        <div
+          class="accessibility-option"
+          onclick="toggleFeature('negative-contrast')"
+        >
+          <div class="option-label">
+            <span class="option-icon">👁</span>
+            Negative Contrast
+          </div>
+          <div class="option-toggle" id="toggle-negative-contrast"></div>
+        </div>
+
+        <div
+          class="accessibility-option"
+          onclick="toggleFeature('light-background')"
+        >
+          <div class="option-label">
+            <span class="option-icon">💡</span>
+            Light Background
+          </div>
+          <div class="option-toggle" id="toggle-light-background"></div>
+        </div>
+
+        <div
+          class="accessibility-option"
+          onclick="toggleFeature('links-underline')"
+        >
+          <div class="option-label">
+            <span class="option-icon">🔗</span>
+            Links Underline
+          </div>
+          <div class="option-toggle" id="toggle-links-underline"></div>
+        </div>
+
+        <div
+          class="accessibility-option"
+          onclick="toggleFeature('readable-font')"
+        >
+          <div class="option-label">
+            <span class="option-icon">📖</span>
+            Readable Font
+          </div>
+          <div class="option-toggle" id="toggle-readable-font"></div>
+        </div>
+
+        <div class="accessibility-option" onclick="resetAccessibility()">
+          <div class="option-label">
+            <span class="option-icon">↻</span>
+            Reset
+          </div>
+        </div>
+      </div>
     </div>
     <div id="footer-container"></div>
 
     <div id="skillhub-chatbot-container"></div>
 
-    
     <script>
-        // Auto-load SkillHub chatbot when div is found
-        document.addEventListener('DOMContentLoaded', function () {
-            const container = document.getElementById('skillhub-chatbot-container');
-            if (!container) return;
+      // Auto-load SkillHub chatbot when div is found
+      document.addEventListener("DOMContentLoaded", function () {
+        const container = document.getElementById("skillhub-chatbot-container");
+        if (!container) return;
 
-            // Inject CSS styles
-            const styles = `
+        // Inject CSS styles
+        const styles = `
         <style id="skillhub-chatbot-styles">
         .skillhub-chat-icon {
             position: fixed;
@@ -667,8 +684,8 @@
         </style>
     `;
 
-            // Inject HTML structure
-            const chatbotHTML = `
+        // Inject HTML structure
+        const chatbotHTML = `
         <button class="skillhub-chat-icon" id="skillhub-chat-icon">
             <svg viewBox="0 0 24 24">
                 <path d="M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4A2,2 0 0,0 20,2M6,9V7H18V9H6M14,11V13H6V11H14M18,15H6V17H18V15Z"/>
@@ -737,82 +754,96 @@
         </div>
     `;
 
-            // Check if styles already exist
-            if (!document.getElementById('skillhub-chatbot-styles')) {
-                document.head.insertAdjacentHTML('beforeend', styles);
+        // Check if styles already exist
+        if (!document.getElementById("skillhub-chatbot-styles")) {
+          document.head.insertAdjacentHTML("beforeend", styles);
+        }
+
+        // Insert chatbot HTML
+        container.innerHTML = chatbotHTML;
+
+        // Initialize chatbot functionality
+        let skillhubChatOpen = false;
+        let skillhubIsRecording = false;
+        let skillhubMediaRecorder = null;
+        let skillhubAudioChunks = [];
+        let skillhubLastBotResponse = null;
+        let skillhubIsProcessing = false;
+        const skillhubSynth = window.speechSynthesis;
+
+        function skillhubToggleChat() {
+          const chatContainer = document.getElementById(
+            "skillhub-chat-container"
+          );
+          const chatIcon = document.getElementById("skillhub-chat-icon");
+          skillhubChatOpen = !skillhubChatOpen;
+          chatContainer.style.display = skillhubChatOpen ? "flex" : "none";
+
+          if (skillhubChatOpen) {
+            chatIcon.classList.add("pulsing");
+            document.getElementById("skillhub-message-input").focus();
+          } else {
+            chatIcon.classList.remove("pulsing");
+            if (skillhubIsRecording) {
+              skillhubStopRecording();
             }
+          }
+        }
 
-            // Insert chatbot HTML
-            container.innerHTML = chatbotHTML;
+        function skillhubAddMessage(content, isUser = false, isVoice = false) {
+          const chatMessages = document.getElementById(
+            "skillhub-chat-messages"
+          );
+          const messageDiv = document.createElement("div");
+          messageDiv.className = `skillhub-message ${isUser ? "user" : "bot"}${
+            isVoice ? " voice" : ""
+          }`;
 
-            // Initialize chatbot functionality
-            let skillhubChatOpen = false;
-            let skillhubIsRecording = false;
-            let skillhubMediaRecorder = null;
-            let skillhubAudioChunks = [];
-            let skillhubLastBotResponse = null;
-            let skillhubIsProcessing = false;
-            const skillhubSynth = window.speechSynthesis;
+          const contentDiv = document.createElement("div");
+          contentDiv.className = "skillhub-message-content";
+          contentDiv.innerHTML = content;
 
-            function skillhubToggleChat() {
-                const chatContainer = document.getElementById('skillhub-chat-container');
-                const chatIcon = document.getElementById('skillhub-chat-icon');
-                skillhubChatOpen = !skillhubChatOpen;
-                chatContainer.style.display = skillhubChatOpen ? 'flex' : 'none';
+          messageDiv.appendChild(contentDiv);
+          chatMessages.appendChild(messageDiv);
+          chatMessages.scrollTop = chatMessages.scrollHeight;
 
-                if (skillhubChatOpen) {
-                    chatIcon.classList.add('pulsing');
-                    document.getElementById('skillhub-message-input').focus();
-                } else {
-                    chatIcon.classList.remove('pulsing');
-                    if (skillhubIsRecording) {
-                        skillhubStopRecording();
-                    }
-                }
-            }
+          if (!isUser) {
+            skillhubLastBotResponse = content;
+            document.getElementById("skillhub-play-btn").style.display = "flex";
+          }
+        }
 
-            function skillhubAddMessage(content, isUser = false, isVoice = false) {
-                const chatMessages = document.getElementById('skillhub-chat-messages');
-                const messageDiv = document.createElement('div');
-                messageDiv.className = `skillhub-message ${isUser ? 'user' : 'bot'}${isVoice ? ' voice' : ''}`;
+        function skillhubShowTypingIndicator() {
+          document.getElementById("skillhub-typing-indicator").style.display =
+            "flex";
+          document.getElementById("skillhub-chat-messages").scrollTop =
+            document.getElementById("skillhub-chat-messages").scrollHeight;
+        }
 
-                const contentDiv = document.createElement('div');
-                contentDiv.className = 'skillhub-message-content';
-                contentDiv.innerHTML = content;
+        function skillhubHideTypingIndicator() {
+          document.getElementById("skillhub-typing-indicator").style.display =
+            "none";
+        }
 
-                messageDiv.appendChild(contentDiv);
-                chatMessages.appendChild(messageDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
+        function skillhubShowVoiceStatus(text) {
+          const status = document.getElementById("skillhub-voice-status");
+          status.textContent = text;
+          status.classList.add("active");
+        }
 
-                if (!isUser) {
-                    skillhubLastBotResponse = content;
-                    document.getElementById('skillhub-play-btn').style.display = 'flex';
-                }
-            }
+        function skillhubHideVoiceStatus() {
+          document
+            .getElementById("skillhub-voice-status")
+            .classList.remove("active");
+        }
 
-            function skillhubShowTypingIndicator() {
-                document.getElementById('skillhub-typing-indicator').style.display = 'flex';
-                document.getElementById('skillhub-chat-messages').scrollTop = document.getElementById('skillhub-chat-messages').scrollHeight;
-            }
+        async function skillhubGetBotResponse(
+          userMessage,
+          isVoiceInput = false
+        ) {
+          const API_KEY = "AIzaSyCsNiZthfSE-0R-kyqeoonXqEzEiJyu4cg";
 
-            function skillhubHideTypingIndicator() {
-                document.getElementById('skillhub-typing-indicator').style.display = 'none';
-            }
-
-            function skillhubShowVoiceStatus(text) {
-                const status = document.getElementById('skillhub-voice-status');
-                status.textContent = text;
-                status.classList.add('active');
-            }
-
-            function skillhubHideVoiceStatus() {
-                document.getElementById('skillhub-voice-status').classList.remove('active');
-            }
-
-            async function skillhubGetBotResponse(userMessage, isVoiceInput = false) {
-                const API_KEY = 'AIzaSyCsNiZthfSE-0R-kyqeoonXqEzEiJyu4cg';
-
-                const systemPrompt = `You are a helpful customer support chatbot for SkillHub, a neighborhood-based skill exchange platform. Your role is to:
+          const systemPrompt = `You are a helpful customer support chatbot for SkillHub, a neighborhood-based skill exchange platform. Your role is to:
 
 1. ONLY provide information about SkillHub platform features and help with technical difficulties
 2. DO NOT reveal any business strategies, financial projections, marketing plans, or internal company information  
@@ -845,324 +876,398 @@ Common help topics:
 - Language preferences and accessibility settings
 - Technical troubleshooting and platform issues
 
-${isVoiceInput ? 'This was a voice input, so respond conversationally.' : 'This was a text input.'}
+${
+  isVoiceInput
+    ? "This was a voice input, so respond conversationally."
+    : "This was a text input."
+}
 
 If asked about business information, politely redirect to platform features or suggest contacting official channels.`;
 
-                try {
-                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${API_KEY}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
+          try {
+            const response = await fetch(
+              `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${API_KEY}`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  contents: [
+                    {
+                      parts: [
+                        {
+                          text: `${systemPrompt}\n\nUser ${
+                            isVoiceInput ? "(voice)" : "(text)"
+                          }: ${userMessage}`,
                         },
-                        body: JSON.stringify({
-                            contents: [{
-                                parts: [{
-                                    text: `${systemPrompt}\n\nUser ${isVoiceInput ? '(voice)' : '(text)'}: ${userMessage}`
-                                }]
-                            }],
-                            generationConfig: {
-                                temperature: 0.7,
-                                topK: 40,
-                                topP: 0.95,
-                                maxOutputTokens: 2048,
-                            }
-                        })
-                    });
+                      ],
+                    },
+                  ],
+                  generationConfig: {
+                    temperature: 0.7,
+                    topK: 40,
+                    topP: 0.95,
+                    maxOutputTokens: 2048,
+                  },
+                }),
+              }
+            );
 
-                    if (!response.ok) {
-                        throw new Error(`API request failed: ${response.status}`);
-                    }
-
-                    const data = await response.json();
-                    return data.candidates[0].content.parts[0].text;
-                } catch (error) {
-                    console.error('Error:', error);
-                    return "I'm sorry, I'm experiencing technical difficulties right now. Please try again later or contact our support team directly for assistance.";
-                }
+            if (!response.ok) {
+              throw new Error(`API request failed: ${response.status}`);
             }
 
-            function skillhubSpeakResponse(text) {
-                if (skillhubSynth.speaking) {
-                    skillhubSynth.cancel();
-                }
+            const data = await response.json();
+            return data.candidates[0].content.parts[0].text;
+          } catch (error) {
+            console.error("Error:", error);
+            return "I'm sorry, I'm experiencing technical difficulties right now. Please try again later or contact our support team directly for assistance.";
+          }
+        }
 
-                const cleanText = text.replace(/[*#_`]/g, '').replace(/\n+/g, '. ');
-                const utterance = new SpeechSynthesisUtterance(cleanText);
-                utterance.rate = 0.9;
-                utterance.pitch = 1.0;
-                utterance.volume = 0.8;
+        function skillhubSpeakResponse(text) {
+          if (skillhubSynth.speaking) {
+            skillhubSynth.cancel();
+          }
 
-                const voices = skillhubSynth.getVoices();
-                const preferredVoice = voices.find(voice =>
-                    voice.lang.includes('en') && (voice.name.includes('Neural') || voice.name.includes('Premium'))
-                ) || voices.find(voice => voice.lang.includes('en'));
+          const cleanText = text.replace(/[*#_`]/g, "").replace(/\n+/g, ". ");
+          const utterance = new SpeechSynthesisUtterance(cleanText);
+          utterance.rate = 0.9;
+          utterance.pitch = 1.0;
+          utterance.volume = 0.8;
 
-                if (preferredVoice) {
-                    utterance.voice = preferredVoice;
-                }
+          const voices = skillhubSynth.getVoices();
+          const preferredVoice =
+            voices.find(
+              (voice) =>
+                voice.lang.includes("en") &&
+                (voice.name.includes("Neural") ||
+                  voice.name.includes("Premium"))
+            ) || voices.find((voice) => voice.lang.includes("en"));
 
-                skillhubSynth.speak(utterance);
-            }
+          if (preferredVoice) {
+            utterance.voice = preferredVoice;
+          }
 
-            async function skillhubStartRecording() {
-                if (skillhubIsProcessing) return;
+          skillhubSynth.speak(utterance);
+        }
 
-                try {
-                    const stream = await navigator.mediaDevices.getUserMedia({
-                        audio: {
-                            echoCancellation: true,
-                            noiseSuppression: true,
-                            sampleRate: 44100
-                        }
-                    });
+        async function skillhubStartRecording() {
+          if (skillhubIsProcessing) return;
 
-                    skillhubMediaRecorder = new MediaRecorder(stream, {
-                        mimeType: 'audio/webm;codecs=opus'
-                    });
+          try {
+            const stream = await navigator.mediaDevices.getUserMedia({
+              audio: {
+                echoCancellation: true,
+                noiseSuppression: true,
+                sampleRate: 44100,
+              },
+            });
 
-                    skillhubAudioChunks = [];
+            skillhubMediaRecorder = new MediaRecorder(stream, {
+              mimeType: "audio/webm;codecs=opus",
+            });
 
-                    skillhubMediaRecorder.ondataavailable = (event) => {
-                        if (event.data.size > 0) {
-                            skillhubAudioChunks.push(event.data);
-                        }
-                    };
+            skillhubAudioChunks = [];
 
-                    skillhubMediaRecorder.onstop = async () => {
-                        const audioBlob = new Blob(skillhubAudioChunks, { type: 'audio/webm' });
-                        await skillhubProcessVoiceInput(audioBlob);
-                        stream.getTracks().forEach(track => track.stop());
-                    };
+            skillhubMediaRecorder.ondataavailable = (event) => {
+              if (event.data.size > 0) {
+                skillhubAudioChunks.push(event.data);
+              }
+            };
 
-                    skillhubMediaRecorder.start();
-                    skillhubIsRecording = true;
+            skillhubMediaRecorder.onstop = async () => {
+              const audioBlob = new Blob(skillhubAudioChunks, {
+                type: "audio/webm",
+              });
+              await skillhubProcessVoiceInput(audioBlob);
+              stream.getTracks().forEach((track) => track.stop());
+            };
 
-                    document.getElementById('skillhub-record-btn').style.display = 'none';
-                    document.getElementById('skillhub-stop-btn').style.display = 'flex';
-                    document.getElementById('skillhub-record-btn').classList.add('recording');
-                    document.getElementById('skillhub-audio-visualizer').classList.add('active');
+            skillhubMediaRecorder.start();
+            skillhubIsRecording = true;
 
-                    skillhubShowVoiceStatus('🎤 Recording... Click stop when done');
+            document.getElementById("skillhub-record-btn").style.display =
+              "none";
+            document.getElementById("skillhub-stop-btn").style.display = "flex";
+            document
+              .getElementById("skillhub-record-btn")
+              .classList.add("recording");
+            document
+              .getElementById("skillhub-audio-visualizer")
+              .classList.add("active");
 
-                } catch (error) {
-                    console.error('Error starting recording:', error);
-                }
-            }
+            skillhubShowVoiceStatus("🎤 Recording... Click stop when done");
+          } catch (error) {
+            console.error("Error starting recording:", error);
+          }
+        }
 
-            function skillhubStopRecording() {
-                if (skillhubMediaRecorder && skillhubIsRecording) {
-                    skillhubMediaRecorder.stop();
-                    skillhubIsRecording = false;
+        function skillhubStopRecording() {
+          if (skillhubMediaRecorder && skillhubIsRecording) {
+            skillhubMediaRecorder.stop();
+            skillhubIsRecording = false;
 
-                    document.getElementById('skillhub-record-btn').style.display = 'flex';
-                    document.getElementById('skillhub-stop-btn').style.display = 'none';
-                    document.getElementById('skillhub-record-btn').classList.remove('recording');
-                    document.getElementById('skillhub-audio-visualizer').classList.remove('active');
+            document.getElementById("skillhub-record-btn").style.display =
+              "flex";
+            document.getElementById("skillhub-stop-btn").style.display = "none";
+            document
+              .getElementById("skillhub-record-btn")
+              .classList.remove("recording");
+            document
+              .getElementById("skillhub-audio-visualizer")
+              .classList.remove("active");
 
-                    skillhubShowVoiceStatus('🔄 Processing audio...');
-                }
-            }
+            skillhubShowVoiceStatus("🔄 Processing audio...");
+          }
+        }
 
-            async function skillhubProcessVoiceInput(audioBlob) {
-                if (skillhubIsProcessing) return;
-                skillhubIsProcessing = true;
+        async function skillhubProcessVoiceInput(audioBlob) {
+          if (skillhubIsProcessing) return;
+          skillhubIsProcessing = true;
 
-                try {
-                    const arrayBuffer = await audioBlob.arrayBuffer();
-                    const base64Audio = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
+          try {
+            const arrayBuffer = await audioBlob.arrayBuffer();
+            const base64Audio = btoa(
+              String.fromCharCode(...new Uint8Array(arrayBuffer))
+            );
 
-                    skillhubShowTypingIndicator();
-                    skillhubShowVoiceStatus('🤖 Transcribing and processing...');
+            skillhubShowTypingIndicator();
+            skillhubShowVoiceStatus("🤖 Transcribing and processing...");
 
-                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=AIzaSyCsNiZthfSE-0R-kyqeoonXqEzEiJyu4cg`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
+            const response = await fetch(
+              `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=AIzaSyCsNiZthfSE-0R-kyqeoonXqEzEiJyu4cg`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  contents: [
+                    {
+                      parts: [
+                        {
+                          text: "Please transcribe this audio and then provide a helpful response about SkillHub platform features or technical support. Focus only on platform information, not business strategies.",
                         },
-                        body: JSON.stringify({
-                            contents: [{
-                                parts: [
-                                    {
-                                        text: "Please transcribe this audio and then provide a helpful response about SkillHub platform features or technical support. Focus only on platform information, not business strategies."
-                                    },
-                                    {
-                                        inline_data: {
-                                            mime_type: "audio/webm",
-                                            data: base64Audio
-                                        }
-                                    }
-                                ]
-                            }],
-                            generationConfig: {
-                                temperature: 0.7,
-                                topK: 40,
-                                topP: 0.95,
-                                maxOutputTokens: 2048,
-                            }
-                        })
-                    });
+                        {
+                          inline_data: {
+                            mime_type: "audio/webm",
+                            data: base64Audio,
+                          },
+                        },
+                      ],
+                    },
+                  ],
+                  generationConfig: {
+                    temperature: 0.7,
+                    topK: 40,
+                    topP: 0.95,
+                    maxOutputTokens: 2048,
+                  },
+                }),
+              }
+            );
 
-                    if (!response.ok) {
-                        throw new Error(`API request failed: ${response.status}`);
-                    }
-
-                    const data = await response.json();
-                    const botResponse = data.candidates[0].content.parts[0].text;
-
-                    const lines = botResponse.split('\n');
-                    const transcription = lines.find(line => line.includes('transcription') || line.includes('said') || line.includes('asked')) || 'Voice message received';
-
-                    skillhubHideTypingIndicator();
-                    skillhubHideVoiceStatus();
-
-                    skillhubAddMessage(transcription.replace(/.*?[:]\s*/, ''), true, true);
-
-                    setTimeout(() => {
-                        skillhubAddMessage(botResponse);
-                        skillhubSpeakResponse(botResponse);
-                    }, 500);
-
-                } catch (error) {
-                    console.error('Error processing voice:', error);
-                    skillhubHideTypingIndicator();
-                    skillhubHideVoiceStatus();
-                } finally {
-                    skillhubIsProcessing = false;
-                }
+            if (!response.ok) {
+              throw new Error(`API request failed: ${response.status}`);
             }
 
-            async function skillhubSendMessage() {
-                const messageInput = document.getElementById('skillhub-message-input');
-                const sendButton = document.getElementById('skillhub-send-btn');
-                const message = messageInput.value.trim();
+            const data = await response.json();
+            const botResponse = data.candidates[0].content.parts[0].text;
 
-                if (!message || skillhubIsProcessing) return;
+            const lines = botResponse.split("\n");
+            const transcription =
+              lines.find(
+                (line) =>
+                  line.includes("transcription") ||
+                  line.includes("said") ||
+                  line.includes("asked")
+              ) || "Voice message received";
 
-                skillhubIsProcessing = true;
+            skillhubHideTypingIndicator();
+            skillhubHideVoiceStatus();
 
-                skillhubAddMessage(message, true);
-                messageInput.value = '';
+            skillhubAddMessage(
+              transcription.replace(/.*?[:]\s*/, ""),
+              true,
+              true
+            );
 
-                messageInput.disabled = true;
-                sendButton.disabled = true;
+            setTimeout(() => {
+              skillhubAddMessage(botResponse);
+              skillhubSpeakResponse(botResponse);
+            }, 500);
+          } catch (error) {
+            console.error("Error processing voice:", error);
+            skillhubHideTypingIndicator();
+            skillhubHideVoiceStatus();
+          } finally {
+            skillhubIsProcessing = false;
+          }
+        }
 
-                skillhubShowTypingIndicator();
+        async function skillhubSendMessage() {
+          const messageInput = document.getElementById(
+            "skillhub-message-input"
+          );
+          const sendButton = document.getElementById("skillhub-send-btn");
+          const message = messageInput.value.trim();
 
-                try {
-                    const botResponse = await skillhubGetBotResponse(message, false);
+          if (!message || skillhubIsProcessing) return;
 
-                    skillhubHideTypingIndicator();
-                    skillhubAddMessage(botResponse);
+          skillhubIsProcessing = true;
 
-                    if (document.getElementById('skillhub-play-btn').style.display === 'flex') {
-                        setTimeout(() => skillhubSpeakResponse(botResponse), 300);
-                    }
+          skillhubAddMessage(message, true);
+          messageInput.value = "";
 
-                } catch (error) {
-                    skillhubHideTypingIndicator();
-                    skillhubAddMessage("I apologize, but I'm having trouble processing your request right now. Please try again in a moment.");
-                    console.error('Send message error:', error);
-                } finally {
-                    messageInput.disabled = false;
-                    sendButton.disabled = false;
-                    messageInput.focus();
-                    skillhubIsProcessing = false;
-                }
+          messageInput.disabled = true;
+          sendButton.disabled = true;
+
+          skillhubShowTypingIndicator();
+
+          try {
+            const botResponse = await skillhubGetBotResponse(message, false);
+
+            skillhubHideTypingIndicator();
+            skillhubAddMessage(botResponse);
+
+            if (
+              document.getElementById("skillhub-play-btn").style.display ===
+              "flex"
+            ) {
+              setTimeout(() => skillhubSpeakResponse(botResponse), 300);
             }
+          } catch (error) {
+            skillhubHideTypingIndicator();
+            skillhubAddMessage(
+              "I apologize, but I'm having trouble processing your request right now. Please try again in a moment."
+            );
+            console.error("Send message error:", error);
+          } finally {
+            messageInput.disabled = false;
+            sendButton.disabled = false;
+            messageInput.focus();
+            skillhubIsProcessing = false;
+          }
+        }
 
-            function skillhubTogglePlayback() {
-                if (skillhubSynth.speaking) {
-                    skillhubSynth.cancel();
-                } else if (skillhubLastBotResponse) {
-                    skillhubSpeakResponse(skillhubLastBotResponse);
-                }
+        function skillhubTogglePlayback() {
+          if (skillhubSynth.speaking) {
+            skillhubSynth.cancel();
+          } else if (skillhubLastBotResponse) {
+            skillhubSpeakResponse(skillhubLastBotResponse);
+          }
+        }
+
+        function skillhubHandleKeyPress(event) {
+          if (event.key === "Enter" && !skillhubIsProcessing) {
+            skillhubSendMessage();
+          }
+        }
+
+        // Event Listeners
+        document
+          .getElementById("skillhub-chat-icon")
+          .addEventListener("click", skillhubToggleChat);
+        document
+          .getElementById("skillhub-close-btn")
+          .addEventListener("click", skillhubToggleChat);
+        document
+          .getElementById("skillhub-record-btn")
+          .addEventListener("click", skillhubStartRecording);
+        document
+          .getElementById("skillhub-stop-btn")
+          .addEventListener("click", skillhubStopRecording);
+        document
+          .getElementById("skillhub-play-btn")
+          .addEventListener("click", skillhubTogglePlayback);
+        document
+          .getElementById("skillhub-send-btn")
+          .addEventListener("click", skillhubSendMessage);
+        document
+          .getElementById("skillhub-message-input")
+          .addEventListener("keypress", skillhubHandleKeyPress);
+
+        // Initialize voices
+        if (skillhubSynth.onvoiceschanged !== undefined) {
+          skillhubSynth.onvoiceschanged = () => {
+            const voices = skillhubSynth.getVoices();
+            console.log("SkillHub Chatbot: Available voices loaded");
+          };
+        }
+
+        // Auto-focus input when chat opens
+        document
+          .getElementById("skillhub-message-input")
+          .addEventListener("focus", function () {
+            setTimeout(() => {
+              document.getElementById("skillhub-chat-messages").scrollTop =
+                document.getElementById("skillhub-chat-messages").scrollHeight;
+            }, 100);
+          });
+
+        // Keyboard shortcuts
+        document.addEventListener("keydown", function (e) {
+          // Only work when chatbot is active
+          if (!skillhubChatOpen) return;
+
+          // Space to start/stop recording (when not typing)
+          if (
+            e.code === "Space" &&
+            e.target !== document.getElementById("skillhub-message-input")
+          ) {
+            e.preventDefault();
+            if (skillhubIsRecording) {
+              skillhubStopRecording();
+            } else {
+              skillhubStartRecording();
             }
+          }
 
-            function skillhubHandleKeyPress(event) {
-                if (event.key === 'Enter' && !skillhubIsProcessing) {
-                    skillhubSendMessage();
-                }
+          // Escape to stop recording or close chat
+          if (e.key === "Escape") {
+            if (skillhubIsRecording) {
+              skillhubStopRecording();
+            } else {
+              skillhubToggleChat();
             }
-
-            // Event Listeners
-            document.getElementById('skillhub-chat-icon').addEventListener('click', skillhubToggleChat);
-            document.getElementById('skillhub-close-btn').addEventListener('click', skillhubToggleChat);
-            document.getElementById('skillhub-record-btn').addEventListener('click', skillhubStartRecording);
-            document.getElementById('skillhub-stop-btn').addEventListener('click', skillhubStopRecording);
-            document.getElementById('skillhub-play-btn').addEventListener('click', skillhubTogglePlayback);
-            document.getElementById('skillhub-send-btn').addEventListener('click', skillhubSendMessage);
-            document.getElementById('skillhub-message-input').addEventListener('keypress', skillhubHandleKeyPress);
-
-            // Initialize voices
-            if (skillhubSynth.onvoiceschanged !== undefined) {
-                skillhubSynth.onvoiceschanged = () => {
-                    const voices = skillhubSynth.getVoices();
-                    console.log('SkillHub Chatbot: Available voices loaded');
-                };
-            }
-
-            // Auto-focus input when chat opens
-            document.getElementById('skillhub-message-input').addEventListener('focus', function () {
-                setTimeout(() => {
-                    document.getElementById('skillhub-chat-messages').scrollTop = document.getElementById('skillhub-chat-messages').scrollHeight;
-                }, 100);
-            });
-
-            // Keyboard shortcuts
-            document.addEventListener('keydown', function (e) {
-                // Only work when chatbot is active
-                if (!skillhubChatOpen) return;
-
-                // Space to start/stop recording (when not typing)
-                if (e.code === 'Space' && e.target !== document.getElementById('skillhub-message-input')) {
-                    e.preventDefault();
-                    if (skillhubIsRecording) {
-                        skillhubStopRecording();
-                    } else {
-                        skillhubStartRecording();
-                    }
-                }
-
-                // Escape to stop recording or close chat
-                if (e.key === 'Escape') {
-                    if (skillhubIsRecording) {
-                        skillhubStopRecording();
-                    } else {
-                        skillhubToggleChat();
-                    }
-                }
-            });
-
-            // Handle page visibility changes
-            document.addEventListener('visibilitychange', function () {
-                if (document.hidden && skillhubIsRecording) {
-                    skillhubStopRecording();
-                }
-            });
-
-            // Connection monitoring
-            window.addEventListener('online', function () {
-                if (skillhubChatOpen) {
-                    skillhubAddMessage("✅ Connection restored. Voice and text features are available.", false);
-                }
-            });
-
-            window.addEventListener('offline', function () {
-                if (skillhubChatOpen) {
-                    skillhubAddMessage("⚠️ Connection lost. Voice features may be limited until connection is restored.", false);
-                }
-            });
-
-            console.log('SkillHub Chatbot initialized successfully');
+          }
         });
+
+        // Handle page visibility changes
+        document.addEventListener("visibilitychange", function () {
+          if (document.hidden && skillhubIsRecording) {
+            skillhubStopRecording();
+          }
+        });
+
+        // Connection monitoring
+        window.addEventListener("online", function () {
+          if (skillhubChatOpen) {
+            skillhubAddMessage(
+              "✅ Connection restored. Voice and text features are available.",
+              false
+            );
+          }
+        });
+
+        window.addEventListener("offline", function () {
+          if (skillhubChatOpen) {
+            skillhubAddMessage(
+              "⚠️ Connection lost. Voice features may be limited until connection is restored.",
+              false
+            );
+          }
+        });
+
+        console.log("SkillHub Chatbot initialized successfully");
+      });
     </script>
-    
+
     <script src="js/auth.js"></script>
     <script src="js/footer-loader.js"></script>
     <script src="js/navbar-loader.js"></script>
     <script src="js/navbar2.js"></script>
-
-</body>
-
+  </body>
 </html>
