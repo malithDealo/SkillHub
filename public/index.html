@@ -4,439 +4,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkillHub - Connect, Learn, Grow</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <title>SkillHub - Test Login</title>
     <link rel="stylesheet" href="css/accessibility.css">
     <script src="js/accessibility.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .test-section h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .credentials {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        .status {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-warning {
+            background: #ffc107;
+            color: black;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        #log {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+        }
+    </style>
 </head>
 
 <body>
-    <header class="header" id="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <a href="/" class="logo-link">
-                        <img src="images/skillhub-logo.svg" alt="SkillHub Logo" id="logo-img">
-                        <span class="logo-text">SkillHub</span>
-                    </a>
-                </div>
-                <nav class="main-nav" id="main-nav">
-                    <ul class="nav-list">
-                        <li class="nav-item"><a href="#" class="nav-link" data-page="home">Home</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link" data-page="skills">Skills</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link" data-page="teachers">Teachers</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link" data-page="classes">Classes</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link" data-page="community">Community</a></li>
-                    </ul>
-                </nav>
-                <div class="header-buttons">
-                    <button class="btn btn-secondary" id="login-btn">Log In</button>
-                    <button class="btn btn-primary" id="signup-btn">Sign Up</button>
-                    <div class="user-menu hidden" id="user-menu">
-                        <img src="images/default-avatar.png" alt="User Avatar" class="user-avatar">
-                        <span class="username">Username</span>
-                        <i class="fas fa-chevron-down"></i>
-                        <div class="dropdown-menu">
-                            <a href="#" class="dropdown-item" data-page="profile">My Profile</a>
-                            <a href="#" class="dropdown-item" data-page="dashboard">Dashboard</a>
-                            <a href="#" class="dropdown-item" data-page="messages">Messages</a>
-                            <a href="#" class="dropdown-item" id="logout-btn">Log Out</a>
-                        </div>
-                    </div>
-                </div>
-                <button class="mobile-nav-toggle" id="mobile-nav-toggle">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
+    <div class="container">
+        <h1>🔧 SkillHub Login Test Page</h1>
+        <p>Use this page to test your SkillHub authentication system.</p>
+
+        <!-- API Test Section -->
+        <div class="test-section">
+            <h3>1. API Connection Test</h3>
+            <button class="btn btn-primary" onclick="testAPI()">Test API Connection</button>
+            <div id="api-status"></div>
         </div>
-    </header>
 
-    <main id="main-content">
-        <!-- Home Page Section -->
-        <section class="section-hero" id="home-section">
-            <div class="container">
-                <div class="hero-content">
-                    <div class="hero-text">
-                        <h1 class="hero-title">Connect with skilled people in your community</h1>
-                        <p class="hero-subtitle">Learn valuable skills from neighbors or share your expertise with
-                            others.</p>
-                        <div class="hero-buttons">
-                            <button class="btn btn-large btn-primary" id="find-teachers-btn">Find Teachers</button>
-                            <button class="btn btn-large btn-secondary" id="become-teacher-btn">Become a
-                                Teacher</button>
-                        </div>
-                    </div>
-                    <div class="hero-image">
-                        <img src="images/hero-illustration.svg" alt="People learning and teaching">
-                    </div>
-                </div>
+        <!-- Database Test Section -->
+        <div class="test-section">
+            <h3>2. Sample Account Login Test</h3>
+            <div class="credentials">
+                <strong>Test Accounts (password: "password"):</strong><br>
+                • Learner: learner@example.com<br>
+                • Teacher: teacher@example.com<br>
+                • Sponsor: sponsor@example.com
             </div>
-        </section>
 
-        <section class="section-features">
-            <div class="container">
-                <h2 class="section-title">How SkillHub Works</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <h3 class="feature-title">Local Connections</h3>
-                        <p class="feature-text">Find skilled teachers in your neighborhood and learn in-person.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3 class="feature-title">Verified Teachers</h3>
-                        <p class="feature-text">All teachers undergo a verification process for your safety.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <h3 class="feature-title">Ratings & Reviews</h3>
-                        <p class="feature-text">Make informed decisions with our comprehensive review system.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h3 class="feature-title">Form Teams</h3>
-                        <p class="feature-text">Create or join learning groups to learn together with peers.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+            <label for="testEmail">Email:</label>
+            <input type="email" id="testEmail" value="learner@example.com"
+                style="margin: 5px; padding: 8px; width: 200px;">
 
-        <section class="section-popular-skills">
-            <div class="container">
-                <h2 class="section-title">Popular Skills</h2>
-                <div class="skills-grid" id="popular-skills-grid">
-                    <!-- Skills will be populated dynamically -->
-                </div>
-                <div class="text-center">
-                    <button class="btn btn-secondary" id="view-all-skills-btn">View All Skills</button>
-                </div>
-            </div>
-        </section>
+            <label for="testPassword">Password:</label>
+            <input type="password" id="testPassword" value="password" style="margin: 5px; padding: 8px; width: 100px;">
 
-        <section class="section-testimonials">
-            <div class="container">
-                <h2 class="section-title">Success Stories</h2>
-                <div class="testimonials-slider" id="testimonials-slider">
-                    <!-- Testimonials will be populated dynamically -->
-                </div>
-            </div>
-        </section>
+            <label for="testUserType">User Type:</label>
+            <select id="testUserType" style="margin: 5px; padding: 8px;">
+                <option value="learner">Learner</option>
+                <option value="teacher">Teacher</option>
+                <option value="sponsor">Sponsor</option>
+            </select>
 
-        <section class="section-cta">
-            <div class="container">
-                <div class="cta-content">
-                    <h2 class="cta-title">Ready to start learning?</h2>
-                    <p class="cta-text">Join our community today and discover the joy of neighborhood-based skill
-                        sharing.</p>
-                    <button class="btn btn-large btn-primary" id="cta-signup-btn">Sign Up Now</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Search Page -->
-        <section class="section-page hidden" id="skills-section">
-            <div class="container">
-                <h1 class="page-title">Find Skills</h1>
-                <div class="search-container">
-                    <div class="search-box">
-                        <input type="text" id="skill-search-input" placeholder="Search for skills...">
-                        <button id="skill-search-btn" class="btn btn-primary"><i class="fas fa-search"></i></button>
-                    </div>
-                    <div class="filter-container">
-                        <div class="filter-group">
-                            <label for="category-filter">Category</label>
-                            <select id="category-filter">
-                                <option value="">All Categories</option>
-                                <!-- Categories will be populated dynamically -->
-                            </select>
-                        </div>
-                        <div class="filter-group">
-                            <label for="location-filter">Location</label>
-                            <input type="text" id="location-filter" placeholder="Enter location">
-                            <span class="distance-slider">
-                                <label for="distance-range">Distance: <span id="distance-value">5</span> km</label>
-                                <input type="range" id="distance-range" min="1" max="50" value="5">
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="skills-results-grid" id="skills-results-grid">
-                    <!-- Skills results will be populated dynamically -->
-                </div>
-                <div class="pagination" id="skills-pagination">
-                    <!-- Pagination will be populated dynamically -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Teachers Search Page -->
-        <section class="section-page hidden" id="teachers-section">
-            <div class="container">
-                <h1 class="page-title">Find Teachers</h1>
-                <div class="search-container">
-                    <div class="search-box">
-                        <input type="text" id="teacher-search-input" placeholder="Search for teachers or skills...">
-                        <button id="teacher-search-btn" class="btn btn-primary"><i class="fas fa-search"></i></button>
-                    </div>
-                    <div class="filter-container">
-                        <div class="filter-group">
-                            <label for="skill-filter">Skill</label>
-                            <select id="skill-filter">
-                                <option value="">All Skills</option>
-                                <!-- Skills will be populated dynamically -->
-                            </select>
-                        </div>
-                        <div class="filter-group">
-                            <label for="teacher-location-filter">Location</label>
-                            <input type="text" id="teacher-location-filter" placeholder="Enter location">
-                            <span class="distance-slider">
-                                <label for="teacher-distance-range">Distance: <span id="teacher-distance-value">5</span>
-                                    km</label>
-                                <input type="range" id="teacher-distance-range" min="1" max="50" value="5">
-                            </span>
-                        </div>
-                        <div class="filter-group">
-                            <label for="rating-filter">Minimum Rating</label>
-                            <select id="rating-filter">
-                                <option value="">Any Rating</option>
-                                <option value="5">5 Stars</option>
-                                <option value="4">4+ Stars</option>
-                                <option value="3">3+ Stars</option>
-                                <option value="2">2+ Stars</option>
-                                <option value="1">1+ Star</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="teachers-results-grid" id="teachers-results-grid">
-                    <!-- Teachers results will be populated dynamically -->
-                </div>
-                <div class="pagination" id="teachers-pagination">
-                    <!-- Pagination will be populated dynamically -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Classes Search Page -->
-        <section class="section-page hidden" id="classes-section">
-            <div class="container">
-                <h1 class="page-title">Find Classes</h1>
-                <div class="search-container">
-                    <div class="search-box">
-                        <input type="text" id="class-search-input" placeholder="Search for classes...">
-                        <button id="class-search-btn" class="btn btn-primary"><i class="fas fa-search"></i></button>
-                    </div>
-                    <div class="filter-container">
-                        <div class="filter-group">
-                            <label for="class-skill-filter">Skill</label>
-                            <select id="class-skill-filter">
-                                <option value="">All Skills</option>
-                                <!-- Skills will be populated dynamically -->
-                            </select>
-                        </div>
-                        <div class="filter-group">
-                            <label for="class-location-filter">Location</label>
-                            <input type="text" id="class-location-filter" placeholder="Enter location">
-                            <span class="distance-slider">
-                                <label for="class-distance-range">Distance: <span id="class-distance-value">5</span>
-                                    km</label>
-                                <input type="range" id="class-distance-range" min="1" max="50" value="5">
-                            </span>
-                        </div>
-                        <div class="filter-group">
-                            <label for="class-type-filter">Class Type</label>
-                            <select id="class-type-filter">
-                                <option value="">All Types</option>
-                                <option value="in-person">In-Person</option>
-                                <option value="online">Online</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="classes-results-grid" id="classes-results-grid">
-                    <!-- Classes results will be populated dynamically -->
-                </div>
-                <div class="pagination" id="classes-pagination">
-                    <!-- Pagination will be populated dynamically -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Community Page -->
-        <section class="section-page hidden" id="community-section">
-            <div class="container">
-                <h1 class="page-title">Community</h1>
-                <div class="community-tabs">
-                    <button class="tab-btn active" data-tab="teams">Teams</button>
-                    <button class="tab-btn" data-tab="events">Events</button>
-                    <button class="tab-btn" data-tab="forums">Forums</button>
-                </div>
-                <div class="tab-content active" id="teams-tab">
-                    <div class="teams-header">
-                        <h2 class="tab-title">Learning Teams</h2>
-                        <button class="btn btn-primary" id="create-team-btn">Create Team</button>
-                    </div>
-                    <div class="search-container">
-                        <div class="search-box">
-                            <input type="text" id="team-search-input" placeholder="Search for teams...">
-                            <button id="team-search-btn" class="btn btn-primary"><i class="fas fa-search"></i></button>
-                        </div>
-                    </div>
-                    <div class="teams-grid" id="teams-grid">
-                        <!-- Teams will be populated dynamically -->
-                    </div>
-                </div>
-                <div class="tab-content" id="events-tab">
-                    <div class="events-header">
-                        <h2 class="tab-title">Upcoming Events</h2>
-                        <button class="btn btn-primary" id="create-event-btn">Create Event</button>
-                    </div>
-                    <div class="events-calendar" id="events-calendar">
-                        <!-- Calendar will be populated dynamically -->
-                    </div>
-                    <div class="events-list" id="events-list">
-                        <!-- Events will be populated dynamically -->
-                    </div>
-                </div>
-                <div class="tab-content" id="forums-tab">
-                    <h2 class="tab-title">Discussion Forums</h2>
-                    <div class="forums-categories" id="forums-categories">
-                        <!-- Forum categories will be populated dynamically -->
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Authentication Modals -->
-    <div class="modal" id="login-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Log In</h2>
-                <button class="modal-close">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="login-form">
-                    <div class="form-group">
-                        <label for="login-email">Email</label>
-                        <input type="email" id="login-email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="login-password">Password</label>
-                        <input type="password" id="login-password" required>
-                    </div>
-                    <div class="form-group">
-                        <div class="checkbox">
-                            <input type="checkbox" id="remember-me">
-                            <label for="remember-me">Remember me</label>
-                        </div>
-                        <a href="#" class="forgot-password">Forgot Password?</a>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Log In</button>
-                </form>
-                <div class="auth-separator">
-                    <span>or</span>
-                </div>
-                <div class="social-login">
-                    <button class="btn btn-social btn-google">
-                        <i class="fab fa-google"></i> Continue with Google
-                    </button>
-                    <button class="btn btn-social btn-facebook">
-                        <i class="fab fa-facebook-f"></i> Continue with Facebook
-                    </button>
-                </div>
-                <p class="auth-switch">
-                    Don't have an account? <a href="#" id="switch-to-signup">Sign Up</a>
-                </p>
-            </div>
+            <br><br>
+            <button class="btn btn-success" onclick="testLogin()">Test Login</button>
+            <div id="login-status"></div>
         </div>
-    </div>
 
-    <div class="modal" id="signup-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Sign Up</h2>
-                <button class="modal-close">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="signup-form">
-                    <div class="form-group">
-                        <label for="signup-username">Username</label>
-                        <input type="text" id="signup-username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="signup-email">Email</label>
-                        <input type="email" id="signup-email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="signup-password">Password</label>
-                        <input type="password" id="signup-password" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="signup-confirm-password">Confirm Password</label>
-                        <input type="password" id="signup-confirm-password" required>
-                    </div>
-                    <div class="form-group">
-                        <div class="checkbox">
-                            <input type="checkbox" id="terms-agree" required>
-                            <label for="terms-agree">I agree to the <a href="#">Terms of Service</a> and <a
-                                    href="#">Privacy Policy</a></label>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
-                </form>
-                <div class="auth-separator">
-                    <span>or</span>
-                </div>
-                <div class="social-login">
-                    <button class="btn btn-social btn-google">
-                        <i class="fab fa-google"></i> Continue with Google
-                    </button>
-                    <button class="btn btn-social btn-facebook">
-                        <i class="fab fa-facebook-f"></i> Continue with Facebook
-                    </button>
-                </div>
-                <p class="auth-switch">
-                    Already have an account? <a href="#" id="switch-to-login">Log In</a>
-                </p>
-            </div>
+        <!-- Page Navigation Test -->
+        <div class="test-section">
+            <h3>3. Login Page Navigation</h3>
+            <a href="login-learner.html" class="btn btn-primary">Test Learner Login Page</a>
+            <a href="login-teacher.html" class="btn btn-primary">Test Teacher Login Page</a>
+            <a href="login-sponsor.html" class="btn btn-primary">Test Sponsor Login Page</a>
         </div>
-    </div>
 
-    <!-- Chatbot widget -->
-    <div class="chatbot-widget" id="chatbot-widget">
-        <div class="chatbot-button" id="chatbot-button">
-            <i class="fas fa-comment-dots"></i>
-        </div>
-        <div class="chatbot-container" id="chatbot-container">
-            <div class="chatbot-header">
-                <h3 class="chatbot-title">SkillHub Assistant</h3>
-                <button class="chatbot-close" id="chatbot-close">&times;</button>
-            </div>
-            <div class="chatbot-messages" id="chatbot-messages">
-                <div class="message bot-message">
-                    <div class="message-content">
-                        Hi there! I'm your SkillHub assistant. How can I help you today?
-                    </div>
-                </div>
-            </div>
-            <div class="chatbot-input">
-                <input type="text" id="chatbot-input-field" placeholder="Type your message...">
-                <button id="chatbot-send">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
+        <!-- Debug Log -->
+        <div class="test-section">
+            <h3>4. Debug Log</h3>
+            <button class="btn btn-warning" onclick="clearLog()">Clear Log</button>
+            <div id="log"></div>
         </div>
     </div>
 
@@ -521,78 +240,99 @@
         </div>
     </div>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="images/skillhub-logo-white.svg" alt="SkillHub Logo">
-                    <h3 class="footer-logo-text">SkillHub</h3>
-                    <p class="footer-tagline">Connect, Learn, Grow</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-links-column">
-                        <h4 class="footer-links-title">About</h4>
-                        <ul class="footer-links-list">
-                            <li><a href="#">Our Mission</a></li>
-                            <li><a href="#">How It Works</a></li>
-                            <li><a href="#">Team</a></li>
-                            <li><a href="#">Careers</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-links-column">
-                        <h4 class="footer-links-title">Learn</h4>
-                        <ul class="footer-links-list">
-                            <li><a href="#">Find Teachers</a></li>
-                            <li><a href="#">Join Classes</a></li>
-                            <li><a href="#">Learning Teams</a></li>
-                            <li><a href="#">Events</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-links-column">
-                        <h4 class="footer-links-title">Teach</h4>
-                        <ul class="footer-links-list">
-                            <li><a href="#">Become a Teacher</a></li>
-                            <li><a href="#">Create Classes</a></li>
-                            <li><a href="#">Teacher Resources</a></li>
-                            <li><a href="#">Success Stories</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-links-column">
-                        <h4 class="footer-links-title">Support</h4>
-                        <ul class="footer-links-list">
-                            <li><a href="#">Help Center</a></li>
-                            <li><a href="#">Safety Guidelines</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Feedback</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="footer-social">
-                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-                </div>
-                <div class="footer-legal">
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Cookie Policy</a>
-                    <a href="#">Accessibility</a>
-                </div>
-                <div class="footer-copyright">
-                    &copy; 2025 SkillHub. All rights reserved.
-                </div>
-            </div>
-        </div>
-    </footer>
+    <script>
+        // Debug logging function
+        function log(message) {
+            const logDiv = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString();
+            logDiv.textContent += `[${timestamp}] ${message}\n`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log(message);
+        }
 
-    <!-- JavaScript -->
-    <script src="js/app.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/chatbot.js"></script>
+        function clearLog() {
+            document.getElementById('log').textContent = '';
+        }
+
+        // Test API connection
+        async function testAPI() {
+            const statusDiv = document.getElementById('api-status');
+            statusDiv.innerHTML = 'Testing...';
+
+            try {
+                log('Testing API connection...');
+                const response = await fetch('/api/test');
+                const data = await response.json();
+
+                if (response.ok) {
+                    statusDiv.innerHTML = `<div class="status success">✅ API Connected Successfully<br>Database: ${data.database}<br>Timestamp: ${data.timestamp}</div>`;
+                    log('✅ API test successful');
+                } else {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="status error">❌ API Connection Failed: ${error.message}</div>`;
+                log(`❌ API test failed: ${error.message}`);
+            }
+        }
+
+        // Test login functionality
+        async function testLogin() {
+            const email = document.getElementById('testEmail').value;
+            const password = document.getElementById('testPassword').value;
+            const userType = document.getElementById('testUserType').value;
+            const statusDiv = document.getElementById('login-status');
+
+            statusDiv.innerHTML = 'Testing login...';
+
+            try {
+                log(`Testing login for ${email} as ${userType}...`);
+
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password,
+                        userType: userType
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    statusDiv.innerHTML = `<div class="status success">✅ Login Successful!<br>User: ${data.user.name}<br>Type: ${data.user.type}<br>Email: ${data.user.email}</div>`;
+                    log(`✅ Login successful for ${data.user.name}`);
+
+                    // Store the login data for testing
+                    localStorage.setItem('skillhub_user', JSON.stringify(data.user));
+                    localStorage.setItem('skillhub_authenticated', 'true');
+                    if (data.token) {
+                        localStorage.setItem('skillhub_token', data.token);
+                    }
+                } else {
+                    statusDiv.innerHTML = `<div class="status error">❌ Login Failed: ${data.message}</div>`;
+                    log(`❌ Login failed: ${data.message}`);
+                }
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="status error">❌ Login Error: ${error.message}</div>`;
+                log(`❌ Login error: ${error.message}`);
+            }
+        }
+
+        // Auto-update email when user type changes
+        document.getElementById('testUserType').addEventListener('change', function () {
+            const userType = this.value;
+            document.getElementById('testEmail').value = `${userType}@example.com`;
+        });
+
+        // Initialize page
+        log('Test page loaded');
+        log('Server should be running on http://localhost:3000');
+        log('Click "Test API Connection" to verify server is running');
+    </script>
 </body>
 
 </html>
