@@ -15,7 +15,12 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-this-in-pro
 
 // Middleware
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:3002', 'http://127.0.0.1:3002'],
+    origin: [
+        'http://localhost:3000', 
+        'http://127.0.0.1:3000', 
+        'http://localhost:3002',    
+        'http://127.0.0.1:3002'     
+    ],
     credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));

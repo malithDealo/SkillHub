@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: skillhub-app
     ports:
-      - "3000:3000"  # Maps port 3000 on your computer to port 3000 in container
+      - "3002:3000"  # Maps port 3000 on your computer to port 3000 in container
     volumes:
       - ./database:/app/database  # Persist database files
       - ./public:/app/public      # Mount public files
