@@ -1,6 +1,6 @@
 const teachers = [
   {
-    name: "John Doe",
+    name: "Nalaka Lekamage",
     subject: "Mathematics",
     desc: "Expert in algebra and calculus with 10+ years.",
     rating: 4.8,
@@ -8,7 +8,7 @@ const teachers = [
       "https://cdn.pixabay.com/photo/2013/08/25/15/15/moody-175729_1280.jpg",
   },
   {
-    name: "Jane Smith",
+    name: "Lakman Mirihella",
     subject: "Physics",
     desc: "Passionate about experiments and theory.",
     rating: 4.5,
@@ -16,7 +16,7 @@ const teachers = [
       "https://cdn.pixabay.com/photo/2021/10/25/18/21/boy-6741717_1280.jpg",
   },
   {
-    name: "Emily Johnson",
+    name: "Janaki Mudalige",
     subject: "Chemistry",
     desc: "Specialist in organic and inorganic chemistry.",
     rating: 4.2,
@@ -32,7 +32,7 @@ const teachers = [
       "https://media.istockphoto.com/id/544352510/photo/portrait-of-a-teacher.jpg?s=1024x1024&w=is&k=20&c=bIVxl4VtvNnWg8JghUdF1_9VcOeO0bCmDB_c6RkVvTc=",
   },
   {
-    name: "Sarah Davis",
+    name: "Sangeetha Pushpakumari",
     subject: "English",
     desc: "Enhances writing and literature skills.",
     rating: 4.9,
@@ -40,7 +40,7 @@ const teachers = [
       "https://media.istockphoto.com/id/1498218111/photo/young-man-wearing-green-shirt-standing-over-green-background.jpg?s=1024x1024&w=is&k=20&c=aJvGxM09j7YbqOT3XgM1ODHII1wsNFGzPoUecSx75IA=",
   },
   {
-    name: "David Wilson",
+    name: "Aruna Wijesinghe",
     subject: "History",
     desc: "Engages students with historical narratives.",
     rating: 4.0,
@@ -48,7 +48,7 @@ const teachers = [
       "https://cdn.pixabay.com/photo/2023/02/09/19/25/monk-7779550_1280.jpg",
   },
   {
-    name: "Laura Martinez",
+    name: "Pavithra Subashini",
     subject: "Computer Science",
     desc: "Teaches coding from basics to advanced.",
     rating: 4.6,
@@ -56,7 +56,7 @@ const teachers = [
       "https://media.istockphoto.com/id/1398275235/photo/portrait-of-a-young-man-outdoors.jpg?s=612x612&w=0&k=20&c=0VguuS3bWsnFGcb6paUPe74Wn1a1i9DU7JVKt_ke8xQ=",
   },
   {
-    name: "James Anderson",
+    name: "Anton Jayakodi",
     subject: "Art",
     desc: "Guides students in creative expression.",
     rating: 4.3,
@@ -64,7 +64,7 @@ const teachers = [
       "https://cdn.pixabay.com/photo/2013/08/25/15/18/giant-175735_1280.jpg",
   },
   {
-    name: "Olivia Taylor",
+    name: "Achini Perera",
     subject: "Music",
     desc: "Offers lessons in theory and performance.",
     rating: 4.8,
@@ -72,7 +72,7 @@ const teachers = [
       "https://cdn.pixabay.com/photo/2013/09/23/18/17/pose-185375_1280.jpg",
   },
   {
-    name: "Daniel Thomas",
+    name: "Wimal Weerasinghe",
     subject: "Spanish",
     desc: "Immersive language learning with a native speaker.",
     rating: 4.4,

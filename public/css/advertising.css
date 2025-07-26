@@ -73,6 +73,7 @@ nav ul li a {
   text-align: center;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden; /* Prevent content from overflowing */
 }
 
 .ad-card:hover {
@@ -86,21 +87,47 @@ nav ul li a {
   background-color: #ddd;
   border-radius: 50%;
   margin: 0 auto 15px;
+  overflow: hidden; /* Hide overflow to maintain circular shape */
+  position: relative;
+  border: 3px solid #4caf50; /* Add a border for better visual appeal */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+/* Fix for teacher images */
+.teacher-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures image covers the container while maintaining aspect ratio */
+  object-position: center; /* Centers the image */
+  border-radius: 50%; /* Maintains circular shape */
+  display: block; /* Removes any inline spacing */
 }
 
 .ad-card h3 {
   margin: 10px 0;
   color: #333;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .ad-card p {
   margin: 5px 0;
   color: #666;
+  line-height: 1.4;
+}
+
+.ad-card p strong {
+  color: #4caf50;
+  font-weight: 600;
 }
 
 .rating {
-  font-size: 20px;
+  font-size: 18px;
   margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 
 .filled-stars {
@@ -120,8 +147,81 @@ nav ul li a {
   cursor: pointer;
   margin-top: 15px;
   font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(76, 175, 80, 0.2);
 }
 
 .ad-card button:hover {
   background-color: #45a049;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+}
+
+.ad-card button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(76, 175, 80, 0.2);
+}
+
+/* Responsive design improvements */
+@media (max-width: 768px) {
+  .hero {
+    margin-top: 8vh;
+    padding: 30px 15px;
+  }
+  
+  .hero h1 {
+    font-size: 28px;
+  }
+  
+  .hero p {
+    font-size: 16px;
+  }
+  
+  .ad-section {
+    padding: 20px 15px;
+  }
+  
+  #adContainer {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .ad-card {
+    padding: 15px;
+  }
+  
+  .teacher-avatar {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 24px;
+  }
+  
+  .hero p {
+    font-size: 14px;
+  }
+  
+  #adContainer {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .ad-card {
+    padding: 12px;
+  }
+  
+  .teacher-avatar {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .ad-card button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
 }
