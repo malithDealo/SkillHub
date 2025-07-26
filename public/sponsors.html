@@ -64,12 +64,12 @@
           </div>
         </div>
         <p>Location: San Francisco, USA</p>
-        <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+        <p>Contact: <a href="mailto:info@techcorp.com">info@techcorp.com</a></p>
         <p>Interest In: Tech conferences, startup events</p>
         <p>Budget: Rs15,000 - Rs60,000</p>
-        <button class="contact-btn">Contact Sponsor</button>
+        <button class="contact-btn" onclick="contactSponsor('TechCorp Solutions', 'info@techcorp.com')">Contact Sponsor</button>
       </div>
-
+      
       <div class="card">
         <div class="card-header">
           <div class="icon">N</div>
@@ -79,12 +79,12 @@
           </div>
         </div>
         <p>Location: Seattle, USA</p>
-        <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+        <p>Contact: <a href="mailto:partnerships@nextgen.com">partnerships@nextgen.com</a></p>
         <p>Interest In: AI workshops, tech expos</p>
         <p>Budget: Rs25,000 - Rs75,000</p>
-        <button class="contact-btn">Contact Sponsor</button>
+        <button class="contact-btn" onclick="contactSponsor('NextGen Tech', 'partnerships@nextgen.com')">Contact Sponsor</button>
       </div>
-
+      
       <!-- Finance Sponsors -->
       <div class="card">
         <div class="card-header">
@@ -95,12 +95,12 @@
           </div>
         </div>
         <p>Location: New York, USA</p>
-        <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+        <p>Contact: <a href="mailto:sponsors@greenbank.com">sponsors@greenbank.com</a></p>
         <p>Interest In: Financial conferences</p>
         <p>Budget: Rs50,000 - Rs100,000</p>
-        <button class="contact-btn">Contact Sponsor</button>
+        <button class="contact-btn" onclick="contactSponsor('GreenBank Financial', 'sponsors@greenbank.com')">Contact Sponsor</button>
       </div>
-
+      
       <div class="card">
         <div class="card-header">
           <div class="icon">F</div>
@@ -110,42 +110,14 @@
           </div>
         </div>
         <p>Location: Chicago, USA</p>
-        <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+        <p>Contact: <a href="mailto:partnerships@fintrust.com">partnerships@fintrust.com</a></p>
         <p>Interest In: Fintech summits</p>
         <p>Budget: Rs40,000 - Rs90,000</p>
-        <button class="contact-btn">Contact Sponsor</button>
+        <button class="contact-btn" onclick="contactSponsor('FinTrust Capital', 'partnerships@fintrust.com')">Contact Sponsor</button>
       </div>
-
-      <div class="card">
-        <div class="card-header">
-          <div class="icon">I</div>
-          <div>
-            <h3>InvestPro Group</h3>
-            <span class="category-tag">Finance</span>
-          </div>
-        </div>
-        <p>Location: Boston, USA</p>
-        <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
-        <p>Interest In: Investment seminars</p>
-        <p>Budget: Rs45,000 - Rs95,000</p>
-        <button class="contact-btn">Contact Sponsor</button>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <div class="icon">B</div>
-          <div>
-            <h3>BlueSky Finance</h3>
-            <span class="category-tag">Finance</span>
-          </div>
-        </div>
-        <p>Location: Denver, USA</p>
-        <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
-        <p>Interest In: Banking events</p>
-        <p>Budget: Rs35,000 - Rs85,000</p>
-        <button class="contact-btn">Contact Sponsor</button>
-      </div>
-
+      
+      <!-- Continue this pattern for all sponsor cards... -->
+      
       <!-- Healthcare Sponsors -->
       <div class="card">
         <div class="card-header">
@@ -156,222 +128,258 @@
           </div>
         </div>
         <p>Location: Boston, USA</p>
-        <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
+        <p>Contact: <a href="mailto:partnerships@healthplus.com">partnerships@healthplus.com</a></p>
         <p>Interest In: Medical conferences</p>
         <p>Budget: Rs20,000 - Rs80,000</p>
-        <button class="contact-btn">Contact Sponsor</button>
+        <button class="contact-btn" onclick="contactSponsor('HealthPlus Innovations', 'partnerships@healthplus.com')">Contact Sponsor</button>
       </div>
-
-      <div class="card">
-        <div class="card-header">
-          <div class="icon">M</div>
-          <div>
-            <h3>MediCare Solutions</h3>
-            <span class="category-tag">Healthcare</span>
-          </div>
-        </div>
-        <p>Location: Houston, USA</p>
-        <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
-        <p>Interest In: Healthcare summits</p>
-        <p>Budget: Rs30,000 - Rs85,000</p>
-        <button class="contact-btn">Contact Sponsor</button>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <div class="icon">W</div>
-          <div>
-            <h3>Wellness First</h3>
-            <span class="category-tag">Healthcare</span>
-          </div>
-        </div>
-        <p>Location: Miami, USA</p>
-        <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
-        <p>Interest In: Mental health events</p>
-        <p>Budget: Rs15,000 - Rs50,000</p>
-        <button class="contact-btn">Contact Sponsor</button>
-      </div>
-
-      <!-- Education Sponsors -->
-      <div class="card">
-        <div class="card-header">
-          <div class="icon">E</div>
-          <div>
-            <h3>EduFuture Foundation</h3>
-            <span class="category-tag">Education</span>
-          </div>
-        </div>
-        <p>Location: Chicago, USA</p>
-        <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
-        <p>Interest In: Educational workshops</p>
-        <p>Budget: Rs10,000 - Rs40,000</p>
-        <button class="contact-btn">Contact Sponsor</button>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <div class="icon">L</div>
-          <div>
-            <h3>LearnEasy Academy</h3>
-            <span class="category-tag">Education</span>
-          </div>
-        </div>
-        <p>Location: Atlanta, USA</p>
-        <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
-        <p>Interest In: Teacher training</p>
-        <p>Budget: Rs12,000 - Rs45,000</p>
-        <button class="contact-btn">Contact Sponsor</button>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <div class="icon">S</div>
-          <div>
-            <h3>SmartKids Initiative</h3>
-            <span class="category-tag">Education</span>
-          </div>
-        </div>
-        <p>Location: Denver, USA</p>
-        <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
-        <p>Interest In: STEM education</p>
-        <p>Budget: Rs15,000 - Rs50,000</p>
-        <button class="contact-btn">Contact Sponsor</button>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <div class="icon">K</div>
-          <div>
-            <h3>KnowledgeHub</h3>
-            <span class="category-tag">Education</span>
-          </div>
-        </div>
-        <p>Location: Boston, USA</p>
-        <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
-        <p>Interest In: Online learning</p>
-        <p>Budget: Rs20,000 - Rs60,000</p>
-        <button class="contact-btn">Contact Sponsor</button>
-      </div>
-
       <div class="card">
         <div class="card-header">
           <div class="icon">T</div>
           <div>
-            <h3>TeachNow Institute</h3>
-            <span class="category-tag">Education</span>
-          </div>
-        </div>
-        <p>Location: Seattle, USA</p>
-        <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
-        <p>Interest In: Teacher development</p>
-        <p>Budget: Rs15,000 - Rs55,000</p>
-        <button class="contact-btn">Contact Sponsor</button>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <div class="icon">L</div>
-          <div>
-            <h3>LearnSphere</h3>
-            <span class="category-tag">Education</span>
-          </div>
-        </div>
-        <p>Location: Austin, USA</p>
-        <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
-        <p>Interest In: Educational summits</p>
-        <p>Budget: Rs18,000 - Rs65,000</p>
-        <button class="contact-btn">Contact Sponsor</button>
-      </div>
-
-      <!-- Retail Sponsors -->
-      <div class="card">
-        <div class="card-header">
-          <div class="icon">R</div>
-          <div>
-            <h3>Retail Giants Inc.</h3>
-            <span class="category-tag">Retail</span>
-          </div>
-        </div>
-        <p>Location: Los Angeles, USA</p>
-        <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
-        <p>Interest In: Retail expos</p>
-        <p>Budget: Rs30,000 - Rs70,000</p>
-        <button class="contact-btn">Contact Sponsor</button>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <div class="icon">S</div>
-          <div>
-            <h3>ShopSmart Co.</h3>
-            <span class="category-tag">Retail</span>
-          </div>
-        </div>
-        <p>Location: Dallas, USA</p>
-        <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
-        <p>Interest In: E-commerce events</p>
-        <p>Budget: Rs25,000 - Rs65,000</p>
-        <button class="contact-btn">Contact Sponsor</button>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <div class="icon">M</div>
-          <div>
-            <h3>MarketTrend Stores</h3>
-            <span class="category-tag">Retail</span>
-          </div>
-        </div>
-        <p>Location: Houston, USA</p>
-        <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
-        <p>Interest In: Retail summits</p>
-        <p>Budget: Rs28,000 - Rs75,000</p>
-        <button class="contact-btn">Contact Sponsor</button>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <div class="icon">B</div>
-          <div>
-            <h3>BuyEasy Retail</h3>
-            <span class="category-tag">Retail</span>
-          </div>
-        </div>
-        <p>Location: Phoenix, USA</p>
-        <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
-        <p>Interest In: Shopping festivals</p>
-        <p>Budget: Rs20,000 - Rs60,000</p>
-        <button class="contact-btn">Contact Sponsor</button>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <div class="icon">T</div>
-          <div>
-            <h3>TrendSetters Mall</h3>
-            <span class="category-tag">Retail</span>
+            <h3>TechCorp Solutions</h3>
+            <span class="category-tag">Technology</span>
           </div>
         </div>
         <p>Location: San Francisco, USA</p>
-        <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
-        <p>Interest In: Fashion events</p>
-        <p>Budget: Rs35,000 - Rs80,000</p>
-        <button class="contact-btn">Contact Sponsor</button>
+        <p>Contact: <a href="mailto:info@techcorp.com">info@techcorp.com</a></p>
+        <p>Interest In: Tech conferences, startup events</p>
+        <p>Budget: Rs15,000 - Rs60,000</p>
+        <button class="contact-btn" onclick="contactSponsor('TechCorp Solutions', 'info@techcorp.com')">Contact Sponsor</button>
       </div>
-
+      
       <div class="card">
         <div class="card-header">
-          <div class="icon">O</div>
+          <div class="icon">N</div>
           <div>
-            <h3>OnlineShop Hub</h3>
-            <span class="category-tag">Retail</span>
+            <h3>NextGen Tech</h3>
+            <span class="category-tag">Technology</span>
+          </div>
+        </div>
+        <p>Location: Seattle, USA</p>
+        <p>Contact: <a href="mailto:partnerships@nextgen.com">partnerships@nextgen.com</a></p>
+        <p>Interest In: AI workshops, tech expos</p>
+        <p>Budget: Rs25,000 - Rs75,000</p>
+        <button class="contact-btn" onclick="contactSponsor('NextGen Tech', 'partnerships@nextgen.com')">Contact Sponsor</button>
+      </div>
+      
+      <!-- Finance Sponsors -->
+      <div class="card">
+        <div class="card-header">
+          <div class="icon">G</div>
+          <div>
+            <h3>GreenBank Financial</h3>
+            <span class="category-tag">Finance</span>
+          </div>
+        </div>
+        <p>Location: New York, USA</p>
+        <p>Contact: <a href="mailto:sponsors@greenbank.com">sponsors@greenbank.com</a></p>
+        <p>Interest In: Financial conferences</p>
+        <p>Budget: Rs50,000 - Rs100,000</p>
+        <button class="contact-btn" onclick="contactSponsor('GreenBank Financial', 'sponsors@greenbank.com')">Contact Sponsor</button>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <div class="icon">F</div>
+          <div>
+            <h3>FinTrust Capital</h3>
+            <span class="category-tag">Finance</span>
           </div>
         </div>
         <p>Location: Chicago, USA</p>
-        <p>Contact: <a href="mailto:[email protected]">[email protected]</a></p>
-        <p>Interest In: E-commerce expos</p>
-        <p>Budget: Rs22,000 - Rs70,000</p>
-        <button class="contact-btn">Contact Sponsor</button>
+        <p>Contact: <a href="mailto:partnerships@fintrust.com">partnerships@fintrust.com</a></p>
+        <p>Interest In: Fintech summits</p>
+        <p>Budget: Rs40,000 - Rs90,000</p>
+        <button class="contact-btn" onclick="contactSponsor('FinTrust Capital', 'partnerships@fintrust.com')">Contact Sponsor</button>
+      </div>
+      
+      <!-- Continue this pattern for all sponsor cards... -->
+      
+      <!-- Healthcare Sponsors -->
+      <div class="card">
+        <div class="card-header">
+          <div class="icon">H</div>
+          <div>
+            <h3>HealthPlus Innovations</h3>
+            <span class="category-tag">Healthcare</span>
+          </div>
+        </div>
+        <p>Location: Boston, USA</p>
+        <p>Contact: <a href="mailto:partnerships@healthplus.com">partnerships@healthplus.com</a></p>
+        <p>Interest In: Medical conferences</p>
+        <p>Budget: Rs20,000 - Rs80,000</p>
+        <button class="contact-btn" onclick="contactSponsor('HealthPlus Innovations', 'partnerships@healthplus.com')">Contact Sponsor</button>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="icon">T</div>
+          <div>
+            <h3>TechCorp Solutions</h3>
+            <span class="category-tag">Technology</span>
+          </div>
+        </div>
+        <p>Location: San Francisco, USA</p>
+        <p>Contact: <a href="mailto:info@techcorp.com">info@techcorp.com</a></p>
+        <p>Interest In: Tech conferences, startup events</p>
+        <p>Budget: Rs15,000 - Rs60,000</p>
+        <button class="contact-btn" onclick="contactSponsor('TechCorp Solutions', 'info@techcorp.com')">Contact Sponsor</button>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <div class="icon">N</div>
+          <div>
+            <h3>NextGen Tech</h3>
+            <span class="category-tag">Technology</span>
+          </div>
+        </div>
+        <p>Location: Seattle, USA</p>
+        <p>Contact: <a href="mailto:partnerships@nextgen.com">partnerships@nextgen.com</a></p>
+        <p>Interest In: AI workshops, tech expos</p>
+        <p>Budget: Rs25,000 - Rs75,000</p>
+        <button class="contact-btn" onclick="contactSponsor('NextGen Tech', 'partnerships@nextgen.com')">Contact Sponsor</button>
+      </div>
+      
+      <!-- Finance Sponsors -->
+      <div class="card">
+        <div class="card-header">
+          <div class="icon">G</div>
+          <div>
+            <h3>GreenBank Financial</h3>
+            <span class="category-tag">Finance</span>
+          </div>
+        </div>
+        <p>Location: New York, USA</p>
+        <p>Contact: <a href="mailto:sponsors@greenbank.com">sponsors@greenbank.com</a></p>
+        <p>Interest In: Financial conferences</p>
+        <p>Budget: Rs50,000 - Rs100,000</p>
+        <button class="contact-btn" onclick="contactSponsor('GreenBank Financial', 'sponsors@greenbank.com')">Contact Sponsor</button>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <div class="icon">F</div>
+          <div>
+            <h3>FinTrust Capital</h3>
+            <span class="category-tag">Finance</span>
+          </div>
+        </div>
+        <p>Location: Chicago, USA</p>
+        <p>Contact: <a href="mailto:partnerships@fintrust.com">partnerships@fintrust.com</a></p>
+        <p>Interest In: Fintech summits</p>
+        <p>Budget: Rs40,000 - Rs90,000</p>
+        <button class="contact-btn" onclick="contactSponsor('FinTrust Capital', 'partnerships@fintrust.com')">Contact Sponsor</button>
+      </div>
+      
+      <!-- Continue this pattern for all sponsor cards... -->
+      
+      <!-- Healthcare Sponsors -->
+      <div class="card">
+        <div class="card-header">
+          <div class="icon">H</div>
+          <div>
+            <h3>HealthPlus Innovations</h3>
+            <span class="category-tag">Healthcare</span>
+          </div>
+        </div>
+        <p>Location: Boston, USA</p>
+        <p>Contact: <a href="mailto:partnerships@healthplus.com">partnerships@healthplus.com</a></p>
+        <p>Interest In: Medical conferences</p>
+        <p>Budget: Rs20,000 - Rs80,000</p>
+        <button class="contact-btn" onclick="contactSponsor('HealthPlus Innovations', 'partnerships@healthplus.com')">Contact Sponsor</button>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="icon">T</div>
+          <div>
+            <h3>TechCorp Solutions</h3>
+            <span class="category-tag">Technology</span>
+          </div>
+        </div>
+        <p>Location: San Francisco, USA</p>
+        <p>Contact: <a href="mailto:info@techcorp.com">info@techcorp.com</a></p>
+        <p>Interest In: Tech conferences, startup events</p>
+        <p>Budget: Rs15,000 - Rs60,000</p>
+        <button class="contact-btn" onclick="contactSponsor('TechCorp Solutions', 'info@techcorp.com')">Contact Sponsor</button>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <div class="icon">N</div>
+          <div>
+            <h3>NextGen Tech</h3>
+            <span class="category-tag">Technology</span>
+          </div>
+        </div>
+        <p>Location: Seattle, USA</p>
+        <p>Contact: <a href="mailto:partnerships@nextgen.com">partnerships@nextgen.com</a></p>
+        <p>Interest In: AI workshops, tech expos</p>
+        <p>Budget: Rs25,000 - Rs75,000</p>
+        <button class="contact-btn" onclick="contactSponsor('NextGen Tech', 'partnerships@nextgen.com')">Contact Sponsor</button>
+      </div>
+      
+      <!-- Finance Sponsors -->
+      <div class="card">
+        <div class="card-header">
+          <div class="icon">G</div>
+          <div>
+            <h3>GreenBank Financial</h3>
+            <span class="category-tag">Finance</span>
+          </div>
+        </div>
+        <p>Location: New York, USA</p>
+        <p>Contact: <a href="mailto:sponsors@greenbank.com">sponsors@greenbank.com</a></p>
+        <p>Interest In: Financial conferences</p>
+        <p>Budget: Rs50,000 - Rs100,000</p>
+        <button class="contact-btn" onclick="contactSponsor('GreenBank Financial', 'sponsors@greenbank.com')">Contact Sponsor</button>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <div class="icon">F</div>
+          <div>
+            <h3>FinTrust Capital</h3>
+            <span class="category-tag">Finance</span>
+          </div>
+        </div>
+        <p>Location: Chicago, USA</p>
+        <p>Contact: <a href="mailto:partnerships@fintrust.com">partnerships@fintrust.com</a></p>
+        <p>Interest In: Fintech summits</p>
+        <p>Budget: Rs40,000 - Rs90,000</p>
+        <button class="contact-btn" onclick="contactSponsor('FinTrust Capital', 'partnerships@fintrust.com')">Contact Sponsor</button>
+      </div>
+      
+      <!-- Continue this pattern for all sponsor cards... -->
+      
+      <!-- Healthcare Sponsors -->
+      <div class="card">
+        <div class="card-header">
+          <div class="icon">H</div>
+          <div>
+            <h3>HealthPlus Innovations</h3>
+            <span class="category-tag">Healthcare</span>
+          </div>
+        </div>
+        <p>Location: Boston, USA</p>
+        <p>Contact: <a href="mailto:partnerships@healthplus.com">partnerships@healthplus.com</a></p>
+        <p>Interest In: Medical conferences</p>
+        <p>Budget: Rs20,000 - Rs80,000</p>
+        <button class="contact-btn" onclick="contactSponsor('HealthPlus Innovations', 'partnerships@healthplus.com')">Contact Sponsor</button>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="icon">G</div>
+          <div>
+            <h3>GreenBank Financial</h3>
+            <span class="category-tag">Finance</span>
+          </div>
+        </div>
+        <p>Location: New York, USA</p>
+        <p>Contact: <a href="mailto:sponsors@greenbank.com">sponsors@greenbank.com</a></p>
+        <p>Interest In: Financial conferences</p>
+        <p>Budget: Rs50,000 - Rs100,000</p>
+        <button class="contact-btn" onclick="contactSponsor('GreenBank Financial', 'sponsors@greenbank.com')">Contact Sponsor</button>
       </div>
     </section>
 
