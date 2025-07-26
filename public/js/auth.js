@@ -740,16 +740,7 @@ class SkillHubAuth {
 
     // Redirect after sign out based on user type
     redirectAfterSignOut(userType) {
-        const redirectMap = {
-            learner: 'home.html',
-            teacher: 'homepage.html', 
-            sponsor: 'sponsorhome.html'
-        };
-
-        const redirectUrl = redirectMap[userType] || 'home.html';
-        
-        console.log('🔄 Redirecting to:', redirectUrl);
-        window.location.href = redirectUrl;
+        window.location.href = 'index.html'; // Your single redirect page
     }
 
     // Show sign in options modal/page

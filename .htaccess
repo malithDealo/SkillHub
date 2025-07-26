@@ -1,0 +1,28 @@
+# .htaccess file - Place this in your root directory
+
+# Enable URL rewriting
+RewriteEngine On
+
+# Remove .html extension from URLs
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+# Redirect .html URLs to clean URLs
+RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
+RewriteRule ^ /%1? [NC,L,R=301]
+
+# Specific redirects for your pages
+RewriteRule ^home$ home.html [NC,L]
+RewriteRule ^about$ about.html [NC,L]
+RewriteRule ^contact$ contact.html [NC,L]
+RewriteRule ^dashboard$ dashboard.html [NC,L]
+RewriteRule ^login$ login.html [NC,L]
+RewriteRule ^signup$ signup.html [NC,L]
+
+# Set index page
+DirectoryIndex home.html
+
+# Optional: Force HTTPS
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
