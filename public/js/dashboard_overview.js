@@ -531,7 +531,7 @@ class TeacherDashboard {
                 title: 'Premium Learning Tools',
                 description: 'Enhance your teaching with our advanced educational platform',
                 sponsor: 'EduTech Solutions',
-                image: 'https://via.placeholder.com/60x60/667eea/ffffff?text=AD',
+                //image: 'https://via.placeholder.com/60x60/667eea/ffffff?text=AD',
                 budget: 500,
                 status: 'active'
             },
@@ -540,7 +540,7 @@ class TeacherDashboard {
                 title: 'Scientific Calculator App',
                 description: 'Professional calculator for advanced mathematics',
                 sponsor: 'MathCorp',
-                image: 'https://via.placeholder.com/60x60/ff6b6b/ffffff?text=AD',
+                //image: 'https://via.placeholder.com/60x60/ff6b6b/ffffff?text=AD',
                 budget: 300,
                 status: 'active'
             },
@@ -549,7 +549,7 @@ class TeacherDashboard {
                 title: 'Virtual Lab Equipment',
                 description: 'Simulate real laboratory experiments online',
                 sponsor: 'LabSim Inc',
-                image: 'https://via.placeholder.com/60x60/2ecc71/ffffff?text=AD',
+                //image: 'https://via.placeholder.com/60x60/2ecc71/ffffff?text=AD',
                 budget: 750,
                 status: 'paused'
             }
@@ -661,7 +661,7 @@ class TeacherDashboard {
             const adItem = document.createElement('div');
             adItem.className = 'ad-item';
             adItem.innerHTML = `
-                <img src="${ad.image}" alt="${ad.title}" class="ad-image">
+                
                 <div class="ad-content">
                     <h4>${ad.title}</h4>
                     <p>${ad.description}</p>

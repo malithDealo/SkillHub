@@ -1599,13 +1599,13 @@
             }
 
             // Method 2: If this is a separate page
-            if (document.referrer.includes('dashboard_overview.html')) {
+            if (document.referrer.includes('profile_settings.html')) {
                 window.history.back();
                 return;
             }
 
             // Method 3: Direct navigation to dashboard
-            window.location.href = 'dashboard_overview.html';
+            window.location.href = 'profile_settings.html';
 
             // Method 4: If using single page application
             if (window.dashboard) {

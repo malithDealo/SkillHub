@@ -575,14 +575,14 @@ body[class*="text-"] .text-size-indicator {
 
 /* Ensure accessibility toolbar maintains consistent sizing */
 .accessibility-toggle {
-    font-size: 18px !important;
+    font-size: 38px !important;
     width: 45px !important;
     height: 45px !important;
 }
 
 .accessibility-panel {
     width: 280px !important;
-    font-size: 14px !important;
+    font-size: 20px !important;
     line-height: 1.4 !important;
 }
 
