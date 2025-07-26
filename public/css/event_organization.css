@@ -1,37 +1,40 @@
 /* Base Styles */
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #f4f7fa;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     margin: 0;
     color: #333;
+    min-height: 100vh;
 }
 
 /* Sidebar Styles */
 .sidebar {
     width: 240px;
-    background: linear-gradient(180deg, #f3f1f1, #3b82f6);
-    color: #090909;
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
     padding: 1.5rem;
     position: fixed;
     height: 100%;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     z-index: 100;
+    backdrop-filter: blur(10px);
 }
 
 .sidebar h1 {
     font-size: 1.75rem;
     font-weight: 700;
-    margin-bottom: 1.5rem;
-    text-align: center;
-    color: white;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    color: #667eea;
 }
 
 .sidebar p {
     font-size: 0.9rem;
-    opacity: 0.8;
+    opacity: 0.7;
     margin-bottom: 1.5rem;
-    text-align: center;
+    text-align: left;
+    color: #333;
 }
 
 .sidebar nav ul {
@@ -46,19 +49,19 @@ body {
     padding: 0.75rem 1rem;
     border-radius: 8px;
     margin-bottom: 0.5rem;
-    color: #fff;
+    color: #333;
     font-weight: 500;
     transition: all 0.2s ease;
     text-decoration: none;
 }
 
 .sidebar nav ul li a:hover {
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(102, 126, 234, 0.1);
     transform: translateX(4px);
 }
 
 .sidebar nav ul li a.active {
-    background-color: #2563eb;
+    background-color: #667eea;
     color: #fff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -73,7 +76,7 @@ body {
 .filter-section {
     margin-top: 1.5rem;
     padding: 1rem;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(102, 126, 234, 0.1);
     border-radius: 10px;
 }
 
@@ -81,13 +84,14 @@ body {
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 0.75rem;
-    color: white;
+    color: #333;
     display: flex;
     align-items: center;
 }
 
 .filter-section h3 i {
     margin-right: 8px;
+    color: #667eea;
 }
 
 .filter-checkbox {
@@ -98,11 +102,11 @@ body {
 
 .filter-checkbox input {
     margin-right: 0.5rem;
-    accent-color: #2563eb;
+    accent-color: #667eea;
 }
 
 .filter-checkbox label {
-    color: white;
+    color: #333;
     font-size: 0.9rem;
 }
 
@@ -110,7 +114,7 @@ body {
     display: flex;
     align-items: center;
     padding: 0.75rem 1rem;
-    color: #fecaca;
+    color: #dc2626;
     font-weight: 500;
     border-radius: 8px;
     margin-top: 2rem;
@@ -119,8 +123,8 @@ body {
 }
 
 .logout:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #fca5a5;
+    background-color: rgba(220, 38, 38, 0.1);
+    color: #dc2626;
 }
 
 .logout i {
@@ -135,53 +139,106 @@ body {
     transition: margin-left 0.3s ease;
 }
 
+header {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
 header h2 {
     font-size: 2rem;
     font-weight: 700;
-    color: #1e3a8a;
+    color: #333;
     margin-bottom: 0.5rem;
 }
 
 header p {
-    color: #6b7280;
+    color: #666;
     font-size: 1rem;
     margin-bottom: 1.5rem;
 }
 
 .card {
-    background-color: #fff;
+    background: rgba(255, 255, 255, 0.95);
     padding: 1.75rem;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    backdrop-filter: blur(10px);
 }
 
 .card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
 .card h3 {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #1e3a8a;
+    color: #333;
     margin-bottom: 1rem;
+}
+
+/* Events Layout */
+.events-layout {
+    display: flex;
+    gap: 2rem;
+}
+
+.events-main {
+    flex: 2;
+}
+
+.events-sidebar {
+    flex: 1;
+}
+
+/* Event Filters */
+.events-filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.filter-tab {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.filter-tab:hover {
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.filter-tab.active {
+    background: #667eea;
+    color: white;
 }
 
 /* Timetable Styles */
 .timetable {
-    background-color: #fff;
+    background: rgba(255, 255, 255, 0.95);
     padding: 1.75rem;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
 }
 
 .timetable h3 {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #1e3a8a;
+    color: #333;
     margin-bottom: 1rem;
 }
 
@@ -198,7 +255,7 @@ header p {
 
 .timetable th {
     font-weight: 600;
-    color: #1e3a8a;
+    color: #333;
 }
 
 .timetable td.available {
@@ -207,7 +264,7 @@ header p {
 }
 
 .timetable td.sessions {
-    color: #2563eb;
+    color: #667eea;
     font-weight: 500;
 }
 
@@ -232,28 +289,31 @@ form button {
     transition: all 0.2s ease;
 }
 
-button.primary {
-    background-color: #2563eb;
+button.primary, .btn.primary {
+    background-color: #667eea;
     color: #fff;
 }
 
-button.primary:hover {
-    background-color: #1e40af;
+button.primary:hover, .btn.primary:hover {
+    background-color: #5a6fd8;
 }
 
 .btn-secondary {
     background: rgba(102, 126, 234, 0.1);
     color: #667eea;
+    border: 1px solid rgba(102, 126, 234, 0.2);
 }
 
 .btn-success {
     background: rgba(34, 197, 94, 0.1);
     color: #22c55e;
+    border: 1px solid rgba(34, 197, 94, 0.2);
 }
 
 .btn-warning {
     background: rgba(251, 191, 36, 0.1);
     color: #fbbf24;
+    border: 1px solid rgba(251, 191, 36, 0.2);
 }
 
 /* Utility Classes */
@@ -277,8 +337,15 @@ button.primary:hover {
 .event-card {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
 .event-content {
@@ -391,7 +458,8 @@ button.primary:hover {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 12px;
     padding: 1.75rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
 }
 
 .widget-title {
@@ -569,7 +637,7 @@ button.primary:hover {
     background: none;
     border: none;
     font-size: 1.25rem;
-    color: #1e3a8a;
+    color: #333;
     cursor: pointer;
     position: absolute;
     top: 2rem;
@@ -594,5 +662,9 @@ button.primary:hover {
     .main-content {
         margin-left: 0;
         padding: 2rem;
+    }
+    
+    .events-layout {
+        flex-direction: column;
     }
 }

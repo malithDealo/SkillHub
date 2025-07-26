@@ -9,6 +9,37 @@
     <link rel="stylesheet" href="css/accessibility.css">
     <script src="js/accessibility.js"></script>
     <style>
+        .nav-bar {
+            justify-content: center;
+            gap: 1rem;
+            display: flex;
+            position: absolute;
+            top: 50px;
+            left: 500px;
+            z-index: 10000;
+        }
+
+        .nav-bar a {
+            text-decoration: none;
+            color: #333;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-bar a:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .nav-bar .back-btn {
+            background: rgba(34, 197, 94, 0.95);
+            color: white;
+        }
+    </style>
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -497,6 +528,12 @@
         <!-- Main Content -->
         <div class="main-content">
             <header class="page-header">
+                <nav class="nav-bar">
+                    <a href="homepage.html" class="back-btn"><i class="fas fa-arrow-left"></i>Back to Navigation</a>
+                    <a href="profile_settings.html">Dashboard</a>
+                    <a href="class_management.html">Classes</a>
+                    <a href="schedule & Availability.html">Schedule</a>
+                </nav>  
                 <div>
                     <h1>Schedule & Availability</h1>
                     <p>Manage your teaching schedule and availability</p>
