@@ -21,8 +21,48 @@ app.use(cors({
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Serve static files from the public directory
-app.use(express.static(path.join(__dirname, '../public')));
+// Enhanced static file serving configuration
+const publicPath = path.join(__dirname, '../public');
+console.log(`📁 Public directory path: ${publicPath}`);
+console.log(`📁 Public directory exists: ${fs.existsSync(publicPath)}`);
+
+// Primary static file serving
+app.use(express.static(publicPath));
+
+// Add explicit static file serving with proper headers
+app.use('/css', express.static(path.join(publicPath, 'css'), {
+    setHeaders: (res, filePath) => {
+        if (filePath.endsWith('.css')) {
+            res.setHeader('Content-Type', 'text/css');
+            console.log(`📄 Serving CSS: ${filePath}`);
+        }
+    }
+}));
+
+app.use('/js', express.static(path.join(publicPath, 'js'), {
+    setHeaders: (res, filePath) => {
+        if (filePath.endsWith('.js')) {
+            res.setHeader('Content-Type', 'application/javascript');
+            console.log(`📄 Serving JS: ${filePath}`);
+        }
+    }
+}));
+
+app.use('/images', express.static(path.join(publicPath, 'images')));
+app.use('/components', express.static(path.join(publicPath, 'components')));
+
+// Enhanced logging middleware for debugging
+app.use((req, res, next) => {
+    // Log all requests for static files
+    if (req.path.includes('.css') || req.path.includes('.js') || req.path.includes('.png') || 
+        req.path.includes('.jpg') || req.path.includes('.ico') || req.path.includes('.html')) {
+        console.log(`📁 Static file requested: ${req.method} ${req.path}`);
+        console.log(`📂 Full path would be: ${path.join(publicPath, req.path)}`);
+        console.log(`🔍 File exists: ${fs.existsSync(path.join(publicPath, req.path))}`);
+        console.log(`🌐 User-Agent: ${req.headers['user-agent']?.substring(0, 50)}...`);
+    }
+    next();
+});
 
 // Database setup
 const dbDir = path.join(__dirname, '../database');
@@ -39,6 +79,54 @@ console.log('🚀 SkillHub API server starting...');
 
 // Database connection with proper initialization
 let db;
+
+// Debug function for file structure
+function debugFileStructure() {
+    console.log('\n🔍 Debugging File Structure:');
+    console.log('Current working directory:', process.cwd());
+    console.log('__dirname:', __dirname);
+    
+    const publicPath = path.join(__dirname, '../public');
+    console.log('Public directory path:', publicPath);
+    console.log('Public directory exists:', fs.existsSync(publicPath));
+    
+    if (fs.existsSync(publicPath)) {
+        console.log('\n📁 Contents of public directory:');
+        try {
+            const files = fs.readdirSync(publicPath, { withFileTypes: true });
+            files.forEach(file => {
+                const icon = file.isDirectory() ? '📂' : '📄';
+                console.log(`   ${icon} ${file.name}`);
+                
+                if (file.isDirectory() && (file.name === 'css' || file.name === 'js')) {
+                    const subPath = path.join(publicPath, file.name);
+                    if (fs.existsSync(subPath)) {
+                        const subFiles = fs.readdirSync(subPath);
+                        subFiles.forEach(subFile => {
+                            console.log(`      📄 ${subFile}`);
+                        });
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('Error reading public directory:', error);
+        }
+    }
+    
+    // Check specific paths
+    const cssPath = path.join(__dirname, '../public/css');
+    const jsPath = path.join(__dirname, '../public/js');
+    
+    console.log('\n🎨 CSS directory:');
+    console.log('Path:', cssPath);
+    console.log('Exists:', fs.existsSync(cssPath));
+    
+    console.log('\n⚡ JS directory:');
+    console.log('Path:', jsPath);
+    console.log('Exists:', fs.existsSync(jsPath));
+    
+    console.log('\n' + '='.repeat(50));
+}
 
 function initializeDatabase() {
     return new Promise((resolve, reject) => {
@@ -1390,26 +1478,101 @@ app.get('/api/auth/login-attempts', async (req, res) => {
     }
 });
 
-// Catch-all route for serving HTML files
+// Enhanced catch-all route for serving HTML files
 app.get('*', (req, res) => {
-    const filePath = path.join(__dirname, '../public', req.path);
+    console.log(`🌐 Request for: ${req.path}`);
+    console.log(`🔍 Headers accept: ${req.headers.accept}`);
     
-    // Check if the requested file exists
-    if (fs.existsSync(filePath) && path.extname(filePath)) {
-        res.sendFile(filePath);
-    } else {
-        // If it's an HTML request and file doesn't exist, serve index.html
-        if (req.path.endsWith('.html') || req.headers.accept?.includes('text/html')) {
-            const htmlFile = path.join(__dirname, '../public', req.path.endsWith('.html') ? req.path : req.path + '.html');
-            if (fs.existsSync(htmlFile)) {
-                res.sendFile(htmlFile);
-            } else {
-                res.status(404).send('File not found');
+    // Handle API routes that don't exist
+    if (req.path.startsWith('/api/')) {
+        return res.status(404).json({ error: 'API endpoint not found' });
+    }
+    
+    // For static files with extensions (CSS, JS, images, etc.)
+    if (path.extname(req.path)) {
+        const filePath = path.join(__dirname, '../public', req.path);
+        console.log(`📁 Static file check: ${filePath}`);
+        console.log(`🔍 File exists: ${fs.existsSync(filePath)}`);
+        
+        if (fs.existsSync(filePath)) {
+            // Set proper content type for common file types
+            const ext = path.extname(req.path).toLowerCase();
+            const contentTypes = {
+                '.css': 'text/css',
+                '.js': 'application/javascript',
+                '.html': 'text/html',
+                '.png': 'image/png',
+                '.jpg': 'image/jpeg',
+                '.jpeg': 'image/jpeg',
+                '.gif': 'image/gif',
+                '.svg': 'image/svg+xml',
+                '.ico': 'image/x-icon',
+                '.woff': 'font/woff',
+                '.woff2': 'font/woff2',
+                '.ttf': 'font/ttf'
+            };
+            
+            if (contentTypes[ext]) {
+                res.setHeader('Content-Type', contentTypes[ext]);
             }
+            
+            console.log(`✅ Serving static file: ${filePath}`);
+            return res.sendFile(filePath);
         } else {
-            res.status(404).json({ error: 'Not found' });
+            console.log(`❌ Static file not found: ${filePath}`);
+            return res.status(404).send('File not found');
         }
     }
+    
+    // For HTML requests (with or without .html extension)
+    if (req.headers.accept?.includes('text/html')) {
+        let htmlPaths = [];
+        
+        // If path already has .html extension, use it directly
+        if (req.path.endsWith('.html')) {
+            htmlPaths.push(path.join(__dirname, '../public', req.path));
+        } else {
+            // Try multiple variations
+            htmlPaths = [
+                path.join(__dirname, '../public', req.path + '.html'),
+                path.join(__dirname, '../public', req.path, 'index.html'),
+                path.join(__dirname, '../public', req.path.substring(1) + '.html'), // Remove leading slash
+                path.join(__dirname, '../public/index.html') // fallback
+            ];
+        }
+        
+        console.log(`🔍 Looking for HTML file in paths:`, htmlPaths);
+        
+        for (const htmlPath of htmlPaths) {
+            console.log(`🔍 Checking: ${htmlPath} - Exists: ${fs.existsSync(htmlPath)}`);
+            if (fs.existsSync(htmlPath)) {
+                console.log(`✅ Serving HTML: ${htmlPath}`);
+                res.setHeader('Content-Type', 'text/html');
+                return res.sendFile(htmlPath);
+            }
+        }
+        
+        // If no HTML file found, list available files for debugging
+        const publicDir = path.join(__dirname, '../public');
+        if (fs.existsSync(publicDir)) {
+            const files = fs.readdirSync(publicDir).filter(f => f.endsWith('.html'));
+            console.log(`❌ HTML file not found. Available HTML files:`, files);
+            return res.status(404).send(`
+                <h1>Page not found</h1>
+                <p>The requested resource <code>${req.path}</code> was not found on this server.</p>
+                <h3>Available HTML files:</h3>
+                <ul>
+                    ${files.map(f => `<li><a href="/${f}">${f}</a></li>`).join('')}
+                </ul>
+            `);
+        } else {
+            return res.status(404).send('Public directory not found');
+        }
+    }
+    
+    // For other requests
+    console.log(`❌ Unhandled request: ${req.path}`);
+    res.status(404).json({ error: 'Not found' });
 });
 
 // Error handling middleware
@@ -1425,6 +1588,9 @@ app.use((error, req, res, next) => {
 // Initialize database and start server
 initializeDatabase()
     .then(() => {
+        // Call debug function after database initialization
+        debugFileStructure();
+        
         app.listen(PORT, () => {
             console.log(`🌐 Server running on http://localhost:${PORT}`);
             console.log(`🧪 Test API: http://localhost:${PORT}/api/test`);
