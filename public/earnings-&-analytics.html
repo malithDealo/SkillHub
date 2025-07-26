@@ -6,10 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TeacherPro - Earnings & Analytics</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="css/accessibility.css">
-    <script src="js/accessibility.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
+        .nav-bar {
+            justify-content: center;
+            gap: 1rem;
+            display: flex;
+            position: absolute;
+            top: 20px;
+            left: 1100px;
+            z-index: 10000;
+        }
+
+        .nav-bar a {
+            text-decoration: none;
+            color: #333;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-bar a:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .nav-bar .back-btn {
+            background: rgba(34, 197, 94, 0.95);
+            color: white;
+        }
+    </style>
+    <style>
+        /* Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -17,137 +47,210 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7fa;
+            color: #333;
         }
 
-        .dashboard-container {
-            display: flex;
-            min-height: 100vh;
-        }
-
+        /* Sidebar Styles */
         .sidebar {
-            width: 280px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-right: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 2rem 0;
+            width: 240px;
+            background: linear-gradient(180deg, #1e3a8a, #3b82f6);
+            color: #fff;
+            padding: 1.5rem;
             position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-        }
-
-        .logo {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding: 0 2rem;
-        }
-
-        .logo h1 {
-            color: #764ba2;
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .welcome-text {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .nav-menu {
-            list-style: none;
-            padding: 0 1rem;
-        }
-
-        .nav-item {
-            margin-bottom: 0.5rem;
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-            color: #555;
-            text-decoration: none;
-            border-radius: 10px;
+            height: 100%;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
+            z-index: 100;
         }
 
-        .nav-link:hover {
-            background: rgba(118, 75, 162, 0.1);
-            color: #764ba2;
-        }
-
-        .nav-link.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+        .sidebar h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
             color: white;
         }
 
-        .nav-link i {
-            margin-right: 1rem;
+        .sidebar p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar nav ul li a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            color: #fff;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .sidebar nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateX(4px);
+        }
+
+        .sidebar nav ul li a.active {
+            background-color: #2563eb;
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar nav ul li a i {
+            margin-right: 10px;
+            font-size: 1.1rem;
             width: 20px;
+            text-align: center;
         }
 
-        .main-content {
-            margin-left: 280px;
-            flex: 1;
-            padding: 2rem;
+        .filter-section {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
         }
 
-        .page-header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        .filter-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: white;
+            display: flex;
+            align-items: center;
         }
 
-        .page-header h1 {
-            color: #333;
-            font-size: 2.5rem;
+        .filter-section h3 i {
+            margin-right: 8px;
+        }
+
+        .filter-checkbox {
+            display: flex;
+            align-items: center;
             margin-bottom: 0.5rem;
         }
 
+        .filter-checkbox input {
+            margin-right: 0.5rem;
+            accent-color: #2563eb;
+        }
+
+        .filter-checkbox label {
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .logout {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: #fecaca;
+            font-weight: 500;
+            border-radius: 8px;
+            margin-top: 2rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .logout:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fca5a5;
+        }
+
+        .logout i {
+            margin-right: 8px;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            margin-left: 280px;
+            padding: 2.5rem;
+            min-height: 100vh;
+            transition: margin-left 0.3s ease;
+        }
+
+        header {
+            margin-bottom: 2rem;
+        }
+
+        header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: #6b7280;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card {
+            background-color: #fff;
+            padding: 1.75rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+        }
+
+        /* Earnings Overview */
         .earnings-overview {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
             margin-bottom: 2rem;
         }
 
         .earning-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
+            background-color: #fff;
+            padding: 1.75rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             text-align: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .earning-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+        .earning-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
         }
 
         .earning-amount {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #333;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e3a8a;
             margin-bottom: 0.5rem;
         }
 
         .earning-label {
-            color: #666;
-            font-size: 1rem;
+            color: #6b7280;
+            font-size: 0.9rem;
             margin-bottom: 1rem;
         }
 
@@ -156,18 +259,19 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            font-size: 0.9rem;
+            font-size: 0.875rem;
             font-weight: 600;
         }
 
         .change-positive {
-            color: #22c55e;
+            color: #10b981;
         }
 
         .change-negative {
             color: #ef4444;
         }
 
+        /* Analytics Grid */
         .analytics-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -176,23 +280,23 @@
         }
 
         .chart-container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            padding: 1.75rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .chart-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .chart-header h3 {
-            color: #333;
-            font-size: 1.5rem;
+            color: #1e3a8a;
+            font-size: 1.25rem;
+            font-weight: 600;
         }
 
         .time-filter {
@@ -202,25 +306,30 @@
 
         .filter-btn {
             padding: 0.5rem 1rem;
-            border: none;
-            background: rgba(102, 126, 234, 0.1);
-            color: #667eea;
-            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            background: #fff;
+            color: #6b7280;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            font-size: 0.875rem;
+        }
+
+        .filter-btn:hover {
+            background: #f9fafb;
         }
 
         .filter-btn.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: #2563eb;
             color: white;
+            border-color: #2563eb;
         }
 
         .top-classes {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            padding: 1.75rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .class-item {
@@ -229,8 +338,8 @@
             align-items: center;
             padding: 1rem;
             margin-bottom: 1rem;
-            background: rgba(102, 126, 234, 0.05);
-            border-radius: 10px;
+            background: #f9fafb;
+            border-radius: 8px;
         }
 
         .class-info {
@@ -240,38 +349,78 @@
         }
 
         .class-rank {
-            width: 30px;
-            height: 30px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: #2563eb;
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 0.875rem;
         }
 
         .class-details h4 {
-            color: #333;
+            color: #1e3a8a;
             margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+            font-weight: 600;
         }
 
         .class-details p {
-            color: #666;
-            font-size: 0.9rem;
+            color: #6b7280;
+            font-size: 0.8rem;
         }
 
         .class-earnings {
-            font-weight: bold;
-            color: #22c55e;
+            font-weight: 600;
+            color: #10b981;
         }
 
+        /* Student Analytics */
+        .student-analytics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .analytics-card {
+            background-color: #fff;
+            padding: 1.75rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .analytics-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #2563eb;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        /* Payment History */
         .payment-history {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            padding: 1.75rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .payment-table {
@@ -282,32 +431,33 @@
 
         .payment-table th,
         .payment-table td {
-            padding: 1rem;
+            padding: 0.75rem;
             text-align: left;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e5e7eb;
         }
 
         .payment-table th {
-            background: rgba(102, 126, 234, 0.1);
-            color: #333;
+            background: #f9fafb;
+            color: #1e3a8a;
             font-weight: 600;
+            font-size: 0.875rem;
         }
 
         .payment-status {
             padding: 0.25rem 0.75rem;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
         }
 
         .status-paid {
-            background: rgba(34, 197, 94, 0.1);
-            color: #22c55e;
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
         }
 
         .status-pending {
             background: rgba(251, 191, 36, 0.1);
-            color: #fbbf24;
+            color: #f59e0b;
         }
 
         .status-failed {
@@ -318,59 +468,49 @@
         .btn {
             padding: 0.75rem 1.5rem;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            font-size: 0.875rem;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: #2563eb;
             color: white;
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .student-analytics {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .analytics-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: rgba(102, 126, 234, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 1rem 0;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 10px;
-            transition: width 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .chart-canvas {
-            max-height: 400px;
+            max-height: 300px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                margin-left: 0;
+                padding: 1.5rem;
+            }
+            
+            .earnings-overview {
+                grid-template-columns: 1fr;
+            }
+            
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .student-analytics {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -379,75 +519,105 @@
     <div class="dashboard-container">
         <!-- Sidebar -->
         <div class="sidebar">
-            <div class="logo">
-                <h1>TeacherPro</h1>
-                <p class="welcome-text">Welcome back, Dr. Smith!</p>
-            </div>
+            <h1>TeacherPro</h1>
+            <p>Welcome back, Dr. Smith!</p>
 
             <nav>
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a href="dashboard_overview.html" class="nav-link">
+                <ul>
+                    <li>
+                        <a href="dashboard_overview.html">
                             <i class="fas fa-home"></i>
                             Dashboard Overview
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="class_management.html" class="nav-link">
+                    <li>
+                        <a href="class_management.html">
                             <i class="fas fa-chalkboard"></i>
                             Class Management
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="schedule & Availability.html" class="nav-link">
+                    <li>
+                        <a href="schedule.html">
                             <i class="fas fa-calendar-alt"></i>
                             Schedule & Availability
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="earnings-&-analytics.html" class="nav-link active">
+                    <li>
+                        <a href="#" class="active">
                             <i class="fas fa-chart-line"></i>
                             Earnings & Analytics
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="profile_settings.html" class="nav-link">
+                    <li>
+                        <a href="profile.html">
                             <i class="fas fa-user-cog"></i>
                             Profile Settings
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="teachers_community.html" class="nav-link">
+                    <li>
+                        <a href="teacher_community.html">
                             <i class="fas fa-users"></i>
                             Teacher Community
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="students.html" class="nav-link">
+                    <li>
+                        <a href="student_management.html">
                             <i class="fas fa-user-graduate"></i>
                             Student Management
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="event_organization.html" class="nav-link">
+                    <li>
+                        <a href="events.html">
                             <i class="fas fa-calendar-check"></i>
                             Event Organization
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="sponsor_conversations.html" class="nav-link">
+                    <li>
+                        <a href="sponsors.html">
                             <i class="fas fa-handshake"></i>
                             Sponsor Management
                         </a>
                     </li>
                 </ul>
             </nav>
+
+            <nav class="nav-bar">
+                <a href="homepage.html" class="back-btn"><i class="fas fa-arrow-left"></i>Back to Navigation</a>
+                <a href="profile_settings.html">Dashboard</a>
+                <a href="class_management.html">Classes</a>
+                <a href="schedule & Availability.html">Schedule</a>
+            </nav>  
+
+            <div class="filter-section">
+                <h3><i class="fas fa-filter"></i> Filters</h3>
+                <div class="filter-checkbox">
+                    <input type="checkbox" id="workshop" checked>
+                    <label for="workshop">Workshop</label>
+                </div>
+                <div class="filter-checkbox">
+                    <input type="checkbox" id="seminar" checked>
+                    <label for="seminar">Seminar</label>
+                </div>
+                <div class="filter-checkbox">
+                    <input type="checkbox" id="conference" checked>
+                    <label for="conference">Conference</label>
+                </div>
+                <div class="filter-checkbox">
+                    <input type="checkbox" id="study-group" checked>
+                    <label for="study-group">Study Group</label>
+                </div>
+            </div>
+
+            <a href="#" class="logout">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
         </div>
 
         <!-- Main Content -->
         <div class="main-content">
-            <header class="page-header">
-                <h1>Earnings & Analytics</h1>
+            <header>
+                <h2>Earnings & Analytics</h2>
                 <p>Track your income, performance, and growth metrics</p>
             </header>
 
@@ -502,7 +672,7 @@
                 </div>
 
                 <div class="top-classes">
-                    <h3 style="margin-bottom: 1.5rem; color: #333;">Top Performing Classes</h3>
+                    <h3>Top Performing Classes</h3>
                     <div class="class-item">
                         <div class="class-info">
                             <div class="class-rank">1</div>
@@ -539,38 +709,37 @@
             <!-- Student Analytics -->
             <div class="student-analytics">
                 <div class="analytics-card">
-                    <h3 style="margin-bottom: 1rem; color: #333;">Student Retention Rate</h3>
-                    <div style="font-size: 2rem; font-weight: bold; color: #22c55e; margin-bottom: 0.5rem;">92%</div>
+                    <h3>Student Retention Rate</h3>
+                    <div style="font-size: 1.75rem; font-weight: 700; color: #10b981; margin-bottom: 0.5rem;">92%</div>
                     <div class="progress-bar">
                         <div class="progress-fill" style="width: 92%;"></div>
                     </div>
-                    <p style="color: #666;">Excellent retention rate this quarter</p>
+                    <p style="color: #6b7280; font-size: 0.875rem;">Excellent retention rate this quarter</p>
                 </div>
 
                 <div class="analytics-card">
-                    <h3 style="margin-bottom: 1rem; color: #333;">Average Rating</h3>
-                    <div style="font-size: 2rem; font-weight: bold; color: #764ba2; margin-bottom: 0.5rem;">4.8/5.0
-                    </div>
+                    <h3>Average Rating</h3>
+                    <div style="font-size: 1.75rem; font-weight: 700; color: #2563eb; margin-bottom: 0.5rem;">4.8/5.0</div>
                     <div class="progress-bar">
                         <div class="progress-fill" style="width: 96%;"></div>
                     </div>
-                    <p style="color: #666;">Based on 156 student reviews</p>
+                    <p style="color: #6b7280; font-size: 0.875rem;">Based on 156 student reviews</p>
                 </div>
 
                 <div class="analytics-card">
-                    <h3 style="margin-bottom: 1rem; color: #333;">Class Completion Rate</h3>
-                    <div style="font-size: 2rem; font-weight: bold; color: #667eea; margin-bottom: 0.5rem;">89%</div>
+                    <h3>Class Completion Rate</h3>
+                    <div style="font-size: 1.75rem; font-weight: 700; color: #1e3a8a; margin-bottom: 0.5rem;">89%</div>
                     <div class="progress-bar">
                         <div class="progress-fill" style="width: 89%;"></div>
                     </div>
-                    <p style="color: #666;">Students completing full courses</p>
+                    <p style="color: #6b7280; font-size: 0.875rem;">Students completing full courses</p>
                 </div>
             </div>
 
             <!-- Payment History -->
             <div class="payment-history">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                    <h3 style="color: #333;">Recent Payments</h3>
+                    <h3>Recent Payments</h3>
                     <button class="btn btn-primary">
                         <i class="fas fa-download"></i>
                         Export Report
@@ -634,87 +803,6 @@
         </div>
     </div>
 
-    <!-- Accessibility Toolbar HTML - Add this to every page -->
-    <button class="accessibility-toggle" onclick="toggleAccessibilityPanel()" aria-label="Toggle accessibility options">
-        ♿
-    </button>
-
-    <div class="accessibility-panel" id="accessibilityPanel">
-        <div class="panel-header">
-            Accessibility Tools
-        </div>
-        <div class="panel-content">
-            <div class="accessibility-option" onclick="increaseText()">
-                <div class="option-label">
-                    <span class="option-icon">🔍</span>
-                    Increase Text
-                </div>
-            </div>
-
-            <div class="accessibility-option" onclick="decreaseText()">
-                <div class="option-label">
-                    <span class="option-icon">🔍</span>
-                    Decrease Text
-                </div>
-            </div>
-
-            <div class="accessibility-option" onclick="toggleFeature('grayscale')">
-                <div class="option-label">
-                    <span class="option-icon">⬜</span>
-                    Grayscale
-                </div>
-                <div class="option-toggle" id="toggle-grayscale"></div>
-            </div>
-
-            <div class="accessibility-option" onclick="toggleFeature('high-contrast')">
-                <div class="option-label">
-                    <span class="option-icon">🌓</span>
-                    High Contrast
-                </div>
-                <div class="option-toggle" id="toggle-high-contrast"></div>
-            </div>
-
-            <div class="accessibility-option" onclick="toggleFeature('negative-contrast')">
-                <div class="option-label">
-                    <span class="option-icon">👁</span>
-                    Negative Contrast
-                </div>
-                <div class="option-toggle" id="toggle-negative-contrast"></div>
-            </div>
-
-            <div class="accessibility-option" onclick="toggleFeature('light-background')">
-                <div class="option-label">
-                    <span class="option-icon">💡</span>
-                    Light Background
-                </div>
-                <div class="option-toggle" id="toggle-light-background"></div>
-            </div>
-
-            <div class="accessibility-option" onclick="toggleFeature('links-underline')">
-                <div class="option-label">
-                    <span class="option-icon">🔗</span>
-                    Links Underline
-                </div>
-                <div class="option-toggle" id="toggle-links-underline"></div>
-            </div>
-
-            <div class="accessibility-option" onclick="toggleFeature('readable-font')">
-                <div class="option-label">
-                    <span class="option-icon">📖</span>
-                    Readable Font
-                </div>
-                <div class="option-toggle" id="toggle-readable-font"></div>
-            </div>
-
-            <div class="accessibility-option" onclick="resetAccessibility()">
-                <div class="option-label">
-                    <span class="option-icon">↻</span>
-                    Reset
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script>
         // Earnings Chart
         const ctx = document.getElementById('earningsChart').getContext('2d');
@@ -725,15 +813,15 @@
                 datasets: [{
                     label: 'Monthly Earnings ($)',
                     data: [1800, 2100, 1950, 2300, 2200, 2450],
-                    borderColor: '#667eea',
-                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
-                    borderWidth: 3,
+                    borderColor: '#2563eb',
+                    backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                    borderWidth: 2,
                     fill: true,
                     tension: 0.4,
-                    pointBackgroundColor: '#764ba2',
+                    pointBackgroundColor: '#2563eb',
                     pointBorderColor: '#fff',
                     pointBorderWidth: 2,
-                    pointRadius: 6
+                    pointRadius: 4
                 }]
             },
             options: {
@@ -752,7 +840,7 @@
                         },
                         ticks: {
                             callback: function (value) {
-                                return ' + value';
+                                return '$' + value;
                             }
                         }
                     },
@@ -764,7 +852,7 @@
                 },
                 elements: {
                     point: {
-                        hoverRadius: 8
+                        hoverRadius: 6
                     }
                 }
             }

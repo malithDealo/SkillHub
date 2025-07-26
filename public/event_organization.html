@@ -1,871 +1,382 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TeacherPro - Earnings & Analytics</title>
+    <title>TeacherPro - Event Organization</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-    <style>
-        .nav-bar {
-            justify-content: center;
-            gap: 1rem;
-            display: flex;
-            position: absolute;
-            top: 20px;
-            left: 1100px;
-            z-index: 10000;
-        }
-
-        .nav-bar a {
-            text-decoration: none;
-            color: #333;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 0.75rem 1.5rem;
-            border-radius: 10px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .nav-bar a:hover {
-            background: rgba(102, 126, 234, 0.2);
-            transform: translateY(-3px);
-        }
-
-        .nav-bar .back-btn {
-            background: rgba(34, 197, 94, 0.95);
-            color: white;
-        }
-    </style>
-    <style>
-        /* Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f4f7fa;
-            color: #333;
-        }
-
-        /* Sidebar Styles */
-        .sidebar {
-            width: 240px;
-            background: linear-gradient(180deg, #1e3a8a, #3b82f6);
-            color: #fff;
-            padding: 1.5rem;
-            position: fixed;
-            height: 100%;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            z-index: 100;
-        }
-
-        .sidebar h1 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            color: white;
-        }
-
-        .sidebar p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        .sidebar nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .sidebar nav ul li a {
-            display: flex;
-            align-items: center;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
-            color: #fff;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            text-decoration: none;
-        }
-
-        .sidebar nav ul li a:hover {
-            background-color: rgba(255, 255, 255, 0.15);
-            transform: translateX(4px);
-        }
-
-        .sidebar nav ul li a.active {
-            background-color: #2563eb;
-            color: #fff;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .sidebar nav ul li a i {
-            margin-right: 10px;
-            font-size: 1.1rem;
-            width: 20px;
-            text-align: center;
-        }
-
-        .filter-section {
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
-
-        .filter-section h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            color: white;
-            display: flex;
-            align-items: center;
-        }
-
-        .filter-section h3 i {
-            margin-right: 8px;
-        }
-
-        .filter-checkbox {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-
-        .filter-checkbox input {
-            margin-right: 0.5rem;
-            accent-color: #2563eb;
-        }
-
-        .filter-checkbox label {
-            color: white;
-            font-size: 0.9rem;
-        }
-
-        .logout {
-            display: flex;
-            align-items: center;
-            padding: 0.75rem 1rem;
-            color: #fecaca;
-            font-weight: 500;
-            border-radius: 8px;
-            margin-top: 2rem;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .logout:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #fca5a5;
-        }
-
-        .logout i {
-            margin-right: 8px;
-        }
-
-        /* Main Content Styles */
-        .main-content {
-            margin-left: 280px;
-            padding: 2.5rem;
-            min-height: 100vh;
-            transition: margin-left 0.3s ease;
-        }
-
-        header {
-            margin-bottom: 2rem;
-        }
-
-        header h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #1e3a8a;
-            margin-bottom: 0.5rem;
-        }
-
-        header p {
-            color: #6b7280;
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .card {
-            background-color: #fff;
-            padding: 1.75rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            margin-bottom: 2rem;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-        }
-
-        .card h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #1e3a8a;
-            margin-bottom: 1rem;
-        }
-
-        /* Earnings Overview */
-        .earnings-overview {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .earning-card {
-            background-color: #fff;
-            padding: 1.75rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            text-align: center;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .earning-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-        }
-
-        .earning-amount {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #1e3a8a;
-            margin-bottom: 0.5rem;
-        }
-
-        .earning-label {
-            color: #6b7280;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .earning-change {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-
-        .change-positive {
-            color: #10b981;
-        }
-
-        .change-negative {
-            color: #ef4444;
-        }
-
-        /* Analytics Grid */
-        .analytics-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .chart-container {
-            background-color: #fff;
-            padding: 1.75rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        }
-
-        .chart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .chart-header h3 {
-            color: #1e3a8a;
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-
-        .time-filter {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .filter-btn {
-            padding: 0.5rem 1rem;
-            border: 1px solid #e5e7eb;
-            background: #fff;
-            color: #6b7280;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 0.875rem;
-        }
-
-        .filter-btn:hover {
-            background: #f9fafb;
-        }
-
-        .filter-btn.active {
-            background: #2563eb;
-            color: white;
-            border-color: #2563eb;
-        }
-
-        .top-classes {
-            background-color: #fff;
-            padding: 1.75rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        }
-
-        .class-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            background: #f9fafb;
-            border-radius: 8px;
-        }
-
-        .class-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .class-rank {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: #2563eb;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 0.875rem;
-        }
-
-        .class-details h4 {
-            color: #1e3a8a;
-            margin-bottom: 0.25rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .class-details p {
-            color: #6b7280;
-            font-size: 0.8rem;
-        }
-
-        .class-earnings {
-            font-weight: 600;
-            color: #10b981;
-        }
-
-        /* Student Analytics */
-        .student-analytics {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .analytics-card {
-            background-color: #fff;
-            padding: 1.75rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .analytics-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #e5e7eb;
-            border-radius: 4px;
-            overflow: hidden;
-            margin: 1rem 0;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: #2563eb;
-            border-radius: 4px;
-            transition: width 0.3s ease;
-        }
-
-        /* Payment History */
-        .payment-history {
-            background-color: #fff;
-            padding: 1.75rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        }
-
-        .payment-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-
-        .payment-table th,
-        .payment-table td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .payment-table th {
-            background: #f9fafb;
-            color: #1e3a8a;
-            font-weight: 600;
-            font-size: 0.875rem;
-        }
-
-        .payment-status {
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .status-paid {
-            background: rgba(16, 185, 129, 0.1);
-            color: #10b981;
-        }
-
-        .status-pending {
-            background: rgba(251, 191, 36, 0.1);
-            color: #f59e0b;
-        }
-
-        .status-failed {
-            background: rgba(239, 68, 68, 0.1);
-            color: #ef4444;
-        }
-
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
-        }
-
-        .btn-primary {
-            background: #2563eb;
-            color: white;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .chart-canvas {
-            max-height: 300px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .main-content {
-                margin-left: 0;
-                padding: 1.5rem;
-            }
-            
-            .earnings-overview {
-                grid-template-columns: 1fr;
-            }
-            
-            .analytics-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .student-analytics {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../css/event_organization.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js"></script>
 </head>
-
 <body>
     <div class="dashboard-container">
         <!-- Sidebar -->
         <div class="sidebar">
-            <h1>TeacherPro</h1>
-            <p>Welcome back, Dr. Smith!</p>
-
+            <div class="logo">
+                <h1>TeacherPro</h1>
+                <p>Welcome back, Dr. Smith!</p>
+            </div>
             <nav>
-                <ul>
-                    <li>
-                        <a href="dashboard_overview.html">
-                            <i class="fas fa-home"></i>
-                            Dashboard Overview
-                        </a>
-                    </li>
-                    <li>
-                        <a href="class_management.html">
-                            <i class="fas fa-chalkboard"></i>
-                            Class Management
-                        </a>
-                    </li>
-                    <li>
-                        <a href="schedule.html">
-                            <i class="fas fa-calendar-alt"></i>
-                            Schedule & Availability
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="active">
-                            <i class="fas fa-chart-line"></i>
-                            Earnings & Analytics
-                        </a>
-                    </li>
-                    <li>
-                        <a href="profile.html">
-                            <i class="fas fa-user-cog"></i>
-                            Profile Settings
-                        </a>
-                    </li>
-                    <li>
-                        <a href="teacher_community.html">
-                            <i class="fas fa-users"></i>
-                            Teacher Community
-                        </a>
-                    </li>
-                    <li>
-                        <a href="student_management.html">
-                            <i class="fas fa-user-graduate"></i>
-                            Student Management
-                        </a>
-                    </li>
-                    <li>
-                        <a href="events.html">
-                            <i class="fas fa-calendar-check"></i>
-                            Event Organization
-                        </a>
-                    </li>
-                    <li>
-                        <a href="sponsors.html">
-                            <i class="fas fa-handshake"></i>
-                            Sponsor Management
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-
-            <nav class="nav-bar">
-                <a href="homepage.html" class="back-btn"><i class="fas fa-arrow-left"></i>Back to Navigation</a>
-                <a href="profile_settings.html">Dashboard</a>
-                <a href="class_management.html">Classes</a>
-                <a href="schedule & Availability.html">Schedule</a>
-            </nav>  
-
-            <div class="filter-section">
-                <h3><i class="fas fa-filter"></i> Filters</h3>
-                <div class="filter-checkbox">
-                    <input type="checkbox" id="workshop" checked>
-                    <label for="workshop">Workshop</label>
+                <!-- <ul>
+                    <li><a href="../public/dashboard_overview.html"><i class="fas fa-home"></i> Dashboard Overview</a></li>
+                    <li><a href="../public/class_management.html"><i class="fas fa-chalkboard"></i> Class Management</a></li>
+                    <li><a href="../public/schedule & Availability.html"><i class="fas fa-calendar-alt"></i> Schedule & Availability</a></li>
+                    <li><a href="../public/earnings & analytics.html"><i class="fas fa-chart-line"></i> Earnings & Analytics</a></li>
+                    <li><a href="../public/profile_settings.html"><i class="fas fa-user-cog"></i> Profile Settings</a></li>
+                    <li><a href="../public/teachers_community.html"><i class="fas fa-users"></i> Teacher Community</a></li>
+                    <li><a href="../public/students.html"><i class="fas fa-user-graduate"></i> Student Management</a></li>
+                    <li><a href="../public/event_organization.html" class="active"><i class="fas fa-calendar-check"></i> Event Organization</a></li>
+                    <li><a href="../public/sponsor_conversations.html"><i class="fas fa-handshake"></i> Sponsor Management</a></li>
+                </ul> -->
+                <div class="filter-section">
+                    <h3><i class="fas fa-filter"></i> Filters</h3>
+                    <div class="filter-checkbox">
+                        <input type="checkbox" id="filter-workshop" name="category">
+                        <label for="filter-workshop">Workshop</label>
+                    </div>
+                    <div class="filter-checkbox">
+                        <input type="checkbox" id="filter-seminar" name="category">
+                        <label for="filter-seminar">Seminar</label>
+                    </div>
+                    <div class="filter-checkbox">
+                        <input type="checkbox" id="filter-conference" name="category">
+                        <label for="filter-conference">Conference</label>
+                    </div>
+                    <div class="filter-checkbox">
+                        <input type="checkbox" id="filter-study-group" name="category">
+                        <label for="filter-study-group">Study Group</label>
+                    </div>
                 </div>
-                <div class="filter-checkbox">
-                    <input type="checkbox" id="seminar" checked>
-                    <label for="seminar">Seminar</label>
-                </div>
-                <div class="filter-checkbox">
-                    <input type="checkbox" id="conference" checked>
-                    <label for="conference">Conference</label>
-                </div>
-                <div class="filter-checkbox">
-                    <input type="checkbox" id="study-group" checked>
-                    <label for="study-group">Study Group</label>
-                </div>
+                <a href="#" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </div>
 
-            <a href="#" class="logout">
-                <i class="fas fa-sign-out-alt"></i>
-                Logout
-            </a>
-        </div>
-
-        <!-- Main Content -->
-        <div class="main-content">
-            <header>
-                <h2>Earnings & Analytics</h2>
-                <p>Track your income, performance, and growth metrics</p>
-            </header>
-
-            <!-- Earnings Overview -->
-            <div class="earnings-overview">
-                <div class="earning-card">
-                    <div class="earning-amount">$2,450</div>
-                    <div class="earning-label">This Month</div>
-                    <div class="earning-change change-positive">
-                        <i class="fas fa-arrow-up"></i>
-                        +12.5%
-                    </div>
-                </div>
-                <div class="earning-card">
-                    <div class="earning-amount">$9,800</div>
-                    <div class="earning-label">Total Earnings</div>
-                    <div class="earning-change change-positive">
-                        <i class="fas fa-arrow-up"></i>
-                        +8.3%
-                    </div>
-                </div>
-                <div class="earning-card">
-                    <div class="earning-amount">$51.25</div>
-                    <div class="earning-label">Average Per Hour</div>
-                    <div class="earning-change change-positive">
-                        <i class="fas fa-arrow-up"></i>
-                        +5.2%
-                    </div>
-                </div>
-                <div class="earning-card">
-                    <div class="earning-amount">48</div>
-                    <div class="earning-label">Hours This Month</div>
-                    <div class="earning-change change-negative">
-                        <i class="fas fa-arrow-down"></i>
-                        -3.1%
-                    </div>
-                </div>
-            </div>
-
-            <!-- Analytics Charts -->
-            <div class="analytics-grid">
-                <div class="chart-container">
-                    <div class="chart-header">
-                        <h3>Monthly Earnings Trend</h3>
-                        <div class="time-filter">
-                            <button class="filter-btn">3M</button>
-                            <button class="filter-btn active">6M</button>
-                            <button class="filter-btn">1Y</button>
-                        </div>
-                    </div>
-                    <canvas id="earningsChart" class="chart-canvas"></canvas>
-                </div>
-
-                <div class="top-classes">
-                    <h3>Top Performing Classes</h3>
-                    <div class="class-item">
-                        <div class="class-info">
-                            <div class="class-rank">1</div>
-                            <div class="class-details">
-                                <h4>Organic Chemistry</h4>
-                                <p>Grade 12 • 30 students</p>
-                            </div>
-                        </div>
-                        <div class="class-earnings">$1,650</div>
-                    </div>
-                    <div class="class-item">
-                        <div class="class-info">
-                            <div class="class-rank">2</div>
-                            <div class="class-details">
-                                <h4>Physics Fundamentals</h4>
-                                <p>Grade 11 • 18 students</p>
-                            </div>
-                        </div>
-                        <div class="class-earnings">$900</div>
-                    </div>
-                    <div class="class-item">
-                        <div class="class-info">
-                            <div class="class-rank">3</div>
-                            <div class="class-details">
-                                <h4>Advanced Mathematics</h4>
-                                <p>Grade 10 • 25 students</p>
-                            </div>
-                        </div>
-                        <div class="class-earnings">$1,125</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Student Analytics -->
-            <div class="student-analytics">
-                <div class="analytics-card">
-                    <h3>Student Retention Rate</h3>
-                    <div style="font-size: 1.75rem; font-weight: 700; color: #10b981; margin-bottom: 0.5rem;">92%</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 92%;"></div>
-                    </div>
-                    <p style="color: #6b7280; font-size: 0.875rem;">Excellent retention rate this quarter</p>
-                </div>
-
-                <div class="analytics-card">
-                    <h3>Average Rating</h3>
-                    <div style="font-size: 1.75rem; font-weight: 700; color: #2563eb; margin-bottom: 0.5rem;">4.8/5.0</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 96%;"></div>
-                    </div>
-                    <p style="color: #6b7280; font-size: 0.875rem;">Based on 156 student reviews</p>
-                </div>
-
-                <div class="analytics-card">
-                    <h3>Class Completion Rate</h3>
-                    <div style="font-size: 1.75rem; font-weight: 700; color: #1e3a8a; margin-bottom: 0.5rem;">89%</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 89%;"></div>
-                    </div>
-                    <p style="color: #6b7280; font-size: 0.875rem;">Students completing full courses</p>
-                </div>
-            </div>
-
-            <!-- Payment History -->
-            <div class="payment-history">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                    <h3>Recent Payments</h3>
-                    <button class="btn btn-primary">
-                        <i class="fas fa-download"></i>
-                        Export Report
+            <!-- Main Content -->
+            <div class="main-content">
+                <header>
+                    <h2>Event Organization</h2>
+                    <p>Create and manage educational events, workshops, and seminars</p>
+                    <button class="btn primary" onclick="openModal('createEventModal')">
+                        <i class="fas fa-plus"></i> Create Event
                     </button>
+                </header>
+
+                <div class="events-layout">
+                    <!-- Main Events Area -->
+                    <div class="events-main">
+                        <div class="events-filters">
+                            <button class="filter-tab active">All Events</button>
+                            <button class="filter-tab">Upcoming</button>
+                            <button class="filter-tab">Ongoing</button>
+                            <button class="filter-tab">Completed</button>
+                            <select class="filter-tab">
+                                <option>All Categories</option>
+                                <option>Workshop</option>
+                                <option>Seminar</option>
+                                <option>Conference</option>
+                                <option>Study Group</option>
+                            </select>
+                        </div>
+
+                        <div id="event-list">
+                            <!-- Event 1 - Upcoming Workshop -->
+                            <div class="event-card">
+                                <div class="event-content">
+                                    <div class="event-header">
+                                        <div>
+                                            <h3 class="event-title">Advanced Chemistry Workshop</h3>
+                                            <span class="event-status status-upcoming">Upcoming</span>
+                                        </div>
+                                        <div class="event-date">
+                                            <div>Jul</div>
+                                            <div>15</div>
+                                        </div>
+                                    </div>
+                                    <div class="event-details">
+                                        <div class="event-detail-item"><i class="fas fa-clock"></i> 2:00 PM - 5:00 PM</div>
+                                        <div class="event-detail-item"><i class="fas fa-map-marker-alt"></i> Science Lab Building, Room 301</div>
+                                        <div class="event-detail-item"><i class="fas fa-users"></i> Max 25 participants</div>
+                                        <div class="event-detail-item"><i class="fas fa-tag"></i> Workshop • Grade 12 & 13</div>
+                                    </div>
+                                    <p class="event-description">
+                                        An intensive hands-on workshop covering advanced organic chemistry concepts, including reaction mechanisms, spectroscopy, and laboratory techniques. Perfect preparation for university-level chemistry.
+                                    </p>
+                                    <div class="event-stats">
+                                        <div class="event-stat"><div class="stat-number">18</div><div class="stat-label">Registered</div></div>
+                                        <div class="event-stat"><div class="stat-number">7</div><div class="stat-label">Available</div></div>
+                                        <div class="event-stat"><div class="stat-number">$25</div><div class="stat-label">Fee</div></div>
+                                    </div>
+                                    <div class="event-actions">
+                                        <button class="btn primary"><i class="fas fa-edit"></i> Edit Event</button>
+                                        <button class="btn btn-secondary"><i class="fas fa-users"></i> View Attendees</button>
+                                        <button class="btn btn-success"><i class="fas fa-envelope"></i> Send Update</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Event 2 - Ongoing Seminar -->
+                            <div class="event-card">
+                                <div class="event-content">
+                                    <div class="event-header">
+                                        <div>
+                                            <h3 class="event-title">Mathematics Olympiad Preparation</h3>
+                                            <span class="event-status status-ongoing">Ongoing</span>
+                                        </div>
+                                        <div class="event-date">
+                                            <div>Jul</div>
+                                            <div>6-20</div>
+                                            </div>
+                                    </div>
+                                    <div class="event-details">
+                                        <div class="event-detail-item"><i class="fas fa-clock"></i> Daily 4:00 PM - 6:00 PM</div>
+                                        <div class="event-detail-item"><i class="fas fa-map-marker-alt"></i> Online via Zoom</div>
+                                        <div class="event-detail-item"><i class="fas fa-users"></i> 15 participants</div>
+                                        <div class="event-detail-item"><i class="fas fa-tag"></i> Intensive Course • Advanced Level</div>
+                                    </div>
+                                    <p class="event-description">
+                                        A comprehensive 2-week intensive course designed to prepare talented students for mathematics competitions. Covers problem-solving strategies, advanced topics, and practice tests.
+                                    </p>
+                                    <div class="event-stats">
+                                        <div class="event-stat"><div class="stat-number">15</div><div class="stat-label">Enrolled</div></div>
+                                        <div class="event-stat"><div class="stat-number">8</div><div class="stat-label">Days Left</div></div>
+                                        <div class="event-stat"><div class="stat-number">$150</div><div class="stat-label">Total Fee</div></divOpenArtifact> </div>
+                                    <div class="event-actions">
+                                        <button class="btn btn-success"><i class="fas fa-video"></i> Join Session</button>
+                                        <button class="btn btn-secondary"><i class="fas fa-users"></i> Manage Students</button>
+                                        <button class="btn btn-warning"><i class="fas fa-chart-line"></i> Progress Report</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Event 3 - Completed Conference -->
+                            <div class="event-card">
+                                <div class="event-content">
+                                    <div class="event-header">
+                                        <div>
+                                            <h3 class="event-title">STEM Education Conference 2025</h3>
+                                            <span class="event-status status-completed">Completed</span>
+                                        </div>
+                                        <div class="event-date">
+                                            <div>Jun</div>
+                                            <div>28</div>
+                                        </div>
+                                    </div>
+                                    <div class="event-details">
+                                        <div class="event-detail-item"><i class="fas fa-clock"></i> 9:00 AM - 5:00 PM</div>
+                                        <div class="event-detail-item"><i class="fas fa-map-marker-alt"></i> Convention Center, Main Hall</div>
+                                        <div class="event-detail-item"><i class="fas fa-users"></i> 120 attendees</div>
+                                        <div class="event-detail-item"><i class="fas fa-tag"></i> Conference • Professional Development</div>
+                                    </div>
+                                    <p class="event-description">
+                                        A full-day conference bringing together educators, researchers, and industry professionals to discuss the latest trends and innovations in STEM education.
+                                    </p>
+                                    <div class="event-stats">
+                                        <div class="event-stat"><div class="stat-number">120</div><div class="stat-label">Attended</div></div>
+                                        <div class="event-stat"><div class="stat-number">4.8</div><div class="stat-label">Rating</div></div>
+                                        <div class="event-stat"><div class="stat-number">85%</div><div class="stat-label">Satisfaction</div></div>
+                                    </div>
+                                    <div class="event-actions">
+                                        <button class="btn btn-secondary"><i class="fas fa-chart-bar"></i> View Report</button>
+                                        <button class="btn btn-secondary"><i class="fas fa-star"></i> Reviews</button>
+                                        <button class="btn btn-success"><i class="fas fa-copy"></i> Duplicate Event</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timetable">
+                            <h3>Weekly Schedule</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Day</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="timetable-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar Widgets -->
+                    <div class="events-sidebar">
+                        <div class="sidebar-widget">
+                            <h3 class="widget-title">Event Statistics</h3>
+                            <div class="quick-stats">
+                                <div class="quick-stat"><div class="stat-number">12</div><div class="stat-label">Total Events</div></div>
+                                <div class="quick-stat"><div class="stat-number">4</div><div class="stat-label">Upcoming</div></div>
+                                <div class="quick-stat"><div class="stat-number">2</div><div class="stat-label">Ongoing</div></div>
+                                <div class="quick-stat"><div class="stat-number">186</div><div class="stat-label">Total Attendees</div></div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <h3 class="widget-title">July 2025</h3>
+                            <div class="calendar-mini">
+                                <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
+                                <div></div><div></div><div class="calendar-day">1</div><div class="calendar-day">2</div>
+                                <div class="calendar-day">3</div><div class="calendar-day">4</div><div class="calendar-day">5</div>
+                                <div class="calendar-day today">6</div><div class="calendar-day">7</div><div class="calendar-day">8</div>
+                                <div class="calendar-day">9</div><div class="calendar-day">10</div><div class="calendar-day">11</div>
+                                <div class="calendar-day">12</div><div class="calendar-day">13</div><div class="calendar-day">14</div>
+                                <div class="calendar-day has-event">15</div><div class="calendar-day">16</div><div class="calendar-day">17</div>
+                                <div class="calendar-day">18</div><div class="calendar-day">19</div><div class="calendar-day has-event">20</div>
+                                <div class="calendar-day">21</div><div class="calendar-day has-event">22</div><div class="calendar-day">23</div>
+                                <div class="calendar-day">24</div><div class="calendar-day">25</div><div class="calendar-day">26</div>
+                                <div class="calendar-day">27</div><div class="calendar-day has-event">28</div><div class="calendar-day">29</div>
+                                <div class="calendar-day">30</div><div class="calendar-day">31</div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <h3 class="widget-title">Upcoming Events</h3>
+                            <div class="upcoming-event">
+                                <div class="upcoming-event-title">Chemistry Workshop</div>
+                                <div class="upcoming-event-date">July 15, 2025 at 2:00 PM</div>
+                            </div>
+                            <div class="upcoming-event">
+                                <div class="upcoming-event-title">Physics Study Group</div>
+                                <div class="upcoming-event-date">July 20, 2025 at 4:00 PM</div>
+                            </div>
+                            <div class="upcoming-event">
+                                <div class="upcoming-event-title">Math Competition Prep</div>
+                                <div class="upcoming-event-date">July 22, 2025 at 10:00 AM</div>
+                            </div>
+                            <div class="upcoming-event">
+                                <div class="upcoming-event-title">Science Fair Planning</div>
+                                <div class="upcoming-event-date">July 28, 2025 at 3:00 PM</div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <h3 class="widget-title">Recent Registrations</h3>
+                            <div class="attendee-item">
+                                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b547?w=50&h=50&fit=crop&crop=face" alt="Emma" class="attendee-avatar">
+                                <div class="attendee-info">
+                                    <div class="attendee-name">Emma Johnson</div>
+                                    <div class="attendee-email">Chemistry Workshop</div>
+                                </div>
+                            </div>
+                            <div class="attendee-item">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face" alt="Michael" class="attendee-avatar">
+                                <div class="attendee-info">
+                                    <div class="attendee-name">Michael Chen</div>
+                                    <div class="attendee-email">Math Olympiad Prep</div>
+                                </div>
+                            </div>
+                            <div class="attendee-item">
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop&crop=face" alt="Sarah" class="attendee-avatar">
+                                <div class="attendee-info">
+                                    <div class="attendee-name">Sarah Williams</div>
+                                    <div class="attendee-email">Chemistry Workshop</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <table class="payment-table">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Student</th>
-                            <th>Class</th>
-                            <th>Amount</th>
-                            <th>Status</th>
-                            <th>Method</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>July 5, 2025</td>
-                            <td>Sarah Johnson</td>
-                            <td>Organic Chemistry</td>
-                            <td>$55.00</td>
-                            <td><span class="payment-status status-paid">Paid</span></td>
-                            <td>Credit Card</td>
-                        </tr>
-                        <tr>
-                            <td>July 4, 2025</td>
-                            <td>Michael Chen</td>
-                            <td>Physics Fundamentals</td>
-                            <td>$50.00</td>
-                            <td><span class="payment-status status-paid">Paid</span></td>
-                            <td>PayPal</td>
-                        </tr>
-                        <tr>
-                            <td>July 3, 2025</td>
-                            <td>Emma Davis</td>
-                            <td>Advanced Mathematics</td>
-                            <td>$45.00</td>
-                            <td><span class="payment-status status-pending">Pending</span></td>
-                            <td>Bank Transfer</td>
-                        </tr>
-                        <tr>
-                            <td>July 2, 2025</td>
-                            <td>Alex Rodriguez</td>
-                            <td>Organic Chemistry</td>
-                            <td>$55.00</td>
-                            <td><span class="payment-status status-paid">Paid</span></td>
-                            <td>Credit Card</td>
-                        </tr>
-                        <tr>
-                            <td>July 1, 2025</td>
-                            <td>Lisa Wang</td>
-                            <td>Physics Fundamentals</td>
-                            <td>$50.00</td>
-                            <td><span class="payment-status status-failed">Failed</span></td>
-                            <td>Credit Card</td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
-    </div>
 
-    <script>
-        // Earnings Chart
-        const ctx = document.getElementById('earningsChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                datasets: [{
-                    label: 'Monthly Earnings ($)',
-                    data: [1800, 2100, 1950, 2300, 2200, 2450],
-                    borderColor: '#2563eb',
-                    backgroundColor: 'rgba(37, 99, 235, 0.1)',
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.4,
-                    pointBackgroundColor: '#2563eb',
-                    pointBorderColor: '#fff',
-                    pointBorderWidth: 2,
-                    pointRadius: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: 'rgba(0,0,0,0.1)'
-                        },
-                        ticks: {
-                            callback: function (value) {
-                                return '$' + value;
-                            }
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    }
-                },
-                elements: {
-                    point: {
-                        hoverRadius: 6
-                    }
-                }
-            }
-        });
+        <!-- Create Event Modal -->
+        <div id="createEventModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Create New Event</h3>
+                    <button class="close-btn" onclick="closeModal('createEventModal')">×</button>
+                </div>
+                <form id="eventForm">
+                    <div class="form-group">
+                        <label for="eventName">Event Title</label>
+                        <input type="text" id="eventName" required placeholder="Enter event title...">
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="eventType">Event Type</label>
+                            <select id="eventType" required>
+                                <option value="">Select Type</option>
+                                <option value="workshop">Workshop</option>
+                                <option value="seminar">Seminar</option>
+                                <option value="conference">Conference</option>
+                                <option value="study-group">Study Group</option>
+                                <option value="exam-prep">Exam Preparation</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventCategory">Category</label>
+                            <select id="eventCategory" required>
+                                <option value="">Select Category</option>
+                                <option value="mathematics">Mathematics</option>
+                                <option value="physics">Physics</option>
+                                <option value="chemistry">Chemistry</option>
+                                <option value="biology">Biology</option>
+                                <option value="general">General</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventDescription">Description</label>
+                        <textarea id="eventDescription" rows="4" placeholder="Describe your event..."></textarea>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="eventDate">Date</label>
+                            <input type="date" id="eventDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventTime">Start Time</label>
+                            <input type="time" id="eventTime" required>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="eventDuration">Duration (hours)</label>
+                            <select id="eventDuration" required>
+                                <option value="">Select Duration</option>
+                                <option value="1">1 hour</option>
+                                <option value="1.5">1.5 hours</option>
+                                <option value="2">2 hours</option>
+                                <option value="3">3 hours</option>
+                                <option value="4">4 hours</option>
+                                <option value="8">Full day (8 hours)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="maxParticipants">Max Participants</label>
+                            <input type="number" id="maxParticipants" min="1" max="200" required>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="eventLocation">Location</label>
+                            <input type="text" id="eventLocation" placeholder="Room 301 or Online via Zoom">
+                        </div>
+                        <div class="form-group">
+                            <label for="eventFee">Registration Fee ($)</label>
+                            <input type="number" id="eventFee" min="0" step="0.01" placeholder="0.00">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="targetGrades">Target Grades</label>
+                        <select id="targetGrades" multiple style="height: 100px;">
+                            <option value="6">Grade 6</option>
+                            <option value="7">Grade 7</option>
+                            <option value="8">Grade 8</option>
+                            <option value="9">Grade 9</option>
+                            <option value="10">Grade 10</option>
+                            <option value="11">Grade 11</option>
+                            <option value="12">Grade 12</option>
+                            <option value="13">Grade 13</option>
+                        </select>
+                        <small style="color: #666;">Hold Ctrl/Cmd to select multiple grades</small>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('createEventModal')">Cancel</button>
+                        <button type="submit" class="btn primary">Create Event</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-        // Filter button functionality
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function () {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-    </script>
-</body>
-
+        <script src="../public/js/event_organization.js"></script>
+    </body>
 </html>
