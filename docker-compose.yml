@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  skillhub-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: skillhub-app
+    ports:
+      - "3000:3000"  # Maps port 3000 on your computer to port 3000 in container
+    volumes:
+      - ./database:/app/database  # Persist database files
+      - ./public:/app/public      # Mount public files
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3002/api/test"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  default:
+    name: skillhub-network
